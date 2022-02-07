@@ -1,5 +1,6 @@
 package com.webnotics.swipee.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NotificationActivity extends AppCompatActivity {
+    @SuppressLint("StaticFieldLeak")
+    public static NotificationActivity instance;
     Rest rest;
     Context mContext;
     ImageView iv_back,iv_more;
@@ -42,6 +45,7 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         mContext=this;
         rest=new Rest(mContext);
+        instance=this;
         if (rest.isInterentAvaliable()){
            AppController.ShowDialogue("",mContext);
            if (Config.isSeeker())
@@ -87,6 +91,14 @@ public class NotificationActivity extends AppCompatActivity {
         });
     }
 
+    public void callService(){
+        try {
+            if (Config.isSeeker())
+                getNotificationList();
+            else getCompanyNotificationList();
+        }catch (Exception ignored){}
+
+    }
     private void getNotificationList() {
         SwipeeApiClient.swipeeServiceInstance().getUserNotification(Config.GetUserToken()).enqueue(new Callback<NotificationModel>() {
             @Override
@@ -160,5 +172,13 @@ public class NotificationActivity extends AppCompatActivity {
                 AppController.dismissProgressdialog();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            instance=null;
+        }catch (Exception ignored){}
     }
 }

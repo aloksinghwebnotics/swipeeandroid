@@ -21,6 +21,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.SplashScreen;
 import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
 
@@ -49,7 +50,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         if (remoteMessage == null)
             return;
-
+        if (Config.GetIsUserLogin()&& Config.isRemember()){
+            if (NotificationActivity.instance!=null){
+                NotificationActivity.instance.callService();
+            }
+        }
       if (!Config.isMute() && Config.GetIsUserLogin()&& Config.isRemember()){
           if (remoteMessage.getData().size() > 0) {
               Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());

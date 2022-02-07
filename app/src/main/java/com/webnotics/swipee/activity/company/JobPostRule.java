@@ -34,6 +34,10 @@ public class JobPostRule extends AppCompatActivity {
     TextView tv_data, tv_gotit, tv_datavalue;
     ImageView iv_back;
     private int job_post_id = 0;
+    private String company_featured_id="";
+    private String total_post_limit="";
+    private String used_listing="";
+    private String featured_package_expire="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,9 @@ public class JobPostRule extends AppCompatActivity {
                 }
 
         );
-        tv_gotit.setOnClickListener(v -> callDialog());
+        tv_gotit.setOnClickListener(v ->{
+            callDialog();
+        } );
     }
 
     private void getpostrule(String id) {
@@ -81,10 +87,10 @@ public class JobPostRule extends AppCompatActivity {
                             tv_data.setText(Html.fromHtml(page_title));
                             tv_datavalue.setText(Html.fromHtml(page_description));
                             JsonObject featured_package_details= data.has("featured_package_details")?data.get("featured_package_details").getAsJsonObject():new JsonObject();
-                            String company_featured_id= featured_package_details.has("company_featured_id")?featured_package_details.get("company_featured_id").getAsString():"";
-                            String total_post_limit= featured_package_details.has("total_post_limit")?featured_package_details.get("total_post_limit").getAsString():"";
-                            String used_listing= featured_package_details.has("used_listing")?featured_package_details.get("used_listing").getAsString():"";
-                            String featured_package_expire= featured_package_details.has("featured_package_expire")?featured_package_details.get("featured_package_expire").getAsString():"";
+                             company_featured_id= featured_package_details.has("company_featured_id")?featured_package_details.get("company_featured_id").getAsString():"";
+                             total_post_limit= featured_package_details.has("total_post_limit")?featured_package_details.get("total_post_limit").getAsString():"";
+                             used_listing= featured_package_details.has("used_listing")?featured_package_details.get("used_listing").getAsString():"";
+                             featured_package_expire= featured_package_details.has("featured_package_expire")?featured_package_details.get("featured_package_expire").getAsString():"";
 
                         } else if (respo.get("code").getAsInt() == 203) {
                             rest.showToast(respo.get("message").getAsString());

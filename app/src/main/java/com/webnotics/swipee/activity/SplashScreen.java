@@ -49,7 +49,9 @@ public class SplashScreen extends AppCompatActivity {
 
        // callHashMap();
 
+/*
               Config.SetUserToken("eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJjb25zdW1lcktleSI6Imluc3RhY2FycmVyIzIwMjEiLCJ1c2VySWQiOiI4IiwiZGV2aWNlX2lkIjoiNUI5RDNFMzUtQUUyQS00MDYwLUE2MDktNkU4OEM0NThENDQ0Iiwicm9sZUlkIjoiMiIsImlzc3VlZEF0IjoiMjAyMi0wMi0wN1QxMToyNToyNiswNTMwIiwidHRsIjo2MzA3MjAwMH0.oZLMB6PWyn_2gjTI8oS4CqSOUsLKqGjYyqfrVXo9Sno");
+*/
         new Handler().postDelayed(() -> {
             if (Config.GetIsUserLogin() && Config.isRemember()) {
                 if (Config.isSeeker()){

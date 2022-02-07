@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Naushad/AndroidStudioProjects/Swipee_Android/app/src/main/res/layout/activity_chat.xml" value="0.2" />
+        <entry key="..\:/Users/Naushad/AndroidStudioProjects/Swipee_Android/app/src/main/res/layout/activity_chat_main.xml" value="0.1480978260869565" />
+        <entry key="..\:/Users/Naushad/AndroidStudioProjects/Swipee_Android/app/src/main/res/layout/activity_main_chat.xml" value="0.2" />
+        <entry key="..\:/Users/Naushad/AndroidStudioProjects/Swipee_Android/app/src/main/res/layout/fragment_main_chat.xml" value="0.1" />
+        <entry key="..\:/Users/Naushad/AndroidStudioProjects/Swipee_Android/app/src/main/res/layout/message_text_view.xml" value="0.1480978260869565" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25925925925925924" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable-v24/ic_plan_select.xml" value="0.1527777777777778" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable-v24/ic_profile_select.xml" value="0.1527777777777778" />

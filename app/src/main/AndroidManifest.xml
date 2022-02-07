@@ -27,15 +27,21 @@
         android:theme="@style/Theme.AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="allowBackup">
+        <activity
+            android:name=".chat.MainChatActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.facebook.sdk.Application"
-            android:value="@string/app_id"/>
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
 
         <activity
             android:name=".activity.AppointmentAction"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.company.JobPostRule"
             android:exported="true"
@@ -293,13 +299,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/basictheme"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.SocialSignUpActivity"
+        <activity
+            android:name=".activity.SocialSignUpActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.company.NotificationAppointmentAction"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NotificationAppointmentAction"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/basictheme"/>
+            android:theme="@style/basictheme" />
 
         <service
             android:name=".fcm.MyFirebaseMessagingService"

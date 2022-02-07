@@ -6,8 +6,9 @@ dependencyResolutionManagement {
         jcenter() //
         maven {
             url "https://jitpack.io"
-        }// Warning: this repository is going to shut down soon
-        maven { url 'https://dl.bintray.com/vension/maven' }
+        }
+        // Warning: this repository is going to shut down soon
+       // maven { url 'https://dl.bintray.com/vension/maven' }
     }
 }
 rootProject.name = "InstaCarriers"

@@ -5,200 +5,210 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-
     tools:context=".activity.ChatActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:paddingTop="@dimen/dimen8dp"
-    android:paddingBottom="@dimen/dimen4dp"
-    android:layout_height="match_parent">
+
     <RelativeLayout
-        android:id="@+id/rl_toollbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen46dp"
-        android:paddingStart="@dimen/dimen18dp"
-        android:paddingEnd="@dimen/dimen18dp">
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/dimen30dp"
-            android:layout_height="@dimen/dimen30dp"
-            android:layout_centerVertical="true"
-            android:paddingEnd="@dimen/dimen12dp"
-            android:src="@drawable/ic_back" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="@dimen/dimen46dp"
-            android:layout_height="@dimen/dimen46dp"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/iv_back"
-            android:src="@drawable/ic_profile_select" />
-
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dimen8dp"
-            android:layout_marginEnd="@dimen/dimen96dp"
-            android:layout_toEndOf="@+id/iv_profile"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen14sp" />
-
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
-            android:id="@+id/tv_action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="-84dp"
-            android:layout_toEndOf="@+id/tv_name"
-            android:background="@drawable/primary_stroke_semiround"
-            android:paddingStart="@dimen/dimen6dp"
-            android:paddingTop="@dimen/dimen2dp"
-            android:visibility="gone"
-            android:paddingEnd="@dimen/dimen6dp"
-            android:paddingBottom="@dimen/dimen2dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/dimen12sp" />
-        <ImageView
-            android:id="@+id/iv_refresh"
-            android:layout_width="@dimen/dimen36dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_height="@dimen/dimen36dp"
-            android:src="@drawable/reload"
-            android:padding="@dimen/dimen4dp"/>
-
-    </RelativeLayout>
-    <View
-        android:layout_below="@+id/rl_toollbar"
-        android:layout_marginTop="@dimen/dimen8dp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen1dp"
-        android:background="@color/white_light"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/cons_layout"
-        android:layout_below="@+id/rl_toollbar"
-        android:layout_marginTop="@dimen/dimen18dp"
-        android:layout_marginBottom="@dimen/dimen2dp"
-        android:paddingStart="@dimen/dimen18dp"
-        android:paddingEnd="@dimen/dimen18dp" />
-   <RelativeLayout
-       android:id="@+id/rl_scroll"
-       android:layout_width="@dimen/dimen52dp"
-       android:layout_alignParentEnd="true"
-       android:visibility="gone"
-       android:layout_above="@+id/cons_layout"
-       android:layout_margin="@dimen/dimen16dp"
-       android:layout_height="@dimen/dimen52dp">
-
-       <ImageView
-           android:layout_alignParentBottom="true"
-           android:id="@+id/iv_scroll"
-           android:layout_width="@dimen/dimen38dp"
-           android:layout_height="@dimen/dimen38dp"
-           android:src="@drawable/ic_baseline_keyboard_double_arrow_down_24"
-           android:background="@drawable/light_black_circle_bg"
-           android:padding="@dimen/dimen6dp"
-           android:layout_alignParentEnd="true"
-           android:visibility="visible" />
-       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
-           android:id="@+id/tv_newmsgcount"
-           android:visibility="gone"
-           android:layout_width="@dimen/dimen26dp"
-           android:layout_height="@dimen/dimen26dp"
-           android:maxLength="3"
-           android:textSize="@dimen/dimen10sp"
-           android:textColor="@color/white"
-           android:gravity="center"
-           android:background="@drawable/circle_green_bg"/>
-   </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:layout_above="@+id/cons_layout"
-        android:background="@color/white_light"/>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cons_layout"
-        android:paddingTop="@dimen/dimen4dp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen8dp"
-        android:layout_marginStart="@dimen/dimen12dp"
-        android:layout_marginEnd="@dimen/dimen12dp"
-        android:minHeight="@dimen/dimen48dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/iv_camera"
-            android:layout_width="@dimen/dimen32dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/ic_camera_chat"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:padding="@dimen/dimen4dp"
-            android:layout_height="@dimen/dimen48dp"/>
-        <ImageView
-            android:id="@+id/iv_send"
-            android:layout_width="@dimen/dimen32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_send_chat"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:padding="@dimen/dimen4dp"
-            android:layout_height="@dimen/dimen48dp"/>
+        android:paddingTop="@dimen/dimen8dp"
+        android:paddingBottom="@dimen/dimen4dp">
 
         <RelativeLayout
-            app:layout_constraintStart_toEndOf="@+id/iv_camera"
-            app:layout_constraintEnd_toStartOf="@+id/iv_send"
-            android:layout_marginStart="@dimen/dimen42dp"
-            android:layout_marginEnd="@dimen/dimen42dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/ll_msg"
+            android:id="@+id/rl_toollbar"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@drawable/white_light_semiround_bg"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/dimen48dp"
-            tools:ignore="MissingConstraints">
+            android:layout_height="@dimen/dimen46dp"
+            android:paddingStart="@dimen/dimen18dp"
+            android:paddingEnd="@dimen/dimen18dp">
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularEditText
-                android:id="@+id/et_msg"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dimen30dp"
+                android:layout_height="@dimen/dimen30dp"
+                android:layout_centerVertical="true"
+                android:paddingEnd="@dimen/dimen12dp"
+                android:src="@drawable/ic_back" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="@dimen/dimen46dp"
+                android:layout_height="@dimen/dimen46dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/iv_back"
+                android:src="@drawable/ic_profile_select" />
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/dimen8dp"
-                android:layout_marginEnd="@dimen/dimen36dp"
-                android:background="#00FFFFFF"
-                android:maxHeight="@dimen/dimen120dp"
-                android:maxLength="500"
-                android:minHeight="@dimen/dimen36dp"
-                android:padding="@dimen/dimen6dp"
-                android:hint="Type a Message"
-                android:scrollbars="vertical"
+                android:layout_marginEnd="@dimen/dimen96dp"
+                android:layout_toEndOf="@+id/iv_profile"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dimen12sp" />
+                android:textSize="@dimen/dimen14sp" />
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-84dp"
+                android:layout_toEndOf="@+id/tv_name"
+                android:background="@drawable/primary_stroke_semiround"
+                android:paddingStart="@dimen/dimen6dp"
+                android:paddingTop="@dimen/dimen2dp"
+                android:paddingEnd="@dimen/dimen6dp"
+                android:paddingBottom="@dimen/dimen2dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dimen12sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_refresh"
+                android:layout_width="@dimen/dimen36dp"
+                android:layout_height="@dimen/dimen36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dimen4dp"
+                android:src="@drawable/reload" />
 
         </RelativeLayout>
-        <ImageView
-            android:id="@+id/iv_doc"
-            android:layout_width="@dimen/dimen32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_height="@dimen/dimen48dp"
-            android:layout_marginEnd="@dimen/dimen18dp"
-            app:layout_constraintEnd_toStartOf="@id/iv_send"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/dimen6dp"
-            android:src="@drawable/ic__attachment_chat" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</RelativeLayout>
-    <include layout="@layout/intent_bottomsheet"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen1dp"
+            android:layout_below="@+id/rl_toollbar"
+            android:layout_marginTop="@dimen/dimen8dp"
+            android:background="@color/white_light" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/cons_layout"
+            android:layout_below="@+id/rl_toollbar"
+            android:layout_marginTop="@dimen/dimen18dp"
+            android:layout_marginBottom="@dimen/dimen2dp"
+            android:paddingStart="@dimen/dimen18dp"
+            android:paddingEnd="@dimen/dimen18dp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_scroll"
+            android:layout_width="@dimen/dimen52dp"
+            android:layout_height="@dimen/dimen52dp"
+            android:layout_above="@+id/cons_layout"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/dimen16dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_scroll"
+                android:layout_width="@dimen/dimen38dp"
+                android:layout_height="@dimen/dimen38dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/light_black_circle_bg"
+                android:padding="@dimen/dimen6dp"
+                android:src="@drawable/ic_baseline_keyboard_double_arrow_down_24"
+                android:visibility="visible" />
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_newmsgcount"
+                android:layout_width="@dimen/dimen26dp"
+                android:layout_height="@dimen/dimen26dp"
+                android:background="@drawable/circle_green_bg"
+                android:gravity="center"
+                android:maxLength="3"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen10sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_above="@+id/cons_layout"
+            android:background="@color/white_light" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cons_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dimen12dp"
+            android:layout_marginEnd="@dimen/dimen12dp"
+            android:layout_marginBottom="@dimen/dimen8dp"
+            android:minHeight="@dimen/dimen48dp"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dimen4dp">
+
+            <ImageView
+                android:id="@+id/iv_camera"
+                android:layout_width="@dimen/dimen32dp"
+                android:layout_height="@dimen/dimen48dp"
+                android:padding="@dimen/dimen4dp"
+                android:src="@drawable/ic_camera_chat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_send"
+                android:layout_width="@dimen/dimen32dp"
+                android:layout_height="@dimen/dimen48dp"
+                android:padding="@dimen/dimen4dp"
+                android:src="@drawable/ic_send_chat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/ll_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen42dp"
+                android:layout_marginEnd="@dimen/dimen42dp"
+                android:background="@drawable/white_light_semiround_bg"
+                android:minHeight="@dimen/dimen48dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_send"
+                app:layout_constraintStart_toEndOf="@+id/iv_camera"
+                tools:ignore="MissingConstraints">
+
+                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                    android:id="@+id/et_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dimen8dp"
+                    android:layout_marginEnd="@dimen/dimen36dp"
+                    android:background="#00FFFFFF"
+                    android:hint="Type a Message"
+                    android:maxHeight="@dimen/dimen120dp"
+                    android:maxLength="500"
+                    android:minHeight="@dimen/dimen36dp"
+                    android:padding="@dimen/dimen6dp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen12sp" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_doc"
+                android:layout_width="@dimen/dimen32dp"
+                android:layout_height="@dimen/dimen48dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dimen18dp"
+                android:padding="@dimen/dimen6dp"
+                android:src="@drawable/ic__attachment_chat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_send" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/intent_bottomsheet" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

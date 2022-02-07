@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="@dimen/dimen6dp" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Locations"
+        android:textSize="@dimen/dimen12sp"
+        android:textColor="@color/gray"/>
+    <com.webnotics.swipee.CustomUi.FlowLayout
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:layout_below="@+id/tv_location"
+        android:id="@+id/flowlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    </com.webnotics.swipee.CustomUi.FlowLayout>
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_industry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/flowlayout"
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:text="Industry"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dimen12sp" />
+    <com.webnotics.swipee.CustomUi.FlowLayout
+
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:layout_below="@+id/tv_industry"
+        android:id="@+id/flowlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    </com.webnotics.swipee.CustomUi.FlowLayout>
+
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:layout_marginTop="@dimen/dimen10dp"
+        android:layout_below="@+id/flowlayout1"
+        android:id="@+id/slalryss"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/dimen14sp"
+        android:gravity="left"
+        android:layout_marginBottom="@dimen/dimen10dp"
+        android:textColor="@color/gray"
+        android:layout_height="match_parent"
+
+        />
+
+
+
+</RelativeLayout>

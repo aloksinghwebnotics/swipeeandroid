@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen105dp"
+    android:background="@color/white_light"
+    android:orientation="vertical"
+     android:padding="@dimen/dimen12dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_profile"
+        android:layout_width="@dimen/dimen64dp"
+        android:layout_height="@dimen/dimen64dp"
+        app:civ_border_color="@color/white"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_profile_select" />
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/civ_profile"
+        android:layout_marginStart="@dimen/dimen8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen14sp" />
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_email"
+            android:layout_below="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen12sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/nav_gray"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

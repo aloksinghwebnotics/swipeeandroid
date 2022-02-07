@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "66833447938",
+    "project_id": "swipee-339908",
+    "storage_bucket": "swipee-339908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66833447938:android:19b3d58fff02c2a284bb1b",
+        "android_client_info": {
+          "package_name": "com.webnotics.swipee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66833447938-v9d5mdb307c9s7815v3qhr92776sbjab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.webnotics.swipee",
+            "certificate_hash": "493df454b23cd36a137a3258437560935c635b81"
+          }
+        },
+        {
+          "client_id": "66833447938-ua1crj240davigm8tbh8rrsvc0727j25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUUhzvP10dhBlFt_Sm_bo-AT8iZJzqec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66833447938-ua1crj240davigm8tbh8rrsvc0727j25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingStart="@dimen/dimen18dp"
+    android:paddingEnd="@dimen/dimen18dp"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dimen16dp"
+    android:paddingBottom="@dimen/dimen16dp"
+    tools:context=".activity.Seeker.AddCityActivity">
+    <RelativeLayout
+        android:id="@+id/rl_toollbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen42dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen30dp"
+            android:layout_height="@dimen/dimen30dp"
+            android:layout_centerVertical="true"
+            android:paddingEnd="@dimen/dimen12dp"
+            android:src="@drawable/ic_back" />
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/statelist"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen16sp" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_next"
+        android:layout_below="@+id/rl_toollbar"
+        android:layout_marginTop="@dimen/dimen6dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_stateList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </androidx.core.widget.NestedScrollView>
+
+
+    <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+        android:id="@+id/tv_next"
+        android:layout_width="@dimen/dimen142dp"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/dimen8dp"
+        android:background="@drawable/primary_semiround_bg"
+        android:gravity="center"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen16sp" />
+</RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:minHeight="@dimen/dimen36dp"
+    android:layout_marginBottom="@dimen/dimen4dp"
+    android:layout_marginTop="@dimen/dimen4dp"
+    android:layout_height="wrap_content">
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dimen8dp"
+        android:paddingTop="@dimen/dimen6dp"
+        android:paddingEnd="@dimen/dimen8dp"
+        android:layout_toStartOf="@+id/radioButton"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen14sp" />
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:paddingStart="@dimen/dimen8dp"
+        android:paddingEnd="@dimen/dimen8dp"
+        android:visibility="gone"
+        android:id="@+id/tv_state"
+        android:layout_below="@+id/tv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/radioButton"
+        android:gravity="center_vertical"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dimen12sp" />
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/dimen36dp"
+        android:layout_height="@dimen/dimen36dp"
+        android:id="@+id/radioButton"
+        android:theme="@style/customRadioButton"/>
+
+</RelativeLayout>

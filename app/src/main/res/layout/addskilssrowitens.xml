@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/dimen36dp"
+    android:paddingTop="@dimen/dimen10dp"
+    android:paddingBottom="@dimen/dimen10dp"
+    android:paddingStart="@dimen/dimen10dp"
+    android:background="@color/white"
+    android:gravity="center"
+    tools:ignore="RtlSymmetry">
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_countryname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen40dp"
+        android:text="@string/noleftswipe"
+        android:paddingEnd="@dimen/dimen10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen14sp"
+        tools:ignore="RtlSymmetry" />
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_countryname"
+        android:layout_marginEnd="@dimen/dimen10dp"
+        android:layout_toStartOf="@+id/chkimg"
+        android:gravity="left"
+        android:paddingBottom="@dimen/dimen8dp"
+        android:textColor="@color/nav_gray"
+        android:textSize="@dimen/dimen12sp"
+        android:visibility="gone" />
+
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularCheckBox
+        android:id="@+id/chkimg"
+        android:layout_width="@dimen/dimen26dp"
+        android:layout_height="@dimen/dimen20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dimen2dp"
+        android:layout_marginEnd="@dimen/dimen10dp"
+        android:theme="@style/checkbox_theme" />
+
+
+</RelativeLayout>

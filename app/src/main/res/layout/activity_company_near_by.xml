@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rl_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:visibility="visible"
+            android:id="@+id/iv_shaddowleft"
+            android:layout_width="@dimen/dimen72dp"
+            android:layout_height="@dimen/dimen132dp"
+            android:layout_marginBottom="@dimen/dimen72dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_intersection_2" />
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dimen16dp"
+            android:paddingStart="@dimen/dimen18dp"
+            android:paddingEnd="@dimen/dimen18dp"
+            android:id="@+id/rl_toollbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen42dp">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dimen30dp"
+                android:layout_height="@dimen/dimen30dp"
+                android:layout_centerVertical="true"
+                android:paddingEnd="@dimen/dimen12dp"
+                android:src="@drawable/ic_back" />
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/nearyou"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen16sp" />
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:id="@+id/tv_viewAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="View All"
+                android:padding="@dimen/dimen2dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dimen14sp" />
+        </RelativeLayout>
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+            android:id="@+id/tv_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen48dp"
+            android:layout_below="@+id/rl_toollbar"
+            android:layout_marginStart="@dimen/dimen18dp"
+            android:layout_marginTop="@dimen/dimen12dp"
+            android:layout_marginEnd="@dimen/dimen18dp"
+            android:layout_marginBottom="@dimen/dimen2dp"
+            android:background="@drawable/white_light_semiround_bg"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawablePadding="@dimen/dimen8dp"
+            android:hint="@string/search"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingStart="@dimen/dimen8dp"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/dimen8dp"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/dimen14sp" />
+
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center">
+
+
+            <com.webnotics.swipee.radarview.RadarViewC
+                android:id="@+id/mRadarCustom"
+                android:layout_width="312dp"
+                android:layout_height="312dp" />
+
+            <com.webnotics.swipee.radarview.Radar
+                android:id="@+id/radar"
+                android:layout_width="312dp"
+                android:layout_height="312dp"
+                android:padding="@dimen/dimen4dp"
+                app:kv_circleColor="@color/colorPrimary"
+                app:kv_circleNum="4"
+                app:kv_flicker="2"
+                app:kv_raindropColor="@color/colorPrimary"
+                app:kv_raindropNum="4"
+                app:kv_showCrossLine="false"
+                app:kv_speed="2"
+                app:kv_sweepColor="#B47298E8" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bottomlay"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/dimen30dp"
+            android:layout_height="@dimen/dimen52dp"
+            android:background="@drawable/primary_semiround_bg"
+            android:layout_alignParentBottom="true"
+            android:paddingStart="@dimen/dimen16dp"
+            android:paddingEnd="@dimen/dimen12dp"
+            android:layout_marginLeft="@dimen/dimen18dp"
+            android:paddingBottom="@dimen/dimen4dp"
+            android:layout_marginRight="@dimen/dimen18dp">
+
+            <com.xw.repo.BubbleSeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/dimen22dp"
+                app:bsb_always_show_bubble="false"
+                app:bsb_hide_bubble="true"
+                app:bsb_second_track_color="@color/white_light"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_section_text="true"
+                app:bsb_show_thumb_text="true"
+                app:bsb_thumb_color="@color/white"
+                app:bsb_thumb_text_color="@color/white_light"
+                app:bsb_thumb_text_size="14sp"
+                app:bsb_touch_to_seek="false"
+                app:bsb_track_color="@color/white" />
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/iv_km"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KM"
+                android:layout_marginTop="@dimen/dimen15dp"
+                android:textSize="@dimen/dimen12sp"
+                android:textColor="@color/white"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/nolay"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_below="@+id/rl_toollbar"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <ImageView
+                android:layout_above="@+id/nodatatxt"
+                android:layout_centerHorizontal="true"
+                android:layout_width="@dimen/dimen96dp"
+                android:layout_height="@dimen/dimen96dp"
+                android:src="@drawable/ic_plan_exp"/>
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:id="@+id/nodatatxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/dimen20dp"
+                android:layout_marginEnd="@dimen/dimen20dp"
+                android:layout_marginTop="@dimen/dimen6dp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dimen14sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_allcompany"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dimen16dp"
+        android:paddingStart="@dimen/dimen18dp"
+        android:paddingEnd="@dimen/dimen18dp"
+        android:background="@color/white">
+        <RelativeLayout
+            android:id="@+id/rl_toollbar1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen42dp">
+
+            <ImageView
+                android:id="@+id/iv_back1"
+                android:layout_width="@dimen/dimen30dp"
+                android:layout_height="@dimen/dimen30dp"
+                android:layout_centerVertical="true"
+                android:paddingEnd="@dimen/dimen12dp"
+                android:src="@drawable/ic_back" />
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="User List"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen16sp" />
+
+
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="@dimen/dimen10dp"
+            android:id="@+id/rv_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_toollbar1">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+
+</RelativeLayout>

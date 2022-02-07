@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:minHeight="@dimen/dimen36dp"
+    android:layout_height="wrap_content">
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:paddingBottom="@dimen/dimen4dp"
+        android:layout_marginEnd="@dimen/dimen8dp"
+        android:layout_toStartOf="@+id/chkimg"
+        android:gravity="left"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen12sp" />
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_state"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item"
+        android:layout_marginEnd="@dimen/dimen8dp"
+        android:layout_toStartOf="@+id/chkimg"
+        android:gravity="left"
+        android:paddingBottom="@dimen/dimen8dp"
+        android:textColor="@color/nav_gray"
+        android:textSize="@dimen/dimen12sp" />
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularCheckBox
+        android:id="@+id/chkimg"
+        android:layout_width="@dimen/dimen26dp"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:layout_height="@dimen/dimen20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dimen4dp"
+        android:theme="@style/checkbox_theme" />
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:id="@+id/rb_radio"
+        android:visibility="gone"
+        android:layout_width="@dimen/dimen26dp"
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:layout_height="@dimen/dimen20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dimen4dp"
+        android:theme="@style/customRadioButton" />
+
+</RelativeLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dimen16dp"
+    android:paddingBottom="@dimen/dimen16dp"
+    tools:context=".activity.NotificationActivity">
+    <RelativeLayout
+        android:paddingStart="@dimen/dimen18dp"
+        android:paddingEnd="@dimen/dimen12dp"
+        android:id="@+id/rl_toollbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen42dp">
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/dimen30dp"
+            android:layout_height="@dimen/dimen30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimen4dp"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            app:tint="@color/black" />
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/notifications"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen16sp" />
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen30dp"
+            android:layout_height="@dimen/dimen30dp"
+            android:layout_centerVertical="true"
+            android:paddingEnd="@dimen/dimen12dp"
+            android:src="@drawable/ic_back" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notification"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_toollbar"
+        android:layout_marginTop="@dimen/dimen10dp"
+        android:paddingStart="@dimen/dimen18dp"
+        android:paddingEnd="@dimen/dimen18dp" />
+    <LinearLayout
+        android:id="@+id/ll_nodata"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/dimen96dp"
+            android:layout_height="@dimen/dimen96dp"
+            android:src="@drawable/ic_no_data"/>
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:visibility="visible"
+            android:id="@+id/tv_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dimen18dp"
+            android:paddingEnd="@dimen/dimen18dp"
+            android:text="@string/nolikedjobs"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen14sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_mute"
+        android:layout_marginEnd="@dimen/dimen20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dimen42dp"
+        android:paddingStart="@dimen/dimen12dp"
+        android:paddingTop="@dimen/dimen4dp"
+        android:paddingBottom="@dimen/dimen8dp"
+        android:paddingEnd="@dimen/dimen12dp"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:minWidth="@dimen/dimen156dp"
+        android:elevation="@dimen/dimen2dp"
+        android:background="@drawable/pure_white_round_bg"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_mute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mute"
+            android:textColor="@color/black"
+            android:paddingTop="@dimen/dimen6dp"
+            android:paddingBottom="@dimen/dimen6dp"
+            android:textSize="@dimen/dimen14sp"/>
+
+
+    </LinearLayout>
+</RelativeLayout>

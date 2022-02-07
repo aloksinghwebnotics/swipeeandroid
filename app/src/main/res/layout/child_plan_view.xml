@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/dimen8dp"
+    android:layout_marginBottom="@dimen/dimen2dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_planDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen13dp"
+        android:background="@drawable/primary_stroke_round"
+        android:padding="@dimen/dimen18dp">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rb_plan"
+            android:layout_width="@dimen/dimen32dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dimen8dp"
+            android:theme="@style/customRadioButton" />
+
+        <LinearLayout
+            android:id="@+id/ll_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/rb_plan"
+            android:orientation="horizontal">
+
+            <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs 545"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen14sp" />
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/month"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dimen10sp" />
+        </LinearLayout>
+
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_plandetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_amount"
+            android:layout_marginTop="@dimen/dimen4dp"
+            android:layout_toEndOf="@+id/rb_plan"
+            android:text="10 Swipes Free (Daily), 10 Job\nRadar Free (daily),\n1 Job Post Free (monthly)"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen12sp" />
+
+    </RelativeLayout>
+
+    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen26dp"
+        android:layout_marginStart="@dimen/dimen16dp"
+        android:background="@drawable/primary_round_bg"
+        android:gravity="center"
+        android:paddingStart="@dimen/dimen32dp"
+        android:paddingEnd="@dimen/dimen32dp"
+        android:text="Basic"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen14sp" />
+
+</RelativeLayout>

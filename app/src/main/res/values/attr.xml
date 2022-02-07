@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2013 Blaž Šolar
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+	<declare-styleable name="FlowLayout">
+		<attr name="android:gravity" />
+	</declare-styleable>
+	<declare-styleable name="FlowLayout_Layout">
+		<attr name="android:layout_gravity" />
+	</declare-styleable>
+
+
+	<declare-styleable name="PageIndicatorView">
+		<attr name="piv_orientation">
+			<enum name="horizontal" value="0" />
+			<enum name="vertical" value="1" />
+		</attr>
+
+		<attr name="piv_viewPager" format="reference" />
+		<attr name="piv_select" format="integer" />
+
+		<attr name="piv_count" format="integer" />
+		<attr name="piv_dynamicCount" format="boolean" />
+
+		<attr name="piv_radius" format="dimension" />
+		<attr name="piv_padding" format="dimension" />
+		<attr name="piv_strokeWidth" format="dimension" />
+		<attr name="piv_scaleFactor" format="float" />
+		<attr name="piv_autoVisibility" format="boolean" />
+
+		<attr name="piv_unselectedColor" format="color" />
+		<attr name="piv_selectedColor" format="color" />
+
+		<attr name="piv_fadeOnIdle" format="boolean" />
+		<attr name="piv_idleDuration" format="integer" />
+
+		<attr name="piv_interactiveAnimation" format="boolean" />
+		<attr name="piv_animationDuration" format="integer" />
+		<attr name="piv_animationType">
+			<enum name="none" value="0" />
+			<enum name="color" value="1" />
+			<enum name="scale" value="2" />
+			<enum name="worm" value="3" />
+			<enum name="slide" value="4" />
+			<enum name="fill" value="5" />
+			<enum name="thinWorm" value="6" />
+			<enum name="drop" value="7" />
+			<enum name="swap" value="8" />
+			<enum name="scale_down" value="9" />
+		</attr>
+		<attr name="piv_rtl_mode">
+			<enum name="on" value="0" />
+			<enum name="off" value="1" />
+			<enum name="auto" value="2" />
+		</attr>
+	</declare-styleable>
+	<declare-styleable name="RippleBackground">
+		<attr name="rb_color" format="color" />
+		<attr name="rb_strokeWidth" format="dimension"/>
+		<attr name="rb_radius" format="dimension"/>
+		<attr name="rb_duration" format="integer"/>
+		<attr name="rb_rippleAmount" format="integer"/>
+		<attr name="rb_scale" format="float"/>
+		<attr name="rb_type" format="enum">
+			<enum name="fillRipple" value="0"/>
+			<enum name="strokeRipple" value="1"/>
+		</attr>
+	</declare-styleable>
+
+	<declare-styleable name="RadarView">
+		<!--圆圈和交叉线的颜色-->
+		<attr name="kv_circleColor" format="color" />
+		<!--圆圈的数量-->
+		<attr name="kv_circleNum" format="integer" />
+		<!--扫描的颜色 RadarView会对这个颜色做渐变透明处理-->
+		<attr name="kv_sweepColor" format="color" />
+		<!--水滴的颜色-->
+		<attr name="kv_raindropColor" format="color" />
+		<!--水滴的数量 这里表示的是水滴最多能同时出现的数量。因为水滴是随机产生的，数量是不确定的-->
+		<attr name="kv_raindropNum" format="integer" />
+		<!--是否显示交叉线-->
+		<attr name="kv_showCrossLine" format="boolean" />
+		<!--是否显示水滴-->
+		<attr name="kv_showRaindrop" format="boolean" />
+		<!--扫描的转速，表示几秒转一圈-->
+		<attr name="kv_speed" format="float" />
+		<!--水滴显示和消失的速度-->
+		<attr name="kv_flicker" format="float" />
+	</declare-styleable>
+
+</resources>

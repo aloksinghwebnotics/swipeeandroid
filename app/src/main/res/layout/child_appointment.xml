@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/dimen4dp"
+    android:layout_marginBottom="@dimen/dimen8dp"
+    android:layout_marginStart="@dimen/dimen6dp"
+    android:layout_marginEnd="@dimen/dimen6dp"
+    android:background="@drawable/primary_stroke_semiround"
+    android:padding="@dimen/dimen12dp"
+
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_toStartOf="@+id/iv_call"
+        android:id="@+id/rl_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/civ_logo"
+            android:layout_width="@dimen/dimen60dp"
+            android:layout_height="@dimen/dimen60dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dimen2dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/civ_logo"
+            android:orientation="vertical">
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dimen4dp"
+                android:paddingTop="@dimen/dimen2dp"
+                android:paddingEnd="@dimen/dimen4dp"
+                android:paddingBottom="@dimen/dimen2dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen14sp" />
+
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dimen4dp"
+                android:paddingTop="@dimen/dimen2dp"
+                android:paddingEnd="@dimen/dimen4dp"
+                android:paddingBottom="@dimen/dimen2dp"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dimen12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:id="@+id/tv_profile"
+        android:layout_below="@+id/rl_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dimen4dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen14sp" />
+
+    <ImageView
+        android:id="@+id/iv_timer"
+        android:layout_width="@dimen/dimen16dp"
+        android:layout_height="@dimen/dimen16dp"
+        android:layout_below="@+id/tv_profile"
+        android:layout_marginTop="@dimen/dimen10dp"
+        android:src="@drawable/ic_time_left" />
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_profile"
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:layout_toEndOf="@+id/tv_date"
+        android:paddingStart="@dimen/dimen4dp"
+        android:paddingTop="@dimen/dimen4dp"
+        android:paddingEnd="@dimen/dimen4dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen12sp" />
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/tv_profile"
+        android:layout_toEndOf="@+id/iv_timer"
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:paddingStart="@dimen/dimen4dp"
+        android:paddingTop="@dimen/dimen4dp"
+        android:paddingEnd="@dimen/dimen4dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen12sp" />
+
+    <ImageView
+        android:id="@+id/iv_call"
+        android:layout_width="@dimen/dimen36dp"
+        android:layout_height="@dimen/dimen24dp"
+        android:padding="@dimen/dimen4dp"
+        android:layout_alignParentEnd="true"
+         />
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_vedio"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_profile"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dimen6dp"
+        android:padding="@dimen/dimen4dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen12sp" />
+
+
+
+
+
+
+</RelativeLayout>

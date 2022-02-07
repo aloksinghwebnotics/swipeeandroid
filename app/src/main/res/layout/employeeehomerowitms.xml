@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    card_view:cardCornerRadius="@dimen/dimen16dp"
+    card_view:cardElevation="@dimen/dimen2dp"
+    card_view:cardBackgroundColor="#00FFFFFF"
+    android:id="@+id/cardview1">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/lightgray_round_bg"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/building"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_margin="@dimen/dimen10dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/save"
+            android:layout_width="@dimen/dimen36dp"
+            android:padding="@dimen/dimen8dp"
+            android:layout_height="@dimen/dimen36dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/semi_gradient_bg"
+            android:layout_marginTop="@dimen/dimen52dp"
+            android:paddingBottom="@dimen/dimen8dp"
+            android:gravity="bottom">
+
+            <RelativeLayout
+                android:id="@+id/desnmlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen4dp"
+                android:layout_marginEnd="@dimen/dimen58dp"
+                android:gravity="center_vertical">
+
+                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    android:id="@+id/designationnm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dimen20dp"
+                    android:gravity="center|left"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen16sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen20dp"
+                    android:layout_height="@dimen/dimen20dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/dimen6dp"
+                    android:layout_marginTop="@dimen/dimen20dp"
+                    android:layout_toEndOf="@+id/designationnm"
+                    android:src="@drawable/ic_check" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/laclay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desnmlay"
+                android:layout_marginTop="@dimen/dimen2dp"
+                android:layout_marginEnd="@dimen/dimen58dp"
+                android:gravity="center|left">
+
+                <ImageView
+                    android:id="@+id/location"
+
+                    android:layout_width="@dimen/dimen16dp"
+                    android:layout_height="@dimen/dimen16dp"
+                    android:layout_marginStart="@dimen/dimen20dp"
+                    android:src="@drawable/ic_location"
+                    card_view:tint="@color/white_light" />
+
+                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    android:id="@+id/locationtxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/dimen4dp"
+                    android:layout_toEndOf="@+id/location"
+                    android:text="Berlin"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginEnd="@dimen/dimen16dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/prognmlay"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="@dimen/dimen58dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/laclay"
+                android:layout_marginTop="@dimen/dimen2dp"
+                android:gravity="center|left">
+
+                <ImageView
+                    android:id="@+id/prognm"
+                    android:layout_width="@dimen/dimen16dp"
+                    android:layout_height="@dimen/dimen16dp"
+                    android:layout_marginStart="@dimen/dimen20dp"
+                    android:src="@drawable/ic_suitcase_nav"
+                    card_view:tint="@color/white_light" />
+
+                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    android:id="@+id/skillls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/dimen4dp"
+                    android:layout_marginEnd="@dimen/dimen16dp"
+                    android:layout_toEndOf="@+id/prognm"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="Php, Html, Css, JQuery, Java Script, Bootstrap"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen12sp" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+
+            android:id="@+id/yess"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@color/green"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Yes"
+            android:textSize="@dimen/dimen21sp"
+            android:visibility="visible"
+            android:textStyle="bold" />
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:id="@+id/nopee"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@color/red"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Nope"
+            android:textSize="@dimen/dimen21sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

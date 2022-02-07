@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="0dp"
+    android:id="@+id/languagebottom_sheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+   >
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="0dp"
+        android:alpha="0.2">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+
+        app:behavior_peekHeight="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/doneeeee"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/headerlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen10dp"
+                    android:layout_marginTop="@dimen/dimen20dp"
+                    android:layout_marginRight="@dimen/dimen10dp">
+
+
+                    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="left"
+                        android:text="Add Language"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/close"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/dimen10dp"
+                        android:alpha="0.8"
+                        android:padding="@dimen/dimen3dp"
+                        android:src="@drawable/ic_baseline_close_24" />
+
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/listviewlanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/headerlay"
+                    android:layout_marginStart="@dimen/dimen10dp"
+                    android:layout_marginTop="@dimen/dimen10dp"
+                    android:layout_marginEnd="@dimen/dimen10dp"
+                    android:layout_marginBottom="@dimen/dimen10dp"
+                    android:divider="@null"
+                    android:dividerHeight="@dimen/dimen10dp"
+                    android:scrollbars="none" />
+
+
+            </RelativeLayout>
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumButton
+                android:id="@+id/doneeeee"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen52dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/primary_topround_bk"
+                android:text="Done"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen16sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/dimen8dp"
+        android:layout_marginRight="@dimen/dimen5dp"
+        android:layout_marginLeft="@dimen/dimen5dp"
+        android:id="@+id/mainlay"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <LinearLayout
+          android:id="@+id/ll_main2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="end"
+          android:background="@drawable/ic_union_1"
+          android:orientation="vertical">
+          <LinearLayout
+              android:id="@+id/textlay"
+              android:padding="@dimen/dimen4dp"
+              android:visibility="visible"
+              android:layout_width="wrap_content"
+              android:gravity="start"
+              android:orientation="vertical"
+              android:layout_height="wrap_content">
+              <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                  android:textColor="@color/white"
+                  android:id="@+id/textView3"
+                  android:paddingStart="@dimen/dimen4dp"
+                  android:paddingEnd="@dimen/dimen4dp"
+                  android:gravity="start"
+                  android:minWidth="@dimen/dimen105dp"
+                  android:minHeight="@dimen/dimen24dp"
+                  android:maxWidth="@dimen/dimen204dp"
+                  android:layout_width="wrap_content"
+                  android:linksClickable="true"
+                  android:autoLink="all"
+                  android:layout_height="wrap_content"
+                  />
+              <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                  android:id="@+id/dateago"
+                  android:visibility="visible"
+                  android:gravity="end"
+                  android:paddingBottom="@dimen/dimen2dp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/graylight"
+                  android:textSize="@dimen/dimen10sp" />
+          </LinearLayout>
+          <RelativeLayout
+              android:id="@+id/rl_image"
+              android:padding="@dimen/dimen4dp"
+              android:gravity="center"
+              android:visibility="gone"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+              <ImageView
+                  android:id="@+id/img"
+                  android:layout_width="@dimen/dimen204dp"
+                  android:layout_height="@dimen/dimen196dp"
+                  android:src="@drawable/white_light_semiround_bg"
+                  android:visibility="visible" />
+              <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                  android:layout_below="@+id/img"
+                  android:id="@+id/dateagoImg"
+                  android:text="@string/state"
+                  android:visibility="gone"
+                  android:gravity="end"
+                  android:layout_width="@dimen/dimen204dp"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/graylight"
+                  android:textSize="@dimen/dimen10sp" />
+          </RelativeLayout>
+
+          <RelativeLayout
+              android:visibility="gone"
+              android:padding="@dimen/dimen6dp"
+              android:id="@+id/videolay"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+              <ImageView
+                  android:id="@+id/videothumb"
+                  android:scaleType="centerCrop"
+                  android:layout_width="wrap_content"
+                  android:src="@drawable/ic_location1"
+                  android:layout_height="wrap_content"
+                  />
+              <ImageView
+                  android:layout_centerInParent="true"
+                  android:id="@+id/playyyy"
+                  android:scaleType="centerCrop"
+                  android:src="@drawable/ic_post_job_unselected"
+                  android:layout_width="@dimen/dimen30dp"
+                  android:layout_height="@dimen/dimen30dp"
+                  />
+          </RelativeLayout>
+
+          <RelativeLayout
+              android:padding="@dimen/dimen4dp"
+              android:visibility="gone"
+              android:id="@+id/doclay"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+              <ImageView
+                  android:id="@+id/pdfdoc"
+                  android:scaleType="centerCrop"
+                  android:layout_width="@dimen/dimen40dp"
+                  android:layout_height="@dimen/dimen40dp"
+                  android:src="@drawable/pdf"/>
+
+              <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                  android:id="@+id/docfilename"
+                  android:layout_width="@dimen/dimen132dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="@dimen/dimen2dp"
+                  android:layout_marginStart="@dimen/dimen10dp"
+                  android:layout_toEndOf="@+id/pdfdoc"
+                  android:ellipsize="end"
+                  android:maxWidth="@dimen/dimen132dp"
+                  android:maxLines="2"
+                  android:textColor="@color/black"
+                  android:textSize="@dimen/dimen12sp" />
+              <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                  android:layout_below="@+id/pdfdoc"
+                  android:id="@+id/dateagoDoc"
+                  android:visibility="visible"
+                  android:gravity="end"
+                  android:maxLines="1"
+                  android:layout_width="@dimen/dimen182dp"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/graylight"
+                  android:textSize="@dimen/dimen10sp" />
+          </RelativeLayout>
+
+
+      </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

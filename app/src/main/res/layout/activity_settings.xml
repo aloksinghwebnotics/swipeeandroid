@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dimen16dp"
+    android:paddingBottom="@dimen/dimen8dp"
+    tools:context=".activity.SettingsActivity">
+    <RelativeLayout
+        android:id="@+id/rl_toollbar"
+        android:paddingStart="@dimen/dimen18dp"
+        android:paddingEnd="@dimen/dimen18dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen42dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen30dp"
+            android:layout_height="@dimen/dimen30dp"
+            android:layout_centerVertical="true"
+            android:paddingEnd="@dimen/dimen12dp"
+            android:src="@drawable/ic_back" />
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/setting"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen16sp" />
+    </RelativeLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_below="@+id/rl_toollbar"
+       android:layout_above="@+id/tv_logout"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <ImageView
+           android:id="@+id/civ_profile"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginTop="@dimen/dimen12dp"
+           android:padding="@dimen/dimen24dp"
+           android:background="@color/colorPrimary"
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/dimen156dp"
+           android:src="@drawable/ic_swipee_white"/>
+
+       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+           android:id="@+id/tv_contactus"
+           android:layout_marginStart="@dimen/dimen18dp"
+           android:layout_marginEnd="@dimen/dimen18dp"
+           android:layout_width="wrap_content"
+           android:layout_height="@dimen/dimen48dp"
+           android:layout_marginTop="@dimen/dimen36dp"
+           android:drawableStart="@drawable/ic_contact"
+           android:drawablePadding="@dimen/dimen12dp"
+           android:gravity="center_vertical"
+           android:paddingStart="@dimen/dimen30dp"
+           android:paddingEnd="@dimen/dimen30dp"
+           android:text="@string/contactus"
+           android:textColor="@color/black"
+           android:textSize="@dimen/dimen16sp" />
+       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+           android:layout_marginStart="@dimen/dimen18dp"
+           android:layout_marginEnd="@dimen/dimen18dp"
+           android:id="@+id/tv_privacy"
+           android:layout_width="wrap_content"
+           android:layout_height="@dimen/dimen48dp"
+           android:layout_marginTop="@dimen/dimen16dp"
+           android:drawableStart="@drawable/ic_privacy"
+           android:drawablePadding="@dimen/dimen19dp"
+           android:gravity="center_vertical"
+           android:paddingStart="@dimen/dimen30dp"
+           android:paddingEnd="@dimen/dimen30dp"
+           android:text="@string/privacypolicy"
+           android:textColor="@color/black"
+           android:textSize="@dimen/dimen16sp" />
+       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+           android:layout_marginStart="@dimen/dimen18dp"
+           android:layout_marginEnd="@dimen/dimen18dp"
+           android:id="@+id/tv_imprint"
+           android:layout_width="wrap_content"
+           android:layout_height="@dimen/dimen48dp"
+           android:layout_marginTop="@dimen/dimen16dp"
+           android:drawableStart="@drawable/ic_imprint"
+           android:drawablePadding="@dimen/dimen13dp"
+           android:gravity="center_vertical"
+           android:paddingStart="@dimen/dimen30dp"
+           android:paddingEnd="@dimen/dimen30dp"
+           android:text="@string/imprint"
+           android:textColor="@color/black"
+           android:textSize="@dimen/dimen16sp" />
+
+   </LinearLayout>
+
+
+    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen8dp"
+        android:layout_marginBottom="@dimen/dimen36dp"
+        android:background="@drawable/primary_stroke_semiround"
+        android:drawableStart="@drawable/ic_logout"
+        android:drawablePadding="@dimen/dimen6dp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dimen30dp"
+        android:paddingEnd="@dimen/dimen30dp"
+        android:text="@string/logout"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/dimen16sp" />
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/appversion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/dimen16dp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dimen30dp"
+        android:paddingEnd="@dimen/dimen30dp"
+        android:text=""
+        android:textColor="@color/nav_gray"
+        android:textSize="@dimen/dimen12sp" />
+
+</RelativeLayout>

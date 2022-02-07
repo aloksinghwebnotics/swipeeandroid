@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:openDrawer="start">
+
+    <include
+        layout="@layout/employeemaindashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="@dimen/dimen288dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/nav_header_main_employee"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+                   <LinearLayout
+                       android:id="@+id/ll_nav_home"
+                       android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:layout_marginStart="@dimen/dimen18dp"
+                       android:layout_marginTop="@dimen/dimen12dp"
+                       android:layout_gravity="center_vertical"
+                       android:orientation="horizontal">
+                       <ImageView
+                           android:layout_gravity="center"
+                           android:layout_width="@dimen/dimen30dp"
+                           android:layout_height="@dimen/dimen32dp"
+                           android:padding="@dimen/dimen4dp"
+                           android:src="@drawable/ic_match_selected"/>
+                       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+                           android:layout_width="@dimen/dimen186dp"
+                           android:layout_height="match_parent"
+                           android:layout_marginStart="@dimen/dimen24dp"
+                           android:textSize="@dimen/dimen15sp"
+                           android:gravity="center_vertical"
+                           android:text="Home"
+                           android:textColor="@color/colorPrimary"
+                            />
+                   </LinearLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_nav_liked"
+                       android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:layout_marginStart="@dimen/dimen18dp"
+                       android:layout_marginTop="@dimen/dimen12dp"
+                       android:layout_gravity="center_vertical"
+                       android:orientation="horizontal">
+                       <ImageView
+                           android:layout_gravity="center"
+                           android:layout_width="@dimen/dimen30dp"
+                           android:layout_height="@dimen/dimen32dp"
+                           android:padding="@dimen/dimen4dp"
+                           android:src="@drawable/ic_like_nav"/>
+                       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+                           android:layout_width="@dimen/dimen186dp"
+                           android:layout_height="match_parent"
+                           android:layout_marginStart="@dimen/dimen24dp"
+                           android:textSize="@dimen/dimen15sp"
+                           android:gravity="center_vertical"
+                           android:text="Liked Job"
+                           android:textColor="@color/nav_gray"
+                           />
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_nav_matched"
+                       android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:layout_marginStart="@dimen/dimen18dp"
+                       android:layout_marginTop="@dimen/dimen12dp"
+                       android:layout_gravity="center_vertical"
+                       android:orientation="horizontal">
+                       <ImageView
+                           android:layout_gravity="center"
+                           android:layout_width="@dimen/dimen30dp"
+                           android:layout_height="@dimen/dimen32dp"
+                           android:padding="@dimen/dimen4dp"
+                           android:src="@drawable/ic_match_nav"/>
+                       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+                           android:layout_width="@dimen/dimen186dp"
+                           android:layout_height="match_parent"
+                           android:layout_marginStart="@dimen/dimen24dp"
+                           android:textSize="@dimen/dimen15sp"
+                           android:gravity="center_vertical"
+                           android:text="Matched Jobs"
+                           android:textColor="@color/nav_gray"
+                           />
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_nav_saved"
+                   android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                   android:layout_marginStart="@dimen/dimen18dp"
+                   android:layout_marginTop="@dimen/dimen12dp"
+                   android:layout_gravity="center_vertical"
+                   android:orientation="horizontal">
+                   <ImageView
+                       android:layout_gravity="center"
+                       android:layout_width="@dimen/dimen30dp"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:padding="@dimen/dimen3dp"
+                       android:src="@drawable/nav_star"
+                       app:tint="#ababab"/>
+                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+                       android:layout_width="@dimen/dimen186dp"
+                       android:layout_height="match_parent"
+                       android:layout_marginStart="@dimen/dimen24dp"
+                       android:textSize="@dimen/dimen15sp"
+                       android:gravity="center_vertical"
+                       android:text="Saved Jobs"
+                       android:textColor="@color/nav_gray"
+                       />
+
+               </LinearLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_nav_applied"
+                       android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:layout_marginStart="@dimen/dimen18dp"
+                       android:layout_marginTop="@dimen/dimen12dp"
+                       android:layout_gravity="center_vertical"
+                       android:orientation="horizontal">
+                       <ImageView
+                           android:layout_gravity="center"
+                           android:layout_width="@dimen/dimen30dp"
+                           android:layout_height="@dimen/dimen32dp"
+                           android:padding="@dimen/dimen4dp"
+                           android:src="@drawable/nav_applied"
+                           app:tint="#ababab"/>
+                       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+                           android:layout_width="@dimen/dimen186dp"
+                           android:layout_height="match_parent"
+                           android:layout_marginStart="@dimen/dimen24dp"
+                           android:textSize="@dimen/dimen15sp"
+                           android:gravity="center_vertical"
+                           android:text="Applied Jobs"
+                           android:textColor="@color/nav_gray"
+                           />
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_nav_featured"
+                       android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:layout_marginStart="@dimen/dimen18dp"
+                       android:layout_marginTop="@dimen/dimen12dp"
+                       android:layout_gravity="center_vertical"
+                       android:orientation="horizontal">
+                       <ImageView
+                           android:layout_gravity="center"
+                           android:layout_width="@dimen/dimen30dp"
+                           android:layout_height="@dimen/dimen32dp"
+                           android:padding="@dimen/dimen3dp"
+                           android:src="@drawable/nav_featured"
+                           app:tint="#ababab" />
+                       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+                           android:layout_width="@dimen/dimen186dp"
+                           android:layout_height="match_parent"
+                           android:layout_marginStart="@dimen/dimen24dp"
+                           android:textSize="@dimen/dimen15sp"
+                           android:gravity="center_vertical"
+                           android:text="Featured Jobs"
+                           android:textColor="@color/nav_gray"
+                           />
+                   </LinearLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_nav_appoiment"
+                   android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                   android:layout_marginStart="@dimen/dimen18dp"
+                   android:layout_marginTop="@dimen/dimen12dp"
+                   android:layout_gravity="center_vertical"
+                   android:orientation="horizontal">
+                   <ImageView
+                       android:layout_gravity="center"
+                       android:layout_width="@dimen/dimen30dp"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:padding="@dimen/dimen4dp"
+                       android:src="@drawable/ic_calendar_nav"/>
+                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+                       android:layout_width="@dimen/dimen186dp"
+                       android:layout_height="match_parent"
+                       android:layout_marginStart="@dimen/dimen24dp"
+                       android:textSize="@dimen/dimen15sp"
+                       android:gravity="center_vertical"
+                       android:text="Appointments"
+                       android:textColor="@color/nav_gray"
+                       />
+               </LinearLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_nav_setting"
+                   android:layout_width="match_parent"
+                       android:layout_height="@dimen/dimen32dp"
+                   android:layout_marginStart="@dimen/dimen18dp"
+                   android:layout_marginTop="@dimen/dimen12dp"
+                   android:layout_gravity="center_vertical"
+                   android:orientation="horizontal">
+                   <ImageView
+                       android:layout_gravity="center"
+                       android:layout_width="@dimen/dimen30dp"
+                       android:layout_height="@dimen/dimen32dp"
+                       android:padding="@dimen/dimen4dp"
+                       android:src="@drawable/ic_settings_nav"/>
+                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                       android:layout_width="@dimen/dimen186dp"
+                       android:layout_height="match_parent"
+                       android:layout_marginStart="@dimen/dimen24dp"
+                       android:textSize="@dimen/dimen15sp"
+                       android:gravity="center_vertical"
+                       android:text="Settings"
+                       android:textColor="@color/nav_gray" />
+               </LinearLayout>
+
+
+
+               </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

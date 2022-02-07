@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dimen16dp"
+    android:paddingBottom="@dimen/dimen4dp"
+    tools:context=".activity.company.CompanyAppoimentActivity">
+    <RelativeLayout
+        android:paddingStart="@dimen/dimen18dp"
+        android:paddingEnd="@dimen/dimen18dp"
+        android:id="@+id/rl_toollbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen42dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen30dp"
+            android:layout_height="@dimen/dimen30dp"
+            android:layout_centerVertical="true"
+            android:paddingEnd="@dimen/dimen12dp"
+            android:src="@drawable/ic_back" />
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="My Posted Jobs"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_postedjob"
+        android:layout_below="@id/rl_toollbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen18dp"
+        android:layout_marginTop="@dimen/dimen4dp"
+        android:layout_marginEnd="@dimen/dimen18dp">
+
+        <Spinner
+            android:id="@+id/spn_posted"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen36dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dimen2dp"
+            android:paddingEnd="@dimen/dimen32dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/dimen14sp" />
+
+        <ImageView
+            android:layout_width="@dimen/dimen24dp"
+            android:layout_height="@dimen/dimen24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimen3dp"
+            android:rotation="90"
+            android:src="@drawable/ic_right_arrow" />
+
+    </RelativeLayout>
+    <View
+        android:id="@+id/view1"
+        android:layout_below="@+id/rl_postedjob"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen1dp"
+        android:background="@color/gray"
+        android:layout_marginStart="@dimen/dimen18dp"
+        android:layout_marginEnd="@dimen/dimen18dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_appointment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view1"
+        android:layout_marginTop="@dimen/dimen10dp"
+        android:paddingStart="@dimen/dimen18dp"
+        android:paddingEnd="@dimen/dimen18dp" />
+    <LinearLayout
+        android:id="@+id/ll_nodata"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/dimen96dp"
+            android:layout_height="@dimen/dimen96dp"
+            android:src="@drawable/ic_no_data"/>
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:visibility="visible"
+            android:id="@+id/tv_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dimen18dp"
+            android:paddingEnd="@dimen/dimen18dp"
+            android:text="@string/nolikedjobs"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen14sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

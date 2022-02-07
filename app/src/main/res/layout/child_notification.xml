@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/dimen2dp"
+    android:paddingBottom="@dimen/dimen6dp"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_logo"
+        android:layout_width="@dimen/dimen72dp"
+        android:layout_height="@dimen/dimen72dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/dimen6dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/civ_logo"
+        android:orientation="vertical">
+
+        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen2dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen14sp" />
+
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen2dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen12sp" />
+
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_createdat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen2dp"
+            android:textColor="@color/nav_gray"
+            android:textSize="@dimen/dimen12sp" />
+
+    </LinearLayout>
+    <View
+        android:layout_marginTop="@dimen/dimen12dp"
+        android:layout_marginEnd="@dimen/dimen8dp"
+        android:layout_marginStart="@dimen/dimen8dp"
+        android:layout_below="@+id/ll_data"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen2dp"
+        android:background="@color/white_light"/>
+
+
+
+</RelativeLayout>

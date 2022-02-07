@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_marginTop="@dimen/dimen10dp"
+    android:id="@+id/rellay"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/dimen3dp"
+    android:paddingBottom="@dimen/dimen6dp"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/rl_icons"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/dimen2dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="@dimen/dimen26dp"
+            android:layout_height="@dimen/dimen26dp"
+            android:layout_marginEnd="@dimen/dimen4dp"
+            android:padding="@dimen/dimen2dp"
+            android:src="@drawable/ic_outline_edit_24"/>
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="@dimen/dimen26dp"
+            android:layout_height="@dimen/dimen26dp"
+            android:padding="@dimen/dimen2dp"
+
+            android:src="@drawable/ic_baseline_delete_24"/>
+
+    </LinearLayout>
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:layout_below="@+id/rl_icons"
+        android:id="@+id/cmpnyname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="@dimen/dimen10dp"
+        android:layout_toLeftOf="@+id/year"
+        android:text=""
+        android:textColor="@color/gray"
+
+        android:textSize="@dimen/dimen14sp" />
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:layout_below="@+id/rl_icons"
+        android:id="@+id/year"
+        android:layout_alignParentRight="true"
+        android:text=""
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dimen14sp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/desn"
+        android:layout_marginTop="@dimen/dimen10dp"
+        android:layout_below="@+id/cmpnyname"
+        android:text=""
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dimen14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+
+        android:id="@+id/descer"
+        android:layout_marginTop="@dimen/dimen10dp"
+        android:layout_below="@+id/desn"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dimen14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</RelativeLayout>

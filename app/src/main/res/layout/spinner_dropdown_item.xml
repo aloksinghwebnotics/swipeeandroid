@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.webnotics.swipee.CustomUi.PopinsRegularCheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    style="?android:attr/spinnerDropDownItemStyle"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:textColor="@color/black"
+    android:textSize="@dimen/dimen14sp"
+    android:layout_height="@dimen/dimen42dp"
+    android:ellipsize="marquee"/>

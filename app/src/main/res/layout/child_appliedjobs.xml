@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen4dp"
+    android:background="@drawable/white_round_8dp_bg"
+    android:elevation="@dimen/dimen2dp"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/dimen4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_round_lightwhite_bg"
+        android:padding="@dimen/dimen8dp"
+        android:orientation="vertical">
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen14sp" />
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:layout_below="@+id/tv_title"
+            android:id="@+id/tv_companyname"
+            android:paddingTop="@dimen/dimen2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/nav_gray"
+            android:textSize="@dimen/dimen12sp"/>
+        <ImageView
+            android:id="@+id/iv_favorite"
+            android:layout_width="@dimen/dimen20dp"
+            android:layout_height="@dimen/dimen20dp"
+            android:src="@drawable/img_saved"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/dimen8dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/suitcase"
+            android:layout_width="@dimen/dimen20dp"
+            android:layout_height="@dimen/dimen20dp"
+            android:src="@drawable/ic_portfolio"
+            app:tint="@color/colorPrimary" />
+
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/suitcase"
+            android:paddingStart="@dimen/dimen6dp"
+            android:paddingEnd="@dimen/dimen6dp"
+            android:textColor="@color/nav_gray"
+            android:textSize="@dimen/dimen12sp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/dimen8dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/suitcase1"
+            android:layout_width="@dimen/dimen20dp"
+            android:layout_height="@dimen/dimen20dp"
+            android:src="@drawable/ic_location"
+            app:tint="@color/colorPrimary" />
+
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_loaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/suitcase1"
+            android:paddingStart="@dimen/dimen6dp"
+            android:paddingEnd="@dimen/dimen6dp"
+            android:textColor="@color/nav_gray"
+            android:textSize="@dimen/dimen12sp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/dimen8dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/suitcase2"
+            android:layout_width="@dimen/dimen20dp"
+            android:layout_height="@dimen/dimen20dp"
+            android:src="@drawable/iv_desc"
+            app:tint="@color/colorPrimary" />
+
+        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_jobdesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/suitcase2"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:paddingStart="@dimen/dimen6dp"
+            android:paddingEnd="@dimen/dimen6dp"
+            android:textColor="@color/nav_gray"
+            android:textSize="@dimen/dimen12sp" />
+
+    </RelativeLayout>
+    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        android:id="@+id/tv_applystatus"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:layout_gravity="end"
+        android:padding="@dimen/dimen8dp"
+        android:drawablePadding="@dimen/dimen2dp"
+        android:drawableStart="@drawable/ic_checked"
+        android:textSize="@dimen/dimen14sp"
+        app:drawableTint="@color/green"/>
+
+    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        android:id="@+id/tv_view"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="View"
+        android:textSize="@dimen/dimen14sp"
+        android:layout_gravity="end"
+        android:padding="@dimen/dimen8dp" />
+</LinearLayout>

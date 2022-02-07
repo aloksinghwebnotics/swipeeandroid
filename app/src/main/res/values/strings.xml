@@ -1,0 +1,194 @@
+<resources>
+    <string name="app_name">Swipee</string>
+    <string name="seeker">Seeker</string>
+    <string name="recruiter">Recruiter</string>
+    <string name="enteryouremail">Enter your email</string>
+    <string name="enteryourpassword">Enter your password</string>
+    <string name="enteryouremailerror">Please enter a valid e-mail address.</string>
+    <string name="forgotyourpassword">Forgot password?</string>
+    <string name="forgotpassword">Forgot password</string>
+    <string name="rememberme">Remember me</string>
+    <string name="connectbysocial">You can also connect using</string>
+    <string name="donothaveanaccount">Don’t have an account? Sign Up here</string>
+    <string name="donthaveaccount"><![CDATA[Don\'t have an account ? <font color=\'#4867AA\'>Sign Up here</font>]]></string>
+    <string name="dot"><![CDATA[<font color=\'#4867AA\'>●</font>]]></string>
+    <string name="space"><![CDATA[<font color=\'#00FFFFFF\'>.....</font>]]></string>
+    <string name="space1"><![CDATA[<font color=\'#00FFFFFF\'>....</font>]]></string>
+    <string name="nextline"><![CDATA[<br><br>]]></string>
+    <string name="next1"><![CDATA[<br>]]></string>
+    <string name="termcondtn">By continuing, I allow SWIPEE to collect data on how i use the app, which will be used to improve the SWIPEE app.</string>
+    <string name="enteryourphone">Your phone number</string>
+    <string name="enteryourphoneerror">Please enter a valid phone number.</string>
+    <string name="haveanaccount">Have an account? Login here</string>
+    <string name="haveaccount"><![CDATA[Have an account? <font color=\'#4867AA\'>Login here</font>]]></string>
+    <string name="aboutyou">What makes you \"YOU\"?</string>
+    <string name="heythere">Hey there!</string>
+    <string name="enteremailaddress">Please Enter Your Email Address.</string>
+    <string name="plzverify">Please Verify</string>
+    <string name="plzenterotp">Please enter the OTP you received on your email.</string>
+    <string name="resendotp">Resend OTP ?</string>
+    <string name="next">Next</string>
+    <string name="plzenterphone">Please enter your phone no.</string>
+    <string name="plzenterotponphone">Please enter the OTP you received on your phone no.</string>
+    <string name="whatsyourname">What\'s your name?</string>
+    <string name="whatsyourlocation">What\'s your location?</string>
+    <string name="enteryourname">Enter your name</string>
+    <string name="coolname">That\'s cool name! 👌</string>
+    <string name="whenisbday">When is your birthday?</string>
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="date">Date</string>
+    <string name="timeyourlife">This is the time of your life.😎</string>
+    <string name="upload">Upload</string>
+    <string name="atleastonepick">at least 1 photo of yourself</string>
+    <string name="uploadphotomatter">Upload your best photo.\nFirst impressions matter.</string>
+    <string name="onlypngjpg">You can only upload PNG,JPEG</string>
+    <string name="tellabout">Tell us about yourself!</string>
+    <string name="tellaboutmore">Tell us more about yourself</string>
+    <string name="uploadresume">Upload your resume.</string>
+    <string name="plzuploadresume">Please upload your resume!</string>
+    <string name="back">Back</string>
+    <string name="degreehtml"><![CDATA[<font color=\'#4867AA\'>Degree  :</font>]]></string>
+    <string name="collegehtml"><![CDATA[<font color=\'#4867AA\'>College :</font>]]></string>
+
+
+    <string-array name="menuarrayseeker">
+        <item>Home</item>
+        <item>Job Radar</item>
+        <item>My Account</item>
+        <item>Likes</item>
+        <item>Matched Companies</item>
+        <item>Saved Jobs</item>
+        <item>Applied Jobs</item>
+        <item>Featured Jobs</item>
+        <item>Appointments</item>
+        <item>Chat</item>
+        <item>Contact Us</item>
+        <item>Language</item>
+        <item>Privacy Policy</item>
+        <item>Imprint</item>
+
+        <item>Sign Out</item>
+    </string-array>
+    <string name="title_activity_saved_jobs">SavedJobsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="present">\ - Present\</string>
+    <string name="desired_salary">\Desired salary: \</string>
+    <string name="expected_salary">\Expected salary: \</string>
+    <string name="careerobjective">Career Objective</string>
+    <string name="save">Save</string>
+    <string name="entercareerobjective">Enter career objective</string>
+    <string name="citylist">Select City</string>
+    <string name="selectcolluniversity">Select College/University</string>
+    <string name="search">Search</string>
+    <string name="selectdegree">Select Degree</string>
+    <string name="addeducation">Add Education</string>
+    <string name="colluniversity">College or University</string>
+    <string name="degree">Degree</string>
+    <string name="iampursuing">I am currently pursuing this.</string>
+    <string name="period">Period</string>
+    <string name="startdate">Start date</string>
+    <string name="enddate">End date</string>
+    <string name="jobpreferences">Job Preferences</string>
+    <string name="desiredjoblocation">Desired job location (Max 3)</string>
+    <string name="desiredindustry">Desired industry (Max 3)</string>
+    <string name="desiredsalary">Desired salary (\u20B9/month)</string>
+    <string name="addskill">Add Skill</string>
+    <string name="statelist">Select State</string>
+    <string name="contactus">Contact Us</string>
+    <string name="howcanwehelp">How can we help you?</string>
+    <string name="writesomthing">Write something</string>
+    <string name="submit">Submit</string>
+    <string name="basicinfo">Basic Info</string>
+    <string name="firstname">First name*</string>
+    <string name="lstname">Last name*</string>
+    <string name="email">Email</string>
+    <string name="phonenumber">Phone number</string>
+    <string name="gender">Gender*</string>
+    <string name="dateofbirth">Date of birth*</string>
+    <string name="country">Country</string>
+    <string name="countrystar">Country*</string>
+    <string name="state">State</string>
+    <string name="statemend">State*</string>
+    <string name="citymend">City*</string>
+    <string name="city">City</string>
+    <string name="setting">Settings</string>
+    <string name="privacypolicy">Privacy Policy</string>
+    <string name="imprint">Imprint</string>
+    <string name="logout">Logout</string>
+    <string name="addworkexp">Add Work Experience</string>
+    <string name="jobtitle">Job Title</string>
+    <string name="selectjobtitle">Select job title</string>
+    <string name="companyname">Company Name</string>
+    <string name="selectcompanyname">Enter company name</string>
+    <string name="curentlywokinginthis">I am currently working in this role.</string>
+    <string name="workingduration">Working Duration</string>
+    <string name="workdesc">Work Description</string>
+    <string name="savedjobs">Saved Jobs</string>
+    <string name="likedjobs">Liked Jobs</string>
+    <string name="nolikedjobs">No liked jobs</string>
+    <string name="nosavedjobs">No saved jobs</string>
+    <string name="appliedjobs">Applied Jobs</string>
+    <string name="noappliedjobs">No applied jobs</string>
+    <string name="jobdetails">Job Details</string>
+    <string name="rupeesymbole">\u20B9</string>
+    <string name="salarypermonth">(\u20B9/month)</string>
+
+    <string name="noleftswipe">Oops!!! You have crossed your daily swipe limit. Book a plan</string>
+    <string name="dailylimitexceed">Oops!!! You have reached your daily job apply limit</string>
+    <string name="nodatatxt">Oops!!! Seems you have no other match. Kindly broad your match criteria. Alternatively please go to Liked User section.</string>
+
+    <string name="nodatatxt1">Oops!!! Seems you have no other match. Kindly broad your match criteria. Alternatively please go to Liked Job section.</string>
+    <string name="nodatatxt1First">Oops!!! Seems you have no other match. Kindly broad your match criteria.</string>
+    <string name="packageexpseekr">You don’t have any active package. Please purchase a plan to continue.</string>
+    <string name="jobtype">Job Type</string>
+    <string name="location">Location</string>
+    <string name="distance">Distance (KM)</string>
+    <string name="designation">Designation</string>
+    <string name="qualification">Qualification</string>
+    <string name="experience">Experience (Yrs.)</string>
+    <string name="industry">Industry</string>
+    <string name="salary">Salary (\u20B9/M)</string>
+    <string name="notifications">Notifications</string>
+    <string name="appointments">Appointments</string>
+    <string name="matchedcompany">Matched Jobs</string>
+    <string name="nearyou">Near By</string>
+    <string name="companylist">Company List</string>
+    <string name="joblist">Job List</string>
+    <string name="whatsyourcompanyname">What\'s your company name?</string>
+    <string name="enteryourcompanyname">Enter your company name</string>
+    <string name="atleastonepickofcompany">at least 1 photo of your company</string>
+    <string name="givesomemoreinfo">Give us some more information</string>
+    <string name="packageexprectr">Oops!!! You don\'t seem to have an active package. Please purchase a job posting package.</string>
+    <string name="planexpire">Oops!!! You have used your daily post limit</string>
+    <string name="salaryoffered">Salary Offered (₹/month)</string>
+    <string name="plantxt">"Economical plans that provide extra than ever before"\nFind the plan that is best suited to your hiring needs. You can upgrade your subscription whenever you like!!</string>
+    <string name="app_id">308982814513406</string>
+    <string name="errorloginfb">Error to Login Facebook</string>
+
+    <string name="multiplusercall">Multiple participants are not currently support in this UI</string>
+    <string name="connromm">Connect to a room</string>
+    <string name="connect">Connect</string>
+    <string name="cancelbtn">Cancel</string>
+    <string name="roomname">room name</string>
+    <string name="permsnneeded">Permission Need</string>
+    <string name="action">Action</string>
+    <string name="codec_title">Set your preferred audio and video codec. Not all codecs are supported with Group rooms. The media server will fallback to OPUS or VP8 if a preferred codec is not supported.</string>
+    <string name="pref_title_audio_codec">Audio Codec</string>
+    <string name="pref_title_video_codec">Video Codec</string>
+    <string name="sender_bandwidth_constraints">Set sender bandwidth constraints. Zero represents the WebRTC default value which varies by codec.</string>
+    <string name="max_audio_bitrate">Max Audio Bitrate (bits per second)</string>
+    <string name="max_video_bitrate">Max Video Bitrate (bits per second)</string>
+    <string name="vp8_simulcast">VP8 Simulcast</string>
+    <string name="audio_device">Audio Device</string>
+    <string name="linkdin_secret">pyhHqEUbyNUmOdrT</string>
+    <string name="linkdin_clientid">868amcmypovjvo</string>
+
+
+</resources>

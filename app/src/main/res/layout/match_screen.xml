@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/dimen4dp"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/datalay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.daprlabs.cardstack.SwipeFrameLayout
+                    android:id="@+id/swp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.daprlabs.cardstack.SwipeDeck
+                        android:id="@+id/swipe_deck"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/dimen20dp"
+                        swipedeck:card_spacing="@dimen/dimen8dp"
+                        swipedeck:max_visible="1"
+                        swipedeck:render_above="true"
+                        swipedeck:rotation_degrees="15" />
+                </com.daprlabs.cardstack.SwipeFrameLayout>
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_accept"
+                    android:layout_width="@dimen/dimen52dp"
+                    android:layout_height="@dimen/dimen52dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/dimen32dp"
+                    android:layout_marginBottom="@dimen/dimen42dp"
+                    android:src="@drawable/iv_accept" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_reject"
+                    android:layout_above="@+id/iv_accept"
+                    android:layout_width="@dimen/dimen52dp"
+                    android:layout_height="@dimen/dimen52dp"
+                    android:src="@drawable/ic_reject"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="@dimen/dimen13dp"
+                    android:layout_marginEnd="@dimen/dimen32dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nolay"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen12dp"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/iv_nodata"
+                    android:layout_above="@+id/nodatatxt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="@dimen/dimen96dp"
+                    android:layout_marginBottom="@dimen/dimen8dp"
+                    android:layout_height="@dimen/dimen96dp"
+                    android:src="@drawable/ic_no_data"/>
+                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    android:id="@+id/nodatatxt"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dimen14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/noleftswipe"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen12dp"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_above="@+id/tvNoswipe"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="@dimen/dimen96dp"
+                    android:layout_height="@dimen/dimen96dp"
+                    android:src="@drawable/ic_no_swipe"/>
+                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    android:id="@+id/tvNoswipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dimen14sp" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <include layout="@layout/filter_bottomsheet" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

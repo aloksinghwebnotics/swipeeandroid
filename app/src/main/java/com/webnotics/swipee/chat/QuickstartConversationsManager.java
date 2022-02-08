@@ -28,7 +28,9 @@ import okhttp3.Response;
 
 interface QuickstartConversationsManagerListener {
     void receivedNewMessage();
+
     void messageSentCallback();
+
     void reloadMessages();
 }
 
@@ -83,7 +85,7 @@ class QuickstartConversationsManager {
                         if (token != null) {
                             ConversationsClient.Properties props = ConversationsClient.Properties.newBuilder().createProperties();
                             ConversationsClient.create(context, token, props, mConversationsClientCallback);
-                            listener.receivedTokenResponse(true,null);
+                            listener.receivedTokenResponse(true, null);
                         } else {
                             listener.receivedTokenResponse(false, exception);
                         }
@@ -112,35 +114,32 @@ class QuickstartConversationsManager {
             }
             Log.d(MainChatActivity.TAG, "Response from server: " + responseBody);
             Gson gson = new Gson();
-            TokenResponse tokenResponse = gson.fromJson(responseBody,TokenResponse.class);
+            TokenResponse tokenResponse = gson.fromJson(responseBody, TokenResponse.class);
             String accessToken = tokenResponse.token;
             Log.d(MainChatActivity.TAG, "Retrieved access token from server: " + accessToken);
             listener.receivedAccessToken(accessToken, null);
 
-        }
-        catch (IOException ex) {
-            Log.e(MainChatActivity.TAG, ex.getLocalizedMessage(),ex);
+        } catch (IOException ex) {
+            Log.e(MainChatActivity.TAG, ex.getLocalizedMessage(), ex);
             listener.receivedAccessToken(null, ex);
         }
     }
 
     void sendMessage(String messageBody) {
 
-        // some function and variable are changed, so that below lines of code are not working
-        // for sending message, find the right solution for below code
-
-        /*if (conversation != null) {
-            Message.Options options = Message.options().withBody(messageBody);
-            Log.d(MainChatActivity.TAG,"Message created");
-            conversation.sendMessage(options, new CallbackListener<Message>() {
-                @Override
-                public void onSuccess(Message message) {
-                    if (conversationsManagerListener != null) {
-                        conversationsManagerListener.messageSentCallback();
-                    }
-                }
-            });
-        }*/
+        if (conversation != null) {
+            Log.d(MainChatActivity.TAG, "Message created");
+            conversation.prepareMessage()
+                    .setBody(messageBody)
+                    .buildAndSend(new CallbackListener<Message>() {
+                        @Override
+                        public void onSuccess(Message result) {
+                            if (conversationsManagerListener != null) {
+                                conversationsManagerListener.messageSentCallback();
+                            }
+                        }
+                    });
+        }
     }
 
 
@@ -368,9 +367,6 @@ class QuickstartConversationsManager {
 
         @Override
         public void onMessageUpdated(Message message, Message.UpdateReason updateReason) {
-            // Log.d(MainChatActivity.TAG, "Message updated: " + message.getMessageBody());
-            // check if message.getBody returns right message then below line of code is good
-            // if message.getBode not return right message then find another solution
             Log.d(MainChatActivity.TAG, "Message updated: " + message.getBody());
         }
 
@@ -414,7 +410,7 @@ class QuickstartConversationsManager {
         return messages;
     }
 
-    public void setListener(QuickstartConversationsManagerListener listener)  {
+    public void setListener(QuickstartConversationsManagerListener listener) {
         this.conversationsManagerListener = listener;
     }
 }

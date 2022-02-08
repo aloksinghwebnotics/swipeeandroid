@@ -159,9 +159,6 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Message message = quickstartConversationsManager.getMessages().get(position);
-            // String messageText = String.format("%s: %s", message.getAuthor(), message.getMessageBody());
-            // check if message.getBody returns right message then below line of code is good
-            // if message.getBode not return right message then find another solution
             String messageText = String.format("%s: %s", message.getAuthor(), message.getBody());
             holder.messageTextView.setText(messageText);
         }

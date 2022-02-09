@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.razorpay.PaymentResultListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
@@ -33,6 +36,7 @@ import com.webnotics.swipee.fragments.company.CompanyMatchFragments;
 import com.webnotics.swipee.fragments.company.CompanyPlansFragments;
 import com.webnotics.swipee.fragments.company.CompanyProfileFragments;
 import com.webnotics.swipee.fragments.company.PostJobFragments;
+import com.webnotics.swipee.fragments.seeker.PlansFragments;
 import com.webnotics.swipee.interfaces.CountersInterface;
 import com.webnotics.swipee.model.company.CompanyProfileModel;
 import com.webnotics.swipee.rest.SwipeeApiClient;
@@ -44,7 +48,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompanyHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface {
+public class CompanyHomeActivity extends AppCompatActivity implements View.OnClickListener,
+        CountersInterface, PaymentResultListener {
+
     Context mContext;
     @SuppressLint("StaticFieldLeak")
     public static CompanyHomeActivity instance;
@@ -444,5 +450,39 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+    }
+
+    /**
+     * The name of the function has to be
+     * onPaymentSuccess
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+        try {
+            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
+            if (CompanyPlansFragments.instance != null){
+                CompanyPlansFragments.instance.setTransactionData(razorpayPaymentID);
+            }
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentSuccess", e);
+        }
+    }
+
+    /**
+     * The name of the function has to be
+     * onPaymentError
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentError(int code, String response) {
+        Log.d("RazorPay", "Exception in onPaymentError " + response);
+        try {
+            Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentError", e);
+        }
     }
 }

@@ -124,6 +124,6 @@ public class ApiUrls {
 
     // Naushad
     public static final String URL_APPOINTMENT_ACCESS_TOKEN_CHAT = "appointments/access_token_chat";
-
-
+    public static final String URL_EMPLOYER_ORDER_PACKAGE= "packages/employer_order_package";
+    public static final String URL_USER_ORDER_PACKAGE= "packages/user_order_package";
 }

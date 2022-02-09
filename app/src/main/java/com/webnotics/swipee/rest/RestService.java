@@ -419,5 +419,15 @@ public interface RestService {
     @FormUrlEncoded
     @POST(ApiUrls.URL_ORDERFEATUREJOB)
     Call<JsonObject> orderFeatureJob(@FieldMap HashMap<String, String> hashMap);
+
+    //Naushad
+
+    @FormUrlEncoded
+    @POST(ApiUrls.URL_EMPLOYER_ORDER_PACKAGE)
+    Call<JsonObject> setRecruiterTransaction(@FieldMap HashMap<String, String> hashMap);
+
+    @FormUrlEncoded
+    @POST(ApiUrls.URL_USER_ORDER_PACKAGE)
+    Call<JsonObject> setUserTransaction(@FieldMap HashMap<String, String> hashMap);
 }
 

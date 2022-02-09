@@ -1,7 +1,9 @@
 package com.webnotics.swipee.fragments.seeker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +20,26 @@ import com.razorpay.PaymentResultListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
+import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.adapter.seeeker.PlanAdapter;
+import com.webnotics.swipee.chat.MainChatActivity;
 import com.webnotics.swipee.fragments.Basefragment;
 
 import com.webnotics.swipee.payment.Payment;
+import com.webnotics.swipee.rest.ApiUrls;
+import com.webnotics.swipee.rest.ParaName;
+import com.webnotics.swipee.rest.RestService;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class PlansFragments extends Basefragment implements View.OnClickListener {
@@ -93,7 +105,48 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
     }
 
     public void setTransactionData(String transactionId) {
-        // hit service after transaction
+
+        HashMap<String, String> hashMap = new HashMap();
+        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+        hashMap.put(ParaName.KEY_TRANSACTIONID, transactionId);
+        hashMap.put(ParaName.KEY_PACKAGETYPE, package_type);
+        hashMap.put(ParaName.KEY_PAYMENTSTATUS, "Completed");
+        hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
+        hashMap.put(ParaName.KEY_PACKAGEID, package_id);
+
+
+        AppController.ShowDialogue("", mContext);
+
+        SwipeeApiClient.swipeeServiceInstance().setUserTransaction(hashMap).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                Log.d(MainChatActivity.TAG, "Response from server: " + response.body());
+
+                AppController.dismissProgressdialog();
+
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
+                    if (response.body().get("code").getAsInt() == 203) {
+                        rest.showToast(response.body().get("message").getAsString());
+                        AppController.loggedOut(mContext);
+                        getActivity().finish();
+                    } else if (response.body().get("code").getAsInt() == 200 && status) {
+                        startActivity(new Intent(mContext, SeekerHomeActivity.class));
+                    }
+
+                } else {
+                    rest.showToast("Something went wrong");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.e(MainChatActivity.TAG, t.getLocalizedMessage());
+                AppController.dismissProgressdialog();
+            }
+        });
     }
 
     private void callPlanList() {
@@ -148,4 +201,9 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        instance = null;
+    }
 }

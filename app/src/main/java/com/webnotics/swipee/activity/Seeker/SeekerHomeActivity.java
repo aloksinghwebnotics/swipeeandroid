@@ -485,6 +485,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
+
     /**
      * The name of the function has to be
      * onPaymentSuccess

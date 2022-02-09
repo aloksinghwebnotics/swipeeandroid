@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.razorpay.PaymentResultListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
@@ -43,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeekerHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface {
+public class SeekerHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface, PaymentResultListener {
     Context mContext;
     LinearLayout nearlay, matchlay, planlay, chatlay, accountlay;
     LinearLayout bottomlay, ll_nav_home, ll_nav_liked, ll_nav_matched, ll_nav_saved, ll_nav_applied, ll_nav_featured, ll_nav_appoiment, ll_nav_setting;
@@ -482,5 +485,37 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
+    /**
+     * The name of the function has to be
+     * onPaymentSuccess
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+        try {
+            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
+            if (PlansFragments.instance != null){
+                PlansFragments.instance.setTransactionData(razorpayPaymentID);
+            }
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentSuccess", e);
+        }
+    }
 
+    /**
+     * The name of the function has to be
+     * onPaymentError
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentError(int code, String response) {
+        Log.d("RazorPay", "Exception in onPaymentError " + response);
+        try {
+            Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentError", e);
+        }
+    }
 }

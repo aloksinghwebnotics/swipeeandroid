@@ -1,6 +1,7 @@
 package com.webnotics.swipee.chat;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,10 +66,10 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         });
 
         // Token Method 1 - supplied from strings.xml as the test_access_token
-        quickstartConversationsManager.initializeWithAccessToken(this, getString(R.string.test_access_token));
+        // quickstartConversationsManager.initializeWithAccessToken(this, getString(R.string.test_access_token));
 
         // Token Method 2 - retrieve the access token from a web server or Twilio Function
-        //retrieveTokenFromServer();
+        retrieveTokenFromServer();
     }
 
     private void retrieveTokenFromServer() {
@@ -89,10 +90,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                     if (exception != null) {
                         errorMessage = errorMessage + " " + exception.getLocalizedMessage();
                     }
-                    Toast.makeText(MainChatActivity.this,
-                            errorMessage,
-                            Toast.LENGTH_LONG)
-                            .show();
+                    Log.d(MainChatActivity.TAG, "Running Fine");
                 }
             }
         });

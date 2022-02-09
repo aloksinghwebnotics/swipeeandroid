@@ -48,6 +48,7 @@ public interface RestService {
             "Accept: application/json",
             "Content-Type: application/x-www-form-urlencoded"
     })
+
     @FormUrlEncoded
     @POST(ApiUrls.URL_LOGIN)
     Call<JsonObject> loginUser(@FieldMap HashMap<String, String> hashMap);

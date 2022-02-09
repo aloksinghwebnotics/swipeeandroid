@@ -19,6 +19,7 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
+import com.webnotics.swipee.chat.MainChatActivity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -46,20 +47,19 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void initView() {
-
-       // callHashMap();
+        // callHashMap();
 
 /*
               Config.SetUserToken("eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJjb25zdW1lcktleSI6Imluc3RhY2FycmVyIzIwMjEiLCJ1c2VySWQiOiI4IiwiZGV2aWNlX2lkIjoiNUI5RDNFMzUtQUUyQS00MDYwLUE2MDktNkU4OEM0NThENDQ0Iiwicm9sZUlkIjoiMiIsImlzc3VlZEF0IjoiMjAyMi0wMi0wN1QxMToyNToyNiswNTMwIiwidHRsIjo2MzA3MjAwMH0.oZLMB6PWyn_2gjTI8oS4CqSOUsLKqGjYyqfrVXo9Sno");
 */
         new Handler().postDelayed(() -> {
             if (Config.GetIsUserLogin() && Config.isRemember()) {
-                if (Config.isSeeker()){
+                if (Config.isSeeker()) {
                     Intent i = new Intent(this, SeekerHomeActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.enter, R.anim.exit);
                     finish();
-                }else {
+                } else {
                     Intent i = new Intent(this, CompanyHomeActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.enter, R.anim.exit);
@@ -72,9 +72,10 @@ public class SplashScreen extends AppCompatActivity {
                 overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
 
-                /*startActivity(new Intent(SplashScreen.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker",true));
+                startActivity(new Intent(SplashScreen.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker", true));
                 overridePendingTransition(R.anim.enter, R.anim.exit);
-                finish();*/
+                finish();
+
             }
 
         }, 3000);

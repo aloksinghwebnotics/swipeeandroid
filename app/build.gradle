@@ -26,6 +26,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 dependencies {
@@ -62,6 +63,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.0.1'
 
     implementation 'com.facebook.android:facebook-android-sdk:8.+'
+
+    // payment sdk (RazorPay)
+    implementation('com.razorpay:checkout:1.6.12')
 
     // twilio
     implementation 'com.twilio:conversations-android:3.0.0'

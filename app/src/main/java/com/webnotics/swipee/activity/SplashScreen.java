@@ -37,9 +37,10 @@ public class SplashScreen extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) !=
                 PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{
-                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO},
                     REQUEST_CODE_ASK_PERMISSIONS);
         } else initView();
 
@@ -50,7 +51,7 @@ public class SplashScreen extends AppCompatActivity {
        // callHashMap();
 
 /*
-              Config.SetUserToken("eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJjb25zdW1lcktleSI6Imluc3RhY2FycmVyIzIwMjEiLCJ1c2VySWQiOiI4IiwiZGV2aWNlX2lkIjoiNUI5RDNFMzUtQUUyQS00MDYwLUE2MDktNkU4OEM0NThENDQ0Iiwicm9sZUlkIjoiMiIsImlzc3VlZEF0IjoiMjAyMi0wMi0wN1QxMToyNToyNiswNTMwIiwidHRsIjo2MzA3MjAwMH0.oZLMB6PWyn_2gjTI8oS4CqSOUsLKqGjYyqfrVXo9Sno");
+           Config.SetUserToken("eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJjb25zdW1lcktleSI6Imluc3RhY2FycmVyIzIwMjEiLCJ1c2VySWQiOiI4IiwiZGV2aWNlX2lkIjoiQTg3MTU0NzctOEU4NS00QTA1LUI5NjItOTM3ODkxMTE4NzBEIiwicm9sZUlkIjoiMiIsImlzc3VlZEF0IjoiMjAyMi0wMi0wOFQwOTowODoyNSswNTMwIiwidHRsIjo2MzA3MjAwMH0.1befkxyV9_3ccoDzHGYiHIcr99uPVi3psrSWWUiqZHQ");
 */
         new Handler().postDelayed(() -> {
             if (Config.GetIsUserLogin() && Config.isRemember()) {

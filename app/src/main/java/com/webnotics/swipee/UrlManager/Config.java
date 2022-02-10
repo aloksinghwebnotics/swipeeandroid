@@ -1,5 +1,6 @@
 package com.webnotics.swipee.UrlManager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -9,8 +10,10 @@ import android.content.SharedPreferences;
  */
 
 public class Config {
+    public  static  final  String paypalconfig  =   "AaKqob2gRAgUC6uCf9tHftRoG4z_W6j2PpqvUM4Myodfg5aiw1CRnr6g006XO5z7F5npQuXyMNFj8Y7P";
+    @SuppressLint("StaticFieldLeak")
     private static Context mContext;
-    public static final String CONFIG_FILE = "InstaCarrier";
+    public static final String CONFIG_FILE = "Swipee";
 
 
     private static SharedPreferences preference = null;
@@ -45,6 +48,8 @@ public class Config {
     public static final String PHONECODE = "PHONECODE";
     public static final String COUNTRY = "COUNTRY";
     public static final String Lat = "Lat";
+    public static final String DATETIME = "DateTime";
+    public static final String LOCATION = "LocationDb";
     public static final String Longg = "Longg";
     public static final String Radiuss = "Radiuss";
     public static final String GENDER = "GENDER";
@@ -133,6 +138,24 @@ public class Config {
         return preference.getBoolean(IS_NOTIFICATION_MUTE, false);
     }
 
+    public static String GetCollegeRefreshDate(){
+        return preference.getString(DATETIME, "");
+    }
+
+    public static void SetCollegeRefreshDate(String date) {
+        editor.putString(DATETIME, date);
+        editor.commit();
+    }
+
+
+    public static String GetLocationRefreshDate(){
+        return preference.getString(LOCATION, "");
+    }
+
+    public static void SetLocationRefreshDate(String loc) {
+        editor.putString(LOCATION, loc);
+        editor.commit();
+    }
 
 
     public static void SetIsSeeker(boolean IsSeeker) {

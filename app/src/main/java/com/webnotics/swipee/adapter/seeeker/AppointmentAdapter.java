@@ -17,9 +17,11 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.webnotics.swipee.R;
+import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.Seeker.AppoimentActivity;
 import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.model.seeker.AppointmentModel;
+import com.webnotics.swipee.rest.ParaName;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -88,7 +90,9 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        holder.iv_call.setOnClickListener(v -> {
+            mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id()));
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

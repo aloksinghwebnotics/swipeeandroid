@@ -24,42 +24,51 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen16dp"
+            android:layout_marginBottom="@dimen/dimen8dp"
             android:layout_gravity="bottom|end"
             android:orientation="vertical" >
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/switch_camera_action_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen40dp"
+                android:layout_height="@dimen/dimen40dp"
                 android:layout_gravity="center"
-                app:fabSize="mini"
+                android:padding="@dimen/dimen6dp"
+                android:background="@drawable/primary_circle_bg"
                 android:layout_marginBottom="@dimen/fab_margin"
                 android:src="@drawable/ic_switch_camera_white_24dp" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/local_video_action_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen40dp"
+                android:layout_height="@dimen/dimen40dp"
                 android:layout_marginBottom="@dimen/fab_margin"
                 android:layout_gravity="center"
-                app:fabSize="mini"
+                android:padding="@dimen/dimen6dp"
+                android:background="@drawable/primary_circle_bg"
                 android:src="@drawable/ic_videocam_white_24dp" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/mute_action_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabSize="mini"
+                android:layout_width="@dimen/dimen40dp"
+                android:layout_height="@dimen/dimen40dp"
+                android:layout_marginBottom="@dimen/fab_margin"
                 android:layout_gravity="center"
+                android:padding="@dimen/dimen6dp"
+                android:background="@drawable/primary_circle_bg"
                 android:src="@drawable/ic_mic_white_24dp" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/connect_action_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                app:fabSize="normal"
-                android:src="@drawable/ic_video_call_white_24dp" />
+                android:layout_width="@dimen/dimen46dp"
+                android:layout_height="@dimen/dimen46dp"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_gravity="center"
+                android:padding="@dimen/dimen8dp"
+                android:background="@drawable/white_semiround_bg"
+                android:src="@drawable/ic_call_end_white_24px"
+                app:tint="@color/red" />
 
         </LinearLayout>
 

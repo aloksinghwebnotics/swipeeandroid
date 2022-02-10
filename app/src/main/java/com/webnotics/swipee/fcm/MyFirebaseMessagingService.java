@@ -16,14 +16,16 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.NotificationActivity;
+import com.webnotics.swipee.activity.Seeker.FirstVideoActivity;
 import com.webnotics.swipee.activity.SplashScreen;
 import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
+import com.webnotics.swipee.call.AudioActivity;
+import com.webnotics.swipee.call.VideoActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,8 +62,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
               Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
 
               try {
-                  //  JSONObject json = new JSONObject(remoteMessage.getData().toString());
-                  JSONObject json = new JSONObject(remoteMessage.getData());
+                   JSONObject json = new JSONObject(remoteMessage.getData().toString());
+                 // JSONObject json = new JSONObject(remoteMessage.getData());
                   handleDataMessage(json);
               } catch (Exception e) {
                   Log.e(TAG, "Exception: " + e.getMessage());
@@ -145,8 +147,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.e(TAG, "push json: " + json.toString());
 
         try {
-         //   JSONObject data = json.getJSONObject("data");
-            JSONObject data = json;
+            JSONObject data = json.getJSONObject("data");
+          //  JSONObject data = json;
 
             String title = data.getString("title");
             String message = data.getString("message");
@@ -154,15 +156,33 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String imageUrl = "";
             String timestamp = data.getString("timestamp");
 
-            //JSONObject payload = data.getJSONObject("payload");
-            JSONObject payload = new JSONObject(data.getString("payload"));
+            JSONObject payload = data.getJSONObject("payload");
+           // JSONObject payload = new JSONObject(data.getString("payload"));
             String notify_category = payload.getString("notify_category");
 
             //////////////
 
             ///////////////////
             Intent resultIntent;
-            if (notify_category.equalsIgnoreCase("employer_booked_appointment")) {
+            if (notify_category.equalsIgnoreCase("company_reject_audio_call")) {
+               if (AudioActivity.instance!=null){
+                   AudioActivity.instance.rejectCall(payload.getString("appointment_id"));
+                   showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
+               }
+
+            }else if (notify_category.equalsIgnoreCase("user_reject_audio_call")) {
+               if (AudioActivity.instance!=null){
+                   AudioActivity.instance.rejectCall(payload.getString("appointment_id"));
+                   showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
+               }
+
+            } else if (notify_category.equalsIgnoreCase("user_reject_video_call")) {
+               if (VideoActivity.instance!=null){
+                   VideoActivity.instance.rejectCall(payload.getString("appointment_id"));
+                   showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
+               }
+
+            } else if (notify_category.equalsIgnoreCase("employer_booked_appointment")) {
                 String dtStart = payload.getString("appointment_start_time");
                 String end = payload.getString("appointment_end_time");
                 SimpleDateFormat format = new SimpleDateFormat("hh:mm");
@@ -200,10 +220,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     // image is present, show notification with image
                     showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }
-
+            }else if (notify_category.equalsIgnoreCase("video_call")|| notify_category.equalsIgnoreCase("audio_call")) {
+                resultIntent = new Intent(getApplicationContext(), FirstVideoActivity.class);
+                resultIntent.putExtra("user_access_token", payload.getString("user_access_token"));
+                resultIntent.putExtra("appointment_type", payload.getString("appointment_type"));
+                resultIntent.putExtra("room_name", payload.getString("room_name"));
+                resultIntent.putExtra("user_name", payload.getString("user_name"));
+                resultIntent.putExtra("user_mobile", payload.getString("user_mobile"));
+                resultIntent.putExtra("user_phone_code", payload.getString("user_phone_code"));
+                resultIntent.putExtra("user_profile", payload.getString("user_profile"));
+                resultIntent.putExtra("Aid", payload.getString("appointment_id"));
+                resultIntent.putExtra("role_id", payload.getString("role_id"));
+                resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
+                    startActivity(resultIntent);
+                }else {
+                    // check for image attachment
+                    if (TextUtils.isEmpty(imageUrl)) {
+                        showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                    } else {
+                        // image is present, show notification with image
+                        showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                    }
+                }
             }
-
-
 
 
         } catch (JSONException e) {

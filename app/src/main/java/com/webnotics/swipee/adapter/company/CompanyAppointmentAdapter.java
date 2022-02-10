@@ -17,9 +17,11 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.activity.Seeker.JobDetail;
+import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
 import com.webnotics.swipee.activity.company.UserDetail;
 import com.webnotics.swipee.model.company.CompanyAppointmentModel;
+import com.webnotics.swipee.rest.ParaName;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -95,6 +97,12 @@ public class CompanyAppointmentAdapter extends RecyclerView.Adapter<CompanyAppoi
         }
 
         holder.tv_cancel.setOnClickListener(v -> mContext.callCancel(data.get(position).getAppointment_id()));
+        holder.iv_call.setOnClickListener(v -> {
+            mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id()));
+        });
+        holder.tv_vedio.setOnClickListener(v -> {
+            mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id()));
+        });
         holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_id())));
 
         holder.civ_logo.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",CompanyAppoimentActivity.class.getSimpleName()).

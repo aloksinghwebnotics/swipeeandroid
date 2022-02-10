@@ -1,7 +1,9 @@
 package com.webnotics.swipee.activity.Seeker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,11 +21,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
+import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.seeeker.CollegeAdapter;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.room_database.College_model;
+import com.webnotics.swipee.room_database.College_room_abstract;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,10 +58,6 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
         if (getIntent() != null) {
             collegeId = getIntent().getStringExtra("collegeId") != null ? getIntent().getStringExtra("collegeId") : "";
         }
-        if (rest.isInterentAvaliable()) {
-            AppController.ShowDialogue("", mContext);
-            callCollegeList();
-        } else rest.AlertForInternet();
 
         mListView = findViewById(R.id.mlistview);
         et_search = findViewById(R.id.et_search);
@@ -63,6 +65,17 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
 
         iv_back.setOnClickListener(this);
         et_search.addTextChangedListener(this);
+        ArrayList<JsonObject> collegeList=callCollegeFromDB();
+        if (collegeList.size()>0){
+            collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);
+            mListView.setAdapter(collegeAdapter);
+        }else {
+            if (rest.isInterentAvaliable()) {
+                AppController.ShowDialogue("", mContext);
+                callCollegeList();
+            } else rest.AlertForInternet();
+
+        }
 
 
     }
@@ -109,14 +122,22 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                     JsonObject responseBody = response.body();
                     JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
                     ArrayList<JsonObject> jsonObjectArrayList = new ArrayList<>();
-                    for (int i = 0; i < mArrayListData.size(); i++) {
+                    if (mArrayListData.size()>0){
+                        for (int i = 0; i < mArrayListData.size(); i++) {
+                            JsonObject object=mArrayListData.get(i).getAsJsonObject();
+                            jsonObjectArrayList.add(object);
+                            String university_college_id=object.has("university_college_id")?!object.get("university_college_id").isJsonNull()?object.get("university_college_id").getAsString():"":"";
+                            String university_college_name=object.has("university_college_name")?!object.get("university_college_name").isJsonNull()?object.get("university_college_name").getAsString():"":"";
+                            boolean selected= object.has("selected") && (!object.get("selected").isJsonNull() && object.get("selected").getAsBoolean());
+                            College_room_abstract.getDatabase(mContext).college_room_interface().insertData(new College_model(university_college_id,university_college_name,selected?1:0));
+                        }
+                        Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
+                        if (mArrayListData.size() > 0) {
+                            collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, jsonObjectArrayList);
+                            mListView.setAdapter(collegeAdapter);
+                        }
+                    }
 
-                        jsonObjectArrayList.add(mArrayListData.get(i).getAsJsonObject());
-                    }
-                    if (mArrayListData.size() > 0) {
-                        collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, jsonObjectArrayList);
-                        mListView.setAdapter(collegeAdapter);
-                    }
 
                 } else {
                     rest.showToast("Something went wrong");
@@ -136,5 +157,40 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
         startActivity(new Intent(mContext, AddEducation.class).putExtra("from", "college").putExtra("id", id).putExtra("name", name));
         finish();
     }
+
+
+    private  ArrayList<JsonObject> callCollegeFromDB() {
+        ArrayList<JsonObject> temp_prodlist = new ArrayList<>();
+
+        Cursor cursor = College_room_abstract.getDatabase(mContext).college_room_interface().getAllData();
+        if (cursor != null) {
+            if (cursor.moveToFirst() && cursor.getCount() > 0) {
+                try {
+                    do {
+                         @SuppressLint("Range") String university_college_id = cursor.getString(cursor.getColumnIndex("university_college_id"));
+                        @SuppressLint("Range") String university_college_name = cursor.getString(cursor.getColumnIndex("university_college_name"));
+                        @SuppressLint("Range") int selected = cursor.getInt(cursor.getColumnIndex("selected"));
+                        JsonObject object=new JsonObject();
+                        object.addProperty("university_college_id",university_college_id);
+                        object.addProperty("university_college_name",university_college_name);
+                        object.addProperty("selected", selected == 1);
+                        temp_prodlist.add(object);
+
+                    } while (cursor.moveToNext());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    cursor.close();
+                }
+
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return temp_prodlist;
+    }
+
 
 }

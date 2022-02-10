@@ -1,15 +1,16 @@
-package com.webnotics.swipee.fragments.company;
+package com.webnotics.swipee.activity.company;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +23,7 @@ import com.paypal.android.sdk.payments.PaymentActivity;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.adapter.company.CompanyPlanAdapter;
-import com.webnotics.swipee.fragments.Basefragment;
+import com.webnotics.swipee.adapter.company.FeaturedPlanAdapter;
 import com.webnotics.swipee.rest.ApiUrls;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
@@ -35,9 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class CompanyPlansFragments extends Basefragment implements View.OnClickListener {
-    //Paypal intent request code to track onActivityResult method
+public class FeaturedPlan extends AppCompatActivity {
     public static final int PAYPAL_REQUEST_CODE = 123;
     private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
     private static final String CONFIG_CLIENT_ID =  Config.paypalconfig;
@@ -61,54 +59,36 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
     Context mContext;
     RecyclerView rv_plan;
     TextView tv_title,tv_amount,tv_period,tv_pay;
+    private int job_post_id=0;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.plan_screen, container, false);
-        mContext=getActivity();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_featured_plan);
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getColor(R.color.white));
+        mContext=this;
         rest=new Rest(mContext);
+
+        rv_plan=findViewById(R.id.rv_plan);
+        tv_title=findViewById(R.id.tv_title);
+        tv_amount=findViewById(R.id.tv_amount);
+        tv_period=findViewById(R.id.tv_period);
+        tv_pay=findViewById(R.id.tv_pay);
+
+        if (getIntent() != null) {
+            job_post_id = getIntent().getIntExtra("job_post_id", 0);
+        }
         if (rest.isInterentAvaliable()){
             AppController.ShowDialogue("",mContext);
             callPlanList();
         }else rest.AlertForInternet();
-
-        rv_plan=rootView.findViewById(R.id.rv_plan);
-        tv_title=rootView.findViewById(R.id.tv_title);
-        tv_amount=rootView.findViewById(R.id.tv_amount);
-        tv_period=rootView.findViewById(R.id.tv_period);
-        tv_pay=rootView.findViewById(R.id.tv_pay);
-
-
-        return rootView;
-
-
-    }
-    @Override
-    public int setContentView() {
-        return R.layout.plan_screen;
     }
 
-    @Override
-    protected void backPressed() {
-              getActivity().finish();
-    }
-
-    @Override
-    public void onClick(View view) {
-                switch (view.getId()){
-                    case R.id.tv_pay:
-
-                        callPaypal(String.valueOf(package_price),package_id);
-                        break;
-
-                    default:break;
-                }
-
-
-    }
 
     private void callPlanList() {
-        SwipeeApiClient.swipeeServiceInstance().getCompanyPackageList(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
+        SwipeeApiClient.swipeeServiceInstance().featuredPlanList(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
                 AppController.dismissProgressdialog();
@@ -118,12 +98,12 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
                     if (response.body().get("code").getAsInt()==203){
                         rest.showToast(response.body().get("message").getAsString());
                         AppController.loggedOut(mContext);
-                        getActivity().finish();
+                        finish();
                     }else
                     if (response.body().get("code").getAsInt()==200 &&status){
                         JsonArray data=responseBody.has("data")?responseBody.get("data").getAsJsonArray():new JsonArray();
                         if (data.size()>0){
-                            CompanyPlanAdapter planAdapter=new CompanyPlanAdapter(CompanyPlansFragments.this,data);
+                            FeaturedPlanAdapter planAdapter=new FeaturedPlanAdapter(FeaturedPlan.this,data);
                             rv_plan.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             rv_plan.setNestedScrollingEnabled(false);
                             rv_plan.setAdapter(planAdapter);
@@ -156,7 +136,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         tv_title.setText(package_name);
         tv_period.setText("/month");
         tv_amount.setText(MessageFormat.format("Rs {0}", package_price));
-        tv_pay.setOnClickListener(this);
+        //tv_pay.setOnClickListener(this);
 
     }
 
@@ -165,9 +145,9 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         mContext.startService(intent);
         PayPalPayment payment;
-            //Creating a paypalpayment
-            payment = new PayPalPayment(new BigDecimal(price), "INR",  30+" days duration",
-                    PayPalPayment.PAYMENT_INTENT_SALE);
+        //Creating a paypalpayment
+        payment = new PayPalPayment(new BigDecimal(price), "INR",  30+" days duration",
+                PayPalPayment.PAYMENT_INTENT_SALE);
 
         try {
             //Creating Paypal Payment activity intent
@@ -184,4 +164,39 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
             startActivityForResult(intent, PAYPAL_REQUEST_CODE);
         }catch (Exception ignored){}
     }
+
+//////call on payment done
+    private void publishFeaturedJob(String id) {
+        SwipeeApiClient.swipeeServiceInstance().publishFeaturedJob(Config.GetUserToken(), String.valueOf(job_post_id), "Y").enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject respo = response.body();
+                    if (respo != null)
+                        if (respo.get("code").getAsInt() == 200 && respo.get("status").getAsBoolean()) {
+                            rest.showToast(respo.get("message").getAsString());
+                            startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
+                            finish();
+                        } else if (respo.get("code").getAsInt() == 203) {
+                            rest.showToast(respo.get("message").getAsString());
+                            AppController.loggedOut(mContext);
+                            finish();
+                        } else {
+                            rest.showToast(respo.get("message").getAsString());
+                            startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
+                            finish();
+                        }
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
+    }
 }
+

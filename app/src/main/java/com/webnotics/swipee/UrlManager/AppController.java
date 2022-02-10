@@ -115,6 +115,24 @@ public class AppController extends Application {
             ignored.printStackTrace();
         }
     }
+    public static void ShowDialogueWhite(String message, Context mContext) {
+
+        try {
+
+            progressdialog = new Dialog(mContext);
+            progressdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            progressdialog.setContentView(R.layout.progress_bar_white);
+            progressdialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            progressdialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            progressdialog.setCancelable(false);
+            if(progressdialog!=null){
+                progressdialog.show();
+            }
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+    }
 
     public static void dismissProgressdialog() {
         if (progressdialog != null && progressdialog.isShowing()) {

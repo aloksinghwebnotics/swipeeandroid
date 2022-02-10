@@ -1,5 +1,7 @@
 package com.webnotics.swipee.model.seeker;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
 public class NotificationModel {
@@ -44,9 +46,19 @@ public class NotificationModel {
     public static class Data{
        String first_name;
        String last_name;
+       String company_name="";
        String notification_text;
        String created_at;
        String notification_image;
+       JsonObject payload_data;
+
+        public JsonObject getPayload_data() {
+            return payload_data;
+        }
+
+        public void setPayload_data(JsonObject payload_data) {
+            this.payload_data = payload_data;
+        }
 
         public String getFirst_name() {
             return first_name;
@@ -86,6 +98,14 @@ public class NotificationModel {
 
         public void setNotification_image(String notification_image) {
             this.notification_image = notification_image;
+        }
+
+        public String getCompany_name() {
+            return company_name;
+        }
+
+        public void setCompany_name(String company_name) {
+            this.company_name = company_name;
         }
     }
 }

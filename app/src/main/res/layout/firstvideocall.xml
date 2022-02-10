@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile"
+            android:layout_width="@dimen/dimen156dp"
+            android:layout_height="@dimen/dimen156dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimen156dp" />
+
+        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+            android:layout_marginTop="@dimen/dimen10dp"
+            android:id="@+id/name"
+            android:layout_below="@+id/img_profile"
+            android:textColor="@color/white"
+
+            android:gravity="center"
+            android:textSize="@dimen/dimen16sp"
+            android:layout_marginBottom="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+            android:id="@+id/email"
+            android:layout_below="@+id/name"
+            android:textColor="@color/white"
+
+            android:gravity="center"
+            android:textSize="@dimen/dimen16sp"
+            android:layout_marginTop="@dimen/dimen5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/calldecline"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen78dp"
+            android:padding="@dimen/dimen12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dimen60dp"
+            android:layout_marginBottom="@dimen/dimen98dp"
+            android:src="@drawable/ic_cancel_incoming" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/callaccept"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen78dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dimen98dp"
+            android:layout_toEndOf="@+id/calldecline"
+            android:padding="@dimen/dimen12dp"
+            android:src="@drawable/callaccept" />
+    </RelativeLayout>
+
+</RelativeLayout>

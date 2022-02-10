@@ -72,13 +72,13 @@ import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.Collections;
-import java.util.Objects;
 
 import kotlin.Unit;
 
 public class AudioActivity extends AppCompatActivity {
     private static final int CAMERA_MIC_PERMISSION_REQUEST_CODE = 1;
     private static final String TAG = "AudioActivity";
+    public static AudioActivity instance;
 
     /*
      * Audio and video tracks can be created with names. This feature is useful for categorizing
@@ -140,7 +140,7 @@ public class AudioActivity extends AppCompatActivity {
     private FloatingActionButton connectActionFab;
     private FloatingActionButton switchCameraActionFab;
     private FloatingActionButton localVideoActionFab;
-    private FloatingActionButton muteActionFab;
+    private ImageView muteActionFab;
     private ProgressBar reconnectingProgressBar;
     private AlertDialog connectDialog;
     private String remoteParticipantIdentity;
@@ -162,14 +162,15 @@ public class AudioActivity extends AppCompatActivity {
     TextView name, email;
     boolean chklouder = false;
     ConnectOptions.Builder connectOptionsBuilder;
+    private String appointment_id="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio);
-        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mContext = this;
+        instance=this;
         img_profile = findViewById(R.id.img_profile);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
@@ -201,6 +202,7 @@ public class AudioActivity extends AppCompatActivity {
          * Check camera and microphone permissions. Needed in Android M.
          */
         TWILIO_ACCESS_TOKEN = getIntent().getStringExtra("accestoken");
+        appointment_id = getIntent().getStringExtra("appointment_id");
         createAudioAndVideoTracks();
         setAccessToken();
 
@@ -241,20 +243,12 @@ public class AudioActivity extends AppCompatActivity {
         });
 
 
-        callcut.setOnClickListener(view -> {
+      /*  callcut.setOnClickListener(view -> {
             if (room != null) {
                 room.disconnect();
             }
-            if (Config.isSeeker()) {
-                Intent intent = new Intent(AudioActivity.this, SeekerHomeActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Intent intent = new Intent(AudioActivity.this, CompanyHomeActivity.class);
-                startActivity(intent);
-            }
 
-        });
+        });*/
 
         intializeUI();
     }
@@ -447,32 +441,31 @@ public class AudioActivity extends AppCompatActivity {
         /*
          * Tear down audio management and restore previous volume stream
          */
-//        audioDeviceSelector.stop();
-//        setVolumeControlStream(savedVolumeControlStream);
-//
-//        /*
+       audioDeviceSelector.stop();
+  setVolumeControlStream(savedVolumeControlStream);
+
+       /*
 //         * Always disconnect from the room before leaving the Activity to
 //         * ensure any memory allocated to the Room resource is freed.
 //         */
-//        if (room != null && room.getState() != Room.State.DISCONNECTED) {
-//            room.disconnect();
-//            disconnectedFromOnDestroy = true;
-//        }
+     if (room != null && room.getState() != Room.State.DISCONNECTED) {
+          room.disconnect();
+         disconnectedFromOnDestroy = false;
+       }
 //
 //        /*
 //         * Release the local audio and video tracks ensuring any memory allocated to audio
 //         * or video is freed.
 
 //         */
-//        if (localAudioTrack != null) {
-//            localAudioTrack.release();
-//            localAudioTrack = null;
-//        }
-//        if (localVideoTrack != null) {
-//            localVideoTrack.release();
-//            localVideoTrack = null;
-//        }
-
+    if (localAudioTrack != null) {
+            localAudioTrack.release();
+            localAudioTrack = null;
+        }
+      if (localVideoTrack != null) {
+          localVideoTrack.release();
+           localVideoTrack = null;       }
+        instance=null;
         super.onDestroy();
     }
 
@@ -524,7 +517,7 @@ public class AudioActivity extends AppCompatActivity {
     }
 
     private void connectToRoom(String roomName) {
-        audioDeviceSelector.activate();
+      //  audioDeviceSelector.activate();
         handler.removeCallbacks(runnable);
 
         connectOptionsBuilder = new ConnectOptions.Builder(accessToken)
@@ -604,7 +597,7 @@ public class AudioActivity extends AppCompatActivity {
         switchCameraActionFab.setOnClickListener(switchCameraClickListener());
         localVideoActionFab.show();
         localVideoActionFab.setOnClickListener(localVideoClickListener());
-        muteActionFab.show();
+        muteActionFab.setVisibility(View.VISIBLE);
         muteActionFab.setOnClickListener(muteClickListener());
         handler = new Handler();
 
@@ -623,10 +616,8 @@ public class AudioActivity extends AppCompatActivity {
      * The actions performed during disconnect.
      */
     private void setDisconnectAction() {
-        connectActionFab.setImageDrawable(ContextCompat.getDrawable(this,
-                R.drawable.ic_call_end_white_24px));
-        connectActionFab.show();
-        connectActionFab.setOnClickListener(disconnectClickListener());
+        callcut.setVisibility(View.VISIBLE);
+        callcut.setOnClickListener(disconnectClickListener());
     }
 
     /*
@@ -722,17 +713,11 @@ public class AudioActivity extends AppCompatActivity {
             if (remoteVideoTrackPublication.isTrackSubscribed()) {
                 removeParticipantVideo(remoteVideoTrackPublication.getRemoteVideoTrack());
             }
+        }else {
+
         }
 
-        if (Config.isSeeker()){
-            Intent intent = new Intent(AudioActivity.this, SeekerHomeActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            Intent intent = new Intent(AudioActivity.this, CompanyHomeActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
 
         //  moveLocalVideoToPrimaryView();
     }
@@ -797,7 +782,7 @@ public class AudioActivity extends AppCompatActivity {
                     // audioDeviceSelector.deactivate();
                     //  intializeUI();
                     // moveLocalVideoToPrimaryView();
-
+                    audioDeviceSelector.deactivate();
                     if (Config.isSeeker()) {
                         Intent intent = new Intent(AudioActivity.this, SeekerHomeActivity.class);
                         startActivity(intent);
@@ -819,6 +804,9 @@ public class AudioActivity extends AppCompatActivity {
             @Override
             public void onParticipantDisconnected(Room room, RemoteParticipant remoteParticipant) {
                 removeRemoteParticipant(remoteParticipant);
+                if (room != null) {
+                    room.disconnect();
+                }
             }
 
             @Override
@@ -1098,15 +1086,6 @@ public class AudioActivity extends AppCompatActivity {
             if (room != null) {
                 room.disconnect();
             }
-            if (Config.isSeeker()) {
-                Intent intent = new Intent(AudioActivity.this, SeekerHomeActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Intent intent = new Intent(AudioActivity.this, CompanyHomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
         };
     }
 
@@ -1158,6 +1137,11 @@ public class AudioActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
     private View.OnClickListener muteClickListener() {
         return v -> {
             /*
@@ -1175,6 +1159,12 @@ public class AudioActivity extends AppCompatActivity {
             }
         };
     }
-
+    public void rejectCall(String appointment_id) {
+        if (this.appointment_id.equalsIgnoreCase(appointment_id)){
+            if (room != null) {
+                room.disconnect();
+            }
+        }
+    }
 
 }

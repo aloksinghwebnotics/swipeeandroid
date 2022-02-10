@@ -120,7 +120,21 @@ public static final String TERMS_URL = "https://swipee.in/pages/terms";
   public static final String URL_USERAPPOINTMENTSTATUS = "appointments/user_appointment_status";
   public static final String URL_ORDERFEATUREJOB = "packages/employer_order_featuredjob";
   public static final String URL_FEATUREDLIST = "packages/employer_featuredpackage_list";
+  public static final String URL_PUBLISHFEATUREJOB = "recruiterjobs/publish_featured_job";
+  public static final String URL_STARTVEDIO = "appointments/company_start_video";
+  public static final String URL_SEEKERSTARTVEDIO = "appointments/user_start_video";
+  public static final String URL_APPOINTMENTDETAIL = "appointments/employer_appointment_detail";
+  public static final String URL_SEEKERAPPOINTMENTDETAIL = "appointments/employee_appointment_detail";
+  public static final String URL_USERREJECTVIDEOCALL = "appointments/user_reject_video";
+  public static final String URL_COMPANYREJECTVIDEOCALL = "appointments/company_reject_video";
+  public static final String URL_USERREJECTAUDIOCALL = "appointments/user_reject_audio";
+  public static final String URL_COMPANYREJECTAUDIOCALL = "appointments/company_reject_audio";
+  public static final String URL_STARTAUDIO = "appointments/company_start_audio";
+  public static final String URL_SEEKERSTARTAUDIO = "appointments/user_start_audio";
 
 
 
+
+  public static final String PAYPALURGMENT = "https://www.paypal.com/webapps/mpp/ua/useragreement-full";
+  public static final String PAYPALPOLICY="https://www.paypal.com/webapps/mpp/ua/privacy-full";
 }

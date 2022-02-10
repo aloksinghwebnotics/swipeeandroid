@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -36,8 +37,13 @@ import com.webnotics.swipee.fragments.company.PostJobFragments;
 import com.webnotics.swipee.interfaces.CountersInterface;
 import com.webnotics.swipee.model.company.CompanyProfileModel;
 import com.webnotics.swipee.rest.SwipeeApiClient;
+import com.webnotics.swipee.services.MyIntentService;
 
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -234,6 +240,35 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
 
         setMatchFragment();
         getProfileData();
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+            SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
+            if (TextUtils.isEmpty(Config.GetLocationRefreshDate())){
+                startService(new Intent(this,  MyIntentService.class));
+            }else {
+                Date d1   = format.parse(Config.GetLocationRefreshDate());
+                Date d2 = format.parse(Calendar.getInstance().getTime().toString());
+                if (d1!=null && d2!=null){
+                    String date1=formatout.format(d1);
+                    String date2=formatout.format(d2);
+                    Date final1=formatout.parse(date1);
+                    Date final2=formatout.parse(date2);
+                    if (final1!=null && final2!=null){
+                        if(final1.compareTo(final2) != 0) {
+                            Log.d("hhhhh","Hit from date");
+                            startService(new Intent(this,  MyIntentService.class));
+                        }
+                    }else {
+                        Log.d("hhhhh","Hit from null");
+                        startService(new Intent(this,  MyIntentService.class));
+                    }
+                }else   startService(new Intent(this,  MyIntentService.class));
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setMatchFragment() {
@@ -267,6 +302,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
             }
         } catch (Exception ignored) {
         }
+        //startActivity(new Intent(mContext, JobPostRule.class).putExtra("job_post_id", 325));
         matchimg.setImageResource(R.drawable.ic_match_unselected);
         nearimg.setImageResource(R.drawable.ic_post_job_selected);
         planimg.setImageResource(R.drawable.ic_plan_unselect);
@@ -445,4 +481,6 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         });
 
     }
+
+
 }

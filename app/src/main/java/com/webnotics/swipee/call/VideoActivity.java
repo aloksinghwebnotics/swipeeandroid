@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -27,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.twilio.audioswitch.selection.AudioDevice;
 import com.twilio.audioswitch.selection.AudioDeviceSelector;
@@ -68,7 +68,6 @@ import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.Collections;
-import java.util.Objects;
 
 import kotlin.Unit;
 
@@ -133,15 +132,17 @@ public class VideoActivity extends AppCompatActivity {
     private CameraCapturerCompat cameraCapturerCompat;
     private LocalAudioTrack localAudioTrack;
     private LocalVideoTrack localVideoTrack;
-    private FloatingActionButton connectActionFab;
-    private FloatingActionButton switchCameraActionFab;
-    private FloatingActionButton localVideoActionFab;
-    private FloatingActionButton muteActionFab;
+    private ImageView connectActionFab;
+    private ImageView switchCameraActionFab;
+    private ImageView localVideoActionFab;
+    private ImageView muteActionFab;
     private ProgressBar reconnectingProgressBar;
     private AlertDialog connectDialog;
     private String remoteParticipantIdentity;
     Handler handler;
     Runnable runnable;
+    @SuppressLint("StaticFieldLeak")
+    public static VideoActivity instance;
     /*
      * Audio management
      */
@@ -154,16 +155,20 @@ public class VideoActivity extends AppCompatActivity {
     private boolean enableAutomaticSubscription;
     Rest rest;
     Context mContext;
+    private String appointment_id="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
-        Objects.requireNonNull(getSupportActionBar()).hide();
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mContext = this;
-
-
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        instance=this;
         primaryVideoView = findViewById(R.id.primary_video_view);
         thumbnailVideoView = findViewById(R.id.thumbnail_video_view);
         reconnectingProgressBar = findViewById(R.id.reconnecting_progress_bar);
@@ -189,6 +194,7 @@ public class VideoActivity extends AppCompatActivity {
          * Check camera and microphone permissions. Needed in Android M.
          */
         TWILIO_ACCESS_TOKEN = getIntent().getStringExtra("accestoken");
+         appointment_id = getIntent().getStringExtra("appointment_id");
         createAudioAndVideoTracks();
         setAccessToken();
 
@@ -301,7 +307,10 @@ public class VideoActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+    }
     /*
      * Get the preferred audio codec from shared preferences
      */
@@ -396,7 +405,7 @@ public class VideoActivity extends AppCompatActivity {
          */
         if (room != null && room.getState() != Room.State.DISCONNECTED) {
             room.disconnect();
-            disconnectedFromOnDestroy = true;
+            disconnectedFromOnDestroy = false;
         }
 
         /*
@@ -411,7 +420,7 @@ public class VideoActivity extends AppCompatActivity {
             localVideoTrack.release();
             localVideoTrack = null;
         }
-
+        instance=null;
         super.onDestroy();
     }
 
@@ -462,7 +471,7 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void connectToRoom(String roomName) {
-        audioDeviceSelector.activate();
+        //audioDeviceSelector.activate();
         handler.removeCallbacks(runnable);
         ConnectOptions.Builder connectOptionsBuilder = new ConnectOptions.Builder(accessToken)
                 .enableDominantSpeaker(true)
@@ -536,14 +545,14 @@ public class VideoActivity extends AppCompatActivity {
     private void intializeUI() {
         connectActionFab.setImageDrawable(ContextCompat.getDrawable(this,
                 R.drawable.ic_video_call_white_24dp));
-        connectActionFab.show();
+        connectActionFab.setVisibility(View.VISIBLE);
 
        // connectActionFab.setOnClickListener(connectActionClickListener());
-        switchCameraActionFab.show();
+        switchCameraActionFab.setVisibility(View.VISIBLE);
         switchCameraActionFab.setOnClickListener(switchCameraClickListener());
-        localVideoActionFab.show();
+        localVideoActionFab.setVisibility(View.VISIBLE);
         localVideoActionFab.setOnClickListener(localVideoClickListener());
-        muteActionFab.show();
+        muteActionFab.setVisibility(View.VISIBLE);
         muteActionFab.setOnClickListener(muteClickListener());
         handler =   new Handler();
 
@@ -564,7 +573,7 @@ public class VideoActivity extends AppCompatActivity {
     private void setDisconnectAction() {
         connectActionFab.setImageDrawable(ContextCompat.getDrawable(this,
                 R.drawable.ic_call_end_white_24px));
-        connectActionFab.show();
+        connectActionFab.setVisibility(View.VISIBLE);
         connectActionFab.setOnClickListener(disconnectClickListener());
     }
 
@@ -663,14 +672,9 @@ public class VideoActivity extends AppCompatActivity {
             }
         }
 
-        if(Config.isSeeker()){
-            Intent intent = new Intent(VideoActivity.this, SeekerHomeActivity.class);
-            startActivity(intent);
-        }else{
-            Intent intent = new Intent(VideoActivity.this, CompanyHomeActivity.class);
-            startActivity(intent);
+        if (room != null) {
+            room.disconnect();
         }
-        finish();
 
 
     }
@@ -1034,14 +1038,14 @@ public class VideoActivity extends AppCompatActivity {
             if (room != null) {
                 room.disconnect();
             }
-            if(Config.isSeeker()){
+           /* if(Config.isSeeker()){
                 Intent intent = new Intent(VideoActivity.this, SeekerHomeActivity.class);
                 startActivity(intent);
             }else{
                 Intent intent = new Intent(VideoActivity.this, CompanyHomeActivity.class);
                 startActivity(intent);
-            }
-            finish();
+            }*/
+        //    finish();
             // intializeUI();
         };
     }
@@ -1083,10 +1087,10 @@ public class VideoActivity extends AppCompatActivity {
                 int icon;
                 if (enable) {
                     icon = R.drawable.ic_videocam_white_24dp;
-                    switchCameraActionFab.show();
+                    switchCameraActionFab.setVisibility(View.VISIBLE);
                 } else {
                     icon = R.drawable.ic_videocam_off_black_24dp;
-                    switchCameraActionFab.hide();
+                    switchCameraActionFab.setVisibility(View.GONE);
                 }
                 localVideoActionFab.setImageDrawable(
                         ContextCompat.getDrawable(VideoActivity.this, icon));
@@ -1113,4 +1117,11 @@ public class VideoActivity extends AppCompatActivity {
     }
 
 
+    public void rejectCall(String appointment_id) {
+        if (this.appointment_id.equalsIgnoreCase(appointment_id)){
+            if (room != null) {
+                room.disconnect();
+            }
+        }
+    }
 }

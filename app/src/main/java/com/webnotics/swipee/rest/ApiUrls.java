@@ -6,9 +6,9 @@ package com.webnotics.swipee.rest;
 
 public class ApiUrls {
 
-public static final String BASE_URL = "https://swipee.in/app_api/";
-public static final String POLICY_URL = "https://swipee.in/pages/privacyPolicy";
-public static final String TERMS_URL = "https://swipee.in/pages/terms";
+  public static final String BASE_URL = "https://swipee.in/app_api/";
+  public static final String POLICY_URL = "https://swipee.in/pages/privacyPolicy";
+  public static final String TERMS_URL = "https://swipee.in/pages/terms";
 
   //User Apis
   public static final String URL_LOGIN = "auth/user_login";
@@ -137,4 +137,12 @@ public static final String TERMS_URL = "https://swipee.in/pages/terms";
 
   public static final String PAYPALURGMENT = "https://www.paypal.com/webapps/mpp/ua/useragreement-full";
   public static final String PAYPALPOLICY="https://www.paypal.com/webapps/mpp/ua/privacy-full";
+
+    // Naushad
+    public static final String URL_APPOINTMENT_ACCESS_TOKEN_CHAT = "appointments/access_token_chat";
+    public static final String URL_EMPLOYER_ORDER_PACKAGE= "packages/employer_order_package";
+    public static final String URL_USER_ORDER_PACKAGE= "packages/user_order_package";
+
+
+
 }

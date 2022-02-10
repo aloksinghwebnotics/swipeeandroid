@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.razorpay.PaymentResultListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
@@ -33,24 +35,18 @@ import com.webnotics.swipee.fragments.company.CompanyChatFragments;
 import com.webnotics.swipee.fragments.company.CompanyMatchFragments;
 import com.webnotics.swipee.fragments.company.CompanyPlansFragments;
 import com.webnotics.swipee.fragments.company.CompanyProfileFragments;
-import com.webnotics.swipee.fragments.company.PostJobFragments;
 import com.webnotics.swipee.interfaces.CountersInterface;
 import com.webnotics.swipee.model.company.CompanyProfileModel;
 import com.webnotics.swipee.rest.SwipeeApiClient;
-import com.webnotics.swipee.services.MyIntentService;
 
 import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompanyHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface {
+public class CompanyHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface,PaymentResultListener {
     Context mContext;
     @SuppressLint("StaticFieldLeak")
     public static CompanyHomeActivity instance;
@@ -241,7 +237,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         setMatchFragment();
         getProfileData();
 
-        try {
+       /* try {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
             if (TextUtils.isEmpty(Config.GetLocationRefreshDate())){
@@ -268,7 +264,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
             }
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void setMatchFragment() {
@@ -295,14 +291,14 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setNearFragment() {
-        try {
+      /*  try {
             if (fragmentTransaction != null) {
                 PostJobFragments basefragment = new PostJobFragments();
                 fragmentManager.beginTransaction().replace(R.id.homegragment, basefragment).commit();
             }
         } catch (Exception ignored) {
-        }
-        //startActivity(new Intent(mContext, JobPostRule.class).putExtra("job_post_id", 325));
+        }*/
+        startActivity(new Intent(mContext,JobPostRule.class).putExtra("job_post_id",334));
         matchimg.setImageResource(R.drawable.ic_match_unselected);
         nearimg.setImageResource(R.drawable.ic_post_job_selected);
         planimg.setImageResource(R.drawable.ic_plan_unselect);
@@ -482,5 +478,37 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * The name of the function has to be
+     * onPaymentSuccess
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+        try {
+            Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show();
+            if (CompanyPlansFragments.instance != null){
+                CompanyPlansFragments.instance.setTransactionData(razorpayPaymentID);
+            }
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentSuccess", e);
+        }
+    }
 
+    /**
+     * The name of the function has to be
+     * onPaymentError
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentError(int code, String response) {
+        Log.d("RazorPay", "Exception in onPaymentError " + response);
+        try {
+            Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentError", e);
+        }
+    }
 }

@@ -51,10 +51,9 @@ public class MyIntentService extends IntentService {
                                 String location_id=mArrayListData.get(i).getAsJsonObject().get("location_id").getAsString();
                                 String location_name=mArrayListData.get(i).getAsJsonObject().get("location_name").getAsString();
                                 String state_name=mArrayListData.get(i).getAsJsonObject().get("state_name").getAsString();
-                                Location_room_abstract.getDatabase(getApplicationContext()).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
+                                Location_room_abstract.getDatabase(getBaseContext()).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
                             }
                             Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
-                            stopSelf();
                         }
 
                     }
@@ -66,7 +65,6 @@ public class MyIntentService extends IntentService {
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-                stopSelf();
                 AppController.dismissProgressdialog();
             }
         });

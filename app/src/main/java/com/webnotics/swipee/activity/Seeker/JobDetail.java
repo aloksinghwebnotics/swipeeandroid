@@ -153,7 +153,9 @@ public class JobDetail extends AppCompatActivity {
 
         } else rest.AlertForInternet();
 
-        iv_back.setOnClickListener(v -> finish());
+        iv_back.setOnClickListener(v -> {
+           onBackPressed();
+        });
         iv_accept.setOnClickListener(v -> {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
@@ -376,6 +378,15 @@ public class JobDetail extends AppCompatActivity {
         });
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (from.equalsIgnoreCase("Notification")) {
+            startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+        }
+        finish();
     }
 
     private void cancelApplicationPopup() {
@@ -636,7 +647,7 @@ public class JobDetail extends AppCompatActivity {
                                 ll_applied.setVisibility(View.VISIBLE);
                                 ll_appointment.setVisibility(View.GONE);
                                 tv_cancel_application.setVisibility(View.VISIBLE);
-                            } else if (from.equalsIgnoreCase(SavedJobsActivity.class.getSimpleName()) || from.equalsIgnoreCase(LikedJobsActivity.class.getSimpleName())
+                            } else if (from.equalsIgnoreCase("Notification") ||from.equalsIgnoreCase(SavedJobsActivity.class.getSimpleName()) || from.equalsIgnoreCase(LikedJobsActivity.class.getSimpleName())
                                     || from.equalsIgnoreCase(JobListActivity.class.getSimpleName()) || from.equalsIgnoreCase(MatchFragments.class.getSimpleName())
                                     || from.equalsIgnoreCase(MatchedCompanyActivity.class.getSimpleName()) || from.equalsIgnoreCase(FeaturedJobsActivity.class.getSimpleName())) {
                                 if (company_match_status.equalsIgnoreCase("A") && user_match_status.equalsIgnoreCase("A")) {
@@ -879,7 +890,10 @@ public class JobDetail extends AppCompatActivity {
 
 
     public void setBackPressed() {
-        if (from.equalsIgnoreCase(AppliedJobsActivity.class.getSimpleName())) {
+        if (from.equalsIgnoreCase("Notification")) {
+            startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            finish();
+        } else if (from.equalsIgnoreCase(AppliedJobsActivity.class.getSimpleName())) {
             if (AppliedJobsActivity.instance != null)
                 AppliedJobsActivity.instance.onBackPressed();
             finish();

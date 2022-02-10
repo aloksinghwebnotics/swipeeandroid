@@ -2,7 +2,6 @@ package com.webnotics.swipee.fragments.company;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
+import com.razorpay.Checkout;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.adapter.company.CompanyPlanAdapter;
 import com.webnotics.swipee.fragments.Basefragment;
-import com.webnotics.swipee.rest.ApiUrls;
+import com.webnotics.swipee.payment.Payment;
+import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
-import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,52 +35,49 @@ import retrofit2.Response;
 
 
 public class CompanyPlansFragments extends Basefragment implements View.OnClickListener {
-    //Paypal intent request code to track onActivityResult method
-    public static final int PAYPAL_REQUEST_CODE = 123;
-    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
-    private static final String CONFIG_CLIENT_ID =  Config.paypalconfig;
 
 
-    private static final PayPalConfiguration config = new PayPalConfiguration()
-            .environment(CONFIG_ENVIRONMENT).clientId(CONFIG_CLIENT_ID)
-            // The following are only used in PayPalFuturePaymentActivity.
-            .merchantName("E3DS8F2ZM3Z5U").merchantPrivacyPolicyUri(
-                    Uri.parse(ApiUrls.PAYPALPOLICY))
-            .merchantUserAgreementUri(Uri.parse(ApiUrls.PAYPALURGMENT));
-
-
-    public String package_id="";
-    public String package_name="";
-    public int package_price=0;
-    public int is_purchase=0;
-    public String package_type="";
-    public String post_limit="";
+    public String package_id = "";
+    public String package_name = "";
+    public int package_price = 0;
+    public int is_purchase = 0;
+    public String package_type = "";
+    public String post_limit = "";
     private Rest rest;
     Context mContext;
     RecyclerView rv_plan;
-    TextView tv_title,tv_amount,tv_period,tv_pay;
+    TextView tv_title, tv_amount, tv_period, tv_pay;
+    public static CompanyPlansFragments instance;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.plan_screen, container, false);
-        mContext=getActivity();
-        rest=new Rest(mContext);
-        if (rest.isInterentAvaliable()){
-            AppController.ShowDialogue("",mContext);
+        mContext = getActivity();
+        rest = new Rest(mContext);
+        instance = this;
+
+        if (rest.isInterentAvaliable()) {
+            AppController.ShowDialogue("", mContext);
             callPlanList();
-        }else rest.AlertForInternet();
+        } else rest.AlertForInternet();
 
-        rv_plan=rootView.findViewById(R.id.rv_plan);
-        tv_title=rootView.findViewById(R.id.tv_title);
-        tv_amount=rootView.findViewById(R.id.tv_amount);
-        tv_period=rootView.findViewById(R.id.tv_period);
-        tv_pay=rootView.findViewById(R.id.tv_pay);
+        rv_plan = rootView.findViewById(R.id.rv_plan);
+        tv_title = rootView.findViewById(R.id.tv_title);
+        tv_amount = rootView.findViewById(R.id.tv_amount);
+        tv_period = rootView.findViewById(R.id.tv_period);
+        tv_pay = rootView.findViewById(R.id.tv_pay);
 
+        tv_pay.setOnClickListener(this);
+
+
+        /*
+         * Preload payment resources
+         */
+        Checkout.preload(mContext.getApplicationContext());
 
         return rootView;
-
-
     }
+
     @Override
     public int setContentView() {
         return R.layout.plan_screen;
@@ -90,23 +85,58 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
 
     @Override
     protected void backPressed() {
-              getActivity().finish();
+        getActivity().finish();
     }
 
     @Override
     public void onClick(View view) {
-                switch (view.getId()){
-                    case R.id.tv_pay:
 
-                        callPaypal(String.valueOf(package_price),package_id);
-                        break;
+        int id = view.getId();
 
-                    default:break;
-                }
-
-
+        if (id == R.id.tv_pay) {
+            Payment payment = new Payment();
+            payment.startPayment(getActivity(), package_name, package_price);
+        }
     }
 
+    public void setTransactionData(String transactionId) {
+
+        HashMap<String, String> hashMap = new HashMap();
+        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+        hashMap.put(ParaName.KEY_TRANSACTIONID, transactionId);
+        hashMap.put(ParaName.KEY_PACKAGETYPE, package_type);
+        hashMap.put(ParaName.KEY_PAYMENTSTATUS, "Completed");
+        hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
+        hashMap.put(ParaName.KEY_PACKAGEID, package_id);
+        AppController.ShowDialogue("", mContext);
+        SwipeeApiClient.swipeeServiceInstance().setRecruiterTransaction(hashMap).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
+                    if (response.body().get("code").getAsInt() == 203) {
+                        rest.showToast(response.body().get("message").getAsString());
+                        AppController.loggedOut(mContext);
+                        getActivity().finish();
+                    } else if (response.body().get("code").getAsInt() == 200 && status) {
+                        startActivity(new Intent(mContext, CompanyHomeActivity.class));
+                    }
+
+                } else {
+                    rest.showToast("Something went wrong");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
+    }
     private void callPlanList() {
         SwipeeApiClient.swipeeServiceInstance().getCompanyPackageList(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
             @Override
@@ -156,32 +186,12 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         tv_title.setText(package_name);
         tv_period.setText("/month");
         tv_amount.setText(MessageFormat.format("Rs {0}", package_price));
-        tv_pay.setOnClickListener(this);
 
     }
 
-    public void callPaypal(String price,String package_id){
-        Intent intent = new Intent(mContext, PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        mContext.startService(intent);
-        PayPalPayment payment;
-            //Creating a paypalpayment
-            payment = new PayPalPayment(new BigDecimal(price), "INR",  30+" days duration",
-                    PayPalPayment.PAYMENT_INTENT_SALE);
-
-        try {
-            //Creating Paypal Payment activity intent
-            intent = new Intent(mContext, PaymentActivity.class);
-
-            //putting the paypal configuration to the intent
-            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-
-            //Puting paypal payment to the intent
-            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-
-            //Starting the intent activity for result
-            //the request code will be used on the method onActivityResult
-            startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-        }catch (Exception ignored){}
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        instance = null;
     }
 }

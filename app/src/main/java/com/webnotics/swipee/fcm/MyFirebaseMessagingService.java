@@ -22,6 +22,7 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.Seeker.FirstVideoActivity;
+import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.SplashScreen;
 import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
 import com.webnotics.swipee.call.AudioActivity;
@@ -182,7 +183,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                    showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
                }
 
-            } else if (notify_category.equalsIgnoreCase("employer_booked_appointment")) {
+            } else if (notify_category.equalsIgnoreCase("bulk_job_post_notification")) {
+
+
+                resultIntent = new Intent(getApplicationContext(), JobDetail.class);
+                resultIntent.putExtra("id", payload.getString("job_id"));
+                resultIntent.putExtra("from", "Notification");
+                // check for image attachment
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                } else {
+                    // image is present, show notification with image
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                }
+            }else if (notify_category.equalsIgnoreCase("employer_booked_appointment")) {
                 String dtStart = payload.getString("appointment_start_time");
                 String end = payload.getString("appointment_end_time");
                 SimpleDateFormat format = new SimpleDateFormat("hh:mm");

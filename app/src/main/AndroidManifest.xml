@@ -14,11 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
         android:name=".UrlManager.AppController"
@@ -43,6 +38,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
 
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".chat.MainChatActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.facebook.sdk.Application"
             android:value="@string/app_id" />
@@ -62,10 +62,15 @@
         <activity android:name=".activity.Seeker.FirstVideoActivity"
             android:screenOrientation="portrait"
             android:exported="true"/>
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
         <activity
             android:name=".activity.AppointmentAction"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.company.JobPostRule"
             android:exported="true"
@@ -323,15 +328,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/basictheme"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".activity.SocialSignUpActivity"
+        <activity android:name=".activity.SocialSignUpActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.company.NotificationAppointmentAction"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.company.NotificationAppointmentAction"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/basictheme" />
+            android:theme="@style/basictheme"/>
 
         <service
             android:name=".fcm.MyFirebaseMessagingService"
@@ -347,23 +350,36 @@
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
-        <service
-            android:name="com.paypal.android.sdk.payments.PayPalService"
-            android:exported="false" />
-        <service android:name=".services.MyIntentService"
-            android:exported="false" />
-  <service android:name=".services.CollegeIntentService"
-            android:exported="false" />
+        </service> <!-- Razor Pay Activity -->
+        <receiver
+            android:name="com.razorpay.RzpTokenReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="rzp.device_token.share" />
+            </intent-filter>
+        </receiver>
 
-        <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.PayPalFuturePaymentActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentConsentActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentInfoActivity" />
+        <activity
+            android:name="com.razorpay.CheckoutActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@style/CheckoutTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <data
+                    android:host="rzp.io"
+                    android:scheme="io.rzp" />
+            </intent-filter>
+        </activity>
+
+        <!-- Api key RazorPay -->
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_ZdPTfUwLdH0Amr" />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
     </application>
 
 </manifest>

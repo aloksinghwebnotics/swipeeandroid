@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.razorpay.PaymentResultListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
@@ -36,8 +40,10 @@ import com.webnotics.swipee.fragments.seeker.ProfileFragments;
 import com.webnotics.swipee.interfaces.CountersInterface;
 import com.webnotics.swipee.model.seeker.EmployeeUserDetails;
 import com.webnotics.swipee.rest.SwipeeApiClient;
-import com.webnotics.swipee.services.CollegeIntentService;
-import com.webnotics.swipee.services.MyIntentService;
+import com.webnotics.swipee.room_database.College_model;
+import com.webnotics.swipee.room_database.College_room_abstract;
+import com.webnotics.swipee.room_database.Location_model;
+import com.webnotics.swipee.room_database.Location_room_abstract;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -50,7 +56,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeekerHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface {
+public class SeekerHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface, PaymentResultListener {
     Context mContext;
     LinearLayout nearlay, matchlay, planlay, chatlay, accountlay;
     LinearLayout bottomlay, ll_nav_home, ll_nav_liked, ll_nav_matched, ll_nav_saved, ll_nav_applied, ll_nav_featured, ll_nav_appoiment, ll_nav_setting;
@@ -160,12 +166,12 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         setMatchFragment();
         getProfileData();
 
-        try {
+      /*  try {
             @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             @SuppressLint("SimpleDateFormat") SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
             if (TextUtils.isEmpty(Config.GetCollegeRefreshDate())){
                 Log.d("hhhhh","Hit from empty");
-                startService(new Intent(this,  CollegeIntentService.class));
+                callCollegeList();
             }else {
                 Date d1   = format.parse(Config.GetCollegeRefreshDate());
                 Date d2 = format.parse(Calendar.getInstance().getTime().toString());
@@ -177,26 +183,34 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     if (final1!=null && final2!=null){
                         if(final1.compareTo(final2) != 0) {
                             Log.d("hhhhh","Hit from date");
-                            startService(new Intent(this,  CollegeIntentService.class));
+                            callCollegeList();
+                        }else {
+                            callLocation();
                         }
                     }else {
                         Log.d("hhhhh","Hit from null");
-                        startService(new Intent(this,  CollegeIntentService.class));
+                        callCollegeList();
                     }
-                }else startService(new Intent(this,  CollegeIntentService.class));
+                }else callCollegeList();
 
 
 
             }
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
+
+
+
+    }
+
+    private void callLocation() {
         try {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
             if (TextUtils.isEmpty(Config.GetLocationRefreshDate())){
-                startService(new Intent(this,  MyIntentService.class));
+                callLocationList();
             }else {
                 Date d1   = format.parse(Config.GetLocationRefreshDate());
                 Date d2 = format.parse(Calendar.getInstance().getTime().toString());
@@ -208,22 +222,85 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     if (final1!=null && final2!=null){
                         if(final1.compareTo(final2) != 0) {
                             Log.d("hhhhh","Hit from date");
-                            startService(new Intent(this,  MyIntentService.class));
+                            callLocationList();
+                        }else {
+
                         }
                     }else {
                         Log.d("hhhhh","Hit from null");
-                        startService(new Intent(this,  MyIntentService.class));
+                        callLocationList();
                     }
-                }else   startService(new Intent(this,  MyIntentService.class));
+                }else    callLocationList();
 
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    private void callCollegeList() {
+        SwipeeApiClient.swipeeServiceInstance().getCollege().enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
+                    if (mArrayListData.size()>0){
+                        for (int i = 0; i < mArrayListData.size(); i++) {
+                            JsonObject object=mArrayListData.get(i).getAsJsonObject();
+                            String university_college_id=object.has("university_college_id")?!object.get("university_college_id").isJsonNull()?object.get("university_college_id").getAsString():"":"";
+                            String university_college_name=object.has("university_college_name")?!object.get("university_college_name").isJsonNull()?object.get("university_college_name").getAsString():"":"";
+                            boolean selected= object.has("selected") && (!object.get("selected").isJsonNull() && object.get("selected").getAsBoolean());
+                            College_room_abstract.getDatabase(mContext).college_room_interface().insertData(new College_model(university_college_id,university_college_name,selected?1:0));
+                        }
+                        Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
+                        callLocation();
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+
+                AppController.dismissProgressdialog();
+            }
+        });
+    }
+    private void callLocationList() {
+        SwipeeApiClient.swipeeServiceInstance().getLocation(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    if (response.body().get("code").getAsInt() == 200) {
+                        JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
+                        if (mArrayListData.size()>0){
+                            for (int i = 0; i < mArrayListData.size(); i++) {
+                                String location_id=mArrayListData.get(i).getAsJsonObject().get("location_id").getAsString();
+                                String location_name=mArrayListData.get(i).getAsJsonObject().get("location_name").getAsString();
+                                String state_name=mArrayListData.get(i).getAsJsonObject().get("state_name").getAsString();
+                                Location_room_abstract.getDatabase(mContext).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
+                            }
+                            Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
+
+                        }
+
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
+    }
     public void setMatchFragment() {
 
         try {
@@ -553,67 +630,37 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
-
-    /*private void callCollegeList() {
-        SwipeeApiClient.swipeeServiceInstance().getCollege().enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                if (response.code() == 200 && response.body() != null) {
-                    JsonObject responseBody = response.body();
-                    JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                    if (mArrayListData.size()>0){
-                        for (int i = 0; i < mArrayListData.size(); i++) {
-                            JsonObject object=mArrayListData.get(i).getAsJsonObject();
-                            String university_college_id=object.has("university_college_id")?!object.get("university_college_id").isJsonNull()?object.get("university_college_id").getAsString():"":"";
-                            String university_college_name=object.has("university_college_name")?!object.get("university_college_name").isJsonNull()?object.get("university_college_name").getAsString():"":"";
-                            boolean selected= object.has("selected") && (!object.get("selected").isJsonNull() && object.get("selected").getAsBoolean());
-                            College_room_abstract.getDatabase(mContext).college_room_interface().insertData(new College_model(university_college_id,university_college_name,selected?1:0));
-                        }
-                        Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
-                    }
-
-                }
-
+    /**
+     * The name of the function has to be
+     * onPaymentSuccess
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+        try {
+            Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show();
+            if (PlansFragments.instance != null){
+                PlansFragments.instance.setTransactionData(razorpayPaymentID);
             }
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentSuccess", e);
+        }
+    }
 
-            @Override
-            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-
-                AppController.dismissProgressdialog();
-            }
-        });
-    }*/
-    /*private void callLocationList() {
-        SwipeeApiClient.swipeeServiceInstance().getLocation(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                AppController.dismissProgressdialog();
-                if (response.code() == 200 && response.body() != null) {
-                    JsonObject responseBody = response.body();
-                    if (response.body().get("code").getAsInt() == 200) {
-                        JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                        if (mArrayListData.size()>0){
-                            for (int i = 0; i < mArrayListData.size(); i++) {
-                                String location_id=mArrayListData.get(i).getAsJsonObject().get("location_id").getAsString();
-                                String location_name=mArrayListData.get(i).getAsJsonObject().get("location_name").getAsString();
-                                String state_name=mArrayListData.get(i).getAsJsonObject().get("state_name").getAsString();
-                                Location_room_abstract.getDatabase(mContext).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
-                            }
-                            Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
-                        }
-
-                    }
-
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-
-                AppController.dismissProgressdialog();
-            }
-        });
-    }*/
+    /**
+     * The name of the function has to be
+     * onPaymentError
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentError(int code, String response) {
+        Log.d("RazorPay", "Exception in onPaymentError " + response);
+        try {
+            Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentError", e);
+        }
+    }
 }

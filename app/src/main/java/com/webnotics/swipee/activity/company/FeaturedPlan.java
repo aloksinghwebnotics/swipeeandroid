@@ -2,12 +2,13 @@ package com.webnotics.swipee.activity.company;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,38 +17,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.company.FeaturedPlanAdapter;
-import com.webnotics.swipee.rest.ApiUrls;
+import com.webnotics.swipee.payment.Payment;
+import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
-import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeaturedPlan extends AppCompatActivity {
-    public static final int PAYPAL_REQUEST_CODE = 123;
-    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
-    private static final String CONFIG_CLIENT_ID =  Config.paypalconfig;
-
-
-    private static final PayPalConfiguration config = new PayPalConfiguration()
-            .environment(CONFIG_ENVIRONMENT).clientId(CONFIG_CLIENT_ID)
-            // The following are only used in PayPalFuturePaymentActivity.
-            .merchantName("E3DS8F2ZM3Z5U").merchantPrivacyPolicyUri(
-                    Uri.parse(ApiUrls.PAYPALPOLICY))
-            .merchantUserAgreementUri(Uri.parse(ApiUrls.PAYPALURGMENT));
-
+public class FeaturedPlan extends AppCompatActivity implements PaymentResultListener {
 
     public String package_id="";
     public String package_name="";
@@ -76,6 +64,10 @@ public class FeaturedPlan extends AppCompatActivity {
         tv_amount=findViewById(R.id.tv_amount);
         tv_period=findViewById(R.id.tv_period);
         tv_pay=findViewById(R.id.tv_pay);
+        /*
+         * Preload payment resources
+         */
+        Checkout.preload(mContext.getApplicationContext());
 
         if (getIntent() != null) {
             job_post_id = getIntent().getIntExtra("job_post_id", 0);
@@ -84,6 +76,14 @@ public class FeaturedPlan extends AppCompatActivity {
             AppController.ShowDialogue("",mContext);
             callPlanList();
         }else rest.AlertForInternet();
+
+        tv_pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Payment payment = new Payment();
+                payment.startPayment(FeaturedPlan.this, package_name, package_price);
+            }
+        });
     }
 
 
@@ -114,7 +114,7 @@ public class FeaturedPlan extends AppCompatActivity {
                     rest.showToast("Something went wrong");
                 }
 
-            }
+             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
@@ -140,33 +140,10 @@ public class FeaturedPlan extends AppCompatActivity {
 
     }
 
-    public void callPaypal(String price,String package_id){
-        Intent intent = new Intent(mContext, PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        mContext.startService(intent);
-        PayPalPayment payment;
-        //Creating a paypalpayment
-        payment = new PayPalPayment(new BigDecimal(price), "INR",  30+" days duration",
-                PayPalPayment.PAYMENT_INTENT_SALE);
-
-        try {
-            //Creating Paypal Payment activity intent
-            intent = new Intent(mContext, PaymentActivity.class);
-
-            //putting the paypal configuration to the intent
-            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-
-            //Puting paypal payment to the intent
-            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-
-            //Starting the intent activity for result
-            //the request code will be used on the method onActivityResult
-            startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-        }catch (Exception ignored){}
-    }
 
 //////call on payment done
     private void publishFeaturedJob(String id) {
+        AppController.ShowDialogue("",mContext);
         SwipeeApiClient.swipeeServiceInstance().publishFeaturedJob(Config.GetUserToken(), String.valueOf(job_post_id), "Y").enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
@@ -197,6 +174,76 @@ public class FeaturedPlan extends AppCompatActivity {
                 AppController.dismissProgressdialog();
             }
         });
+    }
+
+    /**
+     * The name of the function has to be
+     * onPaymentSuccess
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+        try {
+            Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show();
+
+
+                HashMap<String, String> hashMap = new HashMap();
+                hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+                hashMap.put(ParaName.KEY_TRANSACTIONID, razorpayPaymentID);
+                hashMap.put(ParaName.KEY_PAYMENTSTATUS, "Completed");
+                hashMap.put(ParaName.KEY_PACKAGETYPE, package_type);
+                hashMap.put(ParaName.KEY_PACKAGENAME, package_name);
+                hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
+                hashMap.put(ParaName.KEY_PACKAGEID, package_id);
+                AppController.ShowDialogue("", mContext);
+                SwipeeApiClient.swipeeServiceInstance().orderFeatureJob(hashMap).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                        AppController.dismissProgressdialog();
+
+                        if (response.code() == 200 && response.body() != null) {
+                            JsonObject responseBody = response.body();
+                            boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
+                            if (response.body().get("code").getAsInt() == 203) {
+                                rest.showToast(response.body().get("message").getAsString());
+                                AppController.loggedOut(mContext);
+                                finish();
+                            } else if (response.body().get("code").getAsInt() == 200 && status) {
+                                publishFeaturedJob(String.valueOf(job_post_id));
+                            }
+
+                        } else {
+                            rest.showToast("Something went wrong");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        AppController.dismissProgressdialog();
+                    }
+                });
+
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentSuccess", e);
+        }
+    }
+
+    /**
+     * The name of the function has to be
+     * onPaymentError
+     * Wrap your code in try catch, as shown, to ensure that this method runs correctly
+     */
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentError(int code, String response) {
+        Log.d("RazorPay", "Exception in onPaymentError " + response);
+        try {
+            Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentError", e);
+        }
     }
 }
 

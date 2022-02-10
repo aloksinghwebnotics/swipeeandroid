@@ -35,6 +35,7 @@ import com.webnotics.swipee.fragments.company.CompanyChatFragments;
 import com.webnotics.swipee.fragments.company.CompanyMatchFragments;
 import com.webnotics.swipee.fragments.company.CompanyPlansFragments;
 import com.webnotics.swipee.fragments.company.CompanyProfileFragments;
+import com.webnotics.swipee.fragments.company.PostJobFragments;
 import com.webnotics.swipee.interfaces.CountersInterface;
 import com.webnotics.swipee.model.company.CompanyProfileModel;
 import com.webnotics.swipee.rest.SwipeeApiClient;
@@ -291,14 +292,16 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setNearFragment() {
-      /*  try {
+        try {
             if (fragmentTransaction != null) {
                 PostJobFragments basefragment = new PostJobFragments();
                 fragmentManager.beginTransaction().replace(R.id.homegragment, basefragment).commit();
             }
         } catch (Exception ignored) {
-        }*/
+        }
+/*
         startActivity(new Intent(mContext,JobPostRule.class).putExtra("job_post_id",334));
+*/
         matchimg.setImageResource(R.drawable.ic_match_unselected);
         nearimg.setImageResource(R.drawable.ic_post_job_selected);
         planimg.setImageResource(R.drawable.ic_plan_unselect);

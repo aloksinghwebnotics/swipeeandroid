@@ -59,6 +59,7 @@ public class ApiUrls {
   public static final String URL_USERLOGOUT= "users/logout";
   public static final String URL_FEATUREDJOB= "employeejobs/user_featured_jobs";
   public static final String URL_USERSOCIALLOGIN= "auth/user_social_login";
+  public static final String URL_PACKAGE_ORDERID= "packages/create_package_ordernumber";
 
   /////
   public static final String URL_COMPANYLOGIN= "auth/company_login";

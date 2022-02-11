@@ -20,13 +20,16 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.Seeker.FirstVideoActivity;
 import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.SplashScreen;
 import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
+import com.webnotics.swipee.activity.company.UserDetail;
 import com.webnotics.swipee.call.AudioActivity;
 import com.webnotics.swipee.call.VideoActivity;
+import com.webnotics.swipee.rest.ParaName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,22 +61,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 NotificationActivity.instance.callService();
             }
         }
-      if (!Config.isMute() && Config.GetIsUserLogin()&& Config.isRemember()){
-          if (remoteMessage.getData().size() > 0) {
-              Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
+        if (!Config.isMute() && Config.GetIsUserLogin()&& Config.isRemember()){
+            if (remoteMessage.getData().size() > 0) {
+                Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
 
-              try {
-                   JSONObject json = new JSONObject(remoteMessage.getData().toString());
-                 // JSONObject json = new JSONObject(remoteMessage.getData());
-                  handleDataMessage(json);
-              } catch (Exception e) {
-                  Log.e(TAG, "Exception: " + e.getMessage());
-              }
-          }else   if (remoteMessage.getNotification() != null) {
-              Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
-              handleNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
-          }
-      }
+                try {
+                    JSONObject json = new JSONObject(remoteMessage.getData().toString());
+                    // JSONObject json = new JSONObject(remoteMessage.getData());
+                    handleDataMessage(json);
+                } catch (Exception e) {
+                    Log.e(TAG, "Exception: " + e.getMessage());
+                }
+            }else   if (remoteMessage.getNotification() != null) {
+                Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
+                handleNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
+            }
+        }
 
 
 
@@ -149,7 +152,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         try {
             JSONObject data = json.getJSONObject("data");
-          //  JSONObject data = json;
+            //  JSONObject data = json;
 
             String title = data.getString("title");
             String message = data.getString("message");
@@ -158,7 +161,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String timestamp = data.getString("timestamp");
 
             JSONObject payload = data.getJSONObject("payload");
-           // JSONObject payload = new JSONObject(data.getString("payload"));
+            // JSONObject payload = new JSONObject(data.getString("payload"));
             String notify_category = payload.getString("notify_category");
 
             //////////////
@@ -166,26 +169,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             ///////////////////
             Intent resultIntent;
             if (notify_category.equalsIgnoreCase("company_reject_audio_call")) {
-               if (AudioActivity.instance!=null){
-                   AudioActivity.instance.rejectCall(payload.getString("appointment_id"));
-                   showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
-               }
+                if (AudioActivity.instance!=null){
+                    AudioActivity.instance.rejectCall(payload.getString("appointment_id"));
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
+                }
 
             }else if (notify_category.equalsIgnoreCase("user_reject_audio_call")) {
-               if (AudioActivity.instance!=null){
-                   AudioActivity.instance.rejectCall(payload.getString("appointment_id"));
-                   showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
-               }
+                if (AudioActivity.instance!=null){
+                    AudioActivity.instance.rejectCall(payload.getString("appointment_id"));
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
+                }
 
             } else if (notify_category.equalsIgnoreCase("user_reject_video_call")) {
-               if (VideoActivity.instance!=null){
-                   VideoActivity.instance.rejectCall(payload.getString("appointment_id"));
-                   showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
-               }
+                if (VideoActivity.instance!=null){
+                    VideoActivity.instance.rejectCall(payload.getString("appointment_id"));
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());
+                }
 
-            } else if (notify_category.equalsIgnoreCase("bulk_job_post_notification")) {
-
-
+            } else if (notify_category.equalsIgnoreCase("company_swap_profile")) {
                 resultIntent = new Intent(getApplicationContext(), JobDetail.class);
                 resultIntent.putExtra("id", payload.getString("job_id"));
                 resultIntent.putExtra("from", "Notification");
@@ -196,6 +197,60 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     // image is present, show notification with image
                     showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }
+            } else if (notify_category.equalsIgnoreCase("user_swap_job")) {
+                resultIntent = new Intent(getApplicationContext(), UserDetail.class);
+                resultIntent.putExtra("job_id", payload.getString("job_id"));
+                resultIntent.putExtra("id", payload.getString("user_id"));
+                resultIntent.putExtra("from", "Notification");
+                resultIntent.putExtra("name", "");
+                // check for image attachment
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                } else {
+                    // image is present, show notification with image
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                }
+            }else if (notify_category.equalsIgnoreCase("bulk_job_post_notification")) {
+                resultIntent = new Intent(getApplicationContext(), JobDetail.class);
+                resultIntent.putExtra("id", payload.getString("job_id"));
+                resultIntent.putExtra("from", "Notification");
+                // check for image attachment
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                } else {
+                    // image is present, show notification with image
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                }
+            } else if (notify_category.equalsIgnoreCase("company_change_appointment_status")) {
+                if (payload.has("appointment_status") && payload.getString("appointment_status").equalsIgnoreCase("A")){
+                    resultIntent = new Intent(getApplicationContext(), AppointmentDetail.class);
+                    resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, payload.getString("appointment_id"));
+                    resultIntent.putExtra("from", "Notification");
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                }else {
+                    resultIntent = new Intent(getApplicationContext(), JobDetail.class);
+                    resultIntent.putExtra("id", payload.getString("job_id"));
+                    resultIntent.putExtra("from", "Notification");
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                }
+
+
+            } else if (notify_category.equalsIgnoreCase("user_change_appointment_status")) {
+                if (payload.has("appointment_status") && payload.getString("appointment_status").equalsIgnoreCase("A")){
+                    resultIntent = new Intent(getApplicationContext(), AppointmentDetail.class);
+                    resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, payload.getString("appointment_id"));
+                    resultIntent.putExtra("from", "Notification");
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                }else {
+                    resultIntent = new Intent(getApplicationContext(), UserDetail.class);
+                    resultIntent.putExtra("job_id", payload.getString("job_id"));
+                    resultIntent.putExtra("id", payload.getString("user_id"));
+                    resultIntent.putExtra("from", "Notification");
+                    resultIntent.putExtra("name", payload.getString("first_name"));
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                }
+
+
             }else if (notify_category.equalsIgnoreCase("employer_booked_appointment")) {
                 String dtStart = payload.getString("appointment_start_time");
                 String end = payload.getString("appointment_end_time");
@@ -220,6 +275,44 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("user_id", payload.getString("user_id"));
                 resultIntent.putExtra("company_name", payload.getString("company_name"));
                 resultIntent.putExtra("posted_by", payload.getString("company_name"));
+                resultIntent.putExtra("appointment_number", payload.getString("appointment_number"));
+                resultIntent.putExtra("appointment_id", payload.getString("appointment_id"));
+                resultIntent.putExtra("company_country_name", payload.getString("country_name"));
+                resultIntent.putExtra("company_state_name", payload.getString("state_name"));
+                resultIntent.putExtra("company_city_name", payload.getString("city_name"));
+                resultIntent.putExtra("is_own_job", "Y");
+                resultIntent.putExtra("date", datefinal);
+                // check for image attachment
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                } else {
+                    // image is present, show notification with image
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                }
+            }else if (notify_category.equalsIgnoreCase("user_booked_appointment")) {
+                String dtStart = payload.getString("appointment_start_time");
+                String end = payload.getString("appointment_end_time");
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+                SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
+                Date date,dateend;
+                String datefinal="";
+                try {
+                    date = format.parse(dtStart);
+                    dateend = format.parse(end);
+                    String date1=  formatout.format(date);
+                    String dateend1=  formatout.format(dateend);
+                    datefinal= payload.getString("appointment_date")+ "  "+(date1+ " - "+dateend1).toUpperCase(Locale.ROOT);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                resultIntent = new Intent(getApplicationContext(), NotificationAppointmentAction.class);
+                resultIntent.putExtra("company_id", payload.getString("company_id"));
+                resultIntent.putExtra("company_logo", payload.getString("user_profile"));
+                resultIntent.putExtra("appointment_type", payload.getString("appointment_type"));
+                resultIntent.putExtra("user_id", payload.getString("user_id"));
+                resultIntent.putExtra("company_name", payload.getString("first_name")+" "+payload.getString("last_name"));
+                resultIntent.putExtra("posted_by", payload.getString("first_name")+" "+payload.getString("last_name"));
                 resultIntent.putExtra("appointment_number", payload.getString("appointment_number"));
                 resultIntent.putExtra("appointment_id", payload.getString("appointment_id"));
                 resultIntent.putExtra("company_country_name", payload.getString("country_name"));

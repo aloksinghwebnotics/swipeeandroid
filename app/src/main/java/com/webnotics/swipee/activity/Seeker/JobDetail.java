@@ -34,6 +34,7 @@ import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentAction;
 import com.webnotics.swipee.activity.CompanyProfile;
+import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.activity.company.PostedJobActivity;
@@ -647,7 +648,7 @@ public class JobDetail extends AppCompatActivity {
                                 ll_applied.setVisibility(View.VISIBLE);
                                 ll_appointment.setVisibility(View.GONE);
                                 tv_cancel_application.setVisibility(View.VISIBLE);
-                            } else if (from.equalsIgnoreCase("Notification") ||from.equalsIgnoreCase(SavedJobsActivity.class.getSimpleName()) || from.equalsIgnoreCase(LikedJobsActivity.class.getSimpleName())
+                            } else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()) ||from.equalsIgnoreCase("Notification") ||from.equalsIgnoreCase(SavedJobsActivity.class.getSimpleName()) || from.equalsIgnoreCase(LikedJobsActivity.class.getSimpleName())
                                     || from.equalsIgnoreCase(JobListActivity.class.getSimpleName()) || from.equalsIgnoreCase(MatchFragments.class.getSimpleName())
                                     || from.equalsIgnoreCase(MatchedCompanyActivity.class.getSimpleName()) || from.equalsIgnoreCase(FeaturedJobsActivity.class.getSimpleName())) {
                                 if (company_match_status.equalsIgnoreCase("A") && user_match_status.equalsIgnoreCase("A")) {
@@ -891,7 +892,16 @@ public class JobDetail extends AppCompatActivity {
 
     public void setBackPressed() {
         if (from.equalsIgnoreCase("Notification")) {
+            if (Config.isSeeker())
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            else  startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+            finish();
+        }else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())) {
+            if (NotificationActivity.instance!=null)
+                NotificationActivity.instance.finish();
+            if (Config.isSeeker())
+                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            else  startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
             finish();
         } else if (from.equalsIgnoreCase(AppliedJobsActivity.class.getSimpleName())) {
             if (AppliedJobsActivity.instance != null)

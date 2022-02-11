@@ -24,7 +24,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.Seeker.AppoimentActivity;
+import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
+import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.call.AudioActivity;
 import com.webnotics.swipee.call.VideoActivity;
 import com.webnotics.swipee.model.TwillioDetailModel;
@@ -62,6 +65,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
     private int isLive=0;
     private String user_profile="";
     private String user_phone="";
+    private String from="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
 
         if (getIntent()!=null){
              appointment_id=getIntent().getStringExtra(ParaName.KEY_APPOINTMENTID)!=null?getIntent().getStringExtra(ParaName.KEY_APPOINTMENTID):"";
+             from=getIntent().getStringExtra("from")!=null?getIntent().getStringExtra("from"):"";
             if (!TextUtils.isEmpty(appointment_id)){
                 if (rest.isInterentAvaliable()){
                     AppController.ShowDialogue("",mContext);
@@ -111,8 +116,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     SeekerAppointmentDetailModel responseBody = response.body();
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                        if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                       if (! from.equalsIgnoreCase("Notification")){
+                           if (AppoimentActivity.instance!=null)
+                               AppoimentActivity.instance.onBackPressed();
+                       }
                         AppController.loggedOut(mContext);
                     }else if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         tv_name.setText(MessageFormat.format("{0}",responseBody.getData().getCompany_name()));
@@ -195,8 +211,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     AppointmentDetailModel responseBody = response.body();
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
-                        if (CompanyAppoimentActivity.instance!=null)
-                        CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (! from.equalsIgnoreCase("Notification")){
+                            if (CompanyAppoimentActivity.instance!=null)
+                                CompanyAppoimentActivity.instance.onBackPressed();
+                        }
                         AppController.loggedOut(mContext);
                     }else if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         tv_name.setText(MessageFormat.format("{0} {1}", responseBody.getData().getFirst_name(), responseBody.getData().getLast_name()));
@@ -282,7 +309,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) !=
                         PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{
-                                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO},
+                                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO},
                             REQUEST_CODE_ASK_PERMISSIONS);
                 } else {
                     if (isLive==1) {
@@ -307,7 +334,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                 break;
 
             case R.id.iv_back:
-                finish();
+                onBackPressed();
                 break;
 
             default:break;
@@ -324,8 +351,20 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     TwillioDetailModel responseBody = response.body();
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (AppoimentActivity.instance!=null)
+                                AppoimentActivity.instance.onBackPressed();
+                        }
+
                         AppController.loggedOut(mContext);
 
                     }else
@@ -346,9 +385,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         intent.putExtra("phnno", user_phone);
                         intent.putExtra("appointment_id",appointment_id);
                         startActivity(intent);
-
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (AppoimentActivity.instance!=null)
+                                AppoimentActivity.instance.onBackPressed();
+                        }
                         finish();
                     }
 
@@ -376,8 +425,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     TwillioDetailModel responseBody = response.body();
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (AppoimentActivity.instance!=null)
+                                AppoimentActivity.instance.onBackPressed();
+                        }
                         AppController.loggedOut(mContext);
 
                     }else
@@ -395,8 +455,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         intent.putExtra("rroom", room_name);
                         intent.putExtra("appointment_id", appointment_id);
                         mContext.startActivity(intent);
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (AppoimentActivity.instance!=null)
+                                AppoimentActivity.instance.onBackPressed();
+                        }
                         finish();
                     }
 
@@ -424,8 +495,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     TwillioDetailModel responseBody = response.body();
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (CompanyAppoimentActivity.instance!=null)
+                                CompanyAppoimentActivity.instance.onBackPressed();
+                        }
                         AppController.loggedOut(mContext);
 
                     }else
@@ -443,8 +525,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         intent.putExtra("rroom", room_name);
                         intent.putExtra("appointment_id", appointment_id);
                         mContext.startActivity(intent);
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (CompanyAppoimentActivity.instance!=null)
+                                CompanyAppoimentActivity.instance.onBackPressed();
+                        }
                         finish();
                     }
 
@@ -470,8 +563,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     TwillioDetailModel responseBody = response.body();
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (CompanyAppoimentActivity.instance!=null)
+                                CompanyAppoimentActivity.instance.onBackPressed();
+                        }
                         AppController.loggedOut(mContext);
 
                     }else
@@ -492,9 +596,19 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         intent.putExtra("phnno", user_phone);
                         intent.putExtra("appointment_id",appointment_id);
                         startActivity(intent);
-
-                        if (CompanyAppoimentActivity.instance!=null)
-                            CompanyAppoimentActivity.instance.onBackPressed();
+                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null)
+                                NotificationActivity.instance.finish();
+                            if (Config.isSeeker()){
+                                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+                            }else {
+                                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+                            }
+                        }else
+                        if (!from.equalsIgnoreCase("Notification")){
+                            if (CompanyAppoimentActivity.instance!=null)
+                                CompanyAppoimentActivity.instance.onBackPressed();
+                        }
                         finish();
                     }
 
@@ -512,4 +626,15 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (from.equalsIgnoreCase("Notification")){
+            if (Config.isSeeker()){
+                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            }else {
+                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+            }
+        }
+        super.onBackPressed();
+    }
 }

@@ -476,5 +476,9 @@ public interface RestService {
     @FormUrlEncoded
     @POST(ApiUrls.URL_USER_ORDER_PACKAGE)
     Call<JsonObject> setUserTransaction(@FieldMap HashMap<String, String> hashMap);
+
+    @FormUrlEncoded
+    @POST(ApiUrls.URL_PACKAGE_ORDERID)
+    Call<JsonObject> getOrderId(@FieldMap HashMap<String, String> hashMap);
 }
 

@@ -1,8 +1,10 @@
 package com.webnotics.swipee.fragments.company;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
     Context mContext;
     RecyclerView rv_plan;
     TextView tv_title, tv_amount, tv_period, tv_pay;
+    @SuppressLint("StaticFieldLeak")
     public static CompanyPlansFragments instance;
 
     @Override
@@ -94,8 +97,38 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         int id = view.getId();
 
         if (id == R.id.tv_pay) {
-            Payment payment = new Payment();
-            payment.startPayment(getActivity(), package_name, package_price);
+            AppController.ShowDialogue("",mContext);
+            HashMap<String,String> hashMap=new HashMap<>();
+            hashMap.put(ParaName.KEYTOKEN,Config.GetUserToken());
+            hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
+            SwipeeApiClient.swipeeServiceInstance().getOrderId(hashMap).enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                    AppController.dismissProgressdialog();
+                    if (response.code()==200 && response.body()!=null){
+                        if (response.body().get("code").getAsInt()==203){
+                            rest.showToast(response.body().get("message").getAsString());
+                            AppController.loggedOut(mContext);
+
+                        }else if (response.body().get("code").getAsInt()==200 && response.body().get("status").getAsBoolean()){
+                            JsonObject data=response.body().getAsJsonObject("data");
+                            String order_id=data.has("order_id")?data.get("order_id").getAsString():"";
+                            if (!TextUtils.isEmpty(order_id)){
+                                Payment payment = new Payment();
+                                payment.startPayment(getActivity(), order_id,package_name, package_price);
+                            }
+
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+                    AppController.dismissProgressdialog();
+                }
+            });
+
         }
     }
 

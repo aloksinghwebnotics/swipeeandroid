@@ -309,7 +309,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
         <activity
-            android:name=".activity.videoPlayerActivity"
+            android:name=".activity.VideoPlayerActivity"
             android:exported="true"
             android:screenOrientation="sensorLandscape" />
         <activity
@@ -379,7 +379,7 @@
         <!-- Api key RazorPay -->
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_ZdPTfUwLdH0Amr" />
+            android:value="rzp_test_54rFvRw59NIrOK" />
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />

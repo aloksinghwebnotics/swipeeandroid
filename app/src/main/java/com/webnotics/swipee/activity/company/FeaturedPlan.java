@@ -3,6 +3,7 @@ package com.webnotics.swipee.activity.company;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -80,8 +81,40 @@ public class FeaturedPlan extends AppCompatActivity implements PaymentResultList
         tv_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Payment payment = new Payment();
-                payment.startPayment(FeaturedPlan.this, package_name, package_price);
+
+                    AppController.ShowDialogue("",mContext);
+                    HashMap<String,String> hashMap=new HashMap<>();
+                    hashMap.put(ParaName.KEYTOKEN,Config.GetUserToken());
+                    hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
+                    SwipeeApiClient.swipeeServiceInstance().getOrderId(hashMap).enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                            AppController.dismissProgressdialog();
+                            if (response.code()==200 && response.body()!=null){
+                                if (response.body().get("code").getAsInt()==203){
+                                    rest.showToast(response.body().get("message").getAsString());
+                                    AppController.loggedOut(mContext);
+
+                                }else if (response.body().get("code").getAsInt()==200 && response.body().get("status").getAsBoolean()){
+                                    JsonObject data=response.body().getAsJsonObject("data");
+                                    String order_id=data.has("order_id")?data.get("order_id").getAsString():"";
+                                    if (!TextUtils.isEmpty(order_id)){
+                                        Payment payment = new Payment();
+                                        payment.startPayment(FeaturedPlan.this, order_id,package_name, package_price);
+                                    }
+
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                            AppController.dismissProgressdialog();
+                        }
+                    });
+
+
             }
         });
     }

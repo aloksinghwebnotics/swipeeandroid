@@ -109,7 +109,7 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
     }
 
 
-    public void callCancel(String id) {
+    public void callCancel(String id, String appointment_number, String user_id) {
         Dialog progressdialog = new Dialog(mContext);
         progressdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         progressdialog.setContentView(R.layout.cancel_appointment_popup);
@@ -123,7 +123,7 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
         progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v -> {
             progressdialog.dismiss();
             if (rest.isInterentAvaliable()) {
-                cancelAppointment(id);
+                cancelAppointment(id,appointment_number,user_id);
             } else {
                 rest.AlertForInternet();
             }
@@ -136,11 +136,13 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
         }
     }
 
-    public void cancelAppointment(String id) {
+    public void cancelAppointment(String id, String appointment_number, String user_id) {
         AppController.ShowDialogue("", mContext);
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(ParaName.KEY_APPOINTMENTID, id);
         hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "C");
+        hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
+        hashMap.put(ParaName.KEY_UID, user_id);
         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
         SwipeeApiClient.swipeeServiceInstance().setAppointmentStatus(hashMap).enqueue(new Callback<JsonObject>() {
             @Override

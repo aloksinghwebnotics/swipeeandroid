@@ -324,7 +324,7 @@ public class AppointmentAction extends AppCompatActivity {
             progressdialog.dismiss();
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
-                cancelAppointment(jsonObject.get("appointment_id").getAsString());
+                cancelAppointment(jsonObject.get("appointment_id").getAsString(),jsonObject.get("appointment_number").getAsString());
             } else {
                 rest.AlertForInternet();
             }
@@ -337,11 +337,13 @@ public class AppointmentAction extends AppCompatActivity {
         }
     }
 
-    public void cancelAppointment(String id) {
+    public void cancelAppointment(String id, String appointment_number) {
         AppController.ShowDialogue("", mContext);
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(ParaName.KEY_APPOINTMENTID, id);
         hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "C");
+        hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
+        hashMap.put(ParaName.KEY_USERID, company_id);
         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
         SwipeeApiClient.swipeeServiceInstance().setAppointmentStatus(hashMap).enqueue(new Callback<JsonObject>() {
             @Override

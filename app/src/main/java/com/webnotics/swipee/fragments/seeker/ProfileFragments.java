@@ -202,6 +202,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
         iv_videoplay.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(videoUrl))
                 callPlayer(videoUrl);
+              //  VideoPlayerActivity.start(getActivity(),videoUrl);
         });
 
         if (SeekerHomeActivity.instance!=null){

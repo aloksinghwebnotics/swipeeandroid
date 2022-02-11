@@ -38,7 +38,6 @@ import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
-import com.webnotics.swipee.activity.company.UserDetail;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
@@ -163,12 +162,11 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                         tv_time.setText("");
                         slotSelected = "";
                         AppController.ShowDialogue("", mContext);
-                        if (from.equalsIgnoreCase(UserDetail.class.getSimpleName())) {
-                            getAppointmentSlotCompany(tv_date.getText().toString(), company_id);
-                        } else if (from.equalsIgnoreCase(JobDetail.class.getSimpleName())&& Config.isSeeker())
+                        if (Config.isSeeker()){
                             getAppointmentSlot(tv_date.getText().toString(), company_id);
-                        else if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName()) && Config.isSeeker())
-                            getAppointmentSlot(tv_date.getText().toString(), company_id);
+                        }else getAppointmentSlotCompany(tv_date.getText().toString(), company_id);
+
+
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
@@ -228,7 +226,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                 } else if (TextUtils.isEmpty(tv_time.getText().toString())) {
                     rest.showToast("Select Appointment Time");
                 } else {
-                    if (from.equalsIgnoreCase(UserDetail.class.getSimpleName()) && !Config.isSeeker()) {
+                    if (!Config.isSeeker()) {
                         if (rest.isInterentAvaliable()) {
                             HashMap<String, String> hashMap = new HashMap<>();
                             String time = tv_time.getText().toString();
@@ -246,23 +244,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                             AppController.ShowDialogue("", mContext);
                             createAppointment(hashMap);
                         } else rest.AlertForInternet();
-                    } else if (from.equalsIgnoreCase(JobDetail.class.getSimpleName()) && Config.isSeeker()) {
-                        if (rest.isInterentAvaliable()) {
-                            HashMap<String, String> hashMap = new HashMap<>();
-                            String time = tv_time.getText().toString();
-                            String start = time.substring(0, time.indexOf(" - "));
-                            String end = time.substring(time.indexOf("-") + 2);
-                            hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
-                            hashMap.put(ParaName.KEY_APPOINTMENTDATE, tv_date.getText().toString());
-                            hashMap.put(ParaName.KEY_APPOINTMENTTYPE, appointment_type);
-                            hashMap.put(ParaName.KEY_COMPANYID, company_id);
-                            hashMap.put(ParaName.KEY_APPOINTMENTID, appointmentId);
-                            hashMap.put(ParaName.KEY_ENDTIME, end);
-                            hashMap.put(ParaName.KEY_STARTTIME, start);
-                            AppController.ShowDialogue("", mContext);
-                            rescheduleAppointment(hashMap);
-                        } else rest.AlertForInternet();
-                    } else if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName()) && Config.isSeeker()) {
+                    } else if (Config.isSeeker()) {
                         if (rest.isInterentAvaliable()) {
                             HashMap<String, String> hashMap = new HashMap<>();
                             String time = tv_time.getText().toString();
@@ -317,7 +299,6 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                             if (NotificationAppointmentAction.instance!=null){
                                 NotificationAppointmentAction.instance.onBackPressed();
                             }
-                            startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
                         }
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());

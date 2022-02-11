@@ -38,6 +38,8 @@ import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentAction;
 import com.webnotics.swipee.activity.ChatActivity;
+import com.webnotics.swipee.activity.NotificationActivity;
+import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
@@ -354,7 +356,23 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
 
 
     public void setBackPressed() {
-        if (from.equalsIgnoreCase(MatchedUserActivity.class.getSimpleName())) {
+        if (from.equalsIgnoreCase("Notification")) {
+            if (Config.isSeeker()){
+                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            }else {
+                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+            }
+            onBackPressed();
+        }else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())) {
+            if (NotificationActivity.instance!=null)
+                NotificationActivity.instance.finish();
+            if (Config.isSeeker()){
+                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            }else {
+                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+            }
+            onBackPressed();
+        }else if (from.equalsIgnoreCase(MatchedUserActivity.class.getSimpleName())) {
             if (MatchedUserActivity.instance != null) {
                 MatchedUserActivity.instance.onBackPressed();
             }
@@ -433,6 +451,8 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                             JsonArray user_languages = job_data.has("user_languages") ? job_data.get("user_languages").isJsonNull() ? new JsonArray() : job_data.get("user_languages").getAsJsonArray() : new JsonArray();
                             appointment_data = dataObject.has("appointment_data") ? dataObject.get("appointment_data").isJsonNull() ? new JsonArray() : dataObject.get("appointment_data").getAsJsonArray() : new JsonArray();
 
+
+                            tv_username.setText(MessageFormat.format("{0}''s Profile", first_name));
                             if (TextUtils.isEmpty(video_file_link)) {
                                 rl_video.setVisibility(View.GONE);
                                 tv_video.setVisibility(View.GONE);

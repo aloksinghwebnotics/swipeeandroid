@@ -9,8 +9,9 @@
         android:id="@+id/tv_item"
         android:layout_width="match_parent"
         android:gravity="center"
+        android:minHeight="@dimen/dimen36dp"
         android:padding="@dimen/dimen4dp"
-        android:layout_height="@dimen/dimen36dp"
+        android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="@dimen/dimen12sp"
         />

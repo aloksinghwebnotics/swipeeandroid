@@ -23,6 +23,7 @@ import com.potyvideo.library.AndExoPlayerView;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.VideoPlayerActivity;
 import com.webnotics.swipee.activity.company.CompanyEditProfile;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.fragments.Basefragment;
@@ -82,7 +83,8 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
         });
         iv_videoplay.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(videoUrl))
-                callPlayer(videoUrl);
+                VideoPlayerActivity.start(getActivity(),videoUrl);
+               // callPlayer(videoUrl);
         });
 
         if (CompanyHomeActivity.instance != null) {

@@ -1,5 +1,6 @@
 package com.webnotics.swipee.activity.company;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.RescheduleAppointment;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.rest.ParaName;
@@ -51,9 +53,12 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     private String company_country_name="";
     private String posted_by="";
     private String is_own_job="";
+    private String user_id="";
     private String job_title="";
     private String date="";
+    @SuppressLint("StaticFieldLeak")
     public static NotificationAppointmentAction instance;
+    private String from="";
 
 
     @Override
@@ -80,6 +85,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
         if (getIntent() != null) {
 
              company_id = getIntent().getStringExtra("company_id") != null ? getIntent().getStringExtra("company_id") : "";
+             user_id = getIntent().getStringExtra("user_id") != null ? getIntent().getStringExtra("user_id") : "";
              company_logo = getIntent().getStringExtra("company_logo") != null ? getIntent().getStringExtra("company_logo") : "";
              company_name = getIntent().getStringExtra("company_name") != null ? getIntent().getStringExtra("company_name") : "";
              city = getIntent().getStringExtra("company_city_name") != null ? getIntent().getStringExtra("company_city_name") : "";
@@ -92,6 +98,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
             appointment_type = getIntent().getStringExtra("appointment_type") != null ? getIntent().getStringExtra("appointment_type") : "";
              job_title = getIntent().getStringExtra("job_title") != null ? getIntent().getStringExtra("job_title") : "";
              date = getIntent().getStringExtra("date") != null ? getIntent().getStringExtra("date") : "";
+            from = getIntent().getStringExtra("from") != null ? getIntent().getStringExtra("from") : "";
             tv_name.setText(posted_by);
             tv_datetime.setText(date);
             if (appointment_type.equalsIgnoreCase("online_meeting")) {
@@ -124,9 +131,12 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (Config.isSeeker())
-            startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+            if (Config.isSeeker())
+                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            else  startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+        }
+
         finish();
     }
 
@@ -134,34 +144,41 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_back:
-                if (Config.isSeeker())
-                    startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-                finish();
+               onBackPressed();
                 break;
             case R.id.tv_cancel:
-                if (rest.isInterentAvaliable()){
-                    AppController.ShowDialogue("", mContext);
-                    HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put(ParaName.KEY_APPOINTMENTID, appointmentId);
-                    hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
-                    hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "C");
-                    hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
-                    hashMap.put(ParaName.KEY_COMPANYID, company_id);
-                    statusAppointment(hashMap);
-                }else rest.AlertForInternet();
+                if (Config.isSeeker()){
+                    if (rest.isInterentAvaliable()){
+                        AppController.ShowDialogue("", mContext);
+                        HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put(ParaName.KEY_APPOINTMENTID, appointmentId);
+                        hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
+                        hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "C");
+                        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+                        hashMap.put(ParaName.KEY_COMPANYID, company_id);
+                        statusAppointment(hashMap);
+                    }else rest.AlertForInternet();
+                }else {
+                    cancelAppointment(appointmentId,"C",appointment_number);
+                }
 
                 break;
             case R.id.tv_accept:
-                if (rest.isInterentAvaliable()){
-                    AppController.ShowDialogue("", mContext);
-                    HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put(ParaName.KEY_APPOINTMENTID, appointmentId);
-                    hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
-                    hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "A");
-                    hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
-                    hashMap.put(ParaName.KEY_COMPANYID, company_id);
-                    statusAppointment(hashMap);
-                }else rest.AlertForInternet();
+                if (Config.isSeeker()){
+                    if (rest.isInterentAvaliable()){
+                        AppController.ShowDialogue("", mContext);
+                        HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put(ParaName.KEY_APPOINTMENTID, appointmentId);
+                        hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
+                        hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "A");
+                        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+                        hashMap.put(ParaName.KEY_COMPANYID, company_id);
+                        statusAppointment(hashMap);
+                    }else rest.AlertForInternet();
+                }else {
+                    cancelAppointment(appointmentId,"A",appointment_number);
+                }
+
 
                 break;
             case R.id.tv_appointment:
@@ -187,6 +204,45 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
             default:break;
         }
     }
+
+
+    public void cancelAppointment(String id, String action, String appointment_number) {
+        AppController.ShowDialogue("", mContext);
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(ParaName.KEY_APPOINTMENTID, id);
+        hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, action);
+        hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
+        hashMap.put(ParaName.KEY_UID, user_id);
+        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+        SwipeeApiClient.swipeeServiceInstance().setAppointmentStatus(hashMap).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responceBody = response.body();
+                    if (response.body().get("code").getAsInt() == 203) {
+                        rest.showToast(response.body().get("message").getAsString());
+                        AppController.loggedOut(mContext);
+                        finish();
+                    } else if (responceBody.get("status").getAsBoolean()) {
+                        rest.showToast(responceBody.get("message").getAsString());
+                        startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()));
+                        finish();
+                    } else rest.showToast(responceBody.get("message").getAsString());
+
+                } else rest.showToast("Something went wrong");
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
+
+    }
+
+
 
     public void statusAppointment(HashMap<String,String> hashMap) {
 

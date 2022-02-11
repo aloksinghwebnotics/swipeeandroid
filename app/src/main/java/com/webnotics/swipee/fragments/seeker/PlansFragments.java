@@ -3,6 +3,7 @@ package com.webnotics.swipee.fragments.seeker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,30 +17,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.razorpay.Checkout;
-import com.razorpay.PaymentResultListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
-import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.adapter.seeeker.PlanAdapter;
 import com.webnotics.swipee.chat.MainChatActivity;
 import com.webnotics.swipee.fragments.Basefragment;
-
 import com.webnotics.swipee.payment.Payment;
-import com.webnotics.swipee.rest.ApiUrls;
 import com.webnotics.swipee.rest.ParaName;
-import com.webnotics.swipee.rest.RestService;
-import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
 
 import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class PlansFragments extends Basefragment implements View.OnClickListener {
@@ -99,8 +93,38 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
         int id = view.getId();
 
         if (id == R.id.tv_pay) {
-            Payment payment = new Payment();
-            payment.startPayment(getActivity(), package_name, package_price);
+            AppController.ShowDialogue("",mContext);
+            HashMap<String,String> hashMap=new HashMap<>();
+            hashMap.put(ParaName.KEYTOKEN,Config.GetUserToken());
+            hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
+            SwipeeApiClient.swipeeServiceInstance().getOrderId(hashMap).enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                    AppController.dismissProgressdialog();
+                    if (response.code()==200 && response.body()!=null){
+                        if (response.body().get("code").getAsInt()==203){
+                            rest.showToast(response.body().get("message").getAsString());
+                            AppController.loggedOut(mContext);
+
+                        }else if (response.body().get("code").getAsInt()==200 && response.body().get("status").getAsBoolean()){
+                            JsonObject data=response.body().getAsJsonObject("data");
+                            String order_id=data.has("order_id")?data.get("order_id").getAsString():"";
+                            if (!TextUtils.isEmpty(order_id)){
+                                Payment payment = new Payment();
+                                payment.startPayment(getActivity(), order_id,package_name, package_price);
+                            }
+
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+            AppController.dismissProgressdialog();
+                }
+            });
+
         }
     }
 

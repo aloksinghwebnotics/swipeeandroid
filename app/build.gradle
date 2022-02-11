@@ -79,6 +79,10 @@ dependencies {
 
     implementation 'com.shantanudeshmukh:linkedinsdk:1.0.0'
     implementation project(path: ':linkedin-sdk')
-  
+
+
+    implementation 'org.videolan.android:libvlc-all:3.3.13'
+
+    implementation "com.airbnb.android:lottie:4.2.2"
 
 }

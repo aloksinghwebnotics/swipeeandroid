@@ -96,7 +96,7 @@ public class CompanyAppointmentAdapter extends RecyclerView.Adapter<CompanyAppoi
             e.printStackTrace();
         }
 
-        holder.tv_cancel.setOnClickListener(v -> mContext.callCancel(data.get(position).getAppointment_id()));
+        holder.tv_cancel.setOnClickListener(v -> mContext.callCancel(data.get(position).getAppointment_id(),data.get(position).getAppointment_number(),data.get(position).getUser_id()));
         holder.iv_call.setOnClickListener(v -> {
             mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id()));
         });

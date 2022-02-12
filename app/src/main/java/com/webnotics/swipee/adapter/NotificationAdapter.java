@@ -89,6 +89,23 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                            resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
                            resultIntent.putExtra("name", "");
                            mContext.startActivity(resultIntent);
+                       }else if (type.equalsIgnoreCase("user_applied_job")) {
+                           if (Config.isSeeker()){
+                               Intent resultIntent = new Intent(mContext, JobDetail.class);
+                               resultIntent.putExtra("id", object.get("job_id").getAsString());
+                               resultIntent.putExtra("apply_id", object.get("apply_id").getAsString());
+                               resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
+                               mContext.startActivity(resultIntent);
+                           }else {
+                               Intent resultIntent = new Intent(mContext, UserDetail.class);
+                               resultIntent.putExtra("job_id", object.get("job_id").getAsString());
+                               resultIntent.putExtra("id", object.get("user_id").getAsString());
+                               resultIntent.putExtra("apply_id", object.get("apply_id").getAsString());
+                               resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
+                               resultIntent.putExtra("name", "");
+                               mContext.startActivity(resultIntent);
+                           }
+
                        }  else if (type.equalsIgnoreCase("company_swap_profile")) {
                            Intent resultIntent = new Intent(mContext, JobDetail.class);
                            resultIntent.putExtra("id", object.get("job_id").getAsString());
@@ -116,6 +133,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                resultIntent = new Intent(mContext, UserDetail.class);
                                resultIntent.putExtra("job_id", object.get("job_id").getAsString());
                                resultIntent.putExtra("id", object.get("user_id").getAsString());
+                               resultIntent.putExtra("apply_id", object.get("apply_id").getAsString());
                                resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
                                resultIntent.putExtra("name", object.get("first_name").getAsString());
                            }

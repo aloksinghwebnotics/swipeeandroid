@@ -26,6 +26,11 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="splash" parent="Theme.AppTheme">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
     <style name="Theme.AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

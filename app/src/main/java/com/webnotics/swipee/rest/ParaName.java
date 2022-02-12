@@ -136,5 +136,7 @@ public class ParaName {
     public static final String KEY_PACKAGEPRICE = "package_price";
     public static final String KEY_AMOUNT = "amount";
     public static final String KEY_PACKAGENAME = "package_name";
+    public static final String KEY_ORDERID = "order_id";
+    public static final String KEY_PAYSIGN = "pay_signature";
 
 }

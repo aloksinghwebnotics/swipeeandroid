@@ -104,8 +104,10 @@ public class Config {
     public static final String CVFILELINK = "cv_file_link";
     public static final String PACKAGEEXP = "package_expire";
     public static final String PICKURI = "pick_uri";
+    public static final String PACKAGEID = "package_iidd";
     public static final String SocialLogin = "SocialLogin";
     public static final String REMEMBER = "InstaCarrier.remember";
+    public static final String TRANSACTION = "Swipee.transaction";
 
 
 
@@ -193,14 +195,23 @@ public class Config {
         editor.commit();
     }
 
-    public static String GetPICKURI(){
+    public static String GetPackageId(){
+        return preference.getString(PACKAGEID, "");
+    }
+    public static void SetPackageId(String uri) {
+        editor.putString(PACKAGEID, uri);
+        editor.commit();
+    }
+    public static void SetPICKURI(String uri) {
+        editor.putString(PICKURI, uri);
+
+    }
+
+        public static String GetPICKURI(){
         return preference.getString(PICKURI, "");
     }
 
-    public static void SetPICKURI(String uri) {
-        editor.putString(PICKURI, uri);
-        editor.commit();
-    }
+
     public static String GetLongg(){
         return preference.getString(Longg, "0");
     }
@@ -755,12 +766,13 @@ public class Config {
     }
 
 
-    public static void SetLang(String languagee) {
-        editor.putString(LANGUAGEEE, languagee);
+    public static void SetTransaction(String data) {
+        editor.remove(TRANSACTION);
+        editor.putString(TRANSACTION, data);
         editor.commit();
     }
-    public static String GetLang() {
-        return preference.getString(LANGUAGEEE, null);
+    public static String GetTransaction() {
+        return preference.getString(TRANSACTION, null);
     }
 
 

@@ -49,9 +49,12 @@ import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
+import org.json.JSONObject;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -117,6 +120,37 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
     }
 
     public void init(View rootView) {
+
+
+
+        if (Config.GetTransaction()!=null && !TextUtils.isEmpty(Config.GetTransaction())){
+            String transaction=Config.GetTransaction();
+            try {
+                HashMap<String,String> map=new HashMap<>();
+                JSONObject jsonObject = new JSONObject(transaction);
+                Iterator<String> keysItr = jsonObject.keys();
+                while (keysItr.hasNext()) {
+                    String key = keysItr.next();
+                    map.put(key, jsonObject.get(key).toString());
+                }
+                if (map.containsKey(ParaName.KEY_ISFEATURED)){
+                    if (Objects.requireNonNull(map.get(ParaName.KEY_ISFEATURED)).equalsIgnoreCase("N")){
+                        map.put(ParaName.KEYTOKEN,Config.GetUserToken());
+                        map.remove(ParaName.KEY_ISFEATURED);
+                        callSavePayment(map);
+                    } else if (Objects.requireNonNull(map.get(ParaName.KEY_ISFEATURED)).equalsIgnoreCase("Y")){
+                        map.put(ParaName.KEYTOKEN,Config.GetUserToken());
+                        map.remove(ParaName.KEY_ISFEATURED);
+                        callFeatureSavePayment(map);
+                    }
+                }
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         nodatatxt = rootView.findViewById(R.id.nodatatxt);
         tvNoswipe = rootView.findViewById(R.id.tvNoswipe);
@@ -347,6 +381,37 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
             getHomeJobList();
         } else rest.AlertForInternet();
 
+
+    }
+
+    private void callSavePayment(HashMap<String, String> map) {
+        SwipeeApiClient.swipeeServiceInstance().setRecruiterTransaction(map).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
+                    if (response.body().get("code").getAsInt() == 203) {
+
+                    } else if (response.body().get("code").getAsInt() == 200 && status) {
+                        Config.SetTransaction("");
+                    }else if (response.body().get("code").getAsInt() == 402) {
+                        Config.SetTransaction("");
+                    }
+
+                } else {
+                    rest.showToast("Something went wrong");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
 
     }
 
@@ -1318,5 +1383,35 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    private void callFeatureSavePayment(HashMap<String, String> map) {
+        SwipeeApiClient.swipeeServiceInstance().orderFeatureJob(map).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
+                    if (response.body().get("code").getAsInt() == 203) {
+
+                    } else if (response.body().get("code").getAsInt() == 200 && status) {
+                        Config.SetTransaction("");
+                    } else if (response.body().get("code").getAsInt() == 402) {
+                        Config.SetTransaction("");
+                    }
+
+                } else {
+                    rest.showToast("Something went wrong");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
     }
 }

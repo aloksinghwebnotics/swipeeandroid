@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.razorpay.Checkout;
+import com.razorpay.PaymentData;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
@@ -27,6 +28,8 @@ import com.webnotics.swipee.payment.Payment;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
+
+import org.json.JSONObject;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -97,54 +100,65 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         int id = view.getId();
 
         if (id == R.id.tv_pay) {
-            AppController.ShowDialogue("",mContext);
-            HashMap<String,String> hashMap=new HashMap<>();
-            hashMap.put(ParaName.KEYTOKEN,Config.GetUserToken());
-            hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
-            SwipeeApiClient.swipeeServiceInstance().getOrderId(hashMap).enqueue(new Callback<JsonObject>() {
-                @Override
-                public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                    AppController.dismissProgressdialog();
-                    if (response.code()==200 && response.body()!=null){
-                        if (response.body().get("code").getAsInt()==203){
-                            rest.showToast(response.body().get("message").getAsString());
-                            AppController.loggedOut(mContext);
+            if (!TextUtils.isEmpty(package_id)){
+                AppController.ShowDialogue("",mContext);
+                HashMap<String,String> hashMap=new HashMap<>();
+                hashMap.put(ParaName.KEYTOKEN,Config.GetUserToken());
+                hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price*100));
+                SwipeeApiClient.swipeeServiceInstance().getOrderId(hashMap).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                        AppController.dismissProgressdialog();
+                        if (response.code()==200 && response.body()!=null){
+                            if (response.body().get("code").getAsInt()==203){
+                                rest.showToast(response.body().get("message").getAsString());
+                                AppController.loggedOut(mContext);
 
-                        }else if (response.body().get("code").getAsInt()==200 && response.body().get("status").getAsBoolean()){
-                            JsonObject data=response.body().getAsJsonObject("data");
-                            String order_id=data.has("order_id")?data.get("order_id").getAsString():"";
-                            if (!TextUtils.isEmpty(order_id)){
-                                Payment payment = new Payment();
-                                payment.startPayment(getActivity(), order_id,package_name, package_price);
+                            }else if (response.body().get("code").getAsInt()==200 && response.body().get("status").getAsBoolean()){
+                                JsonObject data=response.body().getAsJsonObject("data");
+                                String order_id=data.has("order_id")?data.get("order_id").getAsString():"";
+                                if (!TextUtils.isEmpty(order_id)){
+                                    Payment payment = new Payment();
+                                    payment.startPayment(getActivity(), order_id,package_name, package_price);
+                                }
+
                             }
 
                         }
-
                     }
-                }
 
-                @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
-                    AppController.dismissProgressdialog();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        AppController.dismissProgressdialog();
+                    }
+                });
 
+            }
         }
     }
 
-    public void setTransactionData(String transactionId) {
+    public void setTransactionData(PaymentData paymentData) {
 
         HashMap<String, String> hashMap = new HashMap();
-        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
-        hashMap.put(ParaName.KEY_TRANSACTIONID, transactionId);
+        hashMap.put(ParaName.KEY_TRANSACTIONID, paymentData.getPaymentId());
         hashMap.put(ParaName.KEY_PACKAGETYPE, package_type);
         hashMap.put(ParaName.KEY_PAYMENTSTATUS, "Completed");
+        hashMap.put(ParaName.KEY_ORDERID, paymentData.getOrderId());
+        hashMap.put(ParaName.KEY_PAYSIGN, paymentData.getSignature());
         hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price));
         hashMap.put(ParaName.KEY_PACKAGEID, package_id);
+
+        hashMap.put(ParaName.KEY_ISFEATURED, "N");
+        JSONObject jsonObject = new JSONObject(hashMap);
+        Config.SetTransaction(jsonObject.toString());
+
+        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+        hashMap.remove(ParaName.KEY_ISFEATURED);
+
         AppController.ShowDialogue("", mContext);
         SwipeeApiClient.swipeeServiceInstance().setRecruiterTransaction(hashMap).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull retrofit2.Response<JsonObject> response) {
                 AppController.dismissProgressdialog();
 
                 if (response.code() == 200 && response.body() != null) {
@@ -155,7 +169,12 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
                         AppController.loggedOut(mContext);
                         getActivity().finish();
                     } else if (response.body().get("code").getAsInt() == 200 && status) {
+                        Config.SetTransaction("");
+                        rest.showToast(response.body().get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class));
+                    }else if (response.body().get("code").getAsInt() == 402) {
+                        Config.SetTransaction("");
+                        rest.showToast(response.body().get("message").getAsString());
                     }
 
                 } else {
@@ -165,7 +184,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
             }
         });

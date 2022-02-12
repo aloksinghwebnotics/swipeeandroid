@@ -19,7 +19,6 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
-import com.webnotics.swipee.chat.MainChatActivity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -73,9 +72,9 @@ public class SplashScreen extends AppCompatActivity {
                 overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
 
-                startActivity(new Intent(SplashScreen.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker", true));
+              /*  startActivity(new Intent(SplashScreen.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker", true));
                 overridePendingTransition(R.anim.enter, R.anim.exit);
-                finish();
+                finish();*/
 
             }
 

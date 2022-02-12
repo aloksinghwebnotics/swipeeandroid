@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
-import com.razorpay.PaymentResultListener;
+import com.razorpay.PaymentData;
+import com.razorpay.PaymentResultWithDataListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
@@ -47,7 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompanyHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface,PaymentResultListener {
+public class CompanyHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface, PaymentResultWithDataListener {
     Context mContext;
     @SuppressLint("StaticFieldLeak")
     public static CompanyHomeActivity instance;
@@ -481,11 +481,11 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    /**
+   /* *//**
      * The name of the function has to be
      * onPaymentSuccess
      * Wrap your code in try catch, as shown, to ensure that this method runs correctly
-     */
+     *//*
     @SuppressWarnings("unused")
     @Override
     public void onPaymentSuccess(String razorpayPaymentID) {
@@ -499,11 +499,11 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    /**
+    *//**
      * The name of the function has to be
      * onPaymentError
      * Wrap your code in try catch, as shown, to ensure that this method runs correctly
-     */
+     *//*
     @SuppressWarnings("unused")
     @Override
     public void onPaymentError(int code, String response) {
@@ -513,5 +513,27 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         } catch (Exception e) {
             Log.e("RazorPay", "Exception in onPaymentError", e);
         }
+    }*/
+
+
+    @Override
+    public void onPaymentSuccess(String s, PaymentData paymentData) {
+        Log.d("sssssssss", paymentData.getData().toString());
+        Log.d("sssssssss", paymentData.getPaymentId());
+        Log.d("sssssssss", paymentData.getOrderId());
+        Log.d("sssssssss", paymentData.getSignature());
+        try {
+            if (CompanyPlansFragments.instance != null){
+                CompanyPlansFragments.instance.setTransactionData(paymentData);
+            }
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentSuccess", e);
+        }
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s, PaymentData paymentData) {
+
     }
 }

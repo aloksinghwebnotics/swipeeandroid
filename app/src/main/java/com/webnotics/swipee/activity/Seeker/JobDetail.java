@@ -183,20 +183,22 @@ public class JobDetail extends AppCompatActivity {
         });
 
         tv_apply.setOnClickListener(v -> {
+            if (Config.GetPACKAGEEXP().equalsIgnoreCase("N")){
+                if (Config.GetLeftApplyCount() > 0 || Config.GetPackageId().equalsIgnoreCase("3")) {
+                    if (!TextUtils.isEmpty(resumeId)) {
+                        HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+                        hashMap.put(ParaName.KEY_JOBPOSTID, job_id);
+                        hashMap.put(ParaName.KEY_CVID, resumeId);
+                        if (rest.isInterentAvaliable()) {
+                            AppController.ShowDialogue("", mContext);
+                            postApplyJob(hashMap);
+                        } else rest.AlertForInternet();
+                    } else rest.showToast("Upload resume first.");
 
-            if (Config.GetLeftApplyCount() > 0) {
-                if (!TextUtils.isEmpty(resumeId)) {
-                    HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
-                    hashMap.put(ParaName.KEY_JOBPOSTID, job_id);
-                    hashMap.put(ParaName.KEY_CVID, resumeId);
-                    if (rest.isInterentAvaliable()) {
-                        AppController.ShowDialogue("", mContext);
-                        postApplyJob(hashMap);
-                    } else rest.AlertForInternet();
-                } else rest.showToast("Upload resume first.");
+                } else rest.showToast("Your daily apply limit exceeded");
+            }  else rest.showToast(getString(R.string.packageexpseekr));
 
-            } else rest.showToast("Your daily apply limit exceeded");
         });
 
         iv_logo.setOnClickListener(new View.OnClickListener() {

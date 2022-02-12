@@ -210,6 +210,27 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     // image is present, show notification with image
                     showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }
+            }else if (notify_category.equalsIgnoreCase("user_applied_job")) {
+                    if (Config.isSeeker()){
+                        resultIntent = new Intent(getApplicationContext(), JobDetail.class);
+                        resultIntent.putExtra("id", payload.getString("job_id"));
+                        resultIntent.putExtra("apply_id", payload.getString("apply_id"));
+                        resultIntent.putExtra("from", "Notification");
+                    }else {
+                        resultIntent = new Intent(getApplicationContext(), UserDetail.class);
+                        resultIntent.putExtra("job_id", payload.getString("job_id"));
+                        resultIntent.putExtra("id", payload.getString("user_id"));
+                        resultIntent.putExtra("apply_id", payload.getString("apply_id"));
+                        resultIntent.putExtra("from", "Notification");
+                        resultIntent.putExtra("name", "");
+                    }
+                // check for image attachment
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                } else {
+                    // image is present, show notification with image
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                }
             }else if (notify_category.equalsIgnoreCase("bulk_job_post_notification")) {
                 resultIntent = new Intent(getApplicationContext(), JobDetail.class);
                 resultIntent.putExtra("id", payload.getString("job_id"));
@@ -245,6 +266,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     resultIntent = new Intent(getApplicationContext(), UserDetail.class);
                     resultIntent.putExtra("job_id", payload.getString("job_id"));
                     resultIntent.putExtra("id", payload.getString("user_id"));
+                    resultIntent.putExtra("apply_id", payload.getString("apply_id"));
                     resultIntent.putExtra("from", "Notification");
                     resultIntent.putExtra("name", payload.getString("first_name"));
                     showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);

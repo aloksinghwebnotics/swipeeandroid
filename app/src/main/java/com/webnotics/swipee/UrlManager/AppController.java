@@ -7,11 +7,8 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -35,7 +32,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -153,24 +149,6 @@ public class AppController extends Application {
 
         return capMatcher.appendTail(capBuffer).toString();
     }
-    public static boolean isNetworkAvailable(Activity mActivity) {
-        Context context = mActivity.getApplicationContext();
-        ConnectivityManager connectivity = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity == null) {
-            return false;
-        } else {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) {
-                for (NetworkInfo networkInfo : info) {
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
 
     public static void hidekeyboard(){
         InputMethodManager imm = (InputMethodManager)  mInstance.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -193,15 +171,6 @@ public class AppController extends Application {
     }
 
 
-    public static   void changelanguage(String lang){
-        Config.SetLang(lang);
-        Locale myLocale = new Locale(lang);//Set Selected Locale
-
-        Locale.setDefault(myLocale);//set new locale as default
-        Configuration config = new Configuration();//get Configuration
-        config.locale = myLocale;//set config locale as selected locale
-        mContext.getApplicationContext().getResources().updateConfiguration(config, mContext.getApplicationContext().getResources().getDisplayMetrics());
-    }
 
 
     public static void callFullImage(Context mContext,String imgurl){

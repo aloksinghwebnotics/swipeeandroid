@@ -26,7 +26,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.razorpay.PaymentResultListener;
+import com.razorpay.PaymentData;
+import com.razorpay.PaymentResultWithDataListener;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
@@ -56,7 +57,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeekerHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface, PaymentResultListener {
+public class SeekerHomeActivity extends AppCompatActivity implements View.OnClickListener, CountersInterface, PaymentResultWithDataListener {
     Context mContext;
     LinearLayout nearlay, matchlay, planlay, chatlay, accountlay;
     LinearLayout bottomlay, ll_nav_home, ll_nav_liked, ll_nav_matched, ll_nav_saved, ll_nav_applied, ll_nav_featured, ll_nav_appoiment, ll_nav_setting;
@@ -629,12 +630,12 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
-
-    /**
+/*
+    *//**
      * The name of the function has to be
      * onPaymentSuccess
      * Wrap your code in try catch, as shown, to ensure that this method runs correctly
-     */
+     *//*
     @SuppressWarnings("unused")
     @Override
     public void onPaymentSuccess(String razorpayPaymentID) {
@@ -648,11 +649,11 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    /**
+    *//**
      * The name of the function has to be
      * onPaymentError
      * Wrap your code in try catch, as shown, to ensure that this method runs correctly
-     */
+     *//*
     @SuppressWarnings("unused")
     @Override
     public void onPaymentError(int code, String response) {
@@ -662,5 +663,24 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         } catch (Exception e) {
             Log.e("RazorPay", "Exception in onPaymentError", e);
         }
+    }*/
+
+    @Override
+    public void onPaymentSuccess(String s, PaymentData paymentData) {
+
+        try {
+            Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show();
+            if (PlansFragments.instance != null){
+                PlansFragments.instance.setTransactionData(paymentData);
+            }
+        } catch (Exception e) {
+            Log.e("RazorPay", "Exception in onPaymentSuccess", e);
+        }
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s, PaymentData paymentData) {
+
     }
 }

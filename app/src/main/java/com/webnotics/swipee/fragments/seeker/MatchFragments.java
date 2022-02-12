@@ -49,9 +49,12 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 
+import org.json.JSONObject;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -117,6 +120,33 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
     }
 
     public void init(View rootView) {
+
+        if (Config.GetTransaction()!=null && !TextUtils.isEmpty(Config.GetTransaction())){
+            String transaction=Config.GetTransaction();
+            try {
+                HashMap<String,String> map=new HashMap<>();
+                JSONObject jsonObject = new JSONObject(transaction);
+                Iterator<String> keysItr = jsonObject.keys();
+                while (keysItr.hasNext()) {
+                    String key = keysItr.next();
+                    map.put(key, jsonObject.get(key).toString());
+                }
+                if (map.containsKey(ParaName.KEY_ISFEATURED)){
+                    if (Objects.requireNonNull(map.get(ParaName.KEY_ISFEATURED)).equalsIgnoreCase("N")){
+                        map.put(ParaName.KEYTOKEN,Config.GetUserToken());
+                        map.remove(ParaName.KEY_ISFEATURED);
+                        callSavePayment(map);
+                    }
+                }
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
 
         nodatatxt = rootView.findViewById(R.id.nodatatxt);
         tvNoswipe = rootView.findViewById(R.id.tvNoswipe);
@@ -347,6 +377,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
 
 
     }
+
+
 
     @Override
     public int setContentView() {
@@ -815,6 +847,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     packgeID = companyuserlisting.getData().getPackage_id();
                     Config.SetPACKAGEEXP(companyuserlisting.getData().getPackage_expire());
                     Config.SetLeftApplyCount(companyuserlisting.getData().getLeft_apply_jobs());
+                    Config.SetPackageId(companyuserlisting.getData().getPackage_id());
                     if (companyuserlisting.getData().getPackage_expire().equalsIgnoreCase("N")) {
                         if (mArrayUser != null) {
                             try {
@@ -1367,5 +1400,37 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+
+    private void callSavePayment(HashMap<String, String> hashMap) {
+
+
+        SwipeeApiClient.swipeeServiceInstance().setUserTransaction(hashMap).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
+                    if (response.body().get("code").getAsInt() == 203) {
+
+                    } else if (response.body().get("code").getAsInt() == 200 && status) {
+                        Config.SetTransaction("");
+                    }else if (response.body().get("code").getAsInt() == 402) {
+                        Config.SetTransaction("");
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
+
     }
 }

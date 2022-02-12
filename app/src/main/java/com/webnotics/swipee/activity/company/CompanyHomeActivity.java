@@ -29,7 +29,6 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.NotificationActivity;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.SettingsActivity;
 import com.webnotics.swipee.fragments.company.CompanyChatFragments;
 import com.webnotics.swipee.fragments.company.CompanyMatchFragments;
@@ -417,15 +416,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null && intent.getStringExtra("from") != null) {
-            if (intent.getStringExtra("from").equalsIgnoreCase(CreateAppointment.class.getSimpleName())) {
-                setMatchFragment();
-            } else if (intent.getStringExtra("from").equalsIgnoreCase(CompanyAppoimentActivity.class.getSimpleName())) {
-                setMatchFragment();
-            } else if (intent.getStringExtra("from").equalsIgnoreCase(UserDetail.class.getSimpleName())) {
-                setMatchFragment();
-            } else if (intent.getStringExtra("from").equalsIgnoreCase(JobDetail.class.getSimpleName())) {
-                setMatchFragment();
-            } else if (intent.getStringExtra("from").equalsIgnoreCase("chat")) {
+             if (intent.getStringExtra("from").equalsIgnoreCase("chat")) {
                 setChatFragment();
             } else setMatchFragment();
 
@@ -460,7 +451,6 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
                             Config.SetId(employeeuserdetail.getData().getCompany_id());
                             Config.SetIndustryId(employeeuserdetail.getData().getIndustry_id());
                             Config.SetCompanyName(employeeuserdetail.getData().getCompany_name());
-                            Config.SetType("Company");
                             Config.SetLat(employeeuserdetail.getData().getLatitude());
                             Config.SetPICKURI(employeeuserdetail.getData().getCompany_logo());
                             Config.SetLongg(employeeuserdetail.getData().getLongitude());

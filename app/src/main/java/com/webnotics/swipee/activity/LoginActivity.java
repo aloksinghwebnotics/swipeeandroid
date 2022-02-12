@@ -576,7 +576,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Config.SetMobileNo(mobile_no);
                             Config.SetLName(last_name);
                             Config.SetName(fname + ((TextUtils.isEmpty(middle_name) ? "" : " " + middle_name)) + ((TextUtils.isEmpty(last_name) ? "" : " " + last_name)));
-                            Config.SetProfile(user_profile);
                             Config.SetUserToken(user_token);
                             Config.SetPhoneCode(phone_code);
                             Config.SetIsSeeker(true);
@@ -658,7 +657,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Config.setRemember(cb_remember.isChecked());
                                     Config.SetEmail(email);
                                     Config.SetMobileNo(mobile_no);
-                                    Config.SetProfile(user_profile);
                                     Config.SetUserToken(user_token);
                                     Config.SetPhoneCode(phone_code);
                                     Config.SetIsSeeker(true);

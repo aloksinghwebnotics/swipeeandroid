@@ -1,5 +1,6 @@
 package com.webnotics.swipee.fragments.seeker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
     Context mContext;
     RecyclerView rv_plan;
     TextView tv_title, tv_amount, tv_period, tv_pay;
+    @SuppressLint("StaticFieldLeak")
     public static PlansFragments instance;
 
     @Override
@@ -123,7 +125,7 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
                     }
 
                     @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                    public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                         AppController.dismissProgressdialog();
                     }
                 });
@@ -185,7 +187,7 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
             }
         });

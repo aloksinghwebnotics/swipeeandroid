@@ -263,10 +263,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                         employeeuserdetail.getData().getUser_profile_data().getLast_name());
             }
             Config.SetFName(employeeuserdetail.getData().getUser_profile_data().getFirst_name());
-            Config.SetMName(employeeuserdetail.getData().getUser_profile_data().getMiddle_name());
             Config.SetLName(employeeuserdetail.getData().getUser_profile_data().getLast_name());
-            Config.SetProfile(employeeuserdetail.getData().getUser_profile_data().getUser_profile());
-            Config.SetType("User");
             Config.SetLat(employeeuserdetail.getData().getUser_profile_data().getLatitude());
             Config.SetPICKURI(employeeuserdetail.getData().getUser_profile_data().getUser_profile());
             Config.SetLongg(employeeuserdetail.getData().getUser_profile_data().getLongitude());

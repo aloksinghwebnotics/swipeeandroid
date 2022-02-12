@@ -124,7 +124,6 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
             Config.SetId(employeeuserdetail.getData().getCompany_id());
             Config.SetIndustryId(employeeuserdetail.getData().getIndustry_id());
             Config.SetCompanyName(employeeuserdetail.getData().getCompany_name());
-            Config.SetType("Company");
             Config.SetLat(employeeuserdetail.getData().getLatitude());
             Config.SetPICKURI(employeeuserdetail.getData().getCompany_logo());
             Config.SetLongg(employeeuserdetail.getData().getLongitude());

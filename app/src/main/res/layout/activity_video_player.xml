@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.VideoPlayerActivity">
+   >
 
-    <org.videolan.libvlc.util.VLCVideoLayout
+    <!--<org.videolan.libvlc.util.VLCVideoLayout
         android:id="@+id/view_vlc_layout"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="@id/view_vlc_layout"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading"
-        android:visibility="visible"/>
+        android:visibility="visible"/>-->
 
     <ImageView
         android:id="@+id/play_pause"

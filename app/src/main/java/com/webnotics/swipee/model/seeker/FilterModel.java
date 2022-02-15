@@ -41,7 +41,7 @@ public class FilterModel {
     }
 
     Data data;
-    public class Data{
+    public static class Data{
         public ArrayList<JobType> getJob_type() {
             return job_type;
         }
@@ -92,9 +92,7 @@ public class FilterModel {
         ArrayList<Location> location;
 
 
-
-
-        public class Location{
+        public static class Location{
             String  location_id, location_name,state_name;
 
             public String getState_name() {

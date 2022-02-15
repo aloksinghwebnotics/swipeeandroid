@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +37,18 @@ import com.webnotics.swipee.interfaces.AddSkillInterface;
 import com.webnotics.swipee.model.AddSkillsModel;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
-import com.webnotics.swipee.room_database.Location_model;
 import com.webnotics.swipee.room_database.Location_room_abstract;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -126,7 +136,48 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         };
 
-        ArrayList<AddSkillsModel> mArrayListSkills1=callLocationFromDB();
+        String data=  readFromFile();
+        try {
+            JSONArray jarray = new JSONArray(data);
+            if (jarray.length()>0){
+                mArrayListSkills.clear();
+                for (int i = 0; i < jarray.length(); i++) {
+                    model = new AddSkillsModel();
+                    JSONObject jsonObject= jarray.getJSONObject(i);
+                    String location_id=jsonObject.getString("location_id");
+                    String location_name=jsonObject.getString("location_name");
+                    String state_name=jsonObject.getString("state_name");
+                    model.setSkill_id(location_id);
+                    model.setSkill_name(location_name);
+                    model.setSelected(false);
+                    model.setStatename(state_name);
+                    mArrayListSkills.add(model);
+                }
+
+                skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
+                mListView.setAdapter(skilladapter);
+
+
+
+            }else {
+                if (rest.isInterentAvaliable()) {
+                    AppController.ShowDialogue("", mContext);
+                    callLocationList();
+                } else {
+                    rest.AlertForInternet();
+                }
+            }
+        } catch (JSONException e) {
+            if (rest.isInterentAvaliable()) {
+                AppController.ShowDialogue("", mContext);
+                callLocationList();
+            } else {
+                rest.AlertForInternet();
+            }
+        }
+
+
+        /*ArrayList<AddSkillsModel> mArrayListSkills1=callLocationFromDB();
         if (mArrayListSkills1.size()>0){
             this.mArrayListSkills.clear();
             this.mArrayListSkills.addAll(mArrayListSkills1);
@@ -140,7 +191,7 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                 rest.AlertForInternet();
             }
 
-        }
+        }*/
 
     }
 
@@ -194,6 +245,7 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                     } else if (response.body().get("code").getAsInt() == 200) {
                         JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
                        if (mArrayListData.size()>0){
+/*
                            for (int i = 0; i < mArrayListData.size(); i++) {
                                model = new AddSkillsModel();
                                String location_id=mArrayListData.get(i).getAsJsonObject().get("location_id").getAsString();
@@ -204,11 +256,40 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                                model.setSelected(false);
                                model.setStatename(state_name);
                                mArrayListSkills.add(model);
-                               Location_room_abstract.getDatabase(mContext).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
+                           //    Location_room_abstract.getDatabase(mContext).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
                            }
-                           Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
-                           skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
-                           mListView.setAdapter(skilladapter);
+*/
+                           writeToFile(mArrayListData.toString());
+                         //  Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
+                       //    skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
+                         //  mListView.setAdapter(skilladapter);
+
+
+                         String data=  readFromFile();
+                           try {
+                               JSONArray jarray = new JSONArray(data);
+                               if (jarray.length()>0){
+                                   mArrayListSkills.clear();
+                                   for (int i = 0; i < jarray.length(); i++) {
+                                       model = new AddSkillsModel();
+                                       JSONObject jsonObject= jarray.getJSONObject(i);
+                                       String location_id=jsonObject.getString("location_id");
+                                       String location_name=jsonObject.getString("location_name");
+                                       String state_name=jsonObject.getString("state_name");
+                                       model.setSkill_id(location_id);
+                                       model.setSkill_name(location_name);
+                                       model.setSelected(false);
+                                       model.setStatename(state_name);
+                                       mArrayListSkills.add(model);
+                                   }
+                                   Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
+                                   skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
+                                   mListView.setAdapter(skilladapter);
+
+                               }
+                           } catch (JSONException e) {
+                               e.printStackTrace();
+                           }
                        }
 
                     } else rest.showToast("Something went wrong");
@@ -232,6 +313,50 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
     }
+
+
+    private void writeToFile(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("location.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private String readFromFile() {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = openFileInput("location.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+                Log.d("skskskksks",ret);
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
+
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {

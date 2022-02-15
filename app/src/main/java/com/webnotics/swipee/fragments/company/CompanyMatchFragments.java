@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +50,15 @@ import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -977,7 +985,32 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                         mExperience_nameArrayList = filterModel.getData().getExperience();
                         mIndustryArrayList = filterModel.getData().getIndustry();
                         mSalaryArrayList = filterModel.getData().getSalary();
-                        mLocationArrayList = filterModel.getData().getLocation();
+                        /*mLocationArrayList = filterModel.getData().getLocation()*/;
+
+
+                        String data1=  readFromFile();
+                        try {
+                            JSONArray jarray = new JSONArray(data1);
+                            if (jarray.length()>0){
+                                ArrayList<FilterModel.Data.Location> mLocationArray = new ArrayList<>();
+                                for (int i = 0; i < jarray.length(); i++) {
+                                    FilterModel.Data.Location   model = new FilterModel.Data.Location();
+                                    JSONObject jsonObject= jarray.getJSONObject(i);
+                                    String location_id=jsonObject.getString("location_id");
+                                    String location_name=jsonObject.getString("location_name");
+                                    String state_name=jsonObject.getString("state_name");
+                                    model.setLocation_id(location_id);
+                                    model.setLocation_name(location_name);
+                                    model.setState_name(state_name);
+                                    model.setSelected(false);
+                                    mLocationArray.add(model);
+                                }
+                                mLocationArrayList = mLocationArray;
+
+                            }else {
+                            }
+                        } catch (JSONException e) {
+                        }
 
                         if (mJOnTypeArrayList != null) {
                             if (mJOnTypeArrayList.size() != 0) {
@@ -1048,7 +1081,6 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                         } else {
                             designation.setVisibility(View.GONE);
                         }
-
 
                         if (mQualificationArrayList != null) {
                             if (mQualificationArrayList.size() != 0) {
@@ -1148,7 +1180,36 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
         });
 
     }
+    private String readFromFile() {
 
+        String ret = "";
+
+        try {
+            InputStream inputStream = mContext.openFileInput("location.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+                Log.d("skskskksks",ret);
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
     private void addDataToDataArray() {
         hideKeyboardFrom(mContext,et_search);
         et_search.setText("");

@@ -68,6 +68,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
     private String appointmentId = "";
     private String from = "";
     private String appointment_type = "";
+    private String notify_number="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
         if (getIntent() != null) {
 
             company_id = getIntent().getStringExtra("company_id") != null ? getIntent().getStringExtra("company_id") : "";
+            notify_number = getIntent().getStringExtra("notify_number") != null ? getIntent().getStringExtra("notify_number") : "";
             String company_logo = getIntent().getStringExtra("company_logo") != null ? getIntent().getStringExtra("company_logo") : "";
             String company_name = getIntent().getStringExtra("company_name") != null ? getIntent().getStringExtra("company_name") : "";
             String city = getIntent().getStringExtra("company_city_name") != null ? getIntent().getStringExtra("company_city_name") : "";
@@ -241,6 +243,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                             hashMap.put(ParaName.KEY_ENDTIME, end);
                             hashMap.put(ParaName.KEY_STARTTIME, start);
                             hashMap.put(ParaName.KEY_APPOINTMENTID, appointmentId);
+                            hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                             AppController.ShowDialogue("", mContext);
                             createAppointment(hashMap);
                         } else rest.AlertForInternet();
@@ -257,6 +260,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                             hashMap.put(ParaName.KEY_APPOINTMENTID, appointmentId);
                             hashMap.put(ParaName.KEY_ENDTIME, end);
                             hashMap.put(ParaName.KEY_STARTTIME, start);
+                            hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                             AppController.ShowDialogue("", mContext);
                             rescheduleAppointment(hashMap);
                         } else rest.AlertForInternet();

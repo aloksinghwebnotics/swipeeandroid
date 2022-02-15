@@ -52,6 +52,7 @@
             android:src="@drawable/ic_no_data"/>
         <com.webnotics.swipee.CustomUi.PopinsMediumTextView
             android:visibility="visible"
+            android:layout_marginTop="@dimen/dimen8dp"
             android:id="@+id/tv_nodata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

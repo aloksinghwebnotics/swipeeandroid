@@ -22,7 +22,7 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.NotificationActivity;
-import com.webnotics.swipee.activity.Seeker.FirstVideoActivity;
+import com.webnotics.swipee.call.FirstVideoActivity;
 import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.SplashScreen;
 import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
@@ -302,6 +302,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("company_country_name", payload.getString("country_name"));
                 resultIntent.putExtra("company_state_name", payload.getString("state_name"));
                 resultIntent.putExtra("company_city_name", payload.getString("city_name"));
+                resultIntent.putExtra("notify_number", payload.getString("unique_notify_number"));
                 resultIntent.putExtra("is_own_job", "Y");
                 resultIntent.putExtra("date", datefinal);
                 // check for image attachment
@@ -340,6 +341,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("company_country_name", payload.getString("country_name"));
                 resultIntent.putExtra("company_state_name", payload.getString("state_name"));
                 resultIntent.putExtra("company_city_name", payload.getString("city_name"));
+                resultIntent.putExtra("notify_number", payload.getString("unique_notify_number"));
                 resultIntent.putExtra("is_own_job", "Y");
                 resultIntent.putExtra("date", datefinal);
                 // check for image attachment

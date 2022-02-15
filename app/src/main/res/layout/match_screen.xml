@@ -65,12 +65,12 @@
                     android:layout_above="@+id/nodatatxt"
                     android:layout_centerHorizontal="true"
                     android:layout_width="@dimen/dimen96dp"
-                    android:layout_marginBottom="@dimen/dimen8dp"
                     android:layout_height="@dimen/dimen96dp"
                     android:src="@drawable/ic_no_data"/>
                 <com.webnotics.swipee.CustomUi.PopinsMediumTextView
                     android:id="@+id/nodatatxt"
                     android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/dimen8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -88,6 +88,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="@dimen/dimen96dp"
                     android:layout_height="@dimen/dimen96dp"
+                    android:layout_marginTop="@dimen/dimen8dp"
                     android:src="@drawable/ic_no_swipe"/>
                 <com.webnotics.swipee.CustomUi.PopinsMediumTextView
                     android:id="@+id/tvNoswipe"

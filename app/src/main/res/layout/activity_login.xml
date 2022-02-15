@@ -60,6 +60,7 @@
                         android:text="@string/recruiter"/>
                 </LinearLayout>
 
+
                 <com.webnotics.swipee.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
@@ -96,36 +97,49 @@
                     android:hint="@string/enteryouremailerror"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/dimen10sp" />
-
-                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
-                    android:id="@+id/et_password"
+                <RelativeLayout
+                    android:id="@+id/rl_pass"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen48dp"
                     android:layout_below="@+id/tv_emailerror"
                     android:layout_marginStart="@dimen/dimen40dp"
                     android:layout_marginTop="@dimen/dimen15dp"
-                    android:layout_marginEnd="@dimen/dimen40dp"
-                    android:background="@drawable/white_light_semiround_bg"
-                    android:drawableStart="@drawable/ic_icon_lock"
-                    android:drawablePadding="@dimen/dimen10dp"
-                    android:gravity="center_vertical"
-                    android:hint="@string/enteryourpassword"
-                    android:inputType="textPassword"
-                    android:maxLength="52"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/dimen12dp"
-                    android:paddingTop="@dimen/dimen4dp"
-                    android:paddingEnd="@dimen/dimen12dp"
-                    android:paddingBottom="@dimen/dimen4dp"
-                    android:textColor="@color/black_Light"
-                    android:textColorHint="@color/black_op50"
-                    android:textSize="@dimen/dimen14sp" />
+                    android:layout_marginEnd="@dimen/dimen40dp">
+                    <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_light_semiround_bg"
+                        android:drawableStart="@drawable/ic_icon_lock"
+                        android:drawablePadding="@dimen/dimen10dp"
+                        android:gravity="center_vertical"
+                        android:hint="@string/enteryourpassword"
+                        android:inputType="textPassword"
+                        android:maxLength="52"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/dimen12dp"
+                        android:paddingTop="@dimen/dimen4dp"
+                        android:paddingEnd="@dimen/dimen48dp"
+                        android:paddingBottom="@dimen/dimen4dp"
+                        android:textColor="@color/black_Light"
+                        android:textColorHint="@color/black_op50"
+                        android:textSize="@dimen/dimen14sp" />
+                    <ImageView
+                        android:id="@+id/iv_show_or_hide_pass"
+                        android:layout_width="@dimen/dimen42dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_hide_password"
+                        android:padding="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen8dp"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/rl_remember"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/et_password"
+                    android:layout_below="@+id/rl_pass"
                     android:layout_marginStart="@dimen/dimen40dp"
                     android:layout_marginTop="@dimen/dimen16dp"
                     android:layout_marginEnd="@dimen/dimen40dp">

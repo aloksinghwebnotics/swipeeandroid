@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,9 +49,18 @@ import com.webnotics.swipee.fragments.Basefragment;
 import com.webnotics.swipee.interfaces.AddSkillInterface;
 import com.webnotics.swipee.model.AddSkillsModel;
 import com.webnotics.swipee.model.company.CommonModel;
-import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -98,7 +108,6 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
     private String industryId = "";
     private String employmentId = "";
     private String locationId = "";
-    private String companyName = "";
     ListView list_qualification, list_perk, list_language;
     private QualificationAdapter qualificationAdapter;
     private PerkAdapter perkAdapter;
@@ -496,7 +505,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.tv_next:
-                companyName = "";
+                String companyName = "";
                 if (cb_samecompany.isChecked())
                     companyName = tv_company.getText().toString();
                 else companyName = et_company.getText().toString();
@@ -782,7 +791,9 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                         JsonObject data = responceBody.has("data") ? responceBody.get("data").getAsJsonObject() : new JsonObject();
                         job_industry = data.has("job_industry") ? data.get("job_industry").getAsJsonArray() : new JsonArray();
                         employment_type = data.has("employment_type") ? data.get("employment_type").getAsJsonArray() : new JsonArray();
+/*
                         job_location = data.has("job_location") ? data.get("job_location").getAsJsonArray() : new JsonArray();
+*/
                         tv_company.setText(Config.GeCompanyName());
                         tv_industry.setText(Config.GetIndustry());
                         industryId=Config.GetIndustryId();
@@ -797,7 +808,27 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                             }
                             tv_industry.setOnClickListener(PostJobFragments.this);
                         }
-                        if (job_location.size() > 0) {
+
+                        String data1=  readFromFile();
+                        try {
+                            JSONArray jarray = new JSONArray(data1);
+                            if (jarray.length()>0){
+                                for (int i = 0; i < jarray.length(); i++) {
+                                    JSONObject jsonObject= jarray.getJSONObject(i);
+                                    String location_id=jsonObject.getString("location_id");
+                                    String location_name=jsonObject.getString("location_name");
+                                    String state_name=jsonObject.getString("state_name");
+                                    CommonModel commonModel = new CommonModel(location_id, location_name, state_name, false);
+                                    commonModelsLocation.add(commonModelsLocation.size(), commonModel);
+                                }
+                                tv_location.setOnClickListener(PostJobFragments.this);
+
+                            }else {
+                            }
+                        } catch (JSONException e) {
+                        }
+
+                        /*if (job_location.size() > 0) {
                              commonModelsLocation = new ArrayList<>();
                             for (int i = 0; i < job_location.size(); i++) {
                                 JsonObject jsonObject = job_location.get(i).getAsJsonObject();
@@ -805,7 +836,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                                 commonModelsLocation.add(commonModelsLocation.size(), commonModel);
                             }
                             tv_location.setOnClickListener(PostJobFragments.this);
-                        }
+                        }*/
                         if (employment_type.size() > 0) {
                             ArrayList<CommonModel> commonModels = new ArrayList<>();
                             for (int i = 0; i < employment_type.size(); i++) {
@@ -835,7 +866,35 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
             }
         });
     }
+    private String readFromFile() {
 
+        String ret = "";
+
+        try {
+            InputStream inputStream = mContext.openFileInput("location.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
     private void getPostJobStepTwo() {
         SwipeeApiClient.swipeeServiceInstance().getPostJobStepTwo(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
             @Override

@@ -50,7 +50,26 @@ public class NotificationModel {
        String notification_text;
        String created_at;
        String notification_image;
+       String is_read="";
+       String is_seen="";
        JsonObject payload_data;
+
+
+        public String getIs_read() {
+            return is_read;
+        }
+
+        public void setIs_read(String is_read) {
+            this.is_read = is_read;
+        }
+
+        public String getIs_seen() {
+            return is_seen;
+        }
+
+        public void setIs_seen(String is_seen) {
+            this.is_seen = is_seen;
+        }
 
         public JsonObject getPayload_data() {
             return payload_data;

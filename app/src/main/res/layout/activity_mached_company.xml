@@ -56,6 +56,7 @@
             android:visibility="visible"
             android:id="@+id/tv_nodata"
             android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/dimen8dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/dimen18dp"
             android:paddingEnd="@dimen/dimen18dp"

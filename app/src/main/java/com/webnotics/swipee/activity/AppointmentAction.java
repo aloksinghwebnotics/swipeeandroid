@@ -58,6 +58,7 @@ public class AppointmentAction extends AppCompatActivity {
     private JsonArray jsonArray = new JsonArray();
     private static String action = "";
     private String company_id = "";
+    private String notify_number = "";
     private String company_logo = "";
     private String company_name = "";
     private String city = "";
@@ -106,6 +107,7 @@ public class AppointmentAction extends AppCompatActivity {
             job_id = getIntent().getStringExtra("job_id") != null ? getIntent().getStringExtra("job_id") : "";
             apply_id = getIntent().getStringExtra("apply_id") != null ? getIntent().getStringExtra("apply_id") : "";
             from = getIntent().getStringExtra("from") != null ? getIntent().getStringExtra("from") : "";
+            notify_number = getIntent().getStringExtra("notify_number") != null ? getIntent().getStringExtra("notify_number") : "";
             action = getIntent().getStringExtra("action") != null ? getIntent().getStringExtra("action") : "";
             company_country_name = getIntent().getStringExtra("company_country_name") != null ? getIntent().getStringExtra("company_country_name") : "";
 
@@ -304,6 +306,7 @@ public class AppointmentAction extends AppCompatActivity {
                 .putExtra("appointment_number", appointment_number)
                 .putExtra("appointment_type", appointment_type)
                 .putExtra("job_title", job_title)
+                .putExtra("notify_number", notify_number)
                 .putExtra("from", from)
                 .putExtra("date", datefinal)
         );
@@ -344,6 +347,7 @@ public class AppointmentAction extends AppCompatActivity {
         hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "C");
         hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
         hashMap.put(ParaName.KEY_USERID, company_id);
+        hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
         SwipeeApiClient.swipeeServiceInstance().setAppointmentStatus(hashMap).enqueue(new Callback<JsonObject>() {
             @Override

@@ -37,6 +37,7 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentAction;
+import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.ChatActivity;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
@@ -515,7 +516,15 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                                 } else if (appointment_type.equalsIgnoreCase("call")) {
                                                     iv_meetingType.setImageResource(R.drawable.ic_telephonefill);
                                                 }
-
+                                                ll_appointment.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        Intent resultIntent = new Intent(mContext, AppointmentDetail.class);
+                                                        resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, appointment_id);
+                                                        resultIntent.putExtra("from", UserDetail.class.getSimpleName());
+                                                        mContext.startActivity(resultIntent);
+                                                    }
+                                                });
                                             } else join.setVisibility(View.GONE);
                                         }
                                     } catch (ParseException e) {

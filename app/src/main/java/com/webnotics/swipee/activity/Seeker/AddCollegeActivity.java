@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,11 +24,20 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.seeeker.CollegeAdapter;
-import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
-import com.webnotics.swipee.room_database.College_model;
+import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.room_database.College_room_abstract;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -65,7 +75,7 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
 
         iv_back.setOnClickListener(this);
         et_search.addTextChangedListener(this);
-        ArrayList<JsonObject> collegeList=callCollegeFromDB();
+      /*  ArrayList<JsonObject> collegeList=callCollegeFromDB();
         if (collegeList.size()>0){
             collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);
             mListView.setAdapter(collegeAdapter);
@@ -75,9 +85,82 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                 callCollegeList();
             } else rest.AlertForInternet();
 
+        }*/
+
+
+        String data=  readFromFile();
+        try {
+            JSONArray jarray = new JSONArray(data);
+            if (jarray.length()>0){
+                  ArrayList<JsonObject> collegeList=new ArrayList<>();
+                for (int i = 0; i < jarray.length(); i++) {
+                    JSONObject jsonObject= jarray.getJSONObject(i);
+                    String university_college_id=jsonObject.getString("university_college_id");
+                    String university_college_name=jsonObject.getString("university_college_name");
+                    boolean selected=jsonObject.getBoolean("selected");
+                    JsonObject object=new JsonObject();
+                    object.addProperty("university_college_id",university_college_id);
+                    object.addProperty("university_college_name",university_college_name);
+                    object.addProperty("selected",selected);
+                    collegeList.add(collegeList.size(),object);
+                }
+
+                collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);
+                mListView.setAdapter(collegeAdapter);
+
+
+
+            }else {
+                if (rest.isInterentAvaliable()) {
+                    AppController.ShowDialogue("", mContext);
+                    callCollegeList();
+                } else {
+                    rest.AlertForInternet();
+                }
+            }
+        } catch (JSONException e) {
+            if (rest.isInterentAvaliable()) {
+                AppController.ShowDialogue("", mContext);
+                callCollegeList();
+            } else {
+                rest.AlertForInternet();
+            }
         }
 
 
+
+    }
+
+
+    private String readFromFile() {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = openFileInput("college.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+                Log.d("skskskksks",ret);
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
     }
 
 
@@ -121,21 +204,34 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
                     JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                    ArrayList<JsonObject> jsonObjectArrayList = new ArrayList<>();
                     if (mArrayListData.size()>0){
-                        for (int i = 0; i < mArrayListData.size(); i++) {
-                            JsonObject object=mArrayListData.get(i).getAsJsonObject();
-                            jsonObjectArrayList.add(object);
-                            String university_college_id=object.has("university_college_id")?!object.get("university_college_id").isJsonNull()?object.get("university_college_id").getAsString():"":"";
-                            String university_college_name=object.has("university_college_name")?!object.get("university_college_name").isJsonNull()?object.get("university_college_name").getAsString():"":"";
-                            boolean selected= object.has("selected") && (!object.get("selected").isJsonNull() && object.get("selected").getAsBoolean());
-                            College_room_abstract.getDatabase(mContext).college_room_interface().insertData(new College_model(university_college_id,university_college_name,selected?1:0));
+                        writeCollege(mArrayListData.toString());
+                        String data=  readFromFile();
+                        try {
+                            JSONArray jarray = new JSONArray(data);
+                            if (jarray.length()>0){
+                                ArrayList<JsonObject> collegeList=new ArrayList<>();
+                                for (int i = 0; i < jarray.length(); i++) {
+                                    JSONObject jsonObject= jarray.getJSONObject(i);
+                                    String university_college_id=jsonObject.getString("university_college_id");
+                                    String university_college_name=jsonObject.getString("university_college_name");
+                                    boolean selected=jsonObject.getBoolean("selected");
+                                    JsonObject object=new JsonObject();
+                                    object.addProperty("university_college_id",university_college_id);
+                                    object.addProperty("university_college_name",university_college_name);
+                                    object.addProperty("selected",selected);
+                                    collegeList.add(collegeList.size(),object);
+                                }
+
+                                collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);
+                                mListView.setAdapter(collegeAdapter);
+                                Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
+
+
+                            }
+                        } catch (JSONException e) {
                         }
-                        Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
-                        if (mArrayListData.size() > 0) {
-                            collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, jsonObjectArrayList);
-                            mListView.setAdapter(collegeAdapter);
-                        }
+
                     }
 
 
@@ -157,7 +253,16 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
         startActivity(new Intent(mContext, AddEducation.class).putExtra("from", "college").putExtra("id", id).putExtra("name", name));
         finish();
     }
-
+    private void writeCollege(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("college.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
 
     private  ArrayList<JsonObject> callCollegeFromDB() {
         ArrayList<JsonObject> temp_prodlist = new ArrayList<>();

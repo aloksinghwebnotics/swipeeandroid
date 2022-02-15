@@ -1,4 +1,4 @@
-package com.webnotics.swipee.activity.Seeker;
+package com.webnotics.swipee.call;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +21,8 @@ import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
+import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
-import com.webnotics.swipee.call.AudioActivity;
-import com.webnotics.swipee.call.VideoActivity;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
@@ -207,7 +206,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
 
                     }else
                     if (responseBody.get("code").getAsInt()==200 &&responseBody.get("status").getAsBoolean()){
-                        startActivity(new Intent(mContext,SeekerHomeActivity.class));
+                        startActivity(new Intent(mContext, SeekerHomeActivity.class));
                         finish();
                     }
 

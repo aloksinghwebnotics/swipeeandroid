@@ -63,7 +63,7 @@ public interface RestService {
     @POST(ApiUrls.URL_COMPANYLOGIN)
     Call<JsonObject> loginCompany(@FieldMap HashMap<String, String> hashMap);
 
- @FormUrlEncoded
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYSOCIALLOGIN)
     Call<JsonObject> socialLoginCompany(@FieldMap HashMap<String, String> hashMap);
 
@@ -152,7 +152,8 @@ public interface RestService {
 
     @GET(ApiUrls.URL_SALERYLIST)
     Call<JsonObject> getSalary();
-/////lohggggg
+
+    /////lohggggg
     @Multipart
     @POST(ApiUrls.URL_UPDATEPROFILE)
     Call<JsonObject> updateProfile(@PartMap() Map<String, RequestBody> partMap, @Part MultipartBody.Part pick, @Part MultipartBody.Part video);
@@ -196,10 +197,11 @@ public interface RestService {
     @POST(ApiUrls.URL_CONTACTUS)
     Call<JsonObject> postContact(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_EMAIL) String email, @Field(ParaName.KEY_PHONECODE) String phoneCode,
                                  @Field(ParaName.KEY_MOBILENO) String mobileNo, @Field(ParaName.KEY_MESSAGE) String msg);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYCONTACTUS)
     Call<JsonObject> postCompanyContact(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_EMAIL) String email, @Field(ParaName.KEY_PHONECODE) String phoneCode,
-                                 @Field(ParaName.KEY_MOBILENO) String mobileNo, @Field(ParaName.KEY_MESSAGE) String msg);
+                                        @Field(ParaName.KEY_MOBILENO) String mobileNo, @Field(ParaName.KEY_MESSAGE) String msg);
 
     @GET(ApiUrls.URL_APPLIEDJOB)
     Call<JsonObject> getAppliedJobs(@Query(ParaName.KEYTOKEN) String token);
@@ -217,34 +219,36 @@ public interface RestService {
     Call<JsonObject> getLikedUser(@Query(ParaName.KEYTOKEN) String token);
 
     @GET(ApiUrls.URL_SINGLEJOBDETAIL)
-    Call<JsonObject> getSingleJobData(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_JOBPOSTID) String jobId,@Query(ParaName.KEY_LOGINTYPE) String logintype);
+    Call<JsonObject> getSingleJobData(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_JOBPOSTID) String jobId, @Query(ParaName.KEY_LOGINTYPE) String logintype);
 
     @GET(ApiUrls.URL_USERDETAIL)
-    Call<JsonObject> getSingleUserData(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_APLLYID) String applyId,@Query(ParaName.KEY_USERID) String userId);
+    Call<JsonObject> getSingleUserData(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_APLLYID) String applyId, @Query(ParaName.KEY_USERID) String userId);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_USERJOBSWIPE)
     Call<JsonObject> postJobAcceptReject(@FieldMap HashMap<String, String> hashMap);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYSWIPE)
     Call<JsonObject> postUSerAcceptReject(@FieldMap HashMap<String, String> hashMap);
 
     @GET(ApiUrls.URL_USERHOMELISTING)
     Call<UserJobListing> getHomeList(@Query(ParaName.KEYTOKEN) String token);
 
- @GET(ApiUrls.URL_COMPANYHOMEDATA)
+    @GET(ApiUrls.URL_COMPANYHOMEDATA)
     Call<CompanyUserListing> getCompanyHomeList(@Query(ParaName.KEYTOKEN) String token);
 
     @GET(ApiUrls.URL_USERFILTER)
     Call<FilterModel> getFilterData(@Query(ParaName.KEYTOKEN) String token);
-  @GET(ApiUrls.URL_COMPANYFILTER)
+
+    @GET(ApiUrls.URL_COMPANYFILTER)
     Call<FilterModel> getCompanyFilterData(@Query(ParaName.KEYTOKEN) String token);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_POSTUSERFILTER)
     Call<UserJobListing> postFilterSearch(@FieldMap HashMap<String, String> hashMap);
 
- @FormUrlEncoded
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYSEARCH)
     Call<CompanyUserListing> postCompanyFilterSearch(@FieldMap HashMap<String, String> hashMap);
 
@@ -254,24 +258,27 @@ public interface RestService {
 
     @GET(ApiUrls.URL_USERAPPOINTMENTLIST)
     Call<AppointmentModel> getUserAppointmentData(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_ISTYPE) String KEY_ISTYPE);
- @GET(ApiUrls.URL_COMPANYAPOINTMENTLIST)
+
+    @GET(ApiUrls.URL_COMPANYAPOINTMENTLIST)
     Call<CompanyAppointmentModel> getCompanyAppointmentData(@Query(ParaName.KEYTOKEN) String token);
 
     @GET(ApiUrls.URL_USERNOTIFICATION)
     Call<NotificationModel> getUserNotification(@Query(ParaName.KEYTOKEN) String token);
- @GET(ApiUrls.URL_COMPANYNOTIFICATION)
+
+    @GET(ApiUrls.URL_COMPANYNOTIFICATION)
     Call<NotificationModel> getCompanyNotification(@Query(ParaName.KEYTOKEN) String token);
 
     @GET(ApiUrls.URL_MATCHEDJOBLIST)
     Call<JsonObject> getMatchedJobList(@Query(ParaName.KEYTOKEN) String token);
 
- @GET(ApiUrls.URL_MATCHEDUSER)
+    @GET(ApiUrls.URL_MATCHEDUSER)
     Call<JsonObject> getMatchedUserList(@Query(ParaName.KEYTOKEN) String token);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_USERRADAR)
     Call<UserRaderViewModel> getUserRadar(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_INDUSTRY) String industry, @Field(ParaName.KEY_RADIUSRANGE) String radius);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYRADARSEARCH)
     Call<CompanyRaderViewModel> getCompanyRadar(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_FUNCTIONALID) String industry, @Field(ParaName.KEY_RADIUSRANGE) String radius);
 
@@ -287,7 +294,7 @@ public interface RestService {
     Call<CompanyProfileModel> companyDetail(@Query(ParaName.KEYTOKEN) String token);
 
     @GET(ApiUrls.URL_COMPANYDETAILFORSEEKER)
-    Call<CompanyProfileModel> companyDetailById(@Query(ParaName.KEYTOKEN) String token,@Query(ParaName.KEY_COMPANYID) String cId);
+    Call<CompanyProfileModel> companyDetailById(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_COMPANYID) String cId);
 
     @GET(ApiUrls.URL_COMPANYSize)
     Call<JsonObject> companySize();
@@ -296,9 +303,9 @@ public interface RestService {
     @POST(ApiUrls.URL_USERLOGOUT)
     Call<JsonObject> userLogout(@Field(ParaName.KEYTOKEN) String token);
 
-@FormUrlEncoded
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYACTION)
-    Call<JsonObject> companyAction(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_APLLYID) String applyId,@Field(ParaName.KEY_COMPANYACTION) String companyAction);
+    Call<JsonObject> companyAction(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APLLYID) String applyId, @Field(ParaName.KEY_COMPANYACTION) String companyAction);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYAPOINTMENTSLOT)
@@ -308,14 +315,15 @@ public interface RestService {
     @POST(ApiUrls.URL_CREATEAPPOINTMENT)
     Call<JsonObject> createAppointment(@FieldMap HashMap<String, String> hashMap);
 
-@FormUrlEncoded
-    @POST(ApiUrls.  URL_USERRESCHEDULEAPPOINTMENT)
+    @FormUrlEncoded
+    @POST(ApiUrls.URL_USERRESCHEDULEAPPOINTMENT)
     Call<JsonObject> rescheduleAppointment(@FieldMap HashMap<String, String> hashMap);
 
- @FormUrlEncoded
+    @FormUrlEncoded
     @POST(ApiUrls.URL_APPOINTMENTSTATUS)
     Call<JsonObject> setAppointmentStatus(@FieldMap HashMap<String, String> hashMap);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST(ApiUrls.URL_USERAPPOINTMENTSTATUS)
     Call<JsonObject> setUserAppointmentStatus(@FieldMap HashMap<String, String> hashMap);
 
@@ -343,16 +351,16 @@ public interface RestService {
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_RESENDMOBILE)
-    Call<JsonObject> resendMobileOtp(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_MOBILENO) String mobile,@Field(ParaName.KEY_PHONECODE) String phonecode);
+    Call<JsonObject> resendMobileOtp(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_MOBILENO) String mobile, @Field(ParaName.KEY_PHONECODE) String phonecode);
 
-   @FormUrlEncoded
+    @FormUrlEncoded
     @POST(ApiUrls.URL_VERIFYCOMPANYMOBILE)
-    Call<JsonObject> companyMobileResend(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_MOBILENO) String mobile,@Field(ParaName.KEY_PHONECODE) String phonecode);
+    Call<JsonObject> companyMobileResend(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_MOBILENO) String mobile, @Field(ParaName.KEY_PHONECODE) String phonecode);
 
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_RESENDEMAIL)
-    Call<JsonObject> resendEmailOtp(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_EMAIL) String mobile);
+    Call<JsonObject> resendEmailOtp(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_EMAIL) String mobile);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_SEEKERFORGOTPASS)
@@ -364,42 +372,43 @@ public interface RestService {
 
 
     @GET(ApiUrls.URL_DELETEEDUCATION)
-    Call<JsonObject> deleteEducation(@Query(ParaName.KEYTOKEN) String token,@Query(ParaName.KEY_USEREDUCATIONID) String educationId);
+    Call<JsonObject> deleteEducation(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_USEREDUCATIONID) String educationId);
 
 
     @GET(ApiUrls.URL_DELETEEXPERIENCE)
-    Call<JsonObject> deleteExperience(@Query(ParaName.KEYTOKEN) String token,@Query(ParaName.KEY_USEREXPID) String educationId);
+    Call<JsonObject> deleteExperience(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_USEREXPID) String educationId);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_CANCELAPPLICATION)
-    Call<JsonObject> cancelJobApplication(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_APLLYID) String applyId);
+    Call<JsonObject> cancelJobApplication(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APLLYID) String applyId);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_BLOCKJOB)
-    Call<JsonObject> blockJob(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_APLLYID) String applyId,@Field(ParaName.KEY_JOBID) String jobId);
+    Call<JsonObject> blockJob(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APLLYID) String applyId, @Field(ParaName.KEY_JOBID) String jobId);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_BLOCKUSER)
-    Call<JsonObject> blockUser(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_UID) String uid);
+    Call<JsonObject> blockUser(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_UID) String uid);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_REPORTJOB)
-    Call<JsonObject> reportJob(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_APLLYID) String applyId,@Field(ParaName.KEY_JOBID) String jobId,@Field(ParaName.KEY_REPORTEDISSUE) String issue);
- @FormUrlEncoded
+    Call<JsonObject> reportJob(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APLLYID) String applyId, @Field(ParaName.KEY_JOBID) String jobId, @Field(ParaName.KEY_REPORTEDISSUE) String issue);
+
+    @FormUrlEncoded
     @POST(ApiUrls.URL_REPORTUSER)
-    Call<JsonObject> reportUser(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_UID) String applyId,@Field(ParaName.KEY_REPORTEDISSUE) String issue);
+    Call<JsonObject> reportUser(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_UID) String applyId, @Field(ParaName.KEY_REPORTEDISSUE) String issue);
 
     @GET(ApiUrls.URL_POSTEDJOBSBYFILTER)
-    Call<PostedJobModel> postedJobs(@Query(ParaName.KEYTOKEN) String token,@Query(ParaName.KEY_FILTER) String filter);
+    Call<PostedJobModel> postedJobs(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_FILTER) String filter);
 
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_JOBPOSTRULE)
-    Call<JsonObject> jobpostrule(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_JOBPOSTID) String id);
+    Call<JsonObject> jobpostrule(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_JOBPOSTID) String id);
 
     @FormUrlEncoded
- @POST(ApiUrls.URL_PUBLISHJOB)
-    Call<JsonObject> publishJob(@Field(ParaName.KEYTOKEN) String token,@Field(ParaName.KEY_JOBPOSTID) String id,@Field(ParaName.KEY_ISFEATURED) String is_featured);
+    @POST(ApiUrls.URL_PUBLISHJOB)
+    Call<JsonObject> publishJob(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_JOBPOSTID) String id, @Field(ParaName.KEY_ISFEATURED) String is_featured);
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_APPOINTMENTSLOTFORUSER)
@@ -410,7 +419,7 @@ public interface RestService {
     Call<ChatModel> getChat(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APPOINTMENTID) String id, @Field(ParaName.KEY_MSGID) String msg_id);
 
     @GET(ApiUrls.URL_SETMSGSEEN)
-    Call<JsonObject> setMsgSeen(@QueryMap HashMap<String,String> hashMap);
+    Call<JsonObject> setMsgSeen(@QueryMap HashMap<String, String> hashMap);
 
 
     @Multipart
@@ -451,7 +460,8 @@ public interface RestService {
     @FormUrlEncoded
     @POST(ApiUrls.URL_USERREJECTVIDEOCALL)
     Call<JsonObject> userRejectVideo(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APPOINTMENTID) String id);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYREJECTVIDEOCALL)
     Call<JsonObject> companyRejectVideo(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APPOINTMENTID) String id);
 
@@ -459,7 +469,7 @@ public interface RestService {
     @POST(ApiUrls.URL_USERREJECTAUDIOCALL)
     Call<JsonObject> userRejectAudio(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APPOINTMENTID) String id);
 
- @FormUrlEncoded
+    @FormUrlEncoded
     @POST(ApiUrls.URL_COMPANYREJECTAUDIOCALL)
     Call<JsonObject> companyRejectAudio(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_APPOINTMENTID) String id);
 

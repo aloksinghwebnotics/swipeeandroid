@@ -272,6 +272,11 @@ public class ChatActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        instance=null;
+    }
 
     @Override
     protected void onResume() {

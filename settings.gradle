@@ -10,7 +10,7 @@ dependencyResolutionManagement {
        // maven { url 'https://dl.bintray.com/vension/maven' }
     }
 }
-rootProject.name = "InstaCarriers"
+rootProject.name = "Swipee"
 include ':app',':linkedin-sdk'
 
 

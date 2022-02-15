@@ -33,6 +33,7 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentAction;
+import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.CompanyProfile;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
@@ -201,112 +202,81 @@ public class JobDetail extends AppCompatActivity {
 
         });
 
-        iv_logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(company_logo))
-                    AppController.callFullImage(mContext, company_logo);
-            }
+        iv_logo.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(company_logo))
+                AppController.callFullImage(mContext, company_logo);
         });
 
-        rl_companyinfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext, CompanyProfile.class).putExtra("company_id", company_id));
-            }
-        });
+        rl_companyinfo.setOnClickListener(v -> startActivity(new Intent(mContext, CompanyProfile.class).putExtra("company_id", company_id)));
 
-        iv_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ll_job_action.getVisibility() == View.VISIBLE) {
-                    ll_job_action.setVisibility(View.GONE);
-                } else {
-                    ll_job_action.setVisibility(View.VISIBLE);
-
-                }
-            }
-        });
-        tv_block.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                blockJobPopup();
+        iv_more.setOnClickListener(v -> {
+            if (ll_job_action.getVisibility() == View.VISIBLE) {
                 ll_job_action.setVisibility(View.GONE);
-
-
-            }
-        });
-        tv_report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ll_job_action.setVisibility(View.GONE);
-                Dialog progressdialog = new Dialog(mContext);
-                progressdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                progressdialog.setContentView(R.layout.job_action_popup);
-                progressdialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-                lp.gravity = Gravity.CENTER;
-                progressdialog.getWindow().setAttributes(lp);
-                TextView cancel = progressdialog.findViewById(R.id.tv_cancel);
-                TextView submit = progressdialog.findViewById(R.id.tv_submit);
-                EditText reason = progressdialog.findViewById(R.id.et_reason);
-
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        progressdialog.dismiss();
-                    }
-                });
-                submit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!TextUtils.isEmpty(reason.getText().toString().replaceAll(" ", ""))) {
-                            AppController.ShowDialogue("", mContext);
-                            if (Config.isSeeker())
-                                reportJob(job_id, apply_id, reason.getText().toString());
-                            progressdialog.dismiss();
-                        } else rest.showToast("Enter report reason");
-
-                    }
-                });
-
-                try {
-                    progressdialog.show();
-                } catch (Exception e) {
-                }
-            }
-        });
-        tv_cancel_application.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ll_job_action.setVisibility(View.GONE);
-                cancelApplicationPopup();
+            } else {
+                ll_job_action.setVisibility(View.VISIBLE);
 
             }
         });
-        tv_reschedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ll_job_action.setVisibility(View.GONE);
-                startActivity(new Intent(mContext, AppointmentAction.class)
-                        .putExtra("company_id", company_id)
-                        .putExtra("company_logo", company_logo)
-                        .putExtra("company_name", company_name)
-                        .putExtra("company_city_name", company_city_name)
-                        .putExtra("company_state_name", company_state_name)
-                        .putExtra("company_country_name", company_country_name)
-                        .putExtra("posted_by", posted_by)
-                        .putExtra("is_own_job", is_own_job)
-                        .putExtra("apply_id", apply_id)
-                        .putExtra("job_id", job_id)
-                        .putExtra("appointment_id", appointment_id)
-                        .putExtra("from", JobDetail.class.getSimpleName())
-                        .putExtra("action", "reschedule")
+        tv_block.setOnClickListener(v -> {
+            blockJobPopup();
+            ll_job_action.setVisibility(View.GONE);
 
-                );
+
+        });
+        tv_report.setOnClickListener(v -> {
+            ll_job_action.setVisibility(View.GONE);
+            Dialog progressdialog = new Dialog(mContext);
+            progressdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            progressdialog.setContentView(R.layout.job_action_popup);
+            progressdialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.gravity = Gravity.CENTER;
+            progressdialog.getWindow().setAttributes(lp);
+            TextView cancel = progressdialog.findViewById(R.id.tv_cancel);
+            TextView submit = progressdialog.findViewById(R.id.tv_submit);
+            EditText reason = progressdialog.findViewById(R.id.et_reason);
+
+            cancel.setOnClickListener(v14 -> progressdialog.dismiss());
+            submit.setOnClickListener(v15 -> {
+                if (!TextUtils.isEmpty(reason.getText().toString().replaceAll(" ", ""))) {
+                    AppController.ShowDialogue("", mContext);
+                    if (Config.isSeeker())
+                        reportJob(job_id, apply_id, reason.getText().toString());
+                    progressdialog.dismiss();
+                } else rest.showToast("Enter report reason");
+
+            });
+
+            try {
+                progressdialog.show();
+            } catch (Exception e) {
             }
+        });
+        tv_cancel_application.setOnClickListener(v -> {
+            ll_job_action.setVisibility(View.GONE);
+            cancelApplicationPopup();
+
+        });
+        tv_reschedule.setOnClickListener(v -> {
+            ll_job_action.setVisibility(View.GONE);
+            startActivity(new Intent(mContext, AppointmentAction.class)
+                    .putExtra("company_id", company_id)
+                    .putExtra("company_logo", company_logo)
+                    .putExtra("company_name", company_name)
+                    .putExtra("company_city_name", company_city_name)
+                    .putExtra("company_state_name", company_state_name)
+                    .putExtra("company_country_name", company_country_name)
+                    .putExtra("posted_by", posted_by)
+                    .putExtra("is_own_job", is_own_job)
+                    .putExtra("apply_id", apply_id)
+                    .putExtra("job_id", job_id)
+                    .putExtra("appointment_id", appointment_id)
+                    .putExtra("from", JobDetail.class.getSimpleName())
+                    .putExtra("action", "reschedule")
+
+            );
         });
 
         tv_active.setOnClickListener(v -> {
@@ -407,21 +377,13 @@ public class JobDetail extends AppCompatActivity {
         tv_title.setText("Cancel Application");
         tv_detail.setText("Are you sure, you want to cancel this job application ?");
 
-        progressdialog.findViewById(R.id.tv_yes).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressdialog.dismiss();
-                AppController.ShowDialogue("", mContext);
-                cancelJob(apply_id);
+        progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v -> {
+            progressdialog.dismiss();
+            AppController.ShowDialogue("", mContext);
+            cancelJob(apply_id);
 
-            }
         });
-        progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressdialog.dismiss();
-            }
-        });
+        progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
         } catch (Exception e) {
@@ -444,22 +406,14 @@ public class JobDetail extends AppCompatActivity {
         tv_title.setText("Block Job");
         tv_detail.setText("Are you sure, you want to block this job ?");
 
-        progressdialog.findViewById(R.id.tv_yes).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressdialog.dismiss();
-                AppController.ShowDialogue("", mContext);
-                if (Config.isSeeker())
-                    blockJob(job_id, apply_id);
+        progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v -> {
+            progressdialog.dismiss();
+            AppController.ShowDialogue("", mContext);
+            if (Config.isSeeker())
+                blockJob(job_id, apply_id);
 
-            }
         });
-        progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressdialog.dismiss();
-            }
-        });
+        progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
         } catch (Exception e) {
@@ -630,6 +584,16 @@ public class JobDetail extends AppCompatActivity {
                                                 } else if (appointment_type.equalsIgnoreCase("call")) {
                                                     iv_meetingType.setImageResource(R.drawable.ic_telephonefill);
                                                 }
+
+                                                ll_appointment.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        Intent resultIntent = new Intent(mContext, AppointmentDetail.class);
+                                                        resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, appointment_id);
+                                                        resultIntent.putExtra("from", JobDetail.class.getSimpleName());
+                                                        mContext.startActivity(resultIntent);
+                                                    }
+                                                });
 
                                             } else join.setVisibility(View.GONE);
                                         }

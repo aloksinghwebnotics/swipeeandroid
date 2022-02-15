@@ -32,7 +32,7 @@
             android:layout_marginEnd="@dimen/dimen40dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Android Developer"
+
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/dimen12sp" />
 

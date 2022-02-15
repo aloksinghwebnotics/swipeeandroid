@@ -59,7 +59,7 @@
             android:screenOrientation="portrait"
             android:exported="true"/>
 
-        <activity android:name=".activity.Seeker.FirstVideoActivity"
+        <activity android:name=".call.FirstVideoActivity"
             android:screenOrientation="portrait"
             android:exported="true"/>
         <activity
@@ -309,10 +309,6 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
-        <activity
-            android:name=".activity.VideoPlayerActivity"
-            android:exported="true"
-            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".activity.Seeker.AddLanguageActivity"
             android:exported="true"

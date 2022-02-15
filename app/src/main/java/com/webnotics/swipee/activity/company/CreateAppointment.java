@@ -284,6 +284,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                         hashMap.put(ParaName.KEY_UID, user_id);
                         hashMap.put(ParaName.KEY_ENDTIME, end);
                         hashMap.put(ParaName.KEY_STARTTIME, start);
+                        hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, "");
                         AppController.ShowDialogue("", mContext);
                         createAppointment(hashMap);
                     }

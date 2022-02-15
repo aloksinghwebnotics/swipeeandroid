@@ -62,7 +62,7 @@ public class JobPostRule extends AppCompatActivity {
             job_post_id = getIntent().getIntExtra("job_post_id", 0);
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
-                getpostrule(String.valueOf(job_post_id));
+                getPostRule(String.valueOf(job_post_id));
             }
         }
 
@@ -77,7 +77,7 @@ public class JobPostRule extends AppCompatActivity {
         } );
     }
 
-    private void getpostrule(String id) {
+    private void getPostRule(String id) {
         SwipeeApiClient.swipeeServiceInstance().jobpostrule(Config.GetUserToken(), id).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
@@ -130,7 +130,7 @@ public class JobPostRule extends AppCompatActivity {
             tv_submit.setText("Post featured job");
             tv_detail.setText(MessageFormat.format("Total Post Limit: {0}\n\nUsed Post Limit: {1}\n\nThis job will be publish as feature job, after 24 hours.", total_post_limit, total_post_limit));
         }else {
-            tv_detail.setText("You have not any active post feature job package .if you want to post your job as a feature job please purchase a post feature job package or you can publish your job.");
+            tv_detail.setText("You have not any active post feature job package. if you want to post your job as a feature job please purchase a post feature job package or you can publish your job.");
             tv_submit.setText("Purchase feature");
         }
 

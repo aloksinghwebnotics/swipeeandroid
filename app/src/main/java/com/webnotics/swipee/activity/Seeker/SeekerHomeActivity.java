@@ -41,11 +41,9 @@ import com.webnotics.swipee.fragments.seeker.ProfileFragments;
 import com.webnotics.swipee.interfaces.CountersInterface;
 import com.webnotics.swipee.model.seeker.EmployeeUserDetails;
 import com.webnotics.swipee.rest.SwipeeApiClient;
-import com.webnotics.swipee.room_database.College_model;
-import com.webnotics.swipee.room_database.College_room_abstract;
-import com.webnotics.swipee.room_database.Location_model;
-import com.webnotics.swipee.room_database.Location_room_abstract;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -167,11 +165,10 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         setMatchFragment();
         getProfileData();
 
-      /*  try {
+        try {
             @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             @SuppressLint("SimpleDateFormat") SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
             if (TextUtils.isEmpty(Config.GetCollegeRefreshDate())){
-                Log.d("hhhhh","Hit from empty");
                 callCollegeList();
             }else {
                 Date d1   = format.parse(Config.GetCollegeRefreshDate());
@@ -183,13 +180,12 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     Date final2=formatout.parse(date2);
                     if (final1!=null && final2!=null){
                         if(final1.compareTo(final2) != 0) {
-                            Log.d("hhhhh","Hit from date");
                             callCollegeList();
                         }else {
                             callLocation();
                         }
                     }else {
-                        Log.d("hhhhh","Hit from null");
+
                         callCollegeList();
                     }
                 }else callCollegeList();
@@ -199,7 +195,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         } catch (ParseException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
 
@@ -247,13 +243,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     JsonObject responseBody = response.body();
                     JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
                     if (mArrayListData.size()>0){
-                        for (int i = 0; i < mArrayListData.size(); i++) {
-                            JsonObject object=mArrayListData.get(i).getAsJsonObject();
-                            String university_college_id=object.has("university_college_id")?!object.get("university_college_id").isJsonNull()?object.get("university_college_id").getAsString():"":"";
-                            String university_college_name=object.has("university_college_name")?!object.get("university_college_name").isJsonNull()?object.get("university_college_name").getAsString():"":"";
-                            boolean selected= object.has("selected") && (!object.get("selected").isJsonNull() && object.get("selected").getAsBoolean());
-                            College_room_abstract.getDatabase(mContext).college_room_interface().insertData(new College_model(university_college_id,university_college_name,selected?1:0));
-                        }
+                        writeCollege(mArrayListData.toString());
                         Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
                         callLocation();
                     }
@@ -269,6 +259,18 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
+
+    private void writeCollege(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("college.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
     private void callLocationList() {
         SwipeeApiClient.swipeeServiceInstance().getLocation(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
             @Override
@@ -278,16 +280,10 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     JsonObject responseBody = response.body();
                     if (response.body().get("code").getAsInt() == 200) {
                         JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                        if (mArrayListData.size()>0){
-                            for (int i = 0; i < mArrayListData.size(); i++) {
-                                String location_id=mArrayListData.get(i).getAsJsonObject().get("location_id").getAsString();
-                                String location_name=mArrayListData.get(i).getAsJsonObject().get("location_name").getAsString();
-                                String state_name=mArrayListData.get(i).getAsJsonObject().get("state_name").getAsString();
-                                Location_room_abstract.getDatabase(mContext).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
-                            }
-                            Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
+                        writeToFile(mArrayListData.toString());
+                        Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
 
-                        }
+
 
                     }
 
@@ -302,6 +298,18 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
+
+    private void writeToFile(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("location.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
     public void setMatchFragment() {
 
         try {

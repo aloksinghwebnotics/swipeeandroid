@@ -143,6 +143,7 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
         hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "C");
         hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
         hashMap.put(ParaName.KEY_UID, user_id);
+        hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, "");
         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
         SwipeeApiClient.swipeeServiceInstance().setAppointmentStatus(hashMap).enqueue(new Callback<JsonObject>() {
             @Override

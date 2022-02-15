@@ -196,5 +196,6 @@
     <string name="chat_token_url">https://swipee.in.twil.io/chat-token</string>
     <string name="write_message">Write Message</string>
     <string name="test_access_token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzYyNjVkZmYzNjdlNTc2MzYwNTVlMDJlZWRhYmIyYzJiLTE2NDQzMDgzMzEiLCJpc3MiOiJTSzYyNjVkZmYzNjdlNTc2MzYwNTVlMDJlZWRhYmIyYzJiIiwic3ViIjoiQUM5ZDI5YTdhZDkzNGY0MDFmYjQ1N2I3ODlkYjFmZWY4ZiIsImV4cCI6MTY0NDMxMTkzMSwiZ3JhbnRzIjp7ImNoYXQiOnsic2VydmljZV9zaWQiOiJJU2E1MDUzZGU5MjhlNTRhYWZhMmY5NzYxNmUxNGEzN2M5In19fQ.vQdaPO41KedaU7qoaZ1Vz_akS8SkYP8skGujF1cNNso</string>
+    <string name="planmsg">You have already an active plan, do you want to switch from exciting plan to new plan.</string>
 
 </resources>

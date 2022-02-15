@@ -54,6 +54,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     private String posted_by="";
     private String is_own_job="";
     private String user_id="";
+    private String notify_number="";
     private String job_title="";
     private String date="";
     @SuppressLint("StaticFieldLeak")
@@ -85,6 +86,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
         if (getIntent() != null) {
 
              company_id = getIntent().getStringExtra("company_id") != null ? getIntent().getStringExtra("company_id") : "";
+            notify_number = getIntent().getStringExtra("notify_number") != null ? getIntent().getStringExtra("notify_number") : "";
              user_id = getIntent().getStringExtra("user_id") != null ? getIntent().getStringExtra("user_id") : "";
              company_logo = getIntent().getStringExtra("company_logo") != null ? getIntent().getStringExtra("company_logo") : "";
              company_name = getIntent().getStringExtra("company_name") != null ? getIntent().getStringExtra("company_name") : "";
@@ -156,6 +158,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "C");
                         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
                         hashMap.put(ParaName.KEY_COMPANYID, company_id);
+                        hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                         statusAppointment(hashMap);
                     }else rest.AlertForInternet();
                 }else {
@@ -173,6 +176,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, "A");
                         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
                         hashMap.put(ParaName.KEY_COMPANYID, company_id);
+                        hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                         statusAppointment(hashMap);
                     }else rest.AlertForInternet();
                 }else {
@@ -197,6 +201,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         .putExtra("appointment_number", appointment_number)
                         .putExtra("appointment_type", appointment_type)
                         .putExtra("job_title", job_title)
+                        .putExtra("notify_number", notify_number)
                         .putExtra("from", NotificationAppointmentAction.class.getSimpleName())
                         .putExtra("date", date)
                 );
@@ -213,6 +218,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
         hashMap.put(ParaName.KEY_APPOINTMENTSTATUS, action);
         hashMap.put(ParaName.KEY_APPOINTMENTNUMBER, appointment_number);
         hashMap.put(ParaName.KEY_UID, user_id);
+        hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
         SwipeeApiClient.swipeeServiceInstance().setAppointmentStatus(hashMap).enqueue(new Callback<JsonObject>() {
             @Override

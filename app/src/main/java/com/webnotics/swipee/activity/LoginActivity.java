@@ -1,11 +1,14 @@
 package com.webnotics.swipee.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -68,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_forgot, donothaveanaccount, tv_seeker, tv_recruiter;
     CheckBox cb_remember;
     Button btn_signin;
-    ImageView iv_google,facebook,likedinnn;
+    ImageView iv_google,facebook,likedinnn,iv_show_or_hide_pass;
     Rest rest;
     private final Context mContext = LoginActivity.this;
     boolean isSeeker = true;
@@ -83,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String socialtype = "";
     private LoginButton btnLogin;
     private CallbackManager callbackManager;
+    private boolean show=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +113,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             btnLogin = findViewById(R.id.login_button);
             facebook = findViewById(R.id.facebook);
             likedinnn = findViewById(R.id.likedinnn);
+            iv_show_or_hide_pass = findViewById(R.id.iv_show_or_hide_pass);
+
             FirebaseApp.initializeApp(mContext);
             /*FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             Bundle bundle = new Bundle();
@@ -130,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             likedinnn.setOnClickListener(this);
             Config.clear(mContext);
             isSeeker = true;
-
+            et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
             btnLogin = findViewById(R.id.login_button);
             btnLogin.setReadPermissions(Arrays.asList("public_profile, email"));
             callbackManager = CallbackManager.Factory.create();
@@ -161,6 +167,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onError(FacebookException exception) {
                     Toast.makeText(mContext, getResources().getString(R.string.errorloginfb), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            iv_show_or_hide_pass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (show){
+                        iv_show_or_hide_pass.setImageResource(R.drawable.img_show_password);
+                        et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        show=false;
+                    }else {
+                        iv_show_or_hide_pass.setImageResource(R.drawable.img_hide_password);
+                        et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        show=true;
+                    }
                 }
             });
 
@@ -357,7 +378,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ///hit
                 Calendar calendar = Calendar.getInstance();
                 String time_zone = calendar.getTimeZone().getID().toString();
-                String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+                @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
                 String phone_code = "+91";
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
                 String device_token = FirebaseInstanceId.getInstance().getId();

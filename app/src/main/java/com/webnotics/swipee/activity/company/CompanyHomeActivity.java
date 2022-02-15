@@ -23,6 +23,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultWithDataListener;
 import com.webnotics.swipee.R;
@@ -39,7 +41,13 @@ import com.webnotics.swipee.interfaces.CountersInterface;
 import com.webnotics.swipee.model.company.CompanyProfileModel;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -79,6 +87,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
             if (!TextUtils.isEmpty(Config.GetPICKURI()))
                 AppController.callFullImage(mContext, Config.GetPICKURI());
         });
+
     }
 
     @Override
@@ -237,35 +246,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         setMatchFragment();
         getProfileData();
 
-       /* try {
-            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
-            SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
-            if (TextUtils.isEmpty(Config.GetLocationRefreshDate())){
-                startService(new Intent(this,  MyIntentService.class));
-            }else {
-                Date d1   = format.parse(Config.GetLocationRefreshDate());
-                Date d2 = format.parse(Calendar.getInstance().getTime().toString());
-                if (d1!=null && d2!=null){
-                    String date1=formatout.format(d1);
-                    String date2=formatout.format(d2);
-                    Date final1=formatout.parse(date1);
-                    Date final2=formatout.parse(date2);
-                    if (final1!=null && final2!=null){
-                        if(final1.compareTo(final2) != 0) {
-                            Log.d("hhhhh","Hit from date");
-                            startService(new Intent(this,  MyIntentService.class));
-                        }
-                    }else {
-                        Log.d("hhhhh","Hit from null");
-                        startService(new Intent(this,  MyIntentService.class));
-                    }
-                }else   startService(new Intent(this,  MyIntentService.class));
-
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-    }
+        callLocation() ;    }
 
     public void setMatchFragment() {
 
@@ -526,4 +507,73 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
     public void onPaymentError(int i, String s, PaymentData paymentData) {
 
     }
+
+    private void callLocation() {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+            SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
+            if (TextUtils.isEmpty(Config.GetLocationRefreshDate())){
+                callLocationList();
+            }else {
+                Date d1   = format.parse(Config.GetLocationRefreshDate());
+                Date d2 = format.parse(Calendar.getInstance().getTime().toString());
+                if (d1!=null && d2!=null){
+                    String date1=formatout.format(d1);
+                    String date2=formatout.format(d2);
+                    Date final1=formatout.parse(date1);
+                    Date final2=formatout.parse(date2);
+                    if (final1!=null && final2!=null){
+                        if(final1.compareTo(final2) != 0) {
+                            Log.d("hhhhh","Hit from date");
+                            callLocationList();
+                        }else {
+
+                        }
+                    }else {
+                        Log.d("hhhhh","Hit from null");
+                        callLocationList();
+                    }
+                }else    callLocationList();
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    private void writeToFile(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("location.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+    private void callLocationList() {
+        SwipeeApiClient.swipeeServiceInstance().getLocation(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+                if (response.code() == 200 && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    if (response.body().get("code").getAsInt() == 200) {
+                        JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
+                        writeToFile(mArrayListData.toString());
+                        Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
+
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
+    }
+
 }

@@ -13,10 +13,13 @@ import android.os.Looper;
 import android.provider.Settings.Secure;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,11 +60,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView donothaveanaccount, tv_seeker, tv_recruiter;
     Button btn_signup;
     EditText et_email, et_password, et_mobile;
+    ImageView iv_show_or_hide_pass;
 
     FusedLocationProviderClient mFusedLocationClient;
     private String lat = "0";
     private String longg = "0";
     private boolean isSeeker=true;
+    private boolean show=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         et_mobile = findViewById(R.id.et_mobile);
         tv_seeker = findViewById(R.id.tv_seeker);
         tv_recruiter = findViewById(R.id.tv_recruiter);
+        iv_show_or_hide_pass = findViewById(R.id.iv_show_or_hide_pass);
         Config.clear(mContext);
         FirebaseApp.initializeApp(mContext);
         if (isSeeker){
@@ -106,7 +112,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }catch (Exception e){}
         }
 
+        et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
         ///////////
+        iv_show_or_hide_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (show){
+                    iv_show_or_hide_pass.setImageResource(R.drawable.img_show_password);
+                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    show=false;
+                }else {
+                    iv_show_or_hide_pass.setImageResource(R.drawable.img_hide_password);
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    show=true;
+                }
+            }
+        });
 
         donothaveanaccount.setText(Html.fromHtml(getString(R.string.haveaccount)));
         btn_signup.setOnClickListener(this::onClick);

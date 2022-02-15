@@ -1,13 +1,19 @@
 package com.webnotics.swipee.fragments.company;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -100,43 +106,77 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         int id = view.getId();
 
         if (id == R.id.tv_pay) {
-            if (!TextUtils.isEmpty(package_id)){
-                AppController.ShowDialogue("",mContext);
-                HashMap<String,String> hashMap=new HashMap<>();
-                hashMap.put(ParaName.KEYTOKEN,Config.GetUserToken());
-                hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price*100));
-                SwipeeApiClient.swipeeServiceInstance().getOrderId(hashMap).enqueue(new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                        AppController.dismissProgressdialog();
-                        if (response.code()==200 && response.body()!=null){
-                            if (response.body().get("code").getAsInt()==203){
-                                rest.showToast(response.body().get("message").getAsString());
-                                AppController.loggedOut(mContext);
-
-                            }else if (response.body().get("code").getAsInt()==200 && response.body().get("status").getAsBoolean()){
-                                JsonObject data=response.body().getAsJsonObject("data");
-                                String order_id=data.has("order_id")?data.get("order_id").getAsString():"";
-                                if (!TextUtils.isEmpty(order_id)){
-                                    Payment payment = new Payment();
-                                    payment.startPayment(getActivity(), order_id,package_name, package_price);
-                                }
-
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
-                        AppController.dismissProgressdialog();
-                    }
-                });
-
-            }
+            if (Config.GetPACKAGEEXP().equalsIgnoreCase("N"))
+                callPlanPopup();
+            else callOrderID();
         }
     }
 
+    private void callOrderID() {
+        if (!TextUtils.isEmpty(package_id)){
+            AppController.ShowDialogue("",mContext);
+            HashMap<String,String> hashMap=new HashMap<>();
+            hashMap.put(ParaName.KEYTOKEN,Config.GetUserToken());
+            hashMap.put(ParaName.KEY_PACKAGEPRICE, String.valueOf(package_price*100));
+            SwipeeApiClient.swipeeServiceInstance().getOrderId(hashMap).enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                    AppController.dismissProgressdialog();
+                    if (response.code()==200 && response.body()!=null){
+                        if (response.body().get("code").getAsInt()==203){
+                            rest.showToast(response.body().get("message").getAsString());
+                            AppController.loggedOut(mContext);
+
+                        }else if (response.body().get("code").getAsInt()==200 && response.body().get("status").getAsBoolean()){
+                            JsonObject data=response.body().getAsJsonObject("data");
+                            String order_id=data.has("order_id")?data.get("order_id").getAsString():"";
+                            if (!TextUtils.isEmpty(order_id)){
+                                Payment payment = new Payment();
+                                payment.startPayment(getActivity(), order_id,package_name, package_price);
+                            }
+
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+                    AppController.dismissProgressdialog();
+                }
+            });
+
+        }
+    }
+
+    private void callPlanPopup() {
+        Dialog progressdialog = new Dialog(mContext);
+        progressdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progressdialog.setContentView(R.layout.cancel_appointment_popup);
+        progressdialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.gravity = Gravity.CENTER;
+        progressdialog.getWindow().setAttributes(lp);
+        TextView tv_title = progressdialog.findViewById(R.id.tv_title);
+        TextView tv_detail = progressdialog.findViewById(R.id.tv_detail);
+        tv_title.setText("Swipee");
+        tv_detail.setText(getString(R.string.planmsg));
+
+        progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v -> {
+            progressdialog.dismiss();
+            callOrderID();
+
+
+        });
+        progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
+        try {
+            progressdialog.show();
+        } catch (Exception e) {
+        }
+
+    }
     public void setTransactionData(PaymentData paymentData) {
 
         HashMap<String, String> hashMap = new HashMap();

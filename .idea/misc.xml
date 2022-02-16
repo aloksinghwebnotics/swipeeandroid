@@ -75,6 +75,7 @@
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable/ic_outline_file_present_24.xml" value="0.202734375" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable/ic_outline_image_24.xml" value="0.202734375" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable/ic_outline_keyboard_arrow_right_24.xml" value="0.1527777777777778" />
+        <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable/ic_pick.xml" value="0.163" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable/ic_plan_unselect.xml" value="0.1527777777777778" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable/ic_plus.xml" value="0.1527777777777778" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/drawable/ic_portfolio.xml" value="0.2703125" />
@@ -173,6 +174,7 @@
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/activity_mached_company.xml" value="0.21981981981981982" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/activity_main.xml" value="0.21981981981981982" />
+        <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/activity_main_chat.xml" value="0.18841698841698842" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/activity_notification.xml" value="0.2" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/activity_notification_appointment.xml" value="0.190625" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/activity_posted_job.xml" value="0.25416666666666665" />
@@ -241,6 +243,7 @@
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/location_bottomsheet.xml" value="0.25416666666666665" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/logout_popup.xml" value="0.25416666666666665" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/match_screen.xml" value="0.21981981981981982" />
+        <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/message_text_view.xml" value="0.190625" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/mobileverification_screen.xml" value="0.21981981981981982" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/month_picker_dialog.xml" value="0.21981981981981982" />
         <entry key="..\:/androidProjects/InstaCarriers/app/src/main/res/layout/month_picker_view.xml" value="0.21981981981981982" />

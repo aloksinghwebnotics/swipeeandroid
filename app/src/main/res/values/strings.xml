@@ -193,9 +193,10 @@
 
     <string name="error_retrieving_access_token">Error retrieving access token from the server.</string>
     <string name="send">Send</string>
-    <string name="chat_token_url">https://swipee.in.twil.io/chat-token</string>
+    <string name="chat_token_url">https://swipee.in/app_api/</string>
+   <!-- <string name="chat_token_url">https://swipee.in.twil.io/chat-token/</string>-->
     <string name="write_message">Write Message</string>
-    <string name="test_access_token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzYyNjVkZmYzNjdlNTc2MzYwNTVlMDJlZWRhYmIyYzJiLTE2NDQzMDgzMzEiLCJpc3MiOiJTSzYyNjVkZmYzNjdlNTc2MzYwNTVlMDJlZWRhYmIyYzJiIiwic3ViIjoiQUM5ZDI5YTdhZDkzNGY0MDFmYjQ1N2I3ODlkYjFmZWY4ZiIsImV4cCI6MTY0NDMxMTkzMSwiZ3JhbnRzIjp7ImNoYXQiOnsic2VydmljZV9zaWQiOiJJU2E1MDUzZGU5MjhlNTRhYWZhMmY5NzYxNmUxNGEzN2M5In19fQ.vQdaPO41KedaU7qoaZ1Vz_akS8SkYP8skGujF1cNNso</string>
+    <string name="test_access_token">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2RjNDMyZWU3Y2UxZDU0MzU3YWJlZjUyMzRhZGM1MTAzLTE2NDUwMDExNDkiLCJncmFudHMiOnsiaWRlbnRpdHkiOiJ0ZXN0aW5nIiwiY2hhdCI6eyJzZXJ2aWNlX3NpZCI6IklTYTUwNTNkZTkyOGU1NGFhZmEyZjk3NjE2ZTE0YTM3YzkifX0sImlhdCI6MTY0NTAwMTE0OSwiZXhwIjoxNjQ1MDA0NzQ5LCJpc3MiOiJTS2RjNDMyZWU3Y2UxZDU0MzU3YWJlZjUyMzRhZGM1MTAzIiwic3ViIjoiQUM5ZDI5YTdhZDkzNGY0MDFmYjQ1N2I3ODlkYjFmZWY4ZiJ9.J-c6hgTeyV-HxJNCvnSiXp5xUcrHpGkpN3XCIIoiZDQ</string>
     <string name="planmsg">You have already an active plan, do you want to switch from exciting plan to new plan.</string>
 
 </resources>

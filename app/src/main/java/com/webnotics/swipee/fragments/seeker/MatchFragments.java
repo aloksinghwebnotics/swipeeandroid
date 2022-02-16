@@ -1020,9 +1020,10 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                                 mLocationArrayList = mLocationArray;
 
                             }else {
+                                location.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
-
+                            location.setVisibility(View.GONE);
                         }
 
                         if (mJOnTypeArrayList != null) {
@@ -1217,8 +1218,10 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
         }
         catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
+            return ret;
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+            return ret;
         }
 
         return ret;

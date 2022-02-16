@@ -9,6 +9,15 @@ public class NotificationModel {
     boolean status;
     int code;
     String message;
+    String fcm_mute;
+
+    public String getFcm_mute() {
+        return fcm_mute;
+    }
+
+    public void setFcm_mute(String fcm_mute) {
+        this.fcm_mute = fcm_mute;
+    }
 
     public boolean isStatus() {
         return status;
@@ -52,8 +61,17 @@ public class NotificationModel {
        String notification_image;
        String is_read="";
        String is_seen="";
+       String appointment_status="";
        JsonObject payload_data;
 
+
+        public String getAppointment_status() {
+            return appointment_status;
+        }
+
+        public void setAppointment_status(String appointment_status) {
+            this.appointment_status = appointment_status;
+        }
 
         public String getIs_read() {
             return is_read;

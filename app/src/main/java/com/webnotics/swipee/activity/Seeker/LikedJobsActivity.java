@@ -78,7 +78,6 @@ public class LikedJobsActivity extends AppCompatActivity {
                         JsonObject jsonObject = response.body();
                         JsonObject dataObject = jsonObject.has("data") ? jsonObject.get("data").getAsJsonObject() : new JsonObject();
                         JsonArray job_data = dataObject.has("jobs_listing") ? dataObject.get("jobs_listing").getAsJsonArray() : new JsonArray();
-                        JsonArray advert_companies = dataObject.has("advert_companies") ? dataObject.get("advert_companies").getAsJsonArray() : new JsonArray();
                         if (job_data.size() > 0) {
                             ArrayList<AppliedJobData> appliedJobDataList = new ArrayList<>();
                             for (int i = 0; i < job_data.size(); i++) {

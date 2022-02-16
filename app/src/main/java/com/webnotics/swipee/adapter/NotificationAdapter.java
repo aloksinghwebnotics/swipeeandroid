@@ -64,6 +64,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.tv_text.setText(data.get(position).getNotification_text());
 
         String is_read=data.get(position).getIs_read();
+        String appointment_status=data.get(position).getAppointment_status();
         String is_seen=data.get(position).getIs_seen();
         if (Config.isSeeker())
             holder.tv_name.setText(data.get(position).getCompany_name());
@@ -253,25 +254,25 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                            }
                        }
                        else {
-                           if (type.equalsIgnoreCase("company_change_appointment_status")) {
-                               Intent resultIntent;
-                               if (object.has("appointment_status") && object.get("appointment_status").getAsString().equalsIgnoreCase("A")){
-                                   resultIntent = new Intent(mContext, AppointmentDetail.class);
-                                   resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, object.get("appointment_id").getAsString());
-                                   resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
-                                   mContext.startActivity(resultIntent);
-                               }
+                           if (appointment_status.equalsIgnoreCase("A")){
+                               if (type.equalsIgnoreCase("company_change_appointment_status") || type.equalsIgnoreCase("employer_booked_appointment")) {
+                                   Intent resultIntent;
 
-                           }else if (type.equalsIgnoreCase("user_change_appointment_status")) {
-                               Intent resultIntent;
-                               if (object.has("appointment_status") && object.get("appointment_status").getAsString().equalsIgnoreCase("A")){
-                                   resultIntent = new Intent(mContext, AppointmentDetail.class);
-                                   resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, object.get("appointment_id").getAsString());
-                                   resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
-                                   mContext.startActivity(resultIntent);
-                               }
+                                       resultIntent = new Intent(mContext, AppointmentDetail.class);
+                                       resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, object.get("appointment_id").getAsString());
+                                       resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
+                                       mContext.startActivity(resultIntent);
 
+
+                               }else if (type.equalsIgnoreCase("user_change_appointment_status") || type.equalsIgnoreCase("user_booked_appointment")) {
+                                   Intent resultIntent;
+                                       resultIntent = new Intent(mContext, AppointmentDetail.class);
+                                       resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, object.get("appointment_id").getAsString());
+                                       resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
+                                       mContext.startActivity(resultIntent);
+                               }
                            }
+
                        }
 
 

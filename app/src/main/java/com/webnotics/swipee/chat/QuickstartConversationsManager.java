@@ -3,7 +3,6 @@ package com.webnotics.swipee.chat;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.twilio.conversations.CallbackListener;
 import com.twilio.conversations.Conversation;
@@ -19,13 +18,9 @@ import com.webnotics.swipee.R;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -53,14 +48,14 @@ interface AccessTokenListener {
 interface AccessTokenAPI {
 
     @FormUrlEncoded
-    @POST("appointments/access_token_chat")
+    @POST("appointments/access_token_chat/")
     Call<JsonObject> createAccessToken(@Field("user_name") String user_name);
 }
 
 public class QuickstartConversationsManager {
 
     // This is the unique name of the conversation  we are using
-    private final static String DEFAULT_CONVERSATION_NAME = "general";
+    private final static String DEFAULT_CONVERSATION_NAME = "testing";
 
     final private ArrayList<Message> messages = new ArrayList<>();
 
@@ -161,6 +156,19 @@ public class QuickstartConversationsManager {
                 @Override
                 public void onTokenExpired() {
                     Log.i(MainChatActivity.TAG, "on token expired");
+                    retrieveToken(new AccessTokenListener() {
+                        @Override
+                        public void receivedAccessToken(@Nullable String token, @Nullable Exception exception) {
+                            if (token != null) {
+                                conversationsClient.updateToken(token, new StatusListener() {
+                                    @Override
+                                    public void onSuccess() {
+                                        Log.d(MainChatActivity.TAG, "Refreshed access token.");
+                                    }
+                                });
+                            }
+                        }
+                    });
                 }
 
                 @Override
@@ -212,6 +220,7 @@ public class QuickstartConversationsManager {
         @Override
         public void onMessageUpdated(Message message, Message.UpdateReason updateReason) {
             Log.d(MainChatActivity.TAG, "Message updated: " + message.getBody());
+
         }
 
         @Override

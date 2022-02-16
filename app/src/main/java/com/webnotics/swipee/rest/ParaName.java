@@ -139,5 +139,6 @@ public class ParaName {
     public static final String KEY_ORDERID = "order_id";
     public static final String KEY_PAYSIGN = "pay_signature";
     public static final String KEY_UNIQUENOTIFYNUMBER = "unique_notify_number";
+    public static final String KEY_FCMMUTE = "fcm_mute";
 
 }

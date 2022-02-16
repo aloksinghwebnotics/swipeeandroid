@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.activity.ChatActivity;
+import com.webnotics.swipee.chat.MainChatActivity;
 import com.webnotics.swipee.model.RecentChatModel;
 
 import java.text.MessageFormat;
@@ -91,7 +91,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
             e.printStackTrace();
         }
 
-        holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, ChatActivity.class)
+        holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, MainChatActivity.class)
             .putExtra("image",data.get(position).getUser_profile())
             .putExtra("msg_id",data.get(position).getMsg_id())
             .putExtra("action",data.get(position).getCompany_action())
@@ -100,7 +100,16 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
             .putExtra("sender_id",data.get(position).getMsg_sender_id())
             .putExtra("receiver_id",data.get(position).getMsg_receiver_id())
             .putExtra("name",Config.isSeeker()? data.get(position).getCompany_name():data.get(position).getFirst_name())
-        ));
+        ));/* holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, ChatActivity.class)
+            .putExtra("image",data.get(position).getUser_profile())
+            .putExtra("msg_id",data.get(position).getMsg_id())
+            .putExtra("action",data.get(position).getCompany_action())
+            .putExtra("appointment_id",data.get(position).getAppointment_id())
+            .putExtra("user_id",data.get(position).getUser_id())
+            .putExtra("sender_id",data.get(position).getMsg_sender_id())
+            .putExtra("receiver_id",data.get(position).getMsg_receiver_id())
+            .putExtra("name",Config.isSeeker()? data.get(position).getCompany_name():data.get(position).getFirst_name())
+        ));*/
 
     }
 

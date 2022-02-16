@@ -15,13 +15,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.NotificationAdapter;
 import com.webnotics.swipee.model.seeker.NotificationModel;
-import com.webnotics.swipee.rest.SwipeeApiClient;
+import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,12 +73,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Config.isMute()){
-                    Config.setMuteNotification(false);
-                    tv_mute.setText("Mute");
-
+                    setNotificationSetting("N");
                 }else {
-                    Config.setMuteNotification(true);
-                    tv_mute.setText("Unmute");
+                    setNotificationSetting("Y");
                 }
                 ll_mute.setVisibility(View.GONE);
             }
@@ -108,6 +109,13 @@ public class NotificationActivity extends AppCompatActivity {
                     NotificationModel notificationModel= response.body();
                     if (notificationModel!=null){
                         if (notificationModel.getCode()==200){
+                            if (notificationModel.getFcm_mute().equalsIgnoreCase("Y")){
+                                Config.setMuteNotification(true);
+                                tv_mute.setText("Unmute");
+                            }else {
+                                Config.setMuteNotification(false);
+                                tv_mute.setText("Mute");
+                            }
                             tv_nodata.setVisibility(View.GONE);
                             ll_nodata.setVisibility(View.GONE);
                             rv_notification.setVisibility(View.VISIBLE);
@@ -145,6 +153,13 @@ public class NotificationActivity extends AppCompatActivity {
                     NotificationModel notificationModel= response.body();
                     if (notificationModel!=null){
                         if (notificationModel.getCode()==200){
+                            if (notificationModel.getFcm_mute().equalsIgnoreCase("Y")){
+                                Config.setMuteNotification(true);
+                                tv_mute.setText("Unmute");
+                            }else {
+                                Config.setMuteNotification(false);
+                                tv_mute.setText("Mute");
+                            }
                             tv_nodata.setVisibility(View.GONE);
                             ll_nodata.setVisibility(View.GONE);
                             rv_notification.setVisibility(View.VISIBLE);
@@ -180,5 +195,40 @@ public class NotificationActivity extends AppCompatActivity {
         try {
             instance=null;
         }catch (Exception ignored){}
+    }
+
+    private void setNotificationSetting(String isMute){
+        AppController.ShowDialogue("", mContext);
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+        hashMap.put(ParaName.KEY_FCMMUTE, isMute);
+        SwipeeApiClient.swipeeServiceInstance().setNotificationSetting(hashMap).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+                if (response.code() == 200 && response.body() != null) {
+                    if (response.body().get("code").getAsInt() == 203) {
+                        rest.showToast(response.body().get("message").getAsString());
+                        AppController.loggedOut(mContext);
+                        finish();
+
+                    } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
+                              if (isMute.equalsIgnoreCase("N")){
+                                  Config.setMuteNotification(false);
+                                  tv_mute.setText("Mute");
+                              }else if (isMute.equalsIgnoreCase("Y")){
+                                  Config.setMuteNotification(true);
+                                  tv_mute.setText("Unmute");
+                              }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                AppController.dismissProgressdialog();
+            }
+        });
     }
 }

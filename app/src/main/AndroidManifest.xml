@@ -372,6 +372,10 @@
                     android:scheme="io.rzp" />
             </intent-filter>
         </activity>
+        <activity android:name=".chat.MainChatActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme"/>
 
         <!-- Api key RazorPay -->
         <meta-data

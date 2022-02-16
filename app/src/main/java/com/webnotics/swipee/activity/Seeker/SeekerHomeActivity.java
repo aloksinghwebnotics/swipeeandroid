@@ -388,6 +388,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         } catch (Exception ignored) {
         }
+        //startActivity(new Intent(mContext, MainChatActivity.class));
         matchimg.setImageResource(R.drawable.ic_match_unselected);
         nearimg.setImageResource(R.drawable.ic_near_unselect);
         planimg.setImageResource(R.drawable.ic_plan_unselect);

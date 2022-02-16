@@ -107,4 +107,21 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
     }
 
 
+   /* private  void caalToken(){
+        String twilioAccountSid = System.getenv("TWILIO_ACCOUNT_SID");
+        String twilioApiKey = System.getenv("TWILIO_API_KEY");
+        String twilioApiSecret = System.getenv("TWILIO_API_SECRET");
+
+        String serviceSid = System.getenv("TWILIO_SERVICE_SID");
+        String identity = "user@example.com";
+
+        ChatGrant grant = new ChatGrant();
+        grant.setServiceSid(serviceSid);
+
+        AccessToken token = new AccessToken.Builder(twilioAccountSid, twilioApiKey, twilioApiSecret)
+                .identity(identity).grant(grant).build();
+
+        System.out.println(token.toJwt());
+    }*/
+
 }

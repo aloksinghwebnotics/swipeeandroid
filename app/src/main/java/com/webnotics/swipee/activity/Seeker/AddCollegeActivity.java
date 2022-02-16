@@ -155,9 +155,12 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
             }
         }
         catch (FileNotFoundException e) {
+
             Log.e("login activity", "File not found: " + e.toString());
+            return ret;
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+            return ret;
         }
 
         return ret;

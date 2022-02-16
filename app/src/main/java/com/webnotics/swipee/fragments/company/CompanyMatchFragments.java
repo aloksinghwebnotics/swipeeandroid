@@ -987,7 +987,6 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                         mSalaryArrayList = filterModel.getData().getSalary();
                         /*mLocationArrayList = filterModel.getData().getLocation()*/;
 
-
                         String data1=  readFromFile();
                         try {
                             JSONArray jarray = new JSONArray(data1);
@@ -1008,8 +1007,10 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                                 mLocationArrayList = mLocationArray;
 
                             }else {
+                                location.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
+                            location.setVisibility(View.GONE);
                         }
 
                         if (mJOnTypeArrayList != null) {
@@ -1204,8 +1205,12 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
         }
         catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
+            return ret;
+
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+            return ret;
+
         }
 
         return ret;

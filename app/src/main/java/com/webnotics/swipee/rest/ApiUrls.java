@@ -132,6 +132,7 @@ public class ApiUrls {
   public static final String URL_COMPANYREJECTAUDIOCALL = "appointments/company_reject_audio";
   public static final String URL_STARTAUDIO = "appointments/company_start_audio";
   public static final String URL_SEEKERSTARTAUDIO = "appointments/user_start_audio";
+  public static final String URL_FCMSETTING = "auth/fcm_settings";
 
 
 

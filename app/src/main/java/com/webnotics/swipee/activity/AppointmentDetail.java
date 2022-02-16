@@ -328,7 +328,6 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
                         setLogoutSeeker();
-
                     }else
                     if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         String appointment_id=responseBody.getData().getAppointment_id();

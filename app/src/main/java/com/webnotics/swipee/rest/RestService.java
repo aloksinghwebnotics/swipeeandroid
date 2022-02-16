@@ -490,5 +490,9 @@ public interface RestService {
     @FormUrlEncoded
     @POST(ApiUrls.URL_PACKAGE_ORDERID)
     Call<JsonObject> getOrderId(@FieldMap HashMap<String, String> hashMap);
+
+    @FormUrlEncoded
+    @POST(ApiUrls.URL_FCMSETTING)
+    Call<JsonObject> setNotificationSetting(@FieldMap HashMap<String, String> hashMap);
 }
 

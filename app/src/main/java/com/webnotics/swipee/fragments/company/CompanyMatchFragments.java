@@ -273,8 +273,10 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                        postLikeDislike(hashMap);
                     } else rest.AlertForInternet();
                 } else {
+                    rest.showToast(getString(R.string.noleftswipe));
                     noleftswipelay.setVisibility(View.VISIBLE);
                     datalay.setVisibility(View.GONE);
+                    CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                 }
 
             }
@@ -363,6 +365,8 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                         } else rest.AlertForInternet();
                     }
                 } else {
+                    rest.showToast(getString(R.string.noleftswipe));
+                    CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                     noleftswipelay.setVisibility(View.VISIBLE);
                     datalay.setVisibility(View.GONE);
                 }
@@ -855,9 +859,11 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                                     if (left_swipes > 0 || packgeID.equalsIgnoreCase("8")) {
                                         noleftswipelay.setVisibility(View.GONE);
                                         datalay.setVisibility(View.VISIBLE);
+                                        CompanyHomeActivity.instance.filter_icon.setVisibility(View.VISIBLE);
                                     } else {
                                         noleftswipelay.setVisibility(View.VISIBLE);
                                         datalay.setVisibility(View.GONE);
+                                        CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                                     }
                                 } else {
                                     nolay.setVisibility(View.VISIBLE);
@@ -1343,6 +1349,12 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                     if (repo.get("status").getAsBoolean()){
                           rest.showToast(repo.get("message").getAsString());
                           left_swipes=left_swipes-1;
+                        if (left_swipes>0 || packgeID.equalsIgnoreCase("8")){}
+                        else {
+                            noleftswipelay.setVisibility(View.VISIBLE);
+                            CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
+                            datalay.setVisibility(View.GONE);
+                        }
                           if (hashMap.get(ParaName.KEY_COMPANYSTATUS)!=null)
                           if (Objects.requireNonNull(hashMap.get(ParaName.KEY_COMPANYSTATUS)).equalsIgnoreCase("A")){
                               mArrayUser.get(pos).setCompany_match_status("A");

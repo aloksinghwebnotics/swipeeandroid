@@ -59,11 +59,6 @@ dependencies {
     implementation 'com.xw.repo:bubbleseekbar:3.20-lite'
     implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.15'
 
-    //room database library
-    implementation 'android.arch.persistence.room:runtime:1.1.1'
-    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
-
-
     implementation 'com.google.android.gms:play-services-auth:20.0.1'
 
     implementation 'com.facebook.android:facebook-android-sdk:8.+'
@@ -72,14 +67,13 @@ dependencies {
     implementation('com.razorpay:checkout:1.6.12')
 
     // twilio
-    implementation 'com.twilio:conversations-android:3.0.0'
+    implementation 'com.twilio:conversations-android:3.0.1'
     implementation 'com.twilio:video-android:5.10.1'
     implementation 'com.twilio:audioswitch:0.1.5'
 
 
     implementation 'com.shantanudeshmukh:linkedinsdk:1.0.0'
     implementation project(path: ':linkedin-sdk')
-
 
 
   //  implementation "com.airbnb.android:lottie:4.2.2"

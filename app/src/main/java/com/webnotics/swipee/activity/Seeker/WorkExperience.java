@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -158,10 +159,12 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
                 else callJobTitleList();
                 break;
             case R.id.doneeeee:
+
                 jobtype_sheetBottom.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 jobIdFinal = jobId;
                 String jobNameFinal = jobName;
                 tv_job.setText(jobNameFinal);
+                IntStream.range(0, jsonObjectArrayList.size()).forEach(i -> jsonObjectArrayList.get(i).setSelected(jsonObjectArrayList.get(i).getId().equalsIgnoreCase(jobIdFinal)));
                 break;
             case R.id.tv_save:
 

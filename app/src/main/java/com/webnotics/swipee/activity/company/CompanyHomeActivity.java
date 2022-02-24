@@ -524,13 +524,9 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
                     Date final2=formatout.parse(date2);
                     if (final1!=null && final2!=null){
                         if(final1.compareTo(final2) != 0) {
-                            Log.d("hhhhh","Hit from date");
                             callLocationList();
-                        }else {
-
                         }
                     }else {
-                        Log.d("hhhhh","Hit from null");
                         callLocationList();
                     }
                 }else    callLocationList();
@@ -554,7 +550,6 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         SwipeeApiClient.swipeeServiceInstance().getLocation(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
                     if (response.body().get("code").getAsInt() == 200) {
@@ -563,15 +558,12 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
                         Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
 
                     }
-
-
                 }
 
             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-                AppController.dismissProgressdialog();
             }
         });
     }

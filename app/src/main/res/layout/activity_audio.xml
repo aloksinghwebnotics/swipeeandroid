@@ -88,7 +88,6 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_below="@+id/name"
                 android:layout_marginTop="@dimen/dimen5dp"
                 android:gravity="center"
@@ -103,7 +102,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/dimen42dp"
                 android:layout_marginBottom="@dimen/dimen98dp"
-                android:padding="@dimen/dimen12dp"
+                android:padding="@dimen/dimen13dp"
                 android:src="@drawable/mute"
                 app:tint="@color/white" />
 
@@ -115,7 +114,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/dimen98dp"
-                android:padding="@dimen/dimen16dp"
+                android:padding="@dimen/dimen18dp"
                 android:src="@drawable/ic_mic_white_24dp"
                 app:tint="@color/white_light" />
 
@@ -123,7 +122,7 @@
                 android:id="@+id/callcut"
                 android:layout_width="@dimen/dimen72dp"
                 android:layout_height="@dimen/dimen72dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="@dimen/dimen42dp"
                 android:layout_marginBottom="@dimen/dimen98dp"

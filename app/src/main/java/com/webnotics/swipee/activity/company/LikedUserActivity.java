@@ -88,22 +88,12 @@ public class LikedUserActivity extends AppCompatActivity {
                                 JsonObject object = job_data.get(i).getAsJsonObject();
                                 String user_id = object.has("user_id") ? object.get("user_id").isJsonNull() ? "" : object.get("user_id").getAsString() : "";
                                 String first_name = object.has("first_name") ? object.get("first_name").isJsonNull() ? "" : object.get("first_name").getAsString() : "";
-                                String middle_name = object.has("middle_name") ? object.get("middle_name").isJsonNull() ? "" : object.get("middle_name").getAsString() : "";
                                 String last_name = object.has("last_name") ? object.get("last_name").isJsonNull() ? "" : object.get("last_name").getAsString() : "";
                                 String user_profile = object.has("user_profile") ? object.get("user_profile").isJsonNull() ? "" : object.get("user_profile").getAsString() : "";
-                                String email = object.has("email") ? object.get("email").isJsonNull() ? "" : object.get("email").getAsString() : "";
-                                String degree_name = object.has("degree_name") ? object.get("degree_name").isJsonNull() ? "" : object.get("degree_name").getAsString() : "";
-                                String mobile_no = object.has("mobile_no") ? object.get("mobile_no").isJsonNull() ? "" : object.get("mobile_no").getAsString() : "";
-                                String phone_code = object.has("phone_code") ? object.get("phone_code").isJsonNull() ? "" : object.get("phone_code").getAsString() : "";
                                 String country = object.has("country") ? object.get("country").isJsonNull() ? "" : object.get("country").getAsString() : "";
                                 String state = object.has("state") ? object.get("state").isJsonNull() ? "" : object.get("state").getAsString() : "";
                                 String city = object.has("city") ? object.get("city").isJsonNull() ? "" : object.get("city").getAsString() : "";
                                 JsonArray skill_name = object.has("skill_name") ? object.get("skill_name").isJsonNull() ? new JsonArray() : object.get("skill_name").getAsJsonArray() : new JsonArray();
-                                String user_dob = object.has("user_dob") ? object.get("user_dob").isJsonNull() ? "" : object.get("user_dob").getAsString() : "";
-                                String gender = object.has("gender") ? object.get("gender").isJsonNull() ? "" : object.get("gender").getAsString() : "";
-                                String match_id = object.has("match_id") ? object.get("match_id").isJsonNull() ? "" : object.get("match_id").getAsString() : "";
-                                String company_match_status = object.has("company_match_status") ? object.get("company_match_status").isJsonNull() ? "" : object.get("company_match_status").getAsString() : "";
-                                String user_match_status = object.has("user_match_status") ? object.get("user_match_status").isJsonNull() ? "" : object.get("user_match_status").getAsString() : "";
                                 String job_id = object.has("job_id") ? object.get("job_id").isJsonNull() ? "" : object.get("job_id").getAsString() : "";
                                 String skill_name1 = "";
                                 if (skill_name.size() > 0) {

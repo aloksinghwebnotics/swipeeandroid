@@ -36,7 +36,7 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
     Context mContext;
     Rest rest;
     CircleImageView civ_profile;
-    TextView tv_companyname,tv_video,tv_industry,tv_companysize,tv_website,tv_founded,tv_companyaddress;
+    TextView tv_companyname,tv_video,tv_industry,tv_companysize,tv_website,tv_founded,tv_companyaddress,tv_companyemail,tv_companymobile;
     ImageView iv_back,iv_video,iv_videoplay;
     AndExoPlayerView vv_video;
     LinearLayout ll_main;
@@ -68,6 +68,8 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
         iv_videoplay=findViewById(R.id.iv_videoplay);
         rl_video=findViewById(R.id.rl_video);
         tv_video=findViewById(R.id.tv_video);
+        tv_companyemail=findViewById(R.id.tv_companyemail);
+        tv_companymobile=findViewById(R.id.tv_companymobile);
         if (getIntent() != null) {
             String company_id = getIntent().getStringExtra("company_id") != null ? getIntent().getStringExtra("company_id") : "";
             if (rest.isInterentAvaliable()) {
@@ -96,8 +98,14 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+    }
 
-
+    @Override
+    protected void onPause() {
+        if (vv_video!=null){
+            vv_video.pausePlayer();
+        }
+        super.onPause();
     }
 
     private void getProfileData(String company_id) {
@@ -160,6 +168,8 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
                     tv_companysize.setText(employeeuserdetail.getData().getCompany_size());
                     tv_founded.setText(employeeuserdetail.getData().getCompany_founded());
                     tv_website.setText(employeeuserdetail.getData().getCompany_url());
+                    tv_companymobile.setText(String.format("%s%s", employeeuserdetail.getData().getPhone_code(), employeeuserdetail.getData().getMobile()));
+                    tv_companyemail.setText(employeeuserdetail.getData().getCompany_email());
                     uri=employeeuserdetail.getData().getCompany_video();
                     if (employeeuserdetail.getData().getCompany_video()!=null && !TextUtils.isEmpty(employeeuserdetail.getData().getCompany_video())){
                         Glide.with(mContext)

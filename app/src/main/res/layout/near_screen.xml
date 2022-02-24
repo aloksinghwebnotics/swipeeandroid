@@ -18,18 +18,21 @@
            android:src="@drawable/ic_intersection_2" />
        <RelativeLayout
            android:layout_marginTop="@dimen/dimen16dp"
-           android:paddingStart="@dimen/dimen18dp"
+           android:paddingStart="@dimen/dimen10dp"
            android:paddingEnd="@dimen/dimen18dp"
            android:id="@+id/rl_toollbar"
            android:layout_width="match_parent"
            android:layout_height="@dimen/dimen42dp">
 
+
+
            <ImageView
                android:id="@+id/iv_back"
-               android:layout_width="@dimen/dimen30dp"
-               android:layout_height="@dimen/dimen30dp"
+               android:layout_width="@dimen/dimen42dp"
+               android:layout_height="@dimen/dimen42dp"
                android:layout_centerVertical="true"
                android:paddingEnd="@dimen/dimen12dp"
+               android:paddingStart="@dimen/dimen12dp"
                android:src="@drawable/ic_back" />
 
            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
@@ -64,7 +67,7 @@
            android:background="@drawable/white_light_semiround_bg"
            android:drawableStart="@drawable/ic_baseline_search_24"
            android:drawablePadding="@dimen/dimen8dp"
-           android:hint="@string/search"
+           android:hint="Search Industry Wise"
            android:maxLines="1"
            android:ellipsize="end"
            android:paddingStart="@dimen/dimen8dp"

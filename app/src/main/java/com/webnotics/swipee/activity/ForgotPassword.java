@@ -1,6 +1,7 @@
 package com.webnotics.swipee.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -70,9 +71,9 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
                 String email = et_email.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    rest.showToast("Please Enter Email Id");
+                    rest.showToast("Please enter email address.");
                 } else if (!Config.isEmailValid(email)) {
-                    rest.showToast("Please Enter Valid Email Id");
+                    rest.showToast("Please enter a valid email address.");
                 } else {
                     if (rest.isInterentAvaliable()) {
                          AppController.ShowDialogue("", mContext);
@@ -118,7 +119,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 if (response.code()==200 && response.body()!=null){
                     JsonObject responseBody= response.body();
                     if (responseBody.has("message"))
-                        rest.showToast(responseBody.get("message").getAsString());
+                    startActivity(new Intent(mContext,ForgotConfirm.class).putExtra("isSeeker",isSeeker).putExtra("email",email));
                     finish();
                 }else {
                     rest.showToast("Something went wrong");
@@ -140,7 +141,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 if (response.code()==200 && response.body()!=null){
                     JsonObject responseBody= response.body();
                     if (responseBody.has("message"))
-                        rest.showToast(responseBody.get("message").getAsString());
+                    startActivity(new Intent(mContext,ForgotConfirm.class).putExtra("isSeeker",isSeeker).putExtra("email",email));
                     finish();
                 }else {
                     rest.showToast("Something went wrong");

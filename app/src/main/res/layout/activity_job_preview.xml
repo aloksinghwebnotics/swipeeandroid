@@ -17,18 +17,20 @@
         android:src="@drawable/ic_intersection_2" />
 
     <RelativeLayout
-        android:paddingStart="@dimen/dimen18dp"
-        android:paddingEnd="@dimen/dimen18dp"
         android:id="@+id/rl_toollbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen42dp">
+        android:layout_height="@dimen/dimen42dp"
+        android:paddingStart="@dimen/dimen10dp"
+        android:paddingEnd="@dimen/dimen18dp">
+
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="@dimen/dimen30dp"
-            android:layout_height="@dimen/dimen30dp"
+            android:layout_width="@dimen/dimen42dp"
+            android:layout_height="@dimen/dimen42dp"
             android:layout_centerVertical="true"
             android:paddingEnd="@dimen/dimen12dp"
+            android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
         <com.webnotics.swipee.CustomUi.PopinsMediumTextView
@@ -69,8 +71,7 @@
                     android:layout_height="@dimen/dimen72dp"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="@dimen/dimen1dp"
-                    android:layout_marginEnd="@dimen/dimen12dp"
-                    android:src="@drawable/ic_swipee_black" />
+                    android:layout_marginEnd="@dimen/dimen12dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -305,7 +306,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="4 Working Days"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen12sp" />
             </RelativeLayout>
@@ -320,12 +320,12 @@
                     android:text="Working Shifts"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen12sp" />
+
                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
-                    android:layout_width="wrap_content"
                     android:id="@+id/tv_workshift"
-                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="First Shift (Day)"
+                    android:layout_alignParentEnd="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen12sp" />
             </RelativeLayout>
@@ -334,18 +334,19 @@
                 android:layout_marginTop="@dimen/dimen2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No of opening"
+                    android:text="No of openings"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen12sp" />
+
                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_height="wrap_content"
-                    android:text="10"
                     android:id="@+id/tv_opening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen12sp" />
             </RelativeLayout>

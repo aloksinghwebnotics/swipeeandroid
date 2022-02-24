@@ -80,7 +80,7 @@
                            android:layout_marginStart="@dimen/dimen24dp"
                            android:textSize="@dimen/dimen15sp"
                            android:gravity="center_vertical"
-                           android:text="Liked Job"
+                           android:text="Liked Jobs"
                            android:textColor="@color/nav_gray"
                            />
 

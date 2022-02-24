@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_hey"
             android:layout_marginTop="@dimen/dimen8dp"
-            android:text="@string/enteremailaddress"
+            android:text="@string/enteryouremailerror"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen18sp" />
 
@@ -175,6 +175,7 @@
                 android:id="@+id/tv_your_email"
                 android:layout_width="wrap_content"
                 android:layout_marginEnd="@dimen/dimen40dp"
+                android:paddingEnd="@dimen/dimen4dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen18sp" />
@@ -189,6 +190,7 @@
                 android:layout_height="@dimen/dimen20dp"
                 android:src="@drawable/ic_icon_feather_edit" />
         </LinearLayout>
+
         <com.webnotics.swipee.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_otpsent"
             android:layout_width="wrap_content"

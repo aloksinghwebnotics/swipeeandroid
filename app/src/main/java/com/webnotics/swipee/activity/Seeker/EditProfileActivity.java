@@ -47,6 +47,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -194,19 +195,19 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.tv_save:
                 if (TextUtils.isEmpty(et_fname.getText().toString())) {
-                    rest.showToast("Enter First Name");
+                    rest.showToast("Enter first name");
                 } else if (TextUtils.isEmpty(et_lname.getText().toString())) {
-                    rest.showToast("Enter Last Name");
+                    rest.showToast("Enter last name");
                 } else if (genderId == 0) {
-                    rest.showToast("Select Gender");
+                    rest.showToast("Select gender");
                 } else if (TextUtils.isEmpty(tv_dob.getText().toString())) {
                     rest.showToast("Select DOB");
                 } else if (TextUtils.isEmpty(countryId)) {
-                    rest.showToast("Select Country");
+                    rest.showToast("Select country");
                 } else if (TextUtils.isEmpty(stateId)) {
-                    rest.showToast("Select State");
+                    rest.showToast("Select state");
                 } else if (TextUtils.isEmpty(cityId)) {
-                    rest.showToast("Select City");
+                    rest.showToast("Select city");
                 } else {
                     MultipartBody.Part body1 = null;
                     MultipartBody.Part video = null;
@@ -232,11 +233,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.tv_city:
                 if (!TextUtils.isEmpty(stateId))
-                    startActivity(new Intent(mContext, AddCityActivity.class).putExtra("id", stateId).putExtra("from", EditProfileActivity.class.getSimpleName()));
-                else rest.showToast("Select State First");
+                    startActivity(new Intent(mContext, AddCityActivity.class).putExtra("id", stateId).putExtra("city_id", cityId).putExtra("from", EditProfileActivity.class.getSimpleName()));
+                else rest.showToast("Select state first");
                 break;
             case R.id.tv_state:
-                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("from", EditProfileActivity.class.getSimpleName()));
+                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id",stateId).putExtra("from", EditProfileActivity.class.getSimpleName()));
                 break;
             case R.id.tv_dob:
                 setDate();
@@ -274,10 +275,25 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     int mothfinal = monthOfYear + 1;
                     tv_dob.setText(year + "/" + mothfinal + "/" + dayOfMonth);
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+
+        String dateCurrent = Calendar.getInstance().getTime().toString();
+        SimpleDateFormat formatCurrent = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+        try
+        {
+            Date myDate = formatCurrent.parse(dateCurrent);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(myDate);
+            calendar.add(Calendar.YEAR , -11 );
+            datePickerDialog.getDatePicker().setMaxDate(calendar.getTime().getTime());
+
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+
+        }
         datePickerDialog.show();
     }
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -305,6 +321,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, SELECT_VIDEO);
     }
+
+
 
     private void industryBottomSheet() {
         RelativeLayout intent_sheet = findViewById(R.id.intent_sheet);
@@ -370,7 +388,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         .into(iv_userpickvideo);
 
                 iv_userpickvideo.setVisibility(View.VISIBLE);
-            } else rest.showToast("Video must be lesser than 15MB");
+            } else rest.showToast("Please select video max 15 MB.");
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");

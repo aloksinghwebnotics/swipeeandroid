@@ -94,17 +94,12 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
     private JsonArray salary_type = new JsonArray();
     private JsonArray job_industry = new JsonArray();
     private JsonArray employment_type = new JsonArray();
-    private JsonArray job_location = new JsonArray();
     RelativeLayout jobtypebottom_sheet, qualification_sheet, perk_sheet;
     BottomSheetBehavior bottomsheet_jobType, bottomsheet_qualification, bottomsheet_perk;
     RecyclerView rv_jobtype;
     private JobPostJobTypeAdapter jobTypeAdapter;
-    static String tempIndustryId = "";
-    static String tempIndustryName = "";
     static String tempjobTypeId = "";
     static String tempjobTypeName = "";
-    static String tempLocationId = "";
-    static String tempLocationName = "";
     private String industryId = "";
     private String employmentId = "";
     private String locationId = "";
@@ -113,13 +108,11 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
     private PerkAdapter perkAdapter;
     ArrayList<CommonModel> qualificationArraylist = new ArrayList<>();
     ArrayList<CommonModel> perkArraylist = new ArrayList<>();
-    ArrayList<CommonModel> languageArraylist = new ArrayList<>();
     ArrayList<CommonModel> qualification = new ArrayList<>();
     ArrayList<CommonModel> perks = new ArrayList<>();
 
     Spinner spn_openning, spn_experience, spn_minsalary, spn_maxsalary, spn_salarytype, spn_workshift, spn_workdays;
     ArrayList<JsonObject> experienceList = new ArrayList<>();
-    ArrayList<JsonObject> salarytypeList = new ArrayList<>();
     ArrayList<JsonObject> salaryofferList = new ArrayList<>();
     private ArrayList<AddSkillsModel> mArrayListSkills;
     private AddSkillAdapter skilladapter;
@@ -512,15 +505,15 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                 if (rl_first.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(tv_industry.getText().toString()) || TextUtils.isEmpty(industryId)) {
-                        rest.showToast("Select Job Industry");
+                        rest.showToast("Select job industry");
                     } else if (TextUtils.isEmpty(companyName.replaceAll(" ", ""))) {
-                        rest.showToast("Enter Company Name");
+                        rest.showToast("Enter company name");
                     } else if (TextUtils.isEmpty(et_jobtitle.getText().toString().replaceAll(" ", ""))) {
-                        rest.showToast("Enter Job Title");
+                        rest.showToast("Enter job title");
                     } else if (TextUtils.isEmpty(tv_employmenttype.getText().toString()) || TextUtils.isEmpty(employmentId)) {
-                        rest.showToast("Select Employment Type");
+                        rest.showToast("Select employment type");
                     } else if (TextUtils.isEmpty(tv_location.getText().toString()) || TextUtils.isEmpty(locationId)) {
-                        rest.showToast("Select Location");
+                        rest.showToast("Select job location");
                     } else {
                         rl_first.setVisibility(View.GONE);
                         rl_second.setVisibility(View.VISIBLE);
@@ -538,15 +531,15 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                     if (spn_openning == null || spn_openning.getSelectedItemPosition() == 0) {
                         rest.showToast("Select number of opening");
                     } else if (TextUtils.isEmpty(tv_qualification.getText().toString())) {
-                        rest.showToast("Select Qualification");
+                        rest.showToast("Select qualification");
                     } else if (spn_experience == null || spn_experience.getSelectedItemPosition() == 0) {
-                        rest.showToast("Select Work Experience");
+                        rest.showToast("Select work experience");
                     } else if (spn_minsalary == null || spn_minsalary.getSelectedItemPosition() == 0) {
-                        rest.showToast("Select Min Salary");
+                        rest.showToast("Select min salary");
                     } else if (spn_maxsalary == null || spn_maxsalary.getSelectedItemPosition() == 0) {
-                        rest.showToast("Select Max Salary");
+                        rest.showToast("Select mMax salary");
                     } else if (Integer.parseInt(spn_maxsalary.getSelectedItem().toString()) < Integer.parseInt(spn_minsalary.getSelectedItem().toString())) {
-                        rest.showToast("Max Salary must be greater than Min Salary");
+                        rest.showToast("Max salary must be greater than min salary");
                     } /*else if (spn_salarytype == null || spn_salarytype.getSelectedItemPosition() == 0) {
                         rest.showToast("Select Salary Type");
                     }*/ else {
@@ -888,10 +881,10 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
             }
         }
         catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
+            Log.e("login activity", "File not found: " + e);
             return ret;
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
+            Log.e("login activity", "Can not read file: " + e);
             return ret;
         }
 
@@ -1243,9 +1236,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         tv_industry.setText(name);
         industryId = id;
         for (int i=0;i<commonModels.size();i++){
-            if (id.equalsIgnoreCase(commonModels.get(i).getId())){
-                commonModels.get(i).setSelected(true);
-            }else commonModels.get(i).setSelected(false);
+            commonModels.get(i).setSelected(id.equalsIgnoreCase(commonModels.get(i).getId()));
         }
     }
 
@@ -1253,9 +1244,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         tv_location.setText(name);
         locationId = id;
         for (int i=0;i<commonModelsLocation.size();i++){
-            if (id.equalsIgnoreCase(commonModelsLocation.get(i).getId())){
-                commonModelsLocation.get(i).setSelected(true);
-            }else commonModelsLocation.get(i).setSelected(false);
+            commonModelsLocation.get(i).setSelected(id.equalsIgnoreCase(commonModelsLocation.get(i).getId()));
         }
     }
 
@@ -1306,9 +1295,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
             String name = data.get(position).getName();
             String id = data.get(position).getId();
             holder.radioButton.setClickable(false);
-            if (data.get(position).isSelected()) {
-                holder.radioButton.setChecked(true);
-            } else holder.radioButton.setChecked(false);
+            holder.radioButton.setChecked(data.get(position).isSelected());
             holder.tv_item.setText(name);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1401,20 +1388,12 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
             mCheckImgView.setOnClickListener(view -> {
 
-                if (!qualificationArraylist.get(pos).isSelected()) {
-                    qualificationArraylist.get(pos).setSelected(true);
-                } else {
-                    qualificationArraylist.get(pos).setSelected(false);
-                }
+                qualificationArraylist.get(pos).setSelected(!qualificationArraylist.get(pos).isSelected());
                 notifyDataSetChanged();
             });
             nameTxt.setOnClickListener(view -> {
 
-                if (!qualificationArraylist.get(pos).isSelected()) {
-                    qualificationArraylist.get(pos).setSelected(true);
-                } else {
-                    qualificationArraylist.get(pos).setSelected(false);
-                }
+                qualificationArraylist.get(pos).setSelected(!qualificationArraylist.get(pos).isSelected());
                 notifyDataSetChanged();
             });
             return convertView;
@@ -1469,20 +1448,12 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
             mCheckImgView.setOnClickListener(view -> {
 
-                if (!perkArraylist.get(pos).isSelected()) {
-                    perkArraylist.get(pos).setSelected(true);
-                } else {
-                    perkArraylist.get(pos).setSelected(false);
-                }
+                perkArraylist.get(pos).setSelected(!perkArraylist.get(pos).isSelected());
                 notifyDataSetChanged();
             });
             nameTxt.setOnClickListener(view -> {
 
-                if (!perkArraylist.get(pos).isSelected()) {
-                    perkArraylist.get(pos).setSelected(true);
-                } else {
-                    perkArraylist.get(pos).setSelected(false);
-                }
+                perkArraylist.get(pos).setSelected(!perkArraylist.get(pos).isSelected());
                 notifyDataSetChanged();
             });
             return convertView;

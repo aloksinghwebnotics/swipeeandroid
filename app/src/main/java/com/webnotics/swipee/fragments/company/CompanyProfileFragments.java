@@ -90,7 +90,7 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
             if (CompanyHomeActivity.instance.employeeuserdetail != null) {
                 CompanyProfileModel employeeuserdetail = CompanyHomeActivity.instance.employeeuserdetail;
                 if (employeeuserdetail.isStatus()) {
-                    setDataResponce(employeeuserdetail);
+                    setDataResponse(employeeuserdetail);
                 } else {
                     hitService();
                 }
@@ -101,7 +101,7 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
         return rootView;
     }
 
-    private void setDataResponce(CompanyProfileModel employeeuserdetail) {
+    private void setDataResponse(CompanyProfileModel employeeuserdetail) {
         if (employeeuserdetail.getCode() == 200 && employeeuserdetail.getData() != null) {
             Config.SetEmail(employeeuserdetail.getData().getCompany_email());
             Config.SetMobileNo(employeeuserdetail.getData().getMobile());
@@ -190,6 +190,14 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
 
     }
 
+
+    @Override
+    public void onPause() {
+        if (vv_video!=null)
+            vv_video.pausePlayer();
+        super.onPause();
+    }
+
     private void callPlayer(String url) {
         vv_video.setSource(url);
         vv_video.setVisibility(View.VISIBLE);
@@ -225,7 +233,7 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
                     } else if (response.body().getCode() == 200 && response.body().isStatus()) {
                         if (CompanyHomeActivity.instance != null)
                             CompanyHomeActivity.instance.employeeuserdetail = response.body();
-                        setDataResponce(response.body());
+                        setDataResponse(response.body());
                     } else {
                         rest.showToast(response.body().getMessage());
                     }

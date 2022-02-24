@@ -13,14 +13,16 @@
     <RelativeLayout
         android:id="@+id/rl_toollbar"
         android:layout_width="match_parent"
+        android:layout_marginStart="-8dp"
         android:layout_height="@dimen/dimen42dp">
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="@dimen/dimen30dp"
-            android:layout_height="@dimen/dimen30dp"
+            android:layout_width="@dimen/dimen42dp"
+            android:layout_height="@dimen/dimen42dp"
             android:layout_centerVertical="true"
             android:paddingEnd="@dimen/dimen12dp"
+            android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
         <com.webnotics.swipee.CustomUi.PopinsMediumTextView
@@ -89,11 +91,11 @@
         android:layout_marginTop="@dimen/dimen12dp"
         android:layout_marginEnd="@dimen/dimen12dp"
         android:background="@drawable/white_light_semiround_bg"
+        android:capitalize="sentences"
         android:gravity="start"
         android:hint="@string/writesomthing"
-        android:padding="@dimen/dimen12dp"
-        android:capitalize="sentences"
         android:inputType="text|textCapSentences"
+        android:padding="@dimen/dimen12dp"
         android:textColor="@color/black"
         android:textSize="@dimen/dimen14sp" />
 

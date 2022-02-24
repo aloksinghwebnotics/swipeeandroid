@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:gravity="left"
-                        android:text="Select Job Type"
+                        android:text="Select Job Types"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen16sp" />
                     <ImageView

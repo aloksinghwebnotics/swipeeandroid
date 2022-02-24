@@ -19,7 +19,8 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_height="match_parent"
             />
     </RelativeLayout>
 
@@ -33,4 +34,16 @@
         android:layout_alignParentRight="true"
         android:padding="@dimen/dimen6dp"
         android:src="@drawable/ic_baseline_close_24" />
+    <ImageView
+        android:visibility="gone"
+        android:layout_margin="@dimen/dimen24dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/iv_send"
+        android:layout_width="@dimen/dimen48dp"
+        android:background="@drawable/primary_circle_bg"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/dimen13dp"
+        android:src="@drawable/ic_send_chat"
+        app:tint="@color/white" />
 </RelativeLayout>

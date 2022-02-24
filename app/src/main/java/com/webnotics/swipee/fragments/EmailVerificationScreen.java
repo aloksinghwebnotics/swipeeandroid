@@ -57,7 +57,7 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
         tv_your_email=rootView.findViewById(R.id.tv_your_email);
         iv_emailedit=rootView.findViewById(R.id.iv_emailedit);
         et_email.setText(Config.GetEmail());
-        tv_your_email.setText(MessageFormat.format("Your Email\n{0}", Config.GetEmail()));
+        tv_your_email.setText(MessageFormat.format("Your email\n{0}", Config.GetEmail()));
         rl_otp.setVisibility(View.VISIBLE);
         rl_email.setVisibility(View.GONE);
         tv_next.setOnClickListener(this);
@@ -90,9 +90,9 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                    }else {
                          String email=et_email.getText().toString();
                        if (TextUtils.isEmpty(email)){
-                           rest.showToast("Please Enter Email Id");
+                           rest.showToast("Please enter email address");
                        }else if (!Config.isEmailValid(email)){
-                           rest.showToast("Please Enter Valid Email Id");
+                           rest.showToast("Please enter a valid email address");
                        }else{
                            if (rest.isInterentAvaliable()) {
                                AppController.ShowDialogue("", mContext);
@@ -130,7 +130,7 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
     private void callCheckOTP() {
         String otp=et_otp1.getText().toString()+et_otp2.getText().toString()+et_otp3.getText().toString()+et_otp4.getText().toString();
         if (otp.length()!=4){
-            rest.showToast("Enter Valid OTP");
+            rest.showToast("Please enter 4 digit OTP");
         }else {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);

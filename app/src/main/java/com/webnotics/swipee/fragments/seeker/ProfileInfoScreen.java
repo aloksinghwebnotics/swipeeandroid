@@ -72,6 +72,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -251,9 +252,9 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
             case R.id.tv_next:
                 if (rl_name.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(et_name.getText().toString()) || et_name.getText().toString().replaceAll(" ", "").length() <= 0) {
-                        rest.showToast("Enter First Name");
+                        rest.showToast("Please enter your first name.");
                     } else if (TextUtils.isEmpty(et_lname.getText().toString()) || et_lname.getText().toString().replaceAll(" ", "").length() <= 0) {
-                        rest.showToast("Enter First Name");
+                        rest.showToast("Please enter your last name.");
 
                     } else {
                         rl_name.setVisibility(View.GONE);
@@ -265,9 +266,9 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                     }
                 }else if (rl_location.getVisibility() == View.VISIBLE) {
                 if (TextUtils.isEmpty(tv_state.getText().toString()) ||TextUtils.isEmpty(stateId)|| stateId.equalsIgnoreCase("0") || tv_state.getText().toString().replaceAll(" ", "").length() <= 0) {
-                    rest.showToast("Select State");
+                    rest.showToast("Please select state.");
                 } else if (TextUtils.isEmpty(tv_city.getText().toString())||TextUtils.isEmpty(cityId)|| cityId.equalsIgnoreCase("0") || tv_city.getText().toString().replaceAll(" ", "").length() <= 0) {
-                    rest.showToast("Select City");
+                    rest.showToast("Please select city.");
                 } else {
                     rl_location.setVisibility(View.GONE);
                     rl_birthday.setVisibility(View.VISIBLE);
@@ -286,7 +287,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                         tv_back.setVisibility(View.VISIBLE);
                         dob = tv_year.getText().toString() + "/" + tv_month.getText().toString() + "/" + tv_date.getText().toString();
                     } else {
-                        rest.showToast("Select Your Birth Date");
+                        rest.showToast("Please select your date of birth");
                     }
 
 
@@ -297,7 +298,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                         iv_shaddowleft.setVisibility(View.VISIBLE);
                         iv_shaddowright.setVisibility(View.VISIBLE);
                         tv_back.setVisibility(View.VISIBLE);
-                    } else rest.showToast("Select Profile Picture");
+                    } else rest.showToast("Please select profile image");
                 } else if (rl_video.getVisibility() == View.VISIBLE) {
                         rl_video.setVisibility(View.GONE);
                         rl_about.setVisibility(View.VISIBLE);
@@ -313,7 +314,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                         iv_shaddowright.setVisibility(View.GONE);
                         tv_back.setVisibility(View.VISIBLE);
                         about = et_about.getText().toString();
-                    } else rest.showToast("Tell Us About Yourself");
+                    } else rest.showToast("Please write somethings about yourself.");
 
                 } else if (rl_skill.getVisibility() == View.VISIBLE) {
                     if (mArrayListid.size() > 0) {
@@ -323,7 +324,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                         iv_shaddowright.setVisibility(View.VISIBLE);
                         tv_back.setVisibility(View.VISIBLE);
                     } else {
-                        rest.showToast("Select skills");
+                        rest.showToast("Please select at least 1 skill");
                     }
 
                 } else if (rl_resume.getVisibility() == View.VISIBLE) {
@@ -346,7 +347,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                             AppController.ShowDialogue("", mContext);
                             callAllDataService(selectedFileUri, body1,body2);
                         } else rest.AlertForInternet();
-                    } else rest.showToast("Please Select Resume");
+                    } else rest.showToast("Please upload your resume");
 
                 }
                 break;
@@ -370,12 +371,12 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                 break;
 
             case R.id.tv_state:
-                    startActivity(new Intent(mContext, AddStateActivity.class).putExtra("from", ProfileInfoScreen.class.getSimpleName()));
+                    startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id",stateId).putExtra("from", ProfileInfoScreen.class.getSimpleName()));
                     break;
 
             case R.id.tv_city:
                         if (!TextUtils.isEmpty(stateId) && !stateId.equalsIgnoreCase("0"))
-                            startActivity(new Intent(mContext, AddCityActivity.class).putExtra("id", stateId).putExtra("from", ProfileInfoScreen.class.getSimpleName()));
+                            startActivity(new Intent(mContext, AddCityActivity.class).putExtra("city_id", cityId).putExtra("id", stateId).putExtra("from", ProfileInfoScreen.class.getSimpleName()));
                         else rest.showToast("Select State First");
                     break;
             default:
@@ -507,9 +508,26 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                     tv_year.setText(String.valueOf(year));
 
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+
+        String dateCurrent = Calendar.getInstance().getTime().toString();
+        SimpleDateFormat formatCurrent = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+        try
+        {
+            Date myDate = formatCurrent.parse(dateCurrent);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(myDate);
+            calendar.add(Calendar.YEAR , -11 );
+            datePickerDialog.getDatePicker().setMaxDate(calendar.getTime().getTime());
+
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+
+        }
         datePickerDialog.show();
     }
+
 
 
     @Override
@@ -549,7 +567,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                         .into( iv_uservideoimg );
                 iv_pickvideo.setVisibility(View.GONE);
 
-            }else rest.showToast("Video must be lesser than 15MB");
+            }else rest.showToast("Please select video max 15 MB.");
         }
         else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
@@ -691,7 +709,6 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
     private void callAllDataService(Uri selectedFileUri, MultipartBody.Part body1, MultipartBody.Part body2) {
         String MULTIPART_FORM_DATA = "multipart/form-data";
         HashMap<String, RequestBody> map = new HashMap<>();
-        Log.d("dkdkdkkdkd",Config.GetUserToken());
         map.put(ParaName.KEYTOKEN, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), Config.GetUserToken()));
         map.put(ParaName.KEY_FNAME, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_name.getText().toString()));
         map.put(ParaName.KEY_LNAME, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_lname.getText().toString()));

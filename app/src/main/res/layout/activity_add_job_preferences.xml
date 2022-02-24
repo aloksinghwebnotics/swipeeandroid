@@ -16,15 +16,18 @@
         <RelativeLayout
             android:id="@+id/rl_toollbar"
             android:layout_width="match_parent"
+            android:layout_marginStart="-8dp"
+            android:layout_marginEnd="-8dp"
             android:layout_height="@dimen/dimen42dp">
 
             <ImageView
                 android:id="@+id/iv_back"
-                android:layout_width="@dimen/dimen30dp"
-                android:layout_height="@dimen/dimen30dp"
-                android:src="@drawable/ic_back"
+                android:layout_width="@dimen/dimen42dp"
+                android:layout_height="@dimen/dimen42dp"
+                android:layout_centerVertical="true"
                 android:paddingEnd="@dimen/dimen12dp"
-                android:layout_centerVertical="true" />
+                android:paddingStart="@dimen/dimen12dp"
+                android:src="@drawable/ic_back" />
 
             <com.webnotics.swipee.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
@@ -138,7 +141,6 @@
                                 android:layout_height="@dimen/dimen36dp"
                                 android:background="@color/white"
                                 android:gravity="center_vertical"
-                                android:inputType="textEmailAddress"
                                 android:maxLines="1"
                                 android:paddingStart="@dimen/dimen2dp"
                                 android:paddingEnd="@dimen/dimen32dp"

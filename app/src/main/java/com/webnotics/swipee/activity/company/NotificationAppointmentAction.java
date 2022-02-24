@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.RescheduleAppointment;
+import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
@@ -42,6 +44,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     TextView tv_name, tv_location,tv_datetime,tv_mode,tv_appointment,tv_accept,tv_cancel;
     Rest rest;
     Context mContext;
+    RelativeLayout rl_card;
     private String appointmentId="";
     private String appointment_type="";
     private String appointment_number="";
@@ -57,6 +60,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     private String notify_number="";
     private String job_title="";
     private String date="";
+    private String job_id="";
     @SuppressLint("StaticFieldLeak")
     public static NotificationAppointmentAction instance;
     private String from="";
@@ -81,6 +85,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
         tv_appointment = findViewById(R.id.tv_appointment);
         tv_accept = findViewById(R.id.tv_accept);
         tv_cancel = findViewById(R.id.tv_cancel);
+        rl_card = findViewById(R.id.rl_card);
         iv_back.setOnClickListener(this);
 
         if (getIntent() != null) {
@@ -101,6 +106,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
              job_title = getIntent().getStringExtra("job_title") != null ? getIntent().getStringExtra("job_title") : "";
              date = getIntent().getStringExtra("date") != null ? getIntent().getStringExtra("date") : "";
             from = getIntent().getStringExtra("from") != null ? getIntent().getStringExtra("from") : "";
+            job_id = getIntent().getStringExtra("job_id") != null ? getIntent().getStringExtra("job_id") : "";
             tv_name.setText(posted_by);
             tv_datetime.setText(date);
             if (appointment_type.equalsIgnoreCase("online_meeting")) {
@@ -127,6 +133,8 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
             tv_accept.setOnClickListener(this);
             tv_cancel.setOnClickListener(this);
             tv_appointment.setOnClickListener(this);
+            rl_card.setOnClickListener(this);
+
         }
     }
 
@@ -206,6 +214,22 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         .putExtra("date", date)
                 );
                 break;
+
+            case R.id.rl_card:
+               if (Config.isSeeker()){
+                   Intent resultIntent = new Intent(mContext, JobDetail.class);
+                   resultIntent.putExtra("id",job_id );
+                   resultIntent.putExtra("from", NotificationAppointmentAction.class.getSimpleName());
+                   mContext.startActivity(resultIntent);
+               }else {
+                   Intent resultIntent = new Intent(mContext, UserDetail.class);
+                   resultIntent.putExtra("job_id", job_id);
+                   resultIntent.putExtra("id", user_id);
+                   resultIntent.putExtra("from", NotificationAppointmentAction.class.getSimpleName());
+                   resultIntent.putExtra("name", "");
+                   mContext.startActivity(resultIntent);
+               }
+                break;
             default:break;
         }
     }
@@ -227,10 +251,20 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responceBody = response.body();
                     if (response.body().get("code").getAsInt() == 203) {
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null){
+                                NotificationActivity.instance.onBackPressed();
+                            }
+                        }
                         rest.showToast(response.body().get("message").getAsString());
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (responceBody.get("status").getAsBoolean()) {
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null){
+                                NotificationActivity.instance.onBackPressed();
+                            }
+                        }
                         rest.showToast(responceBody.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()));
                         finish();
@@ -260,10 +294,20 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                     JsonObject responceBody = response.body();
                     if (response.body().get("code").getAsInt() == 203) {
                         rest.showToast(response.body().get("message").getAsString());
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null){
+                                NotificationActivity.instance.onBackPressed();
+                            }
+                        }
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("code").getAsInt() == 200 &&responceBody.get("status").getAsBoolean()) {
                         rest.showToast(responceBody.get("message").getAsString());
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+                            if (NotificationActivity.instance!=null){
+                                NotificationActivity.instance.onBackPressed();
+                            }
+                        }
                         if (Config.isSeeker())
                             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
                         finish();
@@ -278,6 +322,16 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                 AppController.dismissProgressdialog();
             }
         });
+
+    }
+
+    public void setBackPressed() {
+        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
+            if (NotificationActivity.instance!=null){
+                NotificationActivity.instance.onBackPressed();
+            }
+        }
+        finish();
 
     }
 }

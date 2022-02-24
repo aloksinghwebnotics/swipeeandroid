@@ -33,10 +33,18 @@
         android:usesCleartextTraffic="true"
         tools:replace="allowBackup">
         <activity
+            android:name=".activity.WebViewActivity"
+            android:exported="false"
+            android:theme="@style/basictheme"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ForgotConfirm"
+            android:exported="false" />
+        <activity
             android:name=".activity.AppointmentDetail"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/basictheme"/>
+            android:theme="@style/basictheme" />
         <activity
             android:name=".activity.company.FeaturedPlan"
             android:exported="true"
@@ -49,19 +57,19 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
+
         <activity
             android:name=".call.VideoActivity"
-            android:screenOrientation="portrait"
-            android:exported="true"/>
-
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.webnotics.swipee.call.AudioActivity"
-            android:screenOrientation="portrait"
-            android:exported="true"/>
-
-        <activity android:name=".call.FirstVideoActivity"
-            android:screenOrientation="portrait"
-            android:exported="true"/>
+            android:name=".call.AudioActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".call.FirstVideoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AppointmentAction"
             android:exported="true"
@@ -233,8 +241,8 @@
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -344,14 +352,7 @@
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
-
-        <service android:name=".services.MyIntentService"
-            android:exported="false" />
-        <service android:name=".services.CollegeIntentService"
-            android:exported="false" />
-
-        <!-- Razor Pay Activity -->
+        </service> <!-- Razor Pay Activity -->
         <receiver
             android:name="com.razorpay.RzpTokenReceiver"
             android:exported="false">
@@ -372,12 +373,11 @@
                     android:scheme="io.rzp" />
             </intent-filter>
         </activity>
-        <activity android:name=".chat.MainChatActivity"
+        <activity
+            android:name=".chat.MainChatActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/basictheme"/>
-
-        <!-- Api key RazorPay -->
+            android:theme="@style/basictheme" /> <!-- Api key RazorPay -->
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_54rFvRw59NIrOK" />

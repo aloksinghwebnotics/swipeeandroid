@@ -73,8 +73,8 @@
                     android:drawablePadding="@dimen/dimen10dp"
                     android:gravity="center_vertical"
 
-                    android:inputType="textEmailAddress"
                     android:hint="@string/enteryouremail"
+                    android:inputType="textEmailAddress"
                     android:maxLength="52"
                     android:maxLines="1"
                     android:paddingStart="@dimen/dimen12dp"
@@ -112,7 +112,7 @@
                     android:gravity="center_vertical"
                     android:hint="@string/enteryourphone"
                     android:inputType="number"
-                    android:maxLength="12"
+                    android:maxLength="10"
                     android:maxLines="1"
                     android:paddingStart="@dimen/dimen12dp"
                     android:paddingTop="@dimen/dimen4dp"

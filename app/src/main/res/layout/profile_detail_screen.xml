@@ -2,8 +2,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    xmlns:tagview="http://schemas.android.com/tools"
-
     android:background="@color/white"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -101,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Authentication"
+                        android:text="Authenticated"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen10sp" />
 
@@ -238,7 +236,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Authentication"
+                        android:text="Authenticated"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen10sp" />
 
@@ -308,8 +306,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:inputType="text"
                                 android:maxLines="1"
+                                android:hint="Select industry"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -338,8 +336,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:inputType="text"
                                 android:maxLines="1"
+                                android:hint="Select company size"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -369,6 +367,7 @@
                                 android:gravity="center_vertical"
                                 android:inputType="text"
                                 android:maxLines="1"
+                                android:hint="Enter company website"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen12dp"
@@ -394,6 +393,7 @@
                                 android:gravity="center_vertical"
                                 android:inputType="number"
                                 android:maxLines="1"
+                                android:hint="Enter company established year"
                                 android:maxLength="4"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
@@ -417,8 +417,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:inputType="text"
                                 android:maxLines="1"
+                                android:hint="Enter country"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -447,8 +447,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:inputType="text"
                                 android:maxLines="1"
+                                android:hint="Select state"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -477,12 +477,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:inputType="text"
                                 android:maxLines="1"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
                                 android:paddingBottom="@dimen/dimen4dp"
+                                android:hint="Select city"
                                 android:textColor="@color/black_Light"
                                 android:textColorHint="@color/black_op50"
                                 android:textSize="@dimen/dimen12sp" />
@@ -508,6 +508,7 @@
                                 android:capitalize="sentences"
                                 android:inputType="textCapSentences"
                                 android:maxLines="1"
+                                android:hint="Enter company address"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen12dp"
@@ -530,8 +531,9 @@
                                 android:layout_height="@dimen/dimen42dp"
                                 android:gravity="center_vertical"
                                 android:inputType="number"
-                                android:maxLength="10"
+                                android:maxLength="6"
                                 android:maxLines="1"
+                                android:hint="Enter area pincode"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen12dp"
@@ -659,7 +661,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen40dp"
-                        android:text="@string/upload"
+                        android:text="@string/atleastonepick"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen24sp" />
 
@@ -669,7 +671,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_upload"
                         android:layout_marginTop="@dimen/dimen8dp"
-                        android:text="@string/atleastonepickofcompany"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen18sp" />
 
@@ -698,10 +699,11 @@
 
                         <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                             android:id="@+id/tv_pickimg"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/iv_pickimg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_pickimg"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
                             android:layout_marginTop="@dimen/dimen16dp"
                             android:text="@string/uploadphotomatter"
                             android:textColor="@color/black_Light"

@@ -286,7 +286,6 @@ public interface RestService {
     @POST(ApiUrls.URL_USERAPPLYJOB)
     Call<JsonObject> postApplyJob(@FieldMap HashMap<String, String> hashMap);
 
-
     @GET(ApiUrls.URL_COMPANYJOBLIST)
     Call<JsonObject> getCompanyJobList(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_COMPANYID) String company);
 
@@ -340,7 +339,6 @@ public interface RestService {
     @GET(ApiUrls.URL_JOBPOSTFIVE)
     Call<JsonObject> getPostJobStepFive(@Query(ParaName.KEYTOKEN) String token);
 
-
     @FormUrlEncoded
     @POST(ApiUrls.URL_SAVEJOBPOST)
     Call<JsonObject> savePostJob(@FieldMap HashMap<String, String> hashMap);
@@ -352,10 +350,6 @@ public interface RestService {
     @FormUrlEncoded
     @POST(ApiUrls.URL_RESENDMOBILE)
     Call<JsonObject> resendMobileOtp(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_MOBILENO) String mobile, @Field(ParaName.KEY_PHONECODE) String phonecode);
-
-    @FormUrlEncoded
-    @POST(ApiUrls.URL_VERIFYCOMPANYMOBILE)
-    Call<JsonObject> companyMobileResend(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_MOBILENO) String mobile, @Field(ParaName.KEY_PHONECODE) String phonecode);
 
 
     @FormUrlEncoded
@@ -370,10 +364,8 @@ public interface RestService {
     @POST(ApiUrls.URL_RECRUITERFORGOTPASS)
     Call<JsonObject> forgotRecruiter(@Field(ParaName.KEY_EMAIL) String mobile);
 
-
     @GET(ApiUrls.URL_DELETEEDUCATION)
     Call<JsonObject> deleteEducation(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_USEREDUCATIONID) String educationId);
-
 
     @GET(ApiUrls.URL_DELETEEXPERIENCE)
     Call<JsonObject> deleteExperience(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_USEREXPID) String educationId);
@@ -401,7 +393,6 @@ public interface RestService {
     @GET(ApiUrls.URL_POSTEDJOBSBYFILTER)
     Call<PostedJobModel> postedJobs(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_FILTER) String filter);
 
-
     @FormUrlEncoded
     @POST(ApiUrls.URL_JOBPOSTRULE)
     Call<JsonObject> jobpostrule(@Field(ParaName.KEYTOKEN) String token, @Field(ParaName.KEY_JOBPOSTID) String id);
@@ -421,11 +412,9 @@ public interface RestService {
     @GET(ApiUrls.URL_SETMSGSEEN)
     Call<JsonObject> setMsgSeen(@QueryMap HashMap<String, String> hashMap);
 
-
     @Multipart
     @POST(ApiUrls.URL_SENDMSG)
     Call<JsonObject> sendChat(@PartMap() Map<String, RequestBody> partMap, @Part MultipartBody.Part pick);
-
 
     @FormUrlEncoded
     @POST(ApiUrls.URL_ORDERFEATUREJOB)
@@ -476,9 +465,6 @@ public interface RestService {
     @GET(ApiUrls.URL_SEEKERAPPOINTMENTDETAIL)
     Call<SeekerAppointmentDetailModel> getSeekerAppointmentDetail(@Query(ParaName.KEYTOKEN) String token, @Query(ParaName.KEY_APPOINTMENTID) String id);
 
-
-    //Naushad
-
     @FormUrlEncoded
     @POST(ApiUrls.URL_EMPLOYER_ORDER_PACKAGE)
     Call<JsonObject> setRecruiterTransaction(@FieldMap HashMap<String, String> hashMap);
@@ -494,5 +480,10 @@ public interface RestService {
     @FormUrlEncoded
     @POST(ApiUrls.URL_FCMSETTING)
     Call<JsonObject> setNotificationSetting(@FieldMap HashMap<String, String> hashMap);
+
+
+    @FormUrlEncoded
+    @POST(ApiUrls.URL_APPOINTMENT_ACCESS_TOKEN_CHAT)
+    Call<JsonObject> createAccessToken(@Field(ParaName.KEYTOKEN) String user_token,@Field(ParaName.KEY_UID) String user_id,@Field(ParaName.KEY_APPOINTMENTID) String appoi_id,@Field(ParaName.KEY_APPOINTMENTNUMBER) String appoi_number);
 }
 

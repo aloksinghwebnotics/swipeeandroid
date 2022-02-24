@@ -3,10 +3,13 @@ package com.webnotics.swipee.activity.Seeker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,12 +31,13 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddCityActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddCityActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     RecyclerView rv_stateList;
     ImageView iv_back;
     TextView tv_next;
@@ -41,6 +45,9 @@ public class AddCityActivity extends AppCompatActivity implements View.OnClickLi
     Rest rest;
     public String cityId = "";
     public String cityName = "";
+    EditText et_search;
+    private CityAdapter stateAdapter;
+    private String city_id="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +62,11 @@ public class AddCityActivity extends AppCompatActivity implements View.OnClickLi
         rv_stateList = findViewById(R.id.rv_stateList);
         tv_next = findViewById(R.id.tv_next);
         iv_back = findViewById(R.id.iv_back);
+        et_search = findViewById(R.id.et_search);
         Intent intent = getIntent();
         if (intent != null)
             if (intent.getStringExtra("id") != null) {
+                city_id=intent.getStringExtra("city_id")!=null?intent.getStringExtra("city_id"):"";
                 if (rest.isInterentAvaliable()) {
                     AppController.ShowDialogue("", mContext);
                     getCityList(intent.getStringExtra("id"));
@@ -65,7 +74,7 @@ public class AddCityActivity extends AppCompatActivity implements View.OnClickLi
                 iv_back.setOnClickListener(this);
                 tv_next.setOnClickListener(this);
             }
-
+        et_search.addTextChangedListener(this);
 
     }
 
@@ -79,9 +88,11 @@ public class AddCityActivity extends AppCompatActivity implements View.OnClickLi
                     if (stateModel != null)
                         if (stateModel.isStatus() && stateModel.getCode() == 200) {
                             ArrayList<CityModel.Data> data = stateModel.getData();
+                            if (!TextUtils.isEmpty(city_id))
+                            IntStream.range(0, data.size()).filter(i -> data.get(i).getCity_id().equalsIgnoreCase(city_id)).findFirst().ifPresent(i -> data.get(i).setSelected(true));
                             rv_stateList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             rv_stateList.setNestedScrollingEnabled(false);
-                            CityAdapter stateAdapter = new CityAdapter(AddCityActivity.this, data);
+                             stateAdapter = new CityAdapter(AddCityActivity.this, data);
                             rv_stateList.setAdapter(stateAdapter);
                             rv_stateList.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
                         } else if (stateModel.getCode() == 203) {
@@ -132,6 +143,22 @@ public class AddCityActivity extends AppCompatActivity implements View.OnClickLi
             default:
                 break;
         }
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (stateAdapter != null)
+            stateAdapter.getFilter().filter(s.toString().trim());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
 
     }
 }

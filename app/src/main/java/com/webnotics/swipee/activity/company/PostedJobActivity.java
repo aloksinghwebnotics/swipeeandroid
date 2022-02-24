@@ -104,7 +104,7 @@ public class PostedJobActivity extends AppCompatActivity {
                     ll_nodata.setVisibility(View.GONE);
                     rv_appointment.setVisibility(View.VISIBLE);
                 } else {
-                    tv_nodata.setText("No posted job data found");
+                    tv_nodata.setText("No posted jobs data found");
                     rv_appointment.setVisibility(View.GONE);
                     tv_nodata.setVisibility(View.VISIBLE);
                     ll_nodata.setVisibility(View.VISIBLE);
@@ -142,7 +142,7 @@ public class PostedJobActivity extends AppCompatActivity {
                 ll_nodata.setVisibility(View.GONE);
                 rv_appointment.setVisibility(View.VISIBLE);
             } else {
-                tv_nodata.setText("No active job data found");
+                tv_nodata.setText("No active jobs data found");
                 rv_appointment.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);
                 ll_nodata.setVisibility(View.VISIBLE);
@@ -173,7 +173,7 @@ public class PostedJobActivity extends AppCompatActivity {
                     ll_nodata.setVisibility(View.GONE);
                     rv_appointment.setVisibility(View.VISIBLE);
                 } else {
-                    tv_nodata.setText("No closed job data found");
+                    tv_nodata.setText("No closed jobs data found");
                     rv_appointment.setVisibility(View.GONE);
                     tv_nodata.setVisibility(View.VISIBLE);
                     ll_nodata.setVisibility(View.VISIBLE);
@@ -206,7 +206,7 @@ public class PostedJobActivity extends AppCompatActivity {
                     rv_appointment.setVisibility(View.VISIBLE);
                 } else {
                     rv_appointment.setVisibility(View.GONE);
-                    tv_nodata.setText("No inactive job data found");
+                    tv_nodata.setText("No inactive jobs data found");
                     tv_nodata.setVisibility(View.VISIBLE);
                     ll_nodata.setVisibility(View.VISIBLE);
                 }
@@ -309,7 +309,7 @@ public class PostedJobActivity extends AppCompatActivity {
                             rv_appointment.setVisibility(View.GONE);
                             tv_nodata.setVisibility(View.VISIBLE);
                             ll_nodata.setVisibility(View.VISIBLE);
-                            tv_nodata.setText("No posted job data found");
+                            tv_nodata.setText("No posted jobs data found");
                         }
 
                     } else {

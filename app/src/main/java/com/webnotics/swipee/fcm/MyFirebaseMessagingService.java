@@ -21,6 +21,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentDetail;
+import com.webnotics.swipee.activity.CompanyProfile;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.call.FirstVideoActivity;
 import com.webnotics.swipee.activity.Seeker.JobDetail;
@@ -187,9 +188,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }
 
             } else if (notify_category.equalsIgnoreCase("company_swap_profile")) {
-                resultIntent = new Intent(getApplicationContext(), JobDetail.class);
-                resultIntent.putExtra("id", payload.getString("job_id"));
-                resultIntent.putExtra("from", "Notification");
+                if (TextUtils.isEmpty(payload.getString("job_id"))){
+                    resultIntent = new Intent(getApplicationContext(), CompanyProfile.class);
+                    resultIntent.putExtra("company_id", payload.getString("company_id"));
+                }else{
+                    resultIntent = new Intent(getApplicationContext(), JobDetail.class);
+                    resultIntent.putExtra("id", payload.getString("job_id"));
+                    resultIntent.putExtra("from", "Notification");
+                }
                 // check for image attachment
                 if (TextUtils.isEmpty(imageUrl)) {
                     showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
@@ -246,14 +252,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 if (payload.has("appointment_status") && payload.getString("appointment_status").equalsIgnoreCase("A")){
                     resultIntent = new Intent(getApplicationContext(), AppointmentDetail.class);
                     resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, payload.getString("appointment_id"));
-                    resultIntent.putExtra("from", "Notification");
-                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
                 }else {
                     resultIntent = new Intent(getApplicationContext(), JobDetail.class);
                     resultIntent.putExtra("id", payload.getString("job_id"));
-                    resultIntent.putExtra("from", "Notification");
-                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
                 }
+                resultIntent.putExtra("from", "Notification");
+                showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
 
 
             } else if (notify_category.equalsIgnoreCase("user_change_appointment_status")) {
@@ -303,6 +307,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("company_state_name", payload.getString("state_name"));
                 resultIntent.putExtra("company_city_name", payload.getString("city_name"));
                 resultIntent.putExtra("notify_number", payload.getString("unique_notify_number"));
+                resultIntent.putExtra("job_id", payload.getString("job_id"));
                 resultIntent.putExtra("is_own_job", "Y");
                 resultIntent.putExtra("date", datefinal);
                 // check for image attachment
@@ -342,6 +347,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("company_state_name", payload.getString("state_name"));
                 resultIntent.putExtra("company_city_name", payload.getString("city_name"));
                 resultIntent.putExtra("notify_number", payload.getString("unique_notify_number"));
+                resultIntent.putExtra("job_id","");
                 resultIntent.putExtra("is_own_job", "Y");
                 resultIntent.putExtra("date", datefinal);
                 // check for image attachment
@@ -364,6 +370,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("role_id", payload.getString("role_id"));
                 resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
+                    if (VideoActivity.instance==null && AudioActivity.instance==null)
                     startActivity(resultIntent);
                 }else {
                     // check for image attachment

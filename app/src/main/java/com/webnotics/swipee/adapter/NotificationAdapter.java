@@ -3,6 +3,7 @@ package com.webnotics.swipee.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
+import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentDetail;
+import com.webnotics.swipee.activity.CompanyProfile;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
@@ -72,6 +75,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.tv_createdat.setText(data.get(position).getCreated_at());
         Glide.with(mContext).load(data.get(position).getNotification_image()).
                 error(R.drawable.ic_profile_select).placeholder(R.drawable.ic_profile_select).into(holder.civ_logo);
+
+        holder.civ_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(data.get(position).getNotification_image()))
+                    AppController.callFullImage(mContext,data.get(position).getNotification_image());
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,10 +122,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                }
 
                            }  else if (type.equalsIgnoreCase("company_swap_profile")) {
-                               Intent resultIntent = new Intent(mContext, JobDetail.class);
-                               resultIntent.putExtra("id", object.get("job_id").getAsString());
-                               resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
-                               mContext.startActivity(resultIntent);
+                               if (TextUtils.isEmpty(object.get("job_id").getAsString())){
+                                   mContext.startActivity(new Intent(mContext, CompanyProfile.class).putExtra("company_id", object.get("company_id").getAsString()));
+                               }else {
+                                   Intent resultIntent = new Intent(mContext, JobDetail.class);
+                                   resultIntent.putExtra("id", object.get("job_id").getAsString());
+                                   resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
+                                   mContext.startActivity(resultIntent);
+                               }
+
                            } else if (type.equalsIgnoreCase("company_change_appointment_status")) {
                                Intent resultIntent;
                                if (object.has("appointment_status") && object.get("appointment_status").getAsString().equalsIgnoreCase("A")){
@@ -176,7 +192,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                resultIntent.putExtra("company_state_name", object.get("state_name").getAsString());
                                resultIntent.putExtra("company_city_name",  object.get("city_name").getAsString());
                                resultIntent.putExtra("notify_number", object.get("unique_notify_number").getAsString());
+                               resultIntent.putExtra("job_id", "");
                                resultIntent.putExtra("is_own_job", "Y");
+
                                resultIntent.putExtra("date", datefinal);
                                resultIntent.putExtra("from", NotificationActivity.class.getSimpleName());
                                mContext.startActivity(resultIntent);
@@ -210,6 +228,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                resultIntent.putExtra("company_country_name",  object.get("country_name").getAsString());
                                resultIntent.putExtra("company_state_name",  object.get("state_name").getAsString());
                                resultIntent.putExtra("company_city_name",  object.get("city_name").getAsString());
+                               resultIntent.putExtra("job_id",  object.get("job_id").getAsString());
                                resultIntent.putExtra("notify_number", object.get("unique_notify_number").getAsString());
                                resultIntent.putExtra("is_own_job", "Y");
                                resultIntent.putExtra("date", datefinal);

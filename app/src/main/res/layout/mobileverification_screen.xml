@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_hey"
             android:layout_marginTop="@dimen/dimen8dp"
-            android:text="@string/plzenterphone"
+            android:text="@string/enteryourphoneerror"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen18sp" />
 
@@ -136,7 +136,7 @@
             android:gravity="center_vertical"
             android:hint="@string/enteryourphone"
             android:inputType="number"
-            android:maxLength="12"
+            android:maxLength="10"
             android:maxLines="1"
             android:paddingStart="@dimen/dimen12dp"
             android:paddingTop="@dimen/dimen4dp"
@@ -178,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dimen40dp"
-                android:text="Your number +91 7011154779"
+                android:paddingEnd="@dimen/dimen4dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen18sp" />
 

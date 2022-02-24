@@ -59,7 +59,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.tv_next:
                 if (et_msg.getText().toString().replaceAll(" ", "").isEmpty()) {
-                    rest.showToast("Write your message");
+                    rest.showToast("Please write somethings");
                 } else {
                     if (rest.isInterentAvaliable()) {
                         AppController.ShowDialogue("", mContext);

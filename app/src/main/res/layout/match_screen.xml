@@ -26,7 +26,10 @@
                         android:id="@+id/swipe_deck"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="@dimen/dimen20dp"
+                        android:paddingStart="@dimen/dimen16dp"
+                        android:paddingEnd="@dimen/dimen16dp"
+                        android:paddingTop="@dimen/dimen12dp"
+                        android:paddingBottom="@dimen/dimen12dp"
                         swipedeck:card_spacing="@dimen/dimen8dp"
                         swipedeck:max_visible="1"
                         swipedeck:render_above="true"
@@ -39,8 +42,8 @@
                     android:layout_height="@dimen/dimen52dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="@dimen/dimen32dp"
-                    android:layout_marginBottom="@dimen/dimen42dp"
+                    android:layout_marginEnd="@dimen/dimen26dp"
+                    android:layout_marginBottom="@dimen/dimen36dp"
                     android:src="@drawable/iv_accept" />
                 <ImageView
                     android:visibility="gone"
@@ -51,7 +54,7 @@
                     android:src="@drawable/ic_reject"
                     android:layout_alignParentEnd="true"
                     android:layout_marginBottom="@dimen/dimen13dp"
-                    android:layout_marginEnd="@dimen/dimen32dp"/>
+                    android:layout_marginEnd="@dimen/dimen26dp"/>
             </RelativeLayout>
 
             <RelativeLayout

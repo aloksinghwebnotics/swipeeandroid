@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -78,14 +77,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.tv_privacy:
 
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ApiUrls.POLICY_URL));
-                    startActivity(browserIntent);
+                startActivity(new Intent(mContext,WebViewActivity.class).putExtra("url",ApiUrls.POLICY_URL).putExtra("title","Privacy Policy"));
+
 
                 break;
             case R.id.tv_imprint:
-
-                    Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(ApiUrls.TERMS_URL));
-                    startActivity(browser);
+                     startActivity(new Intent(mContext,WebViewActivity.class).putExtra("url",ApiUrls.TERMS_URL).putExtra("title","Imprint"));
 
                 break;
             case R.id.tv_logout:

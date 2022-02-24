@@ -3,10 +3,13 @@ package com.webnotics.swipee.activity.Seeker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,12 +31,13 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddStateActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddStateActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     public String stateName = "";
     RecyclerView rv_stateList;
     ImageView iv_back;
@@ -41,6 +45,9 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
     Context mContext;
     Rest rest;
     public String stateId = "";
+    EditText et_search;
+    private StateAdapter stateAdapter;
+    private String state_id="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,10 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
         rv_stateList = findViewById(R.id.rv_stateList);
         tv_next = findViewById(R.id.tv_next);
         iv_back = findViewById(R.id.iv_back);
+        et_search = findViewById(R.id.et_search);
+
+        if (getIntent()!=null)
+            state_id=getIntent().getStringExtra("state_id")!=null?getIntent().getStringExtra("state_id"):"";
 
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
@@ -63,6 +74,7 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
 
         iv_back.setOnClickListener(this);
         tv_next.setOnClickListener(this);
+        et_search.addTextChangedListener(this);
     }
 
     private void getStateList(String id) {
@@ -75,9 +87,11 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
                     if (stateModel != null)
                         if (stateModel.isStatus() && stateModel.getCode() == 200) {
                             ArrayList<StateModel.Data> data = stateModel.getData();
+                            if (!TextUtils.isEmpty(state_id))
+                                IntStream.range(0, data.size()).filter(i -> data.get(i).getState_id().equalsIgnoreCase(state_id)).findFirst().ifPresent(i -> data.get(i).setSelected(true));
                             rv_stateList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             rv_stateList.setNestedScrollingEnabled(false);
-                            StateAdapter stateAdapter = new StateAdapter(AddStateActivity.this, data);
+                             stateAdapter = new StateAdapter(AddStateActivity.this, data);
                             rv_stateList.setAdapter(stateAdapter);
                             rv_stateList.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
                         } else if (stateModel.getCode() == 203) {
@@ -131,6 +145,22 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
             default:
                 break;
         }
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (stateAdapter != null)
+            stateAdapter.getFilter().filter(s.toString().trim());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
 
     }
 }

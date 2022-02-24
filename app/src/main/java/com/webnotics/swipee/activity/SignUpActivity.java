@@ -210,16 +210,31 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
                 String mobile = et_mobile.getText().toString();
+                if (lat.equalsIgnoreCase("0") ||longg.equalsIgnoreCase("0")){
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                            PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                            PackageManager.PERMISSION_GRANTED) {
+                        int REQUEST_CODE_ASK_PERMISSIONS = 111;
+                        requestPermissions(new String[]{
+                                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                                REQUEST_CODE_ASK_PERMISSIONS);
+                    } else {
+                        try {
+                            getLastLocation();
+                        }catch (Exception e){}
+                    }
+
+                }else
                 if (TextUtils.isEmpty(email)) {
-                    rest.showToast("Please Enter Email Id");
+                    rest.showToast("Please enter email address");
                 } else if (!Config.isEmailValid(email)) {
-                    rest.showToast("Please Enter Valid Email Id");
+                    rest.showToast("Please enter a valid email address");
                 } else if (TextUtils.isEmpty(mobile)) {
-                    rest.showToast("Please Enter Mobile Number");
+                    rest.showToast("Please enter phone number");
                 } else if (mobile.length() < 10) {
-                    rest.showToast("Please Enter Valid Mobile Number");
+                    rest.showToast("Please enter 10 digit phone number");
                 } else if (TextUtils.isEmpty(password)) {
-                    rest.showToast("Please Enter Valid Password");
+                    rest.showToast("Please enter password");
                 } else {
                     ///hit
                     //  FirebaseApp.initializeApp(mContext);
@@ -328,7 +343,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
-                    Log.d("dbhdfhkjgd", responseBody.toString());
                     if (responseBody.get("code").getAsInt()==200 && responseBody.get("status").getAsBoolean()) {
                         Config.SetEmail(hashMap.get(ParaName.KEY_COMPANYEMAIL));
                         Config.SetPhoneCode(hashMap.get(ParaName.KEY_COMPANYPHONECODE));

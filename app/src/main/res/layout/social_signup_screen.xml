@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:background="@drawable/white_top_round_bg"
             android:layout_height="match_parent">
-            <RelativeLayout
+            <LinearLayout
 
                 android:paddingBottom="@dimen/dimen32dp"
                 android:layout_width="match_parent"
@@ -62,6 +62,30 @@
                 </LinearLayout>
 
                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen48dp"
+                    android:layout_below="@+id/ll_usertype"
+                    android:layout_marginStart="@dimen/dimen40dp"
+                    android:layout_marginTop="@dimen/dimen40dp"
+                    android:layout_marginEnd="@dimen/dimen40dp"
+                    android:background="@drawable/white_light_semiround_bg"
+                    android:drawableStart="@drawable/ic_feather_mail"
+                    android:drawablePadding="@dimen/dimen10dp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enteryouremail"
+                    android:maxLength="52"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/dimen12dp"
+                    android:paddingTop="@dimen/dimen4dp"
+                    android:paddingEnd="@dimen/dimen12dp"
+                    android:paddingBottom="@dimen/dimen4dp"
+                    android:textColor="@color/black_Light"
+                    android:visibility="gone"
+                    android:textColorHint="@color/black_op50"
+                    android:textSize="@dimen/dimen14sp" />
+
+                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen48dp"
@@ -73,7 +97,7 @@
                     android:drawableStart="@drawable/ic_feather_mail"
                     android:drawablePadding="@dimen/dimen10dp"
                     android:gravity="center_vertical"
-
+                    android:visibility="gone"
                     android:hint="@string/enteryouremail"
                     android:inputType="textEmailAddress"
                     android:maxLength="52"
@@ -85,7 +109,6 @@
                     android:textColor="@color/black_Light"
                     android:textColorHint="@color/black_op50"
                     android:textSize="@dimen/dimen14sp" />
-
                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_emailerror"
                     android:layout_width="match_parent"
@@ -123,13 +146,13 @@
                     android:textSize="@dimen/dimen14sp" />
 
                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
-                    android:layout_marginStart="@dimen/dimen40dp"
-                    android:layout_marginEnd="@dimen/dimen40dp"
                     android:id="@+id/tv_mobileerror"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/et_mobile"
+                    android:layout_marginStart="@dimen/dimen40dp"
                     android:layout_marginTop="@dimen/dimen4dp"
+                    android:layout_marginEnd="@dimen/dimen40dp"
                     android:gravity="center_vertical"
                     android:hint="@string/enteryourphoneerror"
                     android:textColor="@color/gray"
@@ -204,7 +227,7 @@
                     android:src="@drawable/ic_intersection_1" />
 
 
-            </RelativeLayout>
+            </LinearLayout>
         </ScrollView>
     </LinearLayout>
 

@@ -94,9 +94,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         try {
             if (SeekerHomeActivity.instance != null)
-                SeekerHomeActivity.instance.onBackPressed();
+                SeekerHomeActivity.instance.finish();
             if (CompanyHomeActivity.instance != null)
-                CompanyHomeActivity.instance.onBackPressed();
+                CompanyHomeActivity.instance.finish();
         } catch (Exception ignored) {
 
         } finally {
@@ -184,10 +184,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
             });
-
-
         }
-
     }
 
 
@@ -196,15 +193,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
             personName = object.getString("first_name") + " " + object.getString("last_name");
 
-            email = object.getString("email");
-            socialid = object.getString("id");
+            email = object.has("email")?object.getString("email"):"";
+            socialid =  object.has("id")?object.getString("id"):"";
             String image_url = "https://graph.facebook.com/" + socialid + "/picture?type=normal";
             socialtype = "facebook_social";
             Config.SetPICKURI(image_url);
 
-           if (email!=null){
+               if (! TextUtils.isEmpty(socialid))
                setSocialLogin();
-           }
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -223,11 +220,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String email1 = et_email.getText().toString();
                 String password = et_password.getText().toString();
                 if (TextUtils.isEmpty(email1)) {
-                    rest.showToast("Please Enter Email Id");
+                    rest.showToast("Please enter email address");
                 } else if (!Config.isEmailValid(email1)) {
-                    rest.showToast("Please Enter Valid Email Id");
+                    rest.showToast("Please enter a valid email address");
                 } else if (TextUtils.isEmpty(password)) {
-                    rest.showToast("Please Enter Valid Password");
+                    rest.showToast("Please enter password");
                 } else {
                     ///hit
                     if (rest.isInterentAvaliable()) {
@@ -355,11 +352,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
 
                 email = acct.getEmail();
+              //  email="";
                 socialid = acct.getId();
 
                 Log.e("loginimageurl", "Name: " + personName + ", email: " + email
                         + ", Image: " + personPhotoUrl);
                 socialtype = "gmail_social";
+                if (! TextUtils.isEmpty(socialid))
                setSocialLogin();
 
             }
@@ -372,38 +371,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void setSocialLogin() {
-        if (!TextUtils.isEmpty(email)) {
-            if (rest.isInterentAvaliable()) {
-                AppController.ShowDialogue("", mContext);
-                ///hit
-                Calendar calendar = Calendar.getInstance();
-                String time_zone = calendar.getTimeZone().getID().toString();
-                @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-                String phone_code = "+91";
-                String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                String device_token = FirebaseInstanceId.getInstance().getId();
-                String user_app_language = Locale.getDefault().getDisplayLanguage().toLowerCase(Locale.ROOT);
+        if (rest.isInterentAvaliable()) {
+            AppController.ShowDialogue("", mContext);
+            ///hit
+            Calendar calendar = Calendar.getInstance();
+            String time_zone = calendar.getTimeZone().getID().toString();
+            @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+            String phone_code = "+91";
+            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+            String device_token = FirebaseInstanceId.getInstance().getId();
+            String user_app_language = Locale.getDefault().getDisplayLanguage().toLowerCase(Locale.ROOT);
 
-                Log.d("djdjdjdj", "android_id  " + refreshedToken);
-                HashMap<String, String> hashMap = new HashMap();
-                hashMap.put(ParaName.KEY_DEVICENAME, "Android");
-                hashMap.put(ParaName.KEY_DEVICETOKEN, refreshedToken);
-                hashMap.put(ParaName.KEY_DEVICEID, android_id);
-                hashMap.put(ParaName.KEY_LANGUAGE, user_app_language);
-                hashMap.put(ParaName.KEY_SOCIALTYPE, socialtype);
-                hashMap.put(ParaName.KEY_OAUTHUID, socialid);
-                hashMap.put(ParaName.KEY_TIMEZONE, time_zone);
-                if (isSeeker){
-                    hashMap.put(ParaName.KEY_EMAIL, email);
-                    callSeekerSocialLoginService(hashMap);
-                }
-                else {
-                    hashMap.put(ParaName.KEY_COMPANYEMAIL,email);
-                    callRecruiterSocialLoginService(hashMap);
-                }
-            } else {
-                rest.AlertForInternet();
+            Log.d("djdjdjdj", "android_id  " + refreshedToken);
+            HashMap<String, String> hashMap = new HashMap();
+            hashMap.put(ParaName.KEY_DEVICENAME, "Android");
+            hashMap.put(ParaName.KEY_DEVICETOKEN, refreshedToken);
+            hashMap.put(ParaName.KEY_DEVICEID, android_id);
+            hashMap.put(ParaName.KEY_LANGUAGE, user_app_language);
+            hashMap.put(ParaName.KEY_SOCIALTYPE, socialtype);
+            hashMap.put(ParaName.KEY_OAUTHUID, socialid);
+            hashMap.put(ParaName.KEY_TIMEZONE, time_zone);
+            if (isSeeker){
+                hashMap.put(ParaName.KEY_EMAIL, email);
+                callSeekerSocialLoginService(hashMap);
             }
+            else {
+                hashMap.put(ParaName.KEY_COMPANYEMAIL,email);
+                callRecruiterSocialLoginService(hashMap);
+            }
+        } else {
+            rest.AlertForInternet();
         }
     }
 
@@ -490,9 +487,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (responseBody.get("code").getAsInt() == 200 && responseBody.get("status").getAsBoolean()) {
                         JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : null;
                         if (data != null && !data.isJsonNull()) {
-                            String company_name = data.has("company_name") ? data.get("company_name").isJsonNull() ? "" : data.get("company_name").getAsString() : "";
-                            String fname = data.has("first_name") ? data.get("first_name").isJsonNull() ? "" : data.get("first_name").getAsString() : "";
-                            String last_name = data.has("last_name") ? data.get("last_name").isJsonNull() ? "" : data.get("last_name").getAsString() : "";
                             String company_logo = data.has("company_logo") ? data.get("company_logo").isJsonNull() ? "" : data.get("company_logo").getAsString() : "";
                             String email = data.has("email") ? data.get("email").isJsonNull() ? "" : data.get("email").getAsString() : "";
                             String mobile_no = data.has("mobile_no") ? data.get("mobile_no").isJsonNull() ? "" : data.get("mobile_no").getAsString() : "";
@@ -504,6 +498,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String latitude = data.has("latitude") ? data.get("latitude").isJsonNull() ? "" : data.get("latitude").getAsString() : "";
                             String longitude = data.has("longitude") ? data.get("longitude").isJsonNull() ? "" : data.get("longitude").getAsString() : "";
                             boolean is_social_login = data.has("is_social_login") && (!data.get("is_social_login").isJsonNull() && data.get("is_social_login").getAsBoolean());
+                            boolean is_email = data.has("is_email") && (!data.get("is_email").isJsonNull() && data.get("is_email").getAsBoolean());
 
                                 Config.SetCompanyName(personName);
                                 Config.SetPICKURI(personPhotoUrl);
@@ -536,12 +531,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                        finish();
                                    }
                                }else {
-                                   startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
+                                   startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
 
                                }
 
                            }else {
-                               startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
+                               startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
 
                            }
 
@@ -646,12 +641,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (responseBody.get("code").getAsInt() == 200 && responseBody.get("status").getAsBoolean()) {
                         JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : null;
                         if (data != null && !data.isJsonNull()) {
-                            String fname = data.has("first_name") ? data.get("first_name").isJsonNull() ? "" : data.get("first_name").getAsString() : "";
-                            String last_name = data.has("last_name") ? data.get("last_name").isJsonNull() ? "" : data.get("last_name").getAsString() : "";
                             String user_profile = data.has("user_profile") ? data.get("user_profile").isJsonNull() ? "" : data.get("user_profile").getAsString() : "";
                             String email = data.has("email") ? data.get("email").isJsonNull() ? "" : data.get("email").getAsString() : "";
                             String mobile_no = data.has("mobile_no") ? data.get("mobile_no").isJsonNull() ? "" : data.get("mobile_no").getAsString() : "";
-                            String middle_name = data.has("middle_name") ? data.get("middle_name").isJsonNull() ? "" : data.get("middle_name").getAsString() : "";
                             String user_token = data.has("user_token") ? data.get("user_token").isJsonNull() ? "" : data.get("user_token").getAsString() : "";
                             String is_profile_updated = data.has("is_profile_updated") ? data.get("is_profile_updated").isJsonNull() ? "" : data.get("is_profile_updated").getAsString() : "";
                             String mobile_verify = data.has("mobile_verify") ? data.get("mobile_verify").isJsonNull() ? "" : data.get("mobile_verify").getAsString() : "";
@@ -660,6 +652,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String latitude = data.has("latitude") ? data.get("latitude").isJsonNull() ? "" : data.get("latitude").getAsString() : "";
                             String longitude = data.has("longitude") ? data.get("longitude").isJsonNull() ? "" : data.get("longitude").getAsString() : "";
                             boolean is_social_login = data.has("is_social_login") && (!data.get("is_social_login").isJsonNull() && data.get("is_social_login").getAsBoolean());
+                            boolean is_email = data.has("is_email") && (!data.get("is_email").isJsonNull() && data.get("is_email").getAsBoolean());
                             if (personName.contains(" ")){
                                 String first_name=personName.substring(0,personName.indexOf(" "));
                                 String lastq_name=!personName.substring(personName.indexOf(" ")+1).isEmpty()?personName.substring(personName.indexOf(" ")+1):"";
@@ -700,11 +693,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         finish();
                                     }
                                 }else {
-                                    startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_EMAIL)));
+                                    startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_EMAIL)));
                                 }
 
                             }else {
-                                startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_EMAIL)));
+                                startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_EMAIL)));
                             }
 
                         }
@@ -779,10 +772,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     personPhotoUrl=user.getProfileUrl();
                     socialtype = "linkd_social";
                     socialid = user.getId();
-                    Log.d("LINKEDINID", ""+personPhotoUrl);
-                   if (email!=null){
-                       setSocialLogin();
-                   }
+
+                    if (! TextUtils.isEmpty(socialid))
+                   setSocialLogin();
+
                 }
             }
         }catch (Exception ignored){}

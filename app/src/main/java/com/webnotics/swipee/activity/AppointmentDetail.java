@@ -32,6 +32,7 @@ import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.activity.company.UserDetail;
 import com.webnotics.swipee.call.AudioActivity;
 import com.webnotics.swipee.call.VideoActivity;
+import com.webnotics.swipee.chat.MainChatActivity;
 import com.webnotics.swipee.model.TwillioDetailModel;
 import com.webnotics.swipee.model.company.AppointmentDetailModel;
 import com.webnotics.swipee.model.seeker.SeekerAppointmentDetailModel;
@@ -68,6 +69,8 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
     private String user_profile="";
     private String user_phone="";
     private String from="";
+    private String name="";
+    private String name1="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +123,8 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         rest.showToast(responseBody.getMessage());
                        setLogoutSeeker();
                     }else if (responseBody.getCode()==200 &&responseBody.isStatus()){
+                        name=responseBody.getData().getCompany_name();
+                        name1=responseBody.getData().getCompany_name();
                         tv_name.setText(MessageFormat.format("{0}",responseBody.getData().getCompany_name()));
                         tv_email.setText(MessageFormat.format("Email: {0}", responseBody.getData().getCompany_email()));
                         tv_phone.setText(MessageFormat.format("Phone: {0}{1}", responseBody.getData().getPhone_code(), responseBody.getData().getMobile()));
@@ -175,7 +180,6 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                             tv_start_appointment.setOnClickListener(null);
                         }
                     }
-
                 } else {
                     rest.showToast("Something went wrong");
                 }
@@ -202,6 +206,8 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         rest.showToast(responseBody.getMessage());
                         setLogoutRecruiter();
                     }else if (responseBody.getCode()==200 &&responseBody.isStatus()){
+                        name=responseBody.getData().getFirst_name();
+                        name1=responseBody.getData().getFirst_name()+" "+responseBody.getData().getLast_name();
                         tv_name.setText(MessageFormat.format("{0} {1}", responseBody.getData().getFirst_name(), responseBody.getData().getLast_name()));
                         tv_email.setText(MessageFormat.format("Email: {0}", responseBody.getData().getEmail()));
                         tv_phone.setText(MessageFormat.format("Phone: {0}{1}", responseBody.getData().getPhone_code(), responseBody.getData().getMobile_no()));
@@ -291,6 +297,17 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     if (isLive==1) {
                         if (!TextUtils.isEmpty(appointment_id)&&!TextUtils.isEmpty(appointment_number)){
                             if (appointment_type.equalsIgnoreCase("chat")) {
+                               startActivity(new Intent(mContext, MainChatActivity.class)
+                                        .putExtra("image",user_profile)
+                                        .putExtra("msg_id","0")
+                                        .putExtra("action","")
+                                        .putExtra("appointment_id",appointment_id)
+                                        .putExtra("appointment_number",appointment_number)
+                                        .putExtra("user_id",user_id)
+                                        .putExtra("sender_id",Config.GetId())
+                                        .putExtra("receiver_id",user_id)
+                                        .putExtra("name",name));
+                                            finish();
                             } else if (appointment_type.equalsIgnoreCase("online_meeting")) {
                                 AppController.ShowDialogue("",mContext);
                                 if (Config.isSeeker())
@@ -400,6 +417,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         intent.putExtra("accestoken", company_access_token);
                         intent.putExtra("rroom", room_name);
                         intent.putExtra("appointment_id", appointment_id);
+                        intent.putExtra("name", name1);
                         mContext.startActivity(intent);
                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
                             if (NotificationActivity.instance!=null)
@@ -475,6 +493,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         intent.putExtra("accestoken", company_access_token);
                         intent.putExtra("rroom", room_name);
                         intent.putExtra("appointment_id", appointment_id);
+                        intent.putExtra("name", name1);
                         mContext.startActivity(intent);
                         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
                             if (NotificationActivity.instance!=null)

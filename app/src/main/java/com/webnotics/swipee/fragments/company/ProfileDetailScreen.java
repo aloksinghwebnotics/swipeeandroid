@@ -183,28 +183,32 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                         name = et_name.getText().toString();
                         tv_heycompany.setText("Hey "+name+" !");
                     } else {
-                        rest.showToast("Enter Your Name");
+                        rest.showToast("Enter company name");
                     }
 
                 } else if (rl_about.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(et_industry.getText().toString()) || et_industry.getText().toString().replaceAll(" ", "").length() == 0) {
-                               rest.showToast("Select Industry");
+                               rest.showToast("Select industry");
                     } else if (TextUtils.isEmpty(et_companysize.getText().toString()) || et_companysize.getText().toString().replaceAll(" ", "").length() == 0) {
-                        rest.showToast("Select Company Size");
+                        rest.showToast("Select company size");
                     }else if (TextUtils.isEmpty(et_website.getText().toString()) || et_website.getText().toString().replaceAll(" ", "").length() == 0) {
-                        rest.showToast("Enter Company Website");
+                        rest.showToast("Enter company website");
                     }else if (TextUtils.isEmpty(et_address.getText().toString()) || et_address.getText().toString().replaceAll(" ", "").length() == 0) {
-                        rest.showToast("Enter Company Address");
+                        rest.showToast("Enter company address");
                     }else if (TextUtils.isEmpty(et_pincode.getText().toString()) || et_pincode.getText().toString().replaceAll(" ", "").length() == 0) {
-                        rest.showToast("Enter Company Pincode");
+                        rest.showToast("Enter 6 digit pincode");
+                    }else if (et_pincode.getText().toString().replaceAll(" ", "").length() !=6 ) {
+                        rest.showToast("Enter 6 digit pincode");
                     }else if (TextUtils.isEmpty(et_founded.getText().toString()) || et_founded.getText().toString().replaceAll(" ", "").length() == 0) {
-                        rest.showToast("Enter Foundation Year");
+                        rest.showToast("Enter established year");
+                    }else if (et_founded.getText().toString().replaceAll(" ", "").length()!=4) {
+                        rest.showToast("Enter 4 digit established year");
                     }else if (TextUtils.isEmpty(tv_country.getText().toString())){
-                        rest.showToast("Select Country");
+                        rest.showToast("Select country");
                     }else if (TextUtils.isEmpty(tv_state.getText().toString())){
-                        rest.showToast("Select State");
+                        rest.showToast("Select state");
                     }else if (TextUtils.isEmpty(tv_city.getText().toString())){
-                        rest.showToast("Select City");
+                        rest.showToast("Select city");
                     } else {
                         rl_about.setVisibility(View.GONE);
                         rl_pick.setVisibility(View.VISIBLE);
@@ -234,7 +238,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                                     callAllDataService(image,video);
                                 } else rest.AlertForInternet();
                             }
-                    } else rest.showToast("Select Profile Picture");
+                    } else rest.showToast("Select profile image");
                 }
                 break;
 
@@ -257,11 +261,11 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                 break;
             case R.id.tv_city:
                 if (!TextUtils.isEmpty(stateId) && !stateId.equalsIgnoreCase("0"))
-                    startActivity(new Intent(mContext, AddCityActivity.class).putExtra("id", stateId).putExtra("from", ProfileDetailScreen.class.getSimpleName()));
-                else rest.showToast("Select State First");
+                    startActivity(new Intent(mContext, AddCityActivity.class).putExtra("id", stateId).putExtra("city_id", cityId).putExtra("from", ProfileDetailScreen.class.getSimpleName()));
+                else rest.showToast("Select state first");
                 break;
             case R.id.tv_state:
-                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("from",ProfileDetailScreen.class.getSimpleName()));
+                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id",stateId).putExtra("from",ProfileDetailScreen.class.getSimpleName()));
                 break;
             default:
                 break;
@@ -348,7 +352,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                     .transform(new MultiTransformation(new CenterCrop(),new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density*16))))
                     .into( iv_userpickvideo );
             iv_userpickvideo.setVisibility(View.VISIBLE);
-        }else rest.showToast("Video must be lesser than 15MB");
+        }else rest.showToast("Please select video max 15 MB.");
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
             Bundle extras = data.getExtras();
@@ -641,7 +645,6 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                             JsonObject data= responseBody.get("data").getAsJsonObject();
                             company_size=data.isJsonNull()? new JsonArray():data.has("company_size")?data.get("company_size").getAsJsonArray():new JsonArray();
                         }
-
                     }
                 } else {
                     rest.showToast("Something went wrong");

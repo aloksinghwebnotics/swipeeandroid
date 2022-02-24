@@ -18,11 +18,12 @@
             <ImageView
 
                 android:id="@+id/menu"
-                android:layout_width="@dimen/dimen22dp"
-                android:layout_height="@dimen/dimen16dp"
+                android:layout_width="@dimen/dimen42dp"
+                android:layout_height="@dimen/dimen42dp"
                 android:layout_alignParentStart="true"
+                android:padding="@dimen/dimen8dp"
                 android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/dimen18dp"
+                android:layout_marginStart="@dimen/dimen8dp"
                 android:src="@drawable/ic_menu" />
 
             <ImageView
@@ -39,15 +40,21 @@
                 android:layout_height="@dimen/dimen30dp"
                 android:layout_centerInParent="true"
                 android:layout_marginStart="@dimen/dimen10dp"
-                android:layout_toStartOf="@+id/notilay"
+                android:layout_toStartOf="@+id/ll_top"
                 android:src="@drawable/ic_baseline_search_24"
                 android:visibility="gone" />
 
+        <LinearLayout
+
+            android:id="@+id/ll_top"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen72dp"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true">
             <RelativeLayout
                 android:id="@+id/notilay"
                 android:layout_width="@dimen/dimen60dp"
-                android:layout_height="@dimen/dimen72dp"
-                android:layout_toStartOf="@+id/filter_icon">
+                android:layout_height="match_parent">
 
                 <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
                     android:id="@+id/counter11"
@@ -63,7 +70,6 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen10sp"
                     android:textStyle="bold"
-
                     android:visibility="gone" />
 
                 <ImageView
@@ -78,13 +84,15 @@
 
             <ImageView
                 android:id="@+id/filter_icon"
-                android:layout_width="@dimen/dimen20dp"
-                android:layout_height="@dimen/dimen20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/dimen6dp"
-                android:layout_marginEnd="@dimen/dimen18dp"
+                android:layout_width="@dimen/dimen24dp"
+                android:layout_height="@dimen/dimen24dp"
+                android:visibility="gone"
+                android:padding="@dimen/dimen2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dimen4dp"
+                android:layout_marginEnd="@dimen/dimen16dp"
                 android:src="@drawable/ic_filter_unfill" />
+        </LinearLayout>
         </RelativeLayout>
 
 

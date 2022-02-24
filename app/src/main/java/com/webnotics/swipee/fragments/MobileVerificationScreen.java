@@ -59,7 +59,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
         et_mobile.setText(Config.GetMobileNo());
         isSeeker=BasicInfoActivity.instance.isSeeker;
 
-        tv_your_mobile.setText(MessageFormat.format("Your Number {0} {1}", Config.GetPhoneCode(), Config.GetMobileNo()));
+        tv_your_mobile.setText(MessageFormat.format("Your number {0} {1}", Config.GetPhoneCode(), Config.GetMobileNo()));
         rl_otp.setVisibility(View.VISIBLE);
         rl_mobile.setVisibility(View.GONE);
         tv_next.setOnClickListener(this);
@@ -90,9 +90,9 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                 }else {
                         String mobile=et_mobile.getText().toString();
                     if (TextUtils.isEmpty(mobile)){
-                        rest.showToast("Please Enter Mobile Number");
+                        rest.showToast("Please enter phone number");
                     }else if (mobile.length()<10){
-                        rest.showToast("Please Enter Valid Mobile Number");
+                        rest.showToast("Please enter 10 digit phone number");
                     }else {
                         if (rest.isInterentAvaliable()) {
                             AppController.ShowDialogue("", mContext);
@@ -127,7 +127,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
     private void callCheckOTP() {
         String otp=et_otp1.getText().toString()+et_otp2.getText().toString()+et_otp3.getText().toString()+et_otp4.getText().toString();
         if (otp.length()!=4){
-            rest.showToast("Enter Valid OTP");
+            rest.showToast("Please enter 4 digit OTP");
         }else {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
@@ -178,7 +178,6 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                 AppController.dismissProgressdialog();
                 if (response.code()==200 && response.body()!=null){
                     JsonObject responseBody= response.body();
-                    Log.d("dbhdfhkjgd",responseBody.toString());
                     if (responseBody.get("status").getAsBoolean()){
                         Config.SetMobileVERIFY(true);
                         if (BasicInfoActivity.instance!=null)
@@ -331,32 +330,4 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
         });
     }
 
-    private void resendCompanyOtp() {
-        SwipeeApiClient.swipeeServiceInstance().companyMobileResend(Config.GetUserToken(),Config.GetMobileNo(),Config.GetPhoneCode()).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                AppController.dismissProgressdialog();
-                if (response.code()==200 && response.body()!=null){
-                    JsonObject responseBody= response.body();
-                    if (response.body().get("code").getAsInt()==203){
-                        rest.showToast(response.body().get("message").getAsString());
-                        AppController.loggedOut(mContext);
-                        getActivity().finish();
-                    }else{
-                        if (responseBody.has("message"))
-                            rest.showToast(responseBody.get("message").getAsString());
-                    }
-
-                }else {
-                    rest.showToast("Something went wrong");
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-                AppController.dismissProgressdialog();
-            }
-        });
-    }
 }

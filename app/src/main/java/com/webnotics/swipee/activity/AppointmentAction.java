@@ -55,7 +55,6 @@ public class AppointmentAction extends AppCompatActivity {
     TextView tv_username, tv_name, tv_location, tv_jobtitle;
     RecyclerView rv_appointment;
     Context mContext;
-    private JsonArray jsonArray = new JsonArray();
     private static String action = "";
     private String company_id = "";
     private String notify_number = "";
@@ -122,6 +121,7 @@ public class AppointmentAction extends AppCompatActivity {
             tv_name.setText(company_name);
             tv_location.setText(MessageFormat.format("{0}, {1}, {2}", city, state, company_country_name));
             rv_appointment.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+            JsonArray jsonArray = new JsonArray();
             if (from.equalsIgnoreCase(UserDetail.class.getSimpleName())) {
                 if (UserDetail.instance != null) {
                     jsonArray = UserDetail.instance.appointment_data;

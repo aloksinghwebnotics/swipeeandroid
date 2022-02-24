@@ -155,7 +155,6 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
         }
 
 
-
         nodatatxt = rootView.findViewById(R.id.nodatatxt);
         tvNoswipe = rootView.findViewById(R.id.tvNoswipe);
         nolay = rootView.findViewById(R.id.nolay);
@@ -265,7 +264,9 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     } else rest.AlertForInternet();
                 }
                 else {
+                    rest.showToast(getString(R.string.noleftswipe));
                     noleftswipelay.setVisibility(View.VISIBLE);
+                    SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                     datalay.setVisibility(View.GONE);
                 }
 
@@ -318,6 +319,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     }
                 }
                 else if (!TextUtils.isEmpty(packgeID) && packgeID.equalsIgnoreCase("3")) {
+
                     if (mArrayUser.get(position).getUser_match_status() != null) {
                         if (!mArrayUser.get(position).getUser_match_status().equalsIgnoreCase("A")) {
                             status = "Accept";
@@ -355,7 +357,9 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     }
                 }
                 else {
+                    rest.showToast(getString(R.string.noleftswipe));
                     noleftswipelay.setVisibility(View.VISIBLE);
+                    SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                     datalay.setVisibility(View.GONE);
                 }
 
@@ -869,7 +873,9 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                                     if (left_swipes > 0 || packgeID.equalsIgnoreCase("3")) {
                                         noleftswipelay.setVisibility(View.GONE);
                                         datalay.setVisibility(View.VISIBLE);
+                                        SeekerHomeActivity.instance.filter_icon.setVisibility(View.VISIBLE);
                                     } else {
+                                        SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                                         noleftswipelay.setVisibility(View.VISIBLE);
                                         datalay.setVisibility(View.GONE);
                                     }
@@ -1354,6 +1360,12 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     }else if (response.body().get("code").getAsInt()==200 &&repo.get("status").getAsBoolean()){
                         rest.showToast(repo.get("message").getAsString());
                         left_swipes=left_swipes-1;
+                        if (left_swipes>0 || packgeID.equalsIgnoreCase("3")){}
+                        else {
+                            noleftswipelay.setVisibility(View.VISIBLE);
+                            SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
+                            datalay.setVisibility(View.GONE);
+                        }
                         if (hashMap.get(ParaName.KEY_USERSTATUS)!=null)
                             if (Objects.requireNonNull(hashMap.get(ParaName.KEY_USERSTATUS)).equalsIgnoreCase("A")){
                                 mArrayUser.get(pos).setUser_match_status("A");

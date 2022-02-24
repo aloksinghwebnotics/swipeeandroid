@@ -32,6 +32,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.potyvideo.library.AndExoPlayerView;
 import com.webnotics.swipee.CustomUi.FlowLayout;
+import com.webnotics.swipee.CustomUi.NestedListView;
 import com.webnotics.swipee.CustomUi.PopinsRegularTextView;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
@@ -41,6 +42,8 @@ import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.ChatActivity;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
+import com.webnotics.swipee.adapter.seeeker.UserPreferenceAdapter;
+import com.webnotics.swipee.model.seeker.EmployeeUserDetails;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
@@ -53,6 +56,7 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,7 +77,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
     ImageView iv_back, iv_profile, iv_more, iv_meetingType;
     private String from = "";
     TextView tv_name, tv_location, tv_shortlisted, tv_hire, tv_reject, tv_about, tv_education, tv_experience, tv_download, tv_appointment;
-    FlowLayout flowlayout, flow_language;
+    FlowLayout flowlayout, flow_language, flow_jobtype;
     LinearLayout ll_action, ll_job_action, ll_appointment, join;
     RelativeLayout rl_main, rl_video;
     TextView tv_video, tv_title_language, appoint_job_title, tv_appointmenttime, tv_title_about, tv_title_experience, tv_title_education, tv_username, tv_report, tv_block, tv_reschedule, tv_cancel_application;
@@ -94,6 +98,8 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
     public JsonArray appointment_data = new JsonArray();
     AndExoPlayerView vv_video;
     private String video_file_link = "";
+    NestedListView list_preferences;
+    private TextView tv_title_job_type,tv_title_prefrences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +158,10 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         vv_video = findViewById(R.id.vv_video);
         iv_video = findViewById(R.id.iv_video);
         iv_videoplay = findViewById(R.id.iv_videoplay);
+        flow_jobtype = findViewById(R.id.flow_jobtype);
+        tv_title_job_type = findViewById(R.id.tv_title_job_type);
+        tv_title_prefrences = findViewById(R.id.tv_title_prefrences);
+        list_preferences = findViewById(R.id.list_preferences);
 
         if (!TextUtils.isEmpty(name))
             tv_username.setText(MessageFormat.format("{0}''s Profile", name));
@@ -356,24 +366,27 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
     }
 
 
+
     public void setBackPressed() {
-        if (from.equalsIgnoreCase("Notification")) {
-            if (Config.isSeeker()){
+        if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())) {
+            onBackPressed();
+        } else if (from.equalsIgnoreCase("Notification")) {
+            if (Config.isSeeker()) {
                 startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            }else {
+            } else {
                 startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
             }
             onBackPressed();
-        }else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())) {
-            if (NotificationActivity.instance!=null)
+        } else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())) {
+            if (NotificationActivity.instance != null)
                 NotificationActivity.instance.finish();
-            if (Config.isSeeker()){
+            if (Config.isSeeker()) {
                 startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            }else {
+            } else {
                 startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
             }
             onBackPressed();
-        }else if (from.equalsIgnoreCase(MatchedUserActivity.class.getSimpleName())) {
+        } else if (from.equalsIgnoreCase(MatchedUserActivity.class.getSimpleName())) {
             if (MatchedUserActivity.instance != null) {
                 MatchedUserActivity.instance.onBackPressed();
             }
@@ -430,28 +443,79 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                             last_name = job_data.has("last_name") ? job_data.get("last_name").isJsonNull() ? "" : job_data.get("last_name").getAsString() : "";
                             user_profile = job_data.has("user_profile") ? job_data.get("user_profile").isJsonNull() ? "" : job_data.get("user_profile").getAsString() : "";
                             matchId = job_data.has("match_id") ? job_data.get("match_id").isJsonNull() ? "" : job_data.get("match_id").getAsString() : "";
-                            String mobile_no = job_data.has("mobile_no") ? job_data.get("mobile_no").isJsonNull() ? "" : job_data.get("mobile_no").getAsString() : "";
-                            String phone_code = job_data.has("phone_code") ? job_data.get("phone_code").isJsonNull() ? "" : job_data.get("phone_code").getAsString() : "";
                             job_skills = job_data.has("skill_name") ? job_data.get("skill_name").isJsonNull() ? new JsonArray() : job_data.get("skill_name").getAsJsonArray() : new JsonArray();
                             country = job_data.has("country") ? job_data.get("country").isJsonNull() ? "" : job_data.get("country").getAsString() : "";
                             state = job_data.has("state") ? job_data.get("state").isJsonNull() ? "" : job_data.get("state").getAsString() : "";
                             city = job_data.has("city") ? job_data.get("city").isJsonNull() ? "" : job_data.get("city").getAsString() : "";
                             String carrier_objective = job_data.has("carrier_objective") ? job_data.get("carrier_objective").isJsonNull() ? "" : job_data.get("carrier_objective").getAsString() : "";
-                            String work_experience = job_data.has("work_experience") ? job_data.get("work_experience").isJsonNull() ? "" : job_data.get("work_experience").getAsString() : "";
                             String company_match_status = job_data.has("company_match_status") ? job_data.get("company_match_status").isJsonNull() ? "" : job_data.get("company_match_status").getAsString() : "";
                             String user_match_status = job_data.has("user_match_status") ? job_data.get("user_match_status").isJsonNull() ? "" : job_data.get("user_match_status").getAsString() : "";
                             String company_action = job_data.has("company_action") ? job_data.get("company_action").isJsonNull() ? "" : job_data.get("company_action").getAsString() : "";
                             apply_id = job_data.has("apply_id") ? job_data.get("apply_id").isJsonNull() ? "" : job_data.get("apply_id").getAsString() : "";
                             JsonObject user_resumes = job_data.has("user_resumes") ? job_data.get("user_resumes").isJsonNull() ? new JsonObject() : job_data.get("user_resumes").getAsJsonObject() : new JsonObject();
-                            JsonObject user_videos = job_data.has("user_videos") ? job_data.get("user_videos").isJsonNull() ? new JsonObject() : job_data.get("user_videos").getAsJsonObject() : new JsonObject();
                             video_file_link = job_data.has("user_video") ? job_data.get("user_video").isJsonNull() ? "" : job_data.get("user_video").getAsString() : "";
                             cv_file_link = user_resumes.has("cv_file_link") ? user_resumes.get("cv_file_link").isJsonNull() ? "" : user_resumes.get("cv_file_link").getAsString() : "";
                             JsonArray user_work_experience = job_data.has("user_work_experience") ? job_data.get("user_work_experience").isJsonNull() ? new JsonArray() : job_data.get("user_work_experience").getAsJsonArray() : new JsonArray();
                             JsonArray user_eductaion = job_data.has("user_eductaion") ? job_data.get("user_eductaion").isJsonNull() ? new JsonArray() : job_data.get("user_eductaion").getAsJsonArray() : new JsonArray();
                             JsonArray user_preferences = job_data.has("user_preferences") ? job_data.get("user_preferences").isJsonNull() ? new JsonArray() : job_data.get("user_preferences").getAsJsonArray() : new JsonArray();
+                            JsonArray user_job_types = job_data.has("user_job_types") ? job_data.get("user_job_types").isJsonNull() ? new JsonArray() : job_data.get("user_job_types").getAsJsonArray() : new JsonArray();
                             JsonArray user_languages = job_data.has("user_languages") ? job_data.get("user_languages").isJsonNull() ? new JsonArray() : job_data.get("user_languages").getAsJsonArray() : new JsonArray();
                             appointment_data = dataObject.has("appointment_data") ? dataObject.get("appointment_data").isJsonNull() ? new JsonArray() : dataObject.get("appointment_data").getAsJsonArray() : new JsonArray();
 
+
+                            if (user_job_types.size() > 0) {
+                                setJobtypeFlow(user_job_types);
+                                flow_jobtype.setVisibility(View.VISIBLE);
+                                tv_title_job_type.setVisibility(View.VISIBLE);
+
+                            } else {
+                                flow_jobtype.setVisibility(View.GONE);
+                                tv_title_job_type.setVisibility(View.GONE);
+                            }
+                            if (user_preferences.size() > 0) {
+                                ArrayList<EmployeeUserDetails.Data.User_Preferences> mArrayuseruserpreference = new ArrayList<>();
+                                for (int j=0;j<user_preferences.size();j++){
+                                    JsonObject dataObj = user_preferences.get(j).getAsJsonObject();
+                                    String preference_id = dataObj.has("preference_id") ? dataObj.get("preference_id").getAsString() : "";
+                                    JsonArray location_data = dataObj.has("location_data") ? dataObj.get("location_data").getAsJsonArray() : new JsonArray();
+                                    JsonArray industry_data = dataObj.has("industry_data") ? dataObj.get("industry_data").getAsJsonArray() : new JsonArray();
+                                    JsonObject expected_salary = dataObj.has("expected_salary") ? dataObj.get("expected_salary").getAsJsonObject() : new JsonObject();
+                                    String expected_salary_number = expected_salary.has("expected_salary_number") ? expected_salary.get("expected_salary_number").getAsString() : "";
+                                    String expected_salary_words = expected_salary.has("expected_salary_words") ? expected_salary.get("expected_salary_words").getAsString() : "";
+                                    ArrayList<EmployeeUserDetails.Data.User_Preferences.Location_Data> locationData = new ArrayList<>();
+                                    ArrayList<EmployeeUserDetails.Data.User_Preferences.Industry_Data> industryData = new ArrayList<>();
+                                    EmployeeUserDetails.Data.User_Preferences.Expected_Salary expectedSalary = new EmployeeUserDetails.Data.User_Preferences.Expected_Salary(expected_salary_number, expected_salary_words);
+                                    for (int i = 0; i < location_data.size(); i++) {
+                                        JsonObject locationObj = location_data.get(i).getAsJsonObject();
+                                        long location_id = locationObj.has("location_id") ? locationObj.get("location_id").getAsLong() : 0;
+                                        String location_name = locationObj.has("location_name") ? locationObj.get("location_name").getAsString() : "";
+                                        EmployeeUserDetails.Data.User_Preferences.Location_Data locationData1 = new EmployeeUserDetails.Data.User_Preferences.Location_Data(String.valueOf(location_id), location_name);
+                                        locationData.add(locationData.size(), locationData1);
+
+                                    }
+                                    for (int i = 0; i < industry_data.size(); i++) {
+                                        JsonObject industryObj = industry_data.get(i).getAsJsonObject();
+                                        long industry_id = industryObj.has("industry_id") ? industryObj.get("industry_id").getAsLong() : 0;
+                                        String industry_name = industryObj.has("industry_name") ? industryObj.get("industry_name").getAsString() : "";
+                                        EmployeeUserDetails.Data.User_Preferences.Industry_Data industry_data1 = new EmployeeUserDetails.Data.User_Preferences.Industry_Data(String.valueOf(industry_id), industry_name);
+                                        industryData.add(industryData.size(), industry_data1);
+
+                                    }
+                                    EmployeeUserDetails.Data.User_Preferences user_preferencesF = new EmployeeUserDetails.Data.User_Preferences(preference_id, locationData, industryData, expectedSalary);
+                                    mArrayuseruserpreference.add(user_preferencesF);
+                                }
+
+                                UserPreferenceAdapter adapter = new UserPreferenceAdapter(mContext, mArrayuseruserpreference);
+                                list_preferences.setAdapter(adapter);
+                                list_preferences.setDivider(null);
+
+                                tv_title_prefrences.setVisibility(View.VISIBLE);
+                                list_preferences.setVisibility(View.VISIBLE);
+
+                            } else {
+                                tv_title_prefrences.setVisibility(View.GONE);
+                                list_preferences.setVisibility(View.GONE);
+                            }
 
                             tv_username.setText(MessageFormat.format("{0}''s Profile", first_name));
                             if (TextUtils.isEmpty(video_file_link)) {
@@ -476,6 +540,16 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                             if (TextUtils.isEmpty(apply_id))
                                 ll_action.setVisibility(View.GONE);
                             else ll_action.setVisibility(View.VISIBLE);
+                            if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
+                                iv_more.setVisibility(View.GONE);
+                                ll_action.setVisibility(View.GONE);
+                                tv_appointment.setVisibility(View.GONE);
+                                tv_cancel_application.setVisibility(View.GONE);
+                                tv_reschedule.setVisibility(View.GONE);
+                                ll_appointment.setVisibility(View.GONE);
+                                iv_reject.setVisibility(View.GONE);
+                                iv_accept.setVisibility(View.GONE);
+                            }else
                             if (user_match_status.equalsIgnoreCase("A") && company_match_status.equalsIgnoreCase("A")) {
 
                                 if (appointment_data.size() > 0) {
@@ -594,7 +668,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                 String workexp = "%#@&";
                                 for (int m = 0; m < user_work_experience.size(); m++) {
                                     JsonObject workobj = user_work_experience.get(m).getAsJsonObject();
-                                    workexp = workexp + workobj.get("work_from").getAsString() + " - " + workobj.get("work_to").getAsString() + getString(R.string.next1) + getString(R.string.space) +
+                                    workexp = workexp + workobj.get("work_from").getAsString() + " - " + (workobj.get("currently_working").getAsString().equalsIgnoreCase("Y")?"Present":workobj.get("work_to").getAsString()) + getString(R.string.next1) + getString(R.string.space) +
                                             getString(R.string.space1) +
                                             workobj.get("experience_title").getAsString() + (m == user_work_experience.size() - 1 ? "" : getString(R.string.nextline) + "%#@&");
                                     workexp = workexp.replaceAll("%#@&", getString(R.string.dot) + getString(R.string.space));
@@ -949,5 +1023,57 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+    @Override
+    protected void onPause() {
+
+        if (vv_video != null) {
+            vv_video.pausePlayer();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+    private void setJobtypeFlow(JsonArray mArrayUserJobType) {
+        flow_jobtype.removeAllViews();
+        if (mArrayUserJobType != null) {
+            for (int i = 0; i < mArrayUserJobType.size(); i++) {
+                LinearLayout linearLayout = new LinearLayout(mContext);
+                LinearLayout linearLayoutF = new LinearLayout(mContext);
+                FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
+                        FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
+                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
+                linearLayoutF.setLayoutParams(layoutParams);
+                linearLayout.setLayoutParams(layoutParamsF);
+                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                linearLayout.setGravity(Gravity.CENTER);
+                linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
+                PopinsRegularTextView bt = new PopinsRegularTextView(mContext);
+                bt.setText(mArrayUserJobType.get(i).getAsJsonObject().get("job_type_name").getAsString());
+                bt.setAllCaps(false);
+                bt.setTextSize(12f);
+                bt.setMaxLines(1);
+                bt.setEllipsize(TextUtils.TruncateAt.END);
+                bt.setTag(mArrayUserJobType.get(i).getAsJsonObject().get("job_type_name").getAsString());
+                bt.setTextColor(mContext.getResources().getColor(R.color.white));
+                LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams1.setMargins(0, 0, 0, 0);
+                bt.setLayoutParams(layoutParams1);
+                linearLayout.addView(bt);
+                linearLayoutF.addView(linearLayout);
+                linearLayoutF.setTag(mArrayUserJobType.get(i).getAsJsonObject().get("job_type_name").getAsString());
+                flow_jobtype.addView(linearLayoutF);
+
+            }
+        }
+    }
 
 }

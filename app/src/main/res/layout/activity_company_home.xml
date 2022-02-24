@@ -106,7 +106,7 @@
                             android:layout_marginStart="@dimen/dimen24dp"
                             android:textSize="@dimen/dimen15sp"
                             android:gravity="center_vertical"
-                            android:text="Liked User"
+                            android:text="Liked Users"
                             android:textColor="@color/nav_gray"
                             />
 
@@ -132,7 +132,7 @@
                             android:layout_marginStart="@dimen/dimen24dp"
                             android:textSize="@dimen/dimen15sp"
                             android:gravity="center_vertical"
-                            android:text="Matched User"
+                            android:text="Matched Users"
                             android:textColor="@color/nav_gray"
                             />
                     </LinearLayout>

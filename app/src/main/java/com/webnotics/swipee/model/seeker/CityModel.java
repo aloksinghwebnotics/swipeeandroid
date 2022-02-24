@@ -68,7 +68,16 @@ public class CityModel {
             this.city_name = city_name;
         }
 
+        public boolean isSelected() {
+            return selected;
+        }
+
+        public void setSelected(boolean selected) {
+            this.selected = selected;
+        }
+
         String city_id;
         String city_name;
+        boolean selected=false;
     }
 }

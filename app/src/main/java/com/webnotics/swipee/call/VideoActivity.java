@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -141,6 +142,7 @@ public class VideoActivity extends AppCompatActivity {
     private String remoteParticipantIdentity;
     Handler handler;
     Runnable runnable;
+    TextView tv_participant_name;
     @SuppressLint("StaticFieldLeak")
     public static VideoActivity instance;
     /*
@@ -172,6 +174,7 @@ public class VideoActivity extends AppCompatActivity {
         primaryVideoView = findViewById(R.id.primary_video_view);
         thumbnailVideoView = findViewById(R.id.thumbnail_video_view);
         reconnectingProgressBar = findViewById(R.id.reconnecting_progress_bar);
+        tv_participant_name = findViewById(R.id.tv_participant_name);
 
         connectActionFab = findViewById(R.id.connect_action_fab);
         switchCameraActionFab = findViewById(R.id.switch_camera_action_fab);
@@ -195,6 +198,8 @@ public class VideoActivity extends AppCompatActivity {
          */
         TWILIO_ACCESS_TOKEN = getIntent().getStringExtra("accestoken");
          appointment_id = getIntent().getStringExtra("appointment_id");
+         String name = getIntent().getStringExtra("name");
+        tv_participant_name.setText(name);
         createAudioAndVideoTracks();
         setAccessToken();
 

@@ -62,7 +62,7 @@ public class FeaturedJobsActivity extends AppCompatActivity {
         ll_nodata = findViewById(R.id.ll_nodata);
         rv_appliedJobs = findViewById(R.id.rv_appliedJobs);
         tv_title = findViewById(R.id.tv_title);
-        tv_title.setText("Featured Job");
+        tv_title.setText("Featured Jobs");
 
         iv_back.setOnClickListener(v -> finish());
     }

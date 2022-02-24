@@ -277,33 +277,37 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.tv_city:
                 if (!TextUtils.isEmpty(stateId) && !stateId.equalsIgnoreCase("0"))
-                    startActivity(new Intent(mContext, AddCityActivity.class).putExtra("id", stateId).putExtra("from", CompanyEditProfile.class.getSimpleName()));
-                else rest.showToast("Select State First");
+                    startActivity(new Intent(mContext, AddCityActivity.class).putExtra("id", stateId).putExtra("city_id", cityId).putExtra("from", CompanyEditProfile.class.getSimpleName()));
+                else rest.showToast("Select state first");
                 break;
             case R.id.tv_state:
-                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("from", CompanyEditProfile.class.getSimpleName()));
+                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id",stateId).putExtra("from", CompanyEditProfile.class.getSimpleName()));
                 break;
             case R.id.tv_save:
                 if (TextUtils.isEmpty(et_companyname.getText().toString())) {
-                    rest.showToast("Enter Company Name");
+                    rest.showToast("Enter company name");
                 } else if (TextUtils.isEmpty(tv_industry.getText().toString())) {
-                    rest.showToast("Select Industry");
+                    rest.showToast("Select industry");
                 } else if (TextUtils.isEmpty(tv_companysize.getText().toString())) {
-                    rest.showToast("Select Company Size");
+                    rest.showToast("Select company size");
                 } else if (TextUtils.isEmpty(et_website.getText().toString())) {
-                    rest.showToast("Enter Company Website");
+                    rest.showToast("Enter company website");
                 } else if (TextUtils.isEmpty(et_address.getText().toString())) {
-                    rest.showToast("Enter Company Address");
+                    rest.showToast("Enter company address");
                 } else if (TextUtils.isEmpty(et_pincode.getText().toString())) {
-                    rest.showToast("Enter Company Pincode");
+                    rest.showToast("Enter 6 digit pincode");
+                }else if (et_pincode.getText().toString().length()!=6) {
+                    rest.showToast("Enter 6 digit pincode");
                 } else if (TextUtils.isEmpty(et_founded.getText().toString())) {
-                    rest.showToast("Enter Foundation Year");
+                    rest.showToast("Enter 4 digit established year");
+                }else if (et_founded.getText().toString().replaceAll(" ", "").length()!=4) {
+                    rest.showToast("Enter 4 digit established year");
                 } else if (TextUtils.isEmpty(tv_country.getText().toString())) {
-                    rest.showToast("Select Country");
+                    rest.showToast("Select country");
                 } else if (TextUtils.isEmpty(tv_state.getText().toString())) {
-                    rest.showToast("Select State");
+                    rest.showToast("Select state");
                 } else if (TextUtils.isEmpty(tv_city.getText().toString())) {
-                    rest.showToast("Select City");
+                    rest.showToast("Select city");
                 } else {
                     MultipartBody.Part image = null;
                     MultipartBody.Part video = null;
@@ -422,7 +426,7 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
                         .into(iv_userpickvideo);
 
                 iv_userpickvideo.setVisibility(View.VISIBLE);
-            } else rest.showToast("Video must be lesser than 15MB");
+            } else rest.showToast("Please select video max 15 MB.");
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");

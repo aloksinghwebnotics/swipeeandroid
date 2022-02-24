@@ -53,7 +53,7 @@
             android:layout_below="@+id/ll_amount"
             android:layout_marginTop="@dimen/dimen4dp"
             android:layout_toEndOf="@+id/rb_plan"
-            android:text="10 Swipes Free (Daily), 10 Job\nRadar Free (daily),\n1 Job Post Free (monthly)"
+            android:text="10 Swipes Free (Daily), \n10 Job\nRadar Free (daily),\n1 Job Post Free (monthly)"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen12sp" />
 

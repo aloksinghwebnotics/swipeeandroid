@@ -38,6 +38,7 @@ import com.webnotics.swipee.activity.CompanyProfile;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
+import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
 import com.webnotics.swipee.activity.company.PostedJobActivity;
 import com.webnotics.swipee.fragments.seeker.MatchFragments;
 import com.webnotics.swipee.rest.ParaName;
@@ -72,7 +73,7 @@ public class JobDetail extends AppCompatActivity {
     private String company_id = "";
     private String resumeId = "";
     private String company_logo = "";
-    TextView tv_appointment, tv_appointmenttime, tv_report, tv_block, tv_reschedule, tv_cancel_application, tv_closed, tv_active, tv_inactive;
+    TextView tv_industry,tv_workdays,tv_opening,tv_workshift, tv_appointment, tv_appointmenttime, tv_report, tv_block, tv_reschedule, tv_cancel_application, tv_closed, tv_active, tv_inactive;
     RelativeLayout rl_companyinfo;
     private String apply_id = "";
     private String company_name = "";
@@ -139,7 +140,10 @@ public class JobDetail extends AppCompatActivity {
         tv_active = findViewById(R.id.tv_active);
         tv_inactive = findViewById(R.id.tv_inactive);
         tv_closed = findViewById(R.id.tv_closed);
-
+        tv_workdays = findViewById(R.id.tv_workdays);
+        tv_opening = findViewById(R.id.tv_opening);
+        tv_workshift = findViewById(R.id.tv_workshift);
+        tv_industry = findViewById(R.id.tv_industry);
 
         iv_more.setVisibility(View.GONE);
         ll_job_action.setVisibility(View.GONE);
@@ -449,6 +453,15 @@ public class JobDetail extends AppCompatActivity {
                             String job_max_salary = job_data.has("job_max_salary") ? job_data.get("job_max_salary").isJsonNull() ? "" : job_data.get("job_max_salary").getAsString() : "";
                             String company_match_status = job_data.has("company_match_status") ? job_data.get("company_match_status").isJsonNull() ? "" : job_data.get("company_match_status").getAsString() : "";
                             String user_match_status = job_data.has("user_match_status") ? job_data.get("user_match_status").isJsonNull() ? "" : job_data.get("user_match_status").getAsString() : "";
+                            String job_opening_numbers = job_data.has("job_opening_numbers") ? job_data.get("job_opening_numbers").isJsonNull() ? "" : job_data.get("job_opening_numbers").getAsString() : "";
+                            String job_working_days = job_data.has("job_working_days") ? job_data.get("job_working_days").isJsonNull() ? "" : job_data.get("job_working_days").getAsString() : "";
+                            String job_shift = job_data.has("job_shift") ? job_data.get("job_shift").isJsonNull() ? "" : job_data.get("job_shift").getAsString() : "";
+                            String job_industry = job_data.has("job_industry") ? job_data.get("job_industry").isJsonNull() ? "" : job_data.get("job_industry").getAsString() : "";
+                            tv_workdays.setText(MessageFormat.format("{0} Working Days", job_working_days));
+                            tv_workshift.setText(job_shift);
+                            tv_opening.setText(job_opening_numbers);
+                            tv_industry.setText(job_industry);
+
                             String job_apply_status = job_data.has("job_apply_status") ? job_data.get("job_apply_status").isJsonNull() ? "" : job_data.get("job_apply_status").getAsString() : "";
                             company_state_name = job_data.has("company_state_name") ? job_data.get("company_state_name").isJsonNull() ? "" : job_data.get("company_state_name").getAsString() : "";
                             company_city_name = job_data.has("company_city_name") ? job_data.get("company_city_name").isJsonNull() ? "" : job_data.get("company_city_name").getAsString() : "";
@@ -520,6 +533,15 @@ public class JobDetail extends AppCompatActivity {
                                 iv_more.setVisibility(View.VISIBLE);
                             } else iv_more.setVisibility(View.GONE);
 
+                            if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
+                                ll_button.setVisibility(View.GONE);
+                                iv_reject.setVisibility(View.GONE);
+                                iv_accept.setVisibility(View.GONE);
+                                ll_applied.setVisibility(View.GONE);
+                                ll_appointment.setVisibility(View.GONE);
+                                iv_more.setVisibility(View.GONE);
+                                ll_action.setVisibility(View.GONE);
+                            }else
                             if (from.equalsIgnoreCase(CompanyAppoimentActivity.class.getSimpleName()) || from.equalsIgnoreCase(PostedJobActivity.class.getSimpleName())) {
                                 ll_button.setVisibility(View.GONE);
                                 iv_reject.setVisibility(View.GONE);
@@ -857,6 +879,9 @@ public class JobDetail extends AppCompatActivity {
 
 
     public void setBackPressed() {
+        if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
+            finish();
+        }else
         if (from.equalsIgnoreCase("Notification")) {
             if (Config.isSeeker())
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));

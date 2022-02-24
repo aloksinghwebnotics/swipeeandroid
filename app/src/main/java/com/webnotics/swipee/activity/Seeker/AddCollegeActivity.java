@@ -1,9 +1,7 @@
 package com.webnotics.swipee.activity.Seeker;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,7 +24,6 @@ import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.seeeker.CollegeAdapter;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
-import com.webnotics.swipee.room_database.College_room_abstract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -126,16 +123,11 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                 rest.AlertForInternet();
             }
         }
-
-
-
     }
 
 
     private String readFromFile() {
-
         String ret = "";
-
         try {
             InputStream inputStream = openFileInput("college.txt");
 
@@ -151,15 +143,11 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
 
                 inputStream.close();
                 ret = stringBuilder.toString();
-                Log.d("skskskksks",ret);
             }
         }
         catch (FileNotFoundException e) {
-
-            Log.e("login activity", "File not found: " + e.toString());
             return ret;
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
             return ret;
         }
 
@@ -234,9 +222,7 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                             }
                         } catch (JSONException e) {
                         }
-
                     }
-
 
                 } else {
                     rest.showToast("Something went wrong");
@@ -267,38 +253,7 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private  ArrayList<JsonObject> callCollegeFromDB() {
-        ArrayList<JsonObject> temp_prodlist = new ArrayList<>();
 
-        Cursor cursor = College_room_abstract.getDatabase(mContext).college_room_interface().getAllData();
-        if (cursor != null) {
-            if (cursor.moveToFirst() && cursor.getCount() > 0) {
-                try {
-                    do {
-                         @SuppressLint("Range") String university_college_id = cursor.getString(cursor.getColumnIndex("university_college_id"));
-                        @SuppressLint("Range") String university_college_name = cursor.getString(cursor.getColumnIndex("university_college_name"));
-                        @SuppressLint("Range") int selected = cursor.getInt(cursor.getColumnIndex("selected"));
-                        JsonObject object=new JsonObject();
-                        object.addProperty("university_college_id",university_college_id);
-                        object.addProperty("university_college_name",university_college_name);
-                        object.addProperty("selected", selected == 1);
-                        temp_prodlist.add(object);
-
-                    } while (cursor.moveToNext());
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    cursor.close();
-                }
-
-            }
-        }
-        if (cursor != null) {
-            cursor.close();
-        }
-        return temp_prodlist;
-    }
 
 
 }

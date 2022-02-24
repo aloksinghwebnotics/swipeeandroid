@@ -126,7 +126,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
                     if (ringtone!=null && ringtone.isPlaying()) {
                         ringtone.stop();
                     }
-                    intent = new Intent(mContext, VideoActivity.class).putExtra("appointment_id",getIntent().getStringExtra("Aid"));
+                    intent = new Intent(mContext, VideoActivity.class).putExtra("name",getIntent().getStringExtra("user_name")).putExtra("appointment_id",getIntent().getStringExtra("Aid"));
                 }
 
                 intent.putExtra("accestoken", getIntent().getStringExtra("user_access_token"));

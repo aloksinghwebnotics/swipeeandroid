@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activity.ForgotPassword">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dimen10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rl_toollbar"
+            android:layout_marginStart="@dimen/dimen10dp"
+            android:layout_marginEnd="@dimen/dimen18dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen42dp">
+
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dimen42dp"
+                android:layout_height="@dimen/dimen42dp"
+                android:layout_centerVertical="true"
+                android:paddingEnd="@dimen/dimen12dp"
+                android:paddingStart="@dimen/dimen12dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/white" />
+
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_margin="@dimen/dimen24dp"
+            android:layout_width="@dimen/dimen98dp"
+            android:layout_height="@dimen/dimen98dp"
+            android:background="@drawable/circle_green_bg"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/dimen20dp"
+            android:src="@drawable/ic_icon_material_check"
+            app:tint="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:id="@+id/tv_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen40dp"
+                android:layout_marginTop="@dimen/dimen20dp"
+                android:layout_marginEnd="@dimen/dimen40dp"
+                android:gravity="center"
+                android:text="Check your e-mail"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen18sp" />
+
+
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_emailsent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen40dp"
+                android:layout_marginTop="@dimen/dimen24dp"
+                android:layout_marginEnd="@dimen/dimen40dp"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen14sp" />
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:id="@+id/tv_emailresend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen40dp"
+                android:layout_marginTop="@dimen/dimen20dp"
+                android:layout_marginEnd="@dimen/dimen40dp"
+                android:gravity="center"
+                android:text="@string/didntgetemail"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen13sp" />
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumButton
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen48dp"
+                android:layout_marginStart="@dimen/dimen40dp"
+                android:layout_marginTop="@dimen/dimen64dp"
+                android:layout_marginEnd="@dimen/dimen40dp"
+                android:background="@drawable/white_semiround_bg"
+                android:text="Go to e-mail"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dimen16sp" />
+
+
+            <ImageView
+                android:layout_width="@dimen/dimen72dp"
+                android:layout_height="@dimen/dimen78dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="-4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_intersection_1" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen72dp"
+                android:layout_height="@dimen/dimen132dp"
+                android:layout_below="@+id/btn_submit"
+                android:layout_marginTop="@dimen/dimen8dpm"
+                android:src="@drawable/ic_intersection_2" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

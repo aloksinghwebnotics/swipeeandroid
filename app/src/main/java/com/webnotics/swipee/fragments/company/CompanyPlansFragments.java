@@ -243,9 +243,10 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
                         getActivity().finish();
                     }else
                     if (response.body().get("code").getAsInt()==200 &&status){
-                        JsonArray data=responseBody.has("data")?responseBody.get("data").getAsJsonArray():new JsonArray();
-                        if (data.size()>0){
-                            CompanyPlanAdapter planAdapter=new CompanyPlanAdapter(CompanyPlansFragments.this,data);
+                        JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : new JsonObject();
+                        JsonArray package_listing = data.has("package_listing") ? data.get("package_listing").getAsJsonArray() : new JsonArray();
+                        if (package_listing.size()>0){
+                            CompanyPlanAdapter planAdapter=new CompanyPlanAdapter(CompanyPlansFragments.this,package_listing);
                             rv_plan.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             rv_plan.setNestedScrollingEnabled(false);
                             rv_plan.setAdapter(planAdapter);

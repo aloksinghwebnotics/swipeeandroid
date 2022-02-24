@@ -36,9 +36,9 @@ import com.webnotics.swipee.CustomUi.PopinsRegularTextView;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -228,39 +228,44 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                 setDate();
                 break;
             case R.id.tv_time:
-                if (slotList.size() > 0) {
-                    progressdialog = new Dialog(mContext);
-                    progressdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    progressdialog.setContentView(R.layout.time_slot_popup);
-                    progressdialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-                    lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-                    lp.gravity = Gravity.CENTER;
-                    progressdialog.getWindow().setAttributes(lp);
-                    RecyclerView recyclerView = progressdialog.findViewById(R.id.rv_sizelist);
-                    recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
-                    recyclerView.setNestedScrollingEnabled(false);
-                    SizeAdapter appliedJobsAdapter = new SizeAdapter(mContext);
+                if (TextUtils.isEmpty(tv_date.getText().toString())){
+                    rest.showToast("Please select appointment date first");
+                }else {
+                    if (slotList.size() > 0) {
+                        progressdialog = new Dialog(mContext);
+                        progressdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        progressdialog.setContentView(R.layout.time_slot_popup);
+                        progressdialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+                        lp.gravity = Gravity.CENTER;
+                        progressdialog.getWindow().setAttributes(lp);
+                        RecyclerView recyclerView = progressdialog.findViewById(R.id.rv_sizelist);
+                        recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
+                        recyclerView.setNestedScrollingEnabled(false);
+                        SizeAdapter appliedJobsAdapter = new SizeAdapter(mContext);
 
-                    recyclerView.setAdapter(appliedJobsAdapter);
+                        recyclerView.setAdapter(appliedJobsAdapter);
 
-                    progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v1 -> {
+                        progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v1 -> {
 
-                        if (TextUtils.isEmpty(slotSelected)) {
-                            rest.showToast("Select Time Slot");
-                        } else {
-                            tv_time.setText(slotSelected);
-                            progressdialog.dismiss();
+                            if (TextUtils.isEmpty(slotSelected)) {
+                                rest.showToast("Select Time Slot");
+                            } else {
+                                tv_time.setText(slotSelected);
+                                progressdialog.dismiss();
+                            }
+                        });
+                        progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v12 -> progressdialog.dismiss());
+                        try {
+                            progressdialog.show();
+                        } catch (Exception e) {
                         }
-                    });
-                    progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v12 -> progressdialog.dismiss());
-                    try {
-                        progressdialog.show();
-                    } catch (Exception e) {
-                    }
 
+                    }
                 }
+
 
                 break;
             case R.id.tv_appointment:

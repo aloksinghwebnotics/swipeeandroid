@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/dimen16dp"
     android:orientation="vertical">
     <ImageView
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/iv_shaddowleft"
         android:layout_width="@dimen/dimen72dp"
         android:layout_height="@dimen/dimen132dp"
@@ -25,7 +25,7 @@
         android:rotation="180"
         android:src="@drawable/ic_intersection_2" />
     <RelativeLayout
-        android:paddingStart="@dimen/dimen18dp"
+        android:paddingStart="@dimen/dimen10dp"
         android:paddingEnd="@dimen/dimen18dp"
         android:id="@+id/rl_toollbar"
         android:layout_width="match_parent"
@@ -33,17 +33,18 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="@dimen/dimen30dp"
-            android:layout_height="@dimen/dimen30dp"
+            android:layout_width="@dimen/dimen42dp"
+            android:layout_height="@dimen/dimen42dp"
             android:layout_centerVertical="true"
             android:paddingEnd="@dimen/dimen12dp"
+            android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
         <com.webnotics.swipee.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Company Detail"
+            android:text="Company Profile"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen16sp" />
     </RelativeLayout>
@@ -101,6 +102,32 @@
                     android:src="@drawable/ic_check" />
             </LinearLayout>
 
+
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_companymobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="#00000000"
+                android:gravity="center"
+                android:visibility="gone"
+                android:paddingStart="@dimen/dimen2dp"
+                android:paddingEnd="@dimen/dimen2dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen12sp" />
+            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                android:id="@+id/tv_companyemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="#00000000"
+                android:gravity="center"
+                android:visibility="gone"
+
+                android:paddingStart="@dimen/dimen2dp"
+                android:paddingEnd="@dimen/dimen2dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen12sp" />
             <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_companyaddress"
                 android:layout_width="wrap_content"
@@ -112,7 +139,6 @@
                 android:paddingEnd="@dimen/dimen2dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen12sp" />
-
             <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

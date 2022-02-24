@@ -16,15 +16,18 @@
        <RelativeLayout
            android:id="@+id/rl_toollbar"
            android:layout_width="match_parent"
+           android:layout_marginStart="-8dp"
+           android:layout_marginEnd="-8dp"
            android:layout_height="@dimen/dimen42dp">
 
            <ImageView
                android:id="@+id/iv_back"
-               android:layout_width="@dimen/dimen30dp"
-               android:layout_height="@dimen/dimen30dp"
-               android:src="@drawable/ic_back"
+               android:layout_width="@dimen/dimen42dp"
+               android:layout_height="@dimen/dimen42dp"
+               android:layout_centerVertical="true"
                android:paddingEnd="@dimen/dimen12dp"
-               android:layout_centerVertical="true" />
+               android:paddingStart="@dimen/dimen12dp"
+               android:src="@drawable/ic_back" />
 
            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
                android:layout_width="wrap_content"
@@ -63,7 +66,6 @@
                    android:background="#00000000"
                    android:gravity="center_vertical"
                    android:hint="@string/selectjobtitle"
-                   android:inputType="text"
                    android:maxLength="56"
                    android:maxLines="1"
                    android:paddingStart="@dimen/dimen2dp"
@@ -156,7 +158,6 @@
                                android:layout_marginTop="@dimen/dimen15dp"
                                android:background="@null"
                                android:hint="@string/startdate"
-                               android:inputType="textEmailAddress|textNoSuggestions"
                                android:singleLine="true"
                                android:textAllCaps="false"
                                android:textColor="@color/black"
@@ -204,7 +205,6 @@
                                android:layout_marginTop="@dimen/dimen15dp"
                                android:background="@null"
                                android:hint="@string/enddate"
-                               android:inputType="textEmailAddress|textNoSuggestions"
                                android:singleLine="true"
                                android:textAllCaps="false"
                                android:textColor="@color/black"

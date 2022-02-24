@@ -40,21 +40,22 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/calldecline"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dimen78dp"
             android:layout_height="@dimen/dimen78dp"
-            android:padding="@dimen/dimen12dp"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/dimen60dp"
             android:layout_marginBottom="@dimen/dimen98dp"
+            android:padding="@dimen/dimen12dp"
             android:src="@drawable/ic_cancel_incoming" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/callaccept"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dimen78dp"
             android:layout_height="@dimen/dimen78dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/dimen60dp"
             android:layout_marginBottom="@dimen/dimen98dp"
-            android:layout_toEndOf="@+id/calldecline"
             android:padding="@dimen/dimen12dp"
             android:src="@drawable/callaccept" />
     </RelativeLayout>

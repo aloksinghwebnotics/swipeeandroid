@@ -288,7 +288,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                                 AppointmentAction.instance.setBackPressed();
                         } else if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
                             if (NotificationAppointmentAction.instance!=null){
-                                NotificationAppointmentAction.instance.onBackPressed();
+                                NotificationAppointmentAction.instance.setBackPressed();
                             }
                             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
                         }

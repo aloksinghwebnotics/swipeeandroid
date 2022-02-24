@@ -291,7 +291,6 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                                 ArrayList<EmployeeUserDetails.Data.User_Preferences.Location_Data> locationData = new ArrayList<>();
                                 ArrayList<EmployeeUserDetails.Data.User_Preferences.Industry_Data> industryData = new ArrayList<>();
                                 EmployeeUserDetails.Data.User_Preferences.Expected_Salary expectedSalary = new EmployeeUserDetails.Data.User_Preferences.Expected_Salary(expected_salary_number, expected_salary_words);
-                                EmployeeUserDetails.Data.User_Preferences user_preferences = new EmployeeUserDetails.Data.User_Preferences(preference_id, locationData, industryData, expectedSalary);
                                 for (int i = 0; i < location_data.size(); i++) {
                                     JsonObject locationObj = location_data.get(i).getAsJsonObject();
                                     long location_id = locationObj.has("location_id") ? locationObj.get("location_id").getAsLong() : 0;
@@ -308,6 +307,8 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                                     industryData.add(industryData.size(), industry_data1);
 
                                 }
+                                EmployeeUserDetails.Data.User_Preferences user_preferences = new EmployeeUserDetails.Data.User_Preferences(preference_id, locationData, industryData, expectedSalary);
+
                                 mArrayuseruserpreference.add(user_preferences);
                                 if (ProfileFragments.instance != null) {
                                     ProfileFragments.instance.setPreferences(mArrayuseruserpreference);

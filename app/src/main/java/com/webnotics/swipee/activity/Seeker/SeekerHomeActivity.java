@@ -283,8 +283,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                         writeToFile(mArrayListData.toString());
                         Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
 
-
-
                     }
 
 
@@ -388,7 +386,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         } catch (Exception ignored) {
         }
-        //startActivity(new Intent(mContext, MainChatActivity.class));
         matchimg.setImageResource(R.drawable.ic_match_unselected);
         nearimg.setImageResource(R.drawable.ic_near_unselect);
         planimg.setImageResource(R.drawable.ic_plan_unselect);
@@ -598,7 +595,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                                     Config.SetName(employeeuserdetail.getData().getUser_profile_data().getFirst_name() + " " +
                                             employeeuserdetail.getData().getUser_profile_data().getLast_name());
                                 }
-
                                 Config.SetFName(employeeuserdetail.getData().getUser_profile_data().getFirst_name());
                                 Config.SetLName(employeeuserdetail.getData().getUser_profile_data().getLast_name());
                                 Config.SetLat(employeeuserdetail.getData().getUser_profile_data().getLatitude());
@@ -617,16 +613,9 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                                 }
 
                             }
-                        } else if (employeeuserdetail.getCode() == 203) {
-                            AppController.loggedOut(mContext);
-                            finish();
-                        }
-                    } else {
-                        if (employeeuserdetail.getCode() == 203) {
-                            AppController.loggedOut(mContext);
-                            finish();
                         }
                     }
+
                 }
 
             }

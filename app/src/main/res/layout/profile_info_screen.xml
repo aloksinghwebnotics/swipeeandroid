@@ -2,7 +2,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    xmlns:tagview="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -192,33 +191,35 @@
 
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/rl_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_above="@+id/tv_next"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:visibility="gone">
+
                 <LinearLayout
-                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen30dp"
                     android:layout_marginEnd="@dimen/dimen30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="@dimen/dimen20dp"
                         android:layout_height="@dimen/dimen20dp"
-                        android:src="@drawable/ic_icon_material_check"
+                        android:background="@drawable/primary_circle_bg"
                         android:padding="@dimen/dimen4dp"
-                        android:background="@drawable/primary_circle_bg" />
+                        android:src="@drawable/ic_icon_material_check" />
 
                     <View
-                        android:layout_weight="0.5"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen20dp"
                         android:layout_marginStart="@dimen/dimen1dp"
                         android:layout_marginEnd="@dimen/dimen1dp"
+                        android:layout_weight="0.5"
                         android:background="@drawable/vertical_dash_line"
                         android:layerType="software" />
 
@@ -231,25 +232,26 @@
                         app:tint="@color/white" />
 
                     <View
-                        android:layout_weight="0.5"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen20dp"
                         android:layout_marginStart="@dimen/dimen1dp"
                         android:layout_marginEnd="@dimen/dimen1dp"
+                        android:layout_weight="0.5"
                         android:background="@drawable/vertical_dash_line"
                         android:layerType="software" />
 
                     <ImageView
                         android:layout_width="@dimen/dimen20dp"
                         android:layout_height="@dimen/dimen20dp"
-                        android:padding="@dimen/dimen4dp"
-                        android:background="@drawable/ic_round_stroke_gray" />
+                        android:background="@drawable/ic_round_stroke_gray"
+                        android:padding="@dimen/dimen4dp" />
                 </LinearLayout>
+
                 <RelativeLayout
-                    android:layout_marginTop="@dimen/dimen4dp"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen4dp"
+                    android:orientation="horizontal">
 
                     <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                         android:layout_width="wrap_content"
@@ -261,22 +263,24 @@
 
                     <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                         android:layout_width="80dp"
-                        android:gravity="center"
-                        android:layout_centerHorizontal="true"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/dimen10sp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
                         android:text="Profile"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen10sp" />
+
                     <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                         android:layout_width="80dp"
-                        android:gravity="center"
-                        android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/dimen10sp"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
                         android:text="Resume"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen10sp" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -314,7 +318,6 @@
                         android:drawablePadding="@dimen/dimen10dp"
                         android:gravity="center_vertical"
                         android:hint="Select your country"
-                        android:inputType="textCapWords"
                         android:maxLines="1"
                         android:paddingStart="@dimen/dimen12dp"
                         android:paddingTop="@dimen/dimen4dp"
@@ -337,7 +340,6 @@
                         android:drawablePadding="@dimen/dimen10dp"
                         android:gravity="center_vertical"
                         android:hint="Select your state"
-                        android:inputType="textCapWords"
                         android:maxLines="1"
                         android:paddingStart="@dimen/dimen12dp"
                         android:paddingTop="@dimen/dimen4dp"
@@ -359,7 +361,6 @@
                         android:drawablePadding="@dimen/dimen10dp"
                         android:gravity="center_vertical"
                         android:hint="Select your city"
-                        android:inputType="textCapWords"
                         android:maxLines="1"
                         android:paddingStart="@dimen/dimen12dp"
                         android:paddingTop="@dimen/dimen4dp"
@@ -689,7 +690,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen40dp"
-                        android:text="@string/upload"
+
+                        android:text="@string/atleastonepick"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen24sp" />
 
@@ -699,7 +701,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_upload"
                         android:layout_marginTop="@dimen/dimen8dp"
-                        android:text="@string/atleastonepick"
+
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen18sp" />
 
@@ -732,6 +734,7 @@
                             android:layout_below="@+id/iv_pickimg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_marginTop="@dimen/dimen16dp"
                             android:text="@string/uploadphotomatter"
                             android:textColor="@color/black_Light"
@@ -846,7 +849,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen40dp"
-                        android:text="@string/aboutyou"
+                        android:text="@string/tellabout"
                         android:textColor="@color/black"
 
                         android:textSize="@dimen/dimen24sp" />
@@ -857,7 +860,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_about"
                         android:layout_marginTop="@dimen/dimen8dp"
-                        android:text="@string/tellabout"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen18sp" />
 
@@ -976,7 +978,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen40dp"
-                        android:text="@string/upload"
+                        android:text="Upload introduction video"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen24sp" />
 
@@ -986,7 +988,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_upload_video"
                         android:layout_marginTop="@dimen/dimen8dp"
-                        android:text="Video"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen18sp" />
 

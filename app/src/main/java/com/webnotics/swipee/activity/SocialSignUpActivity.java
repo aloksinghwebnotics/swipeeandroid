@@ -53,9 +53,9 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
 
     Context mContext = SocialSignUpActivity.this;
     Rest rest;
-    TextView donothaveanaccount, tv_seeker, tv_recruiter,et_email;
+    TextView donothaveanaccount, tv_seeker, tv_recruiter,tv_email;
     Button btn_signup;
-    EditText et_mobile, et_password;
+    EditText et_mobile, et_password,et_email;
 
 
     FusedLocationProviderClient mFusedLocationClient;
@@ -65,6 +65,7 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
     private String oauth_id="";
     private String email="";
     private String social_type="";
+    private boolean is_email=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,16 +77,25 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
               oauth_id = getIntent().getStringExtra(ParaName.KEY_OAUTHUID)!=null?getIntent().getStringExtra(ParaName.KEY_OAUTHUID):"";
               email = getIntent().getStringExtra(ParaName.KEY_EMAIL)!=null? getIntent().getStringExtra(ParaName.KEY_EMAIL):"";
               social_type = getIntent().getStringExtra(ParaName.KEY_SOCIALTYPE)!=null?getIntent().getStringExtra(ParaName.KEY_SOCIALTYPE):"";
+              is_email = getIntent().getBooleanExtra("is_email", true);
         }
         donothaveanaccount = findViewById(R.id.donothaveanaccount);
         btn_signup = findViewById(R.id.btn_signup);
-        et_email = findViewById(R.id.et_email);
+        tv_email = findViewById(R.id.tv_email);
         et_password = findViewById(R.id.et_password);
         et_mobile = findViewById(R.id.et_mobile);
         tv_seeker = findViewById(R.id.tv_seeker);
         tv_recruiter = findViewById(R.id.tv_recruiter);
-        et_email.setText(email);
+        et_email = findViewById(R.id.et_email);
+        tv_email.setText(email);
 
+        if (is_email){
+            et_email.setVisibility(View.VISIBLE);
+            tv_email.setVisibility(View.GONE);
+        }else {
+            tv_email.setVisibility(View.VISIBLE);
+            et_email.setVisibility(View.GONE);
+        }
         if (isSeeker){
             tv_seeker.setBackgroundResource(R.drawable.white_semiround_bg);
             tv_recruiter.setBackgroundResource(0);
@@ -113,11 +123,9 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
         }
 
         FirebaseApp.initializeApp(mContext);
-        ///////////
 
-       // donothaveanaccount.setText(Html.fromHtml(getString(R.string.haveaccount)));
         btn_signup.setOnClickListener(this::onClick);
-        //donothaveanaccount.setOnClickListener(this::onClick);
+
     }
 
     @SuppressLint("MissingPermission")
@@ -193,16 +201,36 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_signup:
 
                 String mobile = et_mobile.getText().toString();
-                if (TextUtils.isEmpty(mobile)) {
-                    rest.showToast("Please Enter Mobile Number");
+                if (lat.equalsIgnoreCase("0") ||longg.equalsIgnoreCase("0")){
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                            PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                            PackageManager.PERMISSION_GRANTED) {
+                        int REQUEST_CODE_ASK_PERMISSIONS = 111;
+                        requestPermissions(new String[]{
+                                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                                REQUEST_CODE_ASK_PERMISSIONS);
+                    } else {
+                        try {
+                            getLastLocation();
+                        }catch (Exception e){}
+                    }
+
+                }
+                else if (is_email && TextUtils.isEmpty(et_email.getText().toString())){
+                    rest.showToast("Please enter email address");
+                }else   if (is_email && !Config.isEmailValid(et_email.getText().toString())){
+                    rest.showToast("Please enter a valid email address");
+                }else if (TextUtils.isEmpty(mobile)) {
+                    rest.showToast("Please enter phone number");
                 } else if (mobile.length() < 10) {
-                    rest.showToast("Please Enter Valid Mobile Number");
+                    rest.showToast("Please enter 10 digit phone number");
                 }  else {
                     ///hit
                     //
-
+                     if (is_email)
+                         email=et_email.getText().toString();
                     Calendar calendar = Calendar.getInstance();
-                    String time_zone = calendar.getTimeZone().getID().toString();
+                    String time_zone = calendar.getTimeZone().getID();
                     String country = Locale.getDefault().getCountry();
                     String android_id = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
                     String phone_code = "+91";
@@ -254,7 +282,6 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
-                    Log.d("dbhdfhkjgd", responseBody.toString());
                     if (responseBody.get("code").getAsInt()==200 &&responseBody.get("status").getAsBoolean()) {
                         JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : null;
                         if (data != null && !data.isJsonNull()) {

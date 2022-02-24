@@ -1,5 +1,6 @@
 package com.webnotics.swipee.fragments.seeker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,6 +57,7 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
     String industys = "";
     TextView viewalltext, nodatatxt, tv_search;
     String id = "";
+    @SuppressLint("StaticFieldLeak")
     public static NearFragments instance;
 
     @Override

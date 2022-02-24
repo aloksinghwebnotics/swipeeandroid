@@ -57,21 +57,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
         Glide.with(mContext).load(data.get(position).getUser_profile()).
                 error(R.drawable.ic_profile_select).placeholder(R.drawable.ic_profile_select).into(holder.civ_logo);
         holder.tv_name.setText(Config.isSeeker()?data.get(position).getCompany_name():data.get(position).getFirst_name());
-        holder.tv_lastchat.setText(!data.get(position).getMsg_type().equalsIgnoreCase("text")?data.get(position).getMsg_type():
-                data.get(position).getLast_msg_content());
-        if (!data.get(position).getMsg_type().equalsIgnoreCase("text")){
-               if (data.get(position).getMsg_type().equalsIgnoreCase("image")){
-                   holder.tv_lastchat.setText("Image");
-                   holder.tv_lastchat.setCompoundDrawablesWithIntrinsicBounds(mContext.getDrawable(R.drawable.ic_outline_image_24),null,null,null);
-               }else if (data.get(position).getMsg_type().equalsIgnoreCase("document")){
-                   holder.tv_lastchat.setText("Document");
-                   holder.tv_lastchat.setCompoundDrawablesWithIntrinsicBounds(mContext.getDrawable(R.drawable.ic_outline_file_present_24),null,null,null);
-               }
-        }else {
-            holder.tv_lastchat.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
 
-            holder.tv_lastchat.setText(data.get(position).getLast_msg_content());
-        }
         if (Config.isSeeker())
             holder.tv_action.setVisibility(View.GONE);
         else holder.tv_action.setVisibility(View.GONE);
@@ -96,6 +82,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
             .putExtra("msg_id",data.get(position).getMsg_id())
             .putExtra("action",data.get(position).getCompany_action())
             .putExtra("appointment_id",data.get(position).getAppointment_id())
+            .putExtra("appointment_number",data.get(position).getAppointment_number())
             .putExtra("user_id",data.get(position).getUser_id())
             .putExtra("sender_id",data.get(position).getMsg_sender_id())
             .putExtra("receiver_id",data.get(position).getMsg_receiver_id())

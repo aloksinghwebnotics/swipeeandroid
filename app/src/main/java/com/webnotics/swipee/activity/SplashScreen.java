@@ -78,7 +78,7 @@ public class SplashScreen extends AppCompatActivity {
 
             }
 
-        }, 3000);
+        }, 2500);
     }
 
     private void callHashMap() {

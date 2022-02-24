@@ -1,9 +1,7 @@
 package com.webnotics.swipee.activity.Seeker;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -37,7 +35,6 @@ import com.webnotics.swipee.interfaces.AddSkillInterface;
 import com.webnotics.swipee.model.AddSkillsModel;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
-import com.webnotics.swipee.room_database.Location_room_abstract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -176,60 +173,8 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
             }
         }
 
-
-        /*ArrayList<AddSkillsModel> mArrayListSkills1=callLocationFromDB();
-        if (mArrayListSkills1.size()>0){
-            this.mArrayListSkills.clear();
-            this.mArrayListSkills.addAll(mArrayListSkills1);
-            skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
-            mListView.setAdapter(skilladapter);
-        }else {
-            if (rest.isInterentAvaliable()) {
-                AppController.ShowDialogue("", mContext);
-                callLocationList();
-            } else {
-                rest.AlertForInternet();
-            }
-
-        }*/
-
     }
 
-    private ArrayList<AddSkillsModel> callLocationFromDB() {
-
-        ArrayList<AddSkillsModel> temp_prodlist = new ArrayList<>();
-
-        Cursor cursor = Location_room_abstract.getDatabase(mContext).location_room_interface().getAllData();
-        if (cursor != null) {
-            if (cursor.moveToFirst() && cursor.getCount() > 0) {
-                try {
-                    do {
-                        @SuppressLint("Range") String location_id = cursor.getString(cursor.getColumnIndex("location_id"));
-                        @SuppressLint("Range") String location_name = cursor.getString(cursor.getColumnIndex("location_name"));
-                        @SuppressLint("Range") String state_name = cursor.getString(cursor.getColumnIndex("state_name"));
-                        @SuppressLint("Range") int selected = cursor.getInt(cursor.getColumnIndex("selected"));
-                        AddSkillsModel model=new AddSkillsModel();
-                        model.setSkill_id(location_id);
-                        model.setSkill_name(location_name);
-                        model.setSelected(false);
-                        model.setStatename(state_name);
-                        temp_prodlist.add(model);
-
-                    } while (cursor.moveToNext());
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    cursor.close();
-                }
-
-            }
-        }
-        if (cursor != null) {
-            cursor.close();
-        }
-        return temp_prodlist;
-    }
 
     private void callLocationList() {
         SwipeeApiClient.swipeeServiceInstance().getLocation(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
@@ -245,26 +190,7 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                     } else if (response.body().get("code").getAsInt() == 200) {
                         JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
                        if (mArrayListData.size()>0){
-/*
-                           for (int i = 0; i < mArrayListData.size(); i++) {
-                               model = new AddSkillsModel();
-                               String location_id=mArrayListData.get(i).getAsJsonObject().get("location_id").getAsString();
-                               String location_name=mArrayListData.get(i).getAsJsonObject().get("location_name").getAsString();
-                               String state_name=mArrayListData.get(i).getAsJsonObject().get("state_name").getAsString();
-                               model.setSkill_id(location_id);
-                               model.setSkill_name(location_name);
-                               model.setSelected(false);
-                               model.setStatename(state_name);
-                               mArrayListSkills.add(model);
-                           //    Location_room_abstract.getDatabase(mContext).location_room_interface().insertData(new Location_model(location_id,location_name,state_name,0));
-                           }
-*/
                            writeToFile(mArrayListData.toString());
-                         //  Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
-                       //    skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
-                         //  mListView.setAdapter(skilladapter);
-
-
                          String data=  readFromFile();
                            try {
                                JSONArray jarray = new JSONArray(data);
@@ -339,7 +265,7 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ( (receiveString = bufferedReader.readLine()) !=   null ) {
                     stringBuilder.append(receiveString);
                 }
 

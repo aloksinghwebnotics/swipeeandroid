@@ -84,9 +84,6 @@ public class ApiUrls {
   public static final String URL_COMPANYAPOINTMENTSLOT= "appointments/employer_appointment_open_slots";
   public static final String URL_CREATEAPPOINTMENT= "appointments/employer_book_appointment";
   public static final String URL_APPOINTMENTSTATUS= "appointments/company_appointment_status";
-  public static final String URL_POSTEDACTIVEJOB= "companies/company_active_posted_jobs";
-  public static final String URL_POSTEDHIDEJOB= "companies/company_closed_jobs";
-  public static final String URL_POSTEDINACTIVEJOB= "companies/company_inactive_posted_jobs";
   public static final String URL_POSTEDJOBSTATUS= "companies/company_hide_posted_jobs";
   public static final String URL_COMPANYRADARSEARCH= "search/employer_radar_search";
   public static final String URL_COMPANYFILTER= "helper/employer_filters";
@@ -141,7 +138,8 @@ public class ApiUrls {
   public static final String PAYPALPOLICY="https://www.paypal.com/webapps/mpp/ua/privacy-full";
 
     // Naushad
-    public static final String URL_APPOINTMENT_ACCESS_TOKEN_CHAT = "appointments/access_token_chat";
+   public static final String URL_APPOINTMENT_ACCESS_TOKEN_CHAT = "appointments/chat_channel_users";
+   //public static final String URL_APPOINTMENT_ACCESS_TOKEN_CHAT = "appointments/company_start_chat";
     public static final String URL_EMPLOYER_ORDER_PACKAGE= "packages/employer_order_package";
     public static final String URL_USER_ORDER_PACKAGE= "packages/user_order_package";
 

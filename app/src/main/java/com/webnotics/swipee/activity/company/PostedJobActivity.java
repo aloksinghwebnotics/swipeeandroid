@@ -309,7 +309,7 @@ public class PostedJobActivity extends AppCompatActivity {
                             rv_appointment.setVisibility(View.GONE);
                             tv_nodata.setVisibility(View.VISIBLE);
                             ll_nodata.setVisibility(View.VISIBLE);
-                            tv_nodata.setText("No posted jobs data found");
+                            tv_nodata.setText("You haven't posted any job yet.");
                         }
 
                     } else {

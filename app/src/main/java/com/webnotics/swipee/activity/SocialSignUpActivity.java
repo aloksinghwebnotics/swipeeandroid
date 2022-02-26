@@ -27,6 +27,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonObject;
@@ -130,19 +131,39 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
 
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
-        try {
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                            if (location == null) {
+                                requestNewLocationData();
+                            } else {
+                                lat = location.getLatitude() + "";
+                                longg = location.getLongitude() + "";
+                                getAddress(mContext, location.getLatitude(), location.getLongitude());
+
+                            }
+
+                    }
+                });
+
+       /* try {
             mFusedLocationClient.getLastLocation().addOnCompleteListener(
                     task -> {
                         Location location = task.getResult();
                         if (location == null) {
                             requestNewLocationData();
                         } else {
+                            lat = location.getLatitude() + "";
+                            longg = location.getLongitude() + "";
                             getAddress(mContext, location.getLatitude(), location.getLongitude());
 
                         }
                     }
             );
-        }catch (Exception e){}
+        }catch (Exception e){}*/
 
     }
 
@@ -150,7 +171,7 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
     private void requestNewLocationData() {
 
         LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         mLocationRequest.setInterval(0);
         mLocationRequest.setFastestInterval(0);
         mLocationRequest.setNumUpdates(1);
@@ -163,10 +184,13 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+
     private final LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             Location mLastLocation = locationResult.getLastLocation();
+            lat = mLastLocation.getLatitude() + "";
+            longg =  mLastLocation.getLongitude() + "";
             getAddress(mContext, mLastLocation.getLatitude(), mLastLocation.getLongitude());
         }
     };
@@ -180,9 +204,6 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
             if (addresses != null && addresses.size() > 0) {
                 lat = LATITUDE + "";
                 longg = LONGITUDE + "";
-                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                String postalCode = addresses.get(0).getPostalCode();
-
 
             }
         } catch (IOException e) {
@@ -195,13 +216,11 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.donothaveanaccount:
-             //   finish();
-                break;
+
             case R.id.btn_signup:
 
                 String mobile = et_mobile.getText().toString();
-                if (lat.equalsIgnoreCase("0") ||longg.equalsIgnoreCase("0")){
+              /*  if (lat.equalsIgnoreCase("0") ||longg.equalsIgnoreCase("0")){
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                             PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                             PackageManager.PERMISSION_GRANTED) {
@@ -216,7 +235,7 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                     }
 
                 }
-                else if (is_email && TextUtils.isEmpty(et_email.getText().toString())){
+                else*/ if (is_email && TextUtils.isEmpty(et_email.getText().toString())){
                     rest.showToast("Please enter email address");
                 }else   if (is_email && !Config.isEmailValid(et_email.getText().toString())){
                     rest.showToast("Please enter a valid email address");
@@ -256,12 +275,14 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                             hashMap.put(ParaName.KEY_MOBILENO, mobile);
                             hashMap.put(ParaName.KEY_PASSWORD, "");
                             hashMap.put(ParaName.KEY_PHONECODE, phone_code);
+                            hashMap.put(ParaName.KEY_ISEMAILVERIFY, is_email?"N":"Y");
                             callSeekerSignUpService(hashMap);
                         } else {
                             hashMap.put(ParaName.KEY_COMPANYEMAIL, email);
                             hashMap.put(ParaName.KEY_COMPANYPHONE, mobile);
                             hashMap.put(ParaName.KEY_COMPANYPASSWORD, "");
                             hashMap.put(ParaName.KEY_COMPANYPHONECODE, phone_code);
+                            hashMap.put(ParaName.KEY_ISEMAILVERIFY, is_email?"N":"Y");
                             callSignUpCompany(hashMap);
                         }
                     } else {

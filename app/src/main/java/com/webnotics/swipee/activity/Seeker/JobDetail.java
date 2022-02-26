@@ -87,6 +87,8 @@ public class JobDetail extends AppCompatActivity {
     private String job_status_type = "";
     private String hiring_status_type = "";
     public JsonArray appointments = new JsonArray();
+    private String match_id="";
+    private String company_match_status="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +170,8 @@ public class JobDetail extends AppCompatActivity {
             hashMap.put(ParaName.KEY_JOBPOSTID, job_id);
             hashMap.put(ParaName.KEY_USERSTATUS, "A");
             hashMap.put(ParaName.KEY_COMPANYID, company_id);
+            hashMap.put(ParaName.KEY_MATCHID, match_id);
+            hashMap.put(ParaName.KEY_COMPANYSTATUS,company_match_status);
 
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
@@ -180,7 +184,8 @@ public class JobDetail extends AppCompatActivity {
             hashMap.put(ParaName.KEY_JOBPOSTID, job_id);
             hashMap.put(ParaName.KEY_USERSTATUS, "R");
             hashMap.put(ParaName.KEY_COMPANYID, company_id);
-
+            hashMap.put(ParaName.KEY_MATCHID, match_id);
+            hashMap.put(ParaName.KEY_COMPANYSTATUS,company_match_status);
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
                 postLikeDislike(hashMap);
@@ -451,8 +456,9 @@ public class JobDetail extends AppCompatActivity {
                             String job_benefits = job_data.has("job_benefits") ? job_data.get("job_benefits").isJsonNull() ? "" : job_data.get("job_benefits").getAsString() : "";
                             String job_degree = job_data.has("job_degree") ? job_data.get("job_degree").isJsonNull() ? "" : job_data.get("job_degree").getAsString() : "";
                             String job_max_salary = job_data.has("job_max_salary") ? job_data.get("job_max_salary").isJsonNull() ? "" : job_data.get("job_max_salary").getAsString() : "";
-                            String company_match_status = job_data.has("company_match_status") ? job_data.get("company_match_status").isJsonNull() ? "" : job_data.get("company_match_status").getAsString() : "";
+                             company_match_status = job_data.has("company_match_status") ? job_data.get("company_match_status").isJsonNull() ? "" : job_data.get("company_match_status").getAsString() : "";
                             String user_match_status = job_data.has("user_match_status") ? job_data.get("user_match_status").isJsonNull() ? "" : job_data.get("user_match_status").getAsString() : "";
+                            match_id = job_data.has("match_id") ? job_data.get("match_id").isJsonNull() ? "" : job_data.get("match_id").getAsString() : "";
                             String job_opening_numbers = job_data.has("job_opening_numbers") ? job_data.get("job_opening_numbers").isJsonNull() ? "" : job_data.get("job_opening_numbers").getAsString() : "";
                             String job_working_days = job_data.has("job_working_days") ? job_data.get("job_working_days").isJsonNull() ? "" : job_data.get("job_working_days").getAsString() : "";
                             String job_shift = job_data.has("job_shift") ? job_data.get("job_shift").isJsonNull() ? "" : job_data.get("job_shift").getAsString() : "";
@@ -640,6 +646,21 @@ public class JobDetail extends AppCompatActivity {
                                     || from.equalsIgnoreCase(JobListActivity.class.getSimpleName()) || from.equalsIgnoreCase(MatchFragments.class.getSimpleName())
                                     || from.equalsIgnoreCase(MatchedCompanyActivity.class.getSimpleName()) || from.equalsIgnoreCase(FeaturedJobsActivity.class.getSimpleName())) {
                                 if (company_match_status.equalsIgnoreCase("A") && user_match_status.equalsIgnoreCase("A")) {
+                                    if (job_status_type.equalsIgnoreCase("Active") && hiring_status_type.equalsIgnoreCase("Open")) {
+                                        ll_button.setVisibility(View.VISIBLE);
+                                        tv_apply.setVisibility(View.VISIBLE);
+                                    } else {
+                                        ll_button.setVisibility(View.GONE);
+                                        tv_apply.setVisibility(View.GONE);
+                                    }
+
+                                    iv_reject.setVisibility(View.GONE);
+                                    iv_accept.setVisibility(View.GONE);
+                                    ll_appointment.setVisibility(View.GONE);
+                                    ll_applied.setVisibility(View.GONE);
+                                    tv_reschedule.setVisibility(View.GONE);
+                                    tv_cancel_application.setVisibility(View.GONE);
+                                } else if (company_match_status.equalsIgnoreCase("A") ) {
                                     if (job_status_type.equalsIgnoreCase("Active") && hiring_status_type.equalsIgnoreCase("Open")) {
                                         ll_button.setVisibility(View.VISIBLE);
                                         tv_apply.setVisibility(View.VISIBLE);

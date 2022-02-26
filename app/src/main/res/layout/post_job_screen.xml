@@ -25,23 +25,11 @@
            android:rotation="180"
            android:src="@drawable/ic_intersection_2" />
 
-
-       <com.webnotics.swipee.CustomUi.PopinsMediumTextView
-           android:id="@+id/tv_main"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="@dimen/dimen16dp"
-           android:text="Add Post"
-           android:textColor="@color/black"
-           android:textSize="@dimen/dimen16sp" />
-
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:layout_below="@+id/tv_main"
            android:paddingStart="@dimen/dimen30dp"
-           android:paddingTop="@dimen/dimen16dp"
+           android:paddingTop="@dimen/dimen4dp"
            android:paddingEnd="@dimen/dimen30dp"
            android:paddingBottom="@dimen/dimen16dp">
 

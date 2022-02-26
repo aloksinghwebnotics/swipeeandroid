@@ -31,6 +31,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonObject;
@@ -138,7 +139,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
-        try {
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location == null) {
+                            requestNewLocationData();
+                        } else {
+                            lat = location.getLatitude() + "";
+                            longg = location.getLongitude() + "";
+                            getAddress(mContext, location.getLatitude(), location.getLongitude());
+
+                        }
+
+                    }
+                });
+
+
+
+       /* try {
             mFusedLocationClient.getLastLocation().addOnCompleteListener(
                     task -> {
                         Location location = task.getResult();
@@ -151,14 +172,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
             );
         }catch (Exception e){}
-
+*/
     }
 
     @SuppressLint("MissingPermission")
     private void requestNewLocationData() {
 
         LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         mLocationRequest.setInterval(0);
         mLocationRequest.setFastestInterval(0);
         mLocationRequest.setNumUpdates(1);
@@ -210,7 +231,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
                 String mobile = et_mobile.getText().toString();
-                if (lat.equalsIgnoreCase("0") ||longg.equalsIgnoreCase("0")){
+               /* if (lat.equalsIgnoreCase("0") ||longg.equalsIgnoreCase("0")){
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                             PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                             PackageManager.PERMISSION_GRANTED) {
@@ -224,7 +245,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         }catch (Exception e){}
                     }
 
-                }else
+                }else*/
                 if (TextUtils.isEmpty(email)) {
                     rest.showToast("Please enter email address");
                 } else if (!Config.isEmailValid(email)) {
@@ -263,12 +284,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             hashMap.put(ParaName.KEY_MOBILENO, mobile);
                             hashMap.put(ParaName.KEY_PASSWORD, password);
                             hashMap.put(ParaName.KEY_PHONECODE, phone_code);
+                            hashMap.put(ParaName.KEY_ISEMAILVERIFY, "N");
                             callSeekerSignUpService(hashMap);
                         } else {
                             hashMap.put(ParaName.KEY_COMPANYEMAIL, email);
                             hashMap.put(ParaName.KEY_COMPANYPHONE, mobile);
                             hashMap.put(ParaName.KEY_COMPANYPASSWORD, password);
                             hashMap.put(ParaName.KEY_COMPANYPHONECODE, phone_code);
+                            hashMap.put(ParaName.KEY_ISEMAILVERIFY, "N");
                             callSignUpCompany(hashMap);
                         }
                     } else {

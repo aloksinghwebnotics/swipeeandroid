@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -39,20 +38,15 @@ import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentAction;
 import com.webnotics.swipee.activity.AppointmentDetail;
-import com.webnotics.swipee.activity.ChatActivity;
 import com.webnotics.swipee.activity.NotificationActivity;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.adapter.seeeker.UserPreferenceAdapter;
+import com.webnotics.swipee.chat.MainChatActivity;
 import com.webnotics.swipee.model.seeker.EmployeeUserDetails;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,8 +55,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -170,7 +162,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         if (rest.isInterentAvaliable()) {
             if (!TextUtils.isEmpty(userId)) {
                 AppController.ShowDialogue("", mContext);
-                getJobDetail();
+                getUserDetail();
             }
         } else rest.AlertForInternet();
 
@@ -412,16 +404,16 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                 PostedJobActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", UserDetail.class.getSimpleName()));
             onBackPressed();
-        } else if (from.equalsIgnoreCase(ChatActivity.class.getSimpleName())) {
-            if (ChatActivity.instance != null)
-                ChatActivity.instance.backPressed();
+        } else if (from.equalsIgnoreCase(MainChatActivity.class.getSimpleName())) {
+            if (MainChatActivity.instance != null)
+                MainChatActivity.instance.backPressed();
             onBackPressed();
         } else onBackPressed();
 
     }
 
 
-    private void getJobDetail() {
+    private void getUserDetail() {
         SwipeeApiClient.swipeeServiceInstance().getSingleUserData(Config.GetUserToken(), apply_id, userId).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
@@ -550,18 +542,15 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                 iv_reject.setVisibility(View.GONE);
                                 iv_accept.setVisibility(View.GONE);
                             }else
-                            if (user_match_status.equalsIgnoreCase("A") && company_match_status.equalsIgnoreCase("A")) {
+                            if (user_match_status.equalsIgnoreCase("A") && company_match_status.equalsIgnoreCase("A") ) {
 
                                 if (appointment_data.size() > 0) {
                                     JsonObject appointmentObj = appointment_data.get(0).getAsJsonObject();
                                     String appointment_id = appointmentObj.has("appointment_id") ? appointmentObj.get("appointment_id").getAsString() : "";
-                                    String appointment_number = appointmentObj.has("appointment_number") ? appointmentObj.get("appointment_number").getAsString() : "";
                                     String appointment_type = appointmentObj.has("appointment_type") ? appointmentObj.get("appointment_type").getAsString() : "";
                                     String appointment_date = appointmentObj.has("appointment_date") ? appointmentObj.get("appointment_date").getAsString() : "";
                                     String appointment_start_at = appointmentObj.has("appointment_start_at") ? appointmentObj.get("appointment_start_at").getAsString() : "";
                                     String appointment_end_at = appointmentObj.has("appointment_end_at") ? appointmentObj.get("appointment_end_at").getAsString() : "";
-                                    String appointment_status = appointmentObj.has("appointment_status") ? appointmentObj.get("appointment_status").getAsString() : "";
-                                    String status = appointmentObj.has("status") ? appointmentObj.get("status").getAsString() : "";
                                     String job_title = appointmentObj.has("job_title") ? appointmentObj.get("job_title").getAsString() : "";
                                     appoint_job_title.setText(job_title);
                                     SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
@@ -622,14 +611,18 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                     }
                                     tv_appointment.setVisibility(View.GONE);
                                 } else {
+                                    if (!TextUtils.isEmpty(apply_id))
                                     tv_appointment.setVisibility(View.VISIBLE);
+                                    else tv_appointment.setVisibility(View.GONE);
                                     tv_cancel_application.setVisibility(View.GONE);
                                     tv_reschedule.setVisibility(View.GONE);
                                     ll_appointment.setVisibility(View.GONE);
                                 }
 
-                            } else if (company_match_status.equalsIgnoreCase("A")) {
-                                tv_appointment.setVisibility(View.VISIBLE);
+                            } else if (company_match_status.equalsIgnoreCase("A") ) {
+                                if ( !TextUtils.isEmpty(apply_id))
+                                    tv_appointment.setVisibility(View.VISIBLE);
+                                else tv_appointment.setVisibility(View.GONE);
                                 iv_reject.setVisibility(View.GONE);
                                 iv_accept.setVisibility(View.GONE);
                             } else {
@@ -959,41 +952,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    class RetrivePDFfromUrl extends AsyncTask<String, Void, InputStream> {
-        @Override
-        protected InputStream doInBackground(String... strings) {
-            // we are using inputstream
-            // for getting out PDF.
-            InputStream inputStream = null;
-            try {
-                URL url = new URL(strings[0]);
-                // below is the step where we are
-                // creating our connection.
-                HttpURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-                if (urlConnection.getResponseCode() == 200) {
-                    // response is success.
-                    // we are getting input stream from url
-                    // and storing it in our variable.
-                    inputStream = new BufferedInputStream(urlConnection.getInputStream());
-                }
-
-            } catch (IOException e) {
-                // this is the method
-                // to handle errors.
-                e.printStackTrace();
-                return null;
-            }
-            return inputStream;
-        }
-
-        @Override
-        protected void onPostExecute(InputStream inputStream) {
-            //   AppController.dismissProgressdialog();
-            //   AppController.callResume(mContext,inputStream);
-        }
     }
 
     private void postLikeDislike(HashMap<String, String> hashMap) {

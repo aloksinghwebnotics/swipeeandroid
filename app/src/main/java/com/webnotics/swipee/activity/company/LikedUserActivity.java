@@ -53,7 +53,7 @@ public class LikedUserActivity extends AppCompatActivity {
         rest = new Rest(mContext);
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
-            getLikedJobs();
+            getLikedUsers();
         } else rest.AlertForInternet();
 
         iv_back = findViewById(R.id.iv_back);
@@ -66,7 +66,7 @@ public class LikedUserActivity extends AppCompatActivity {
         iv_back.setOnClickListener(v -> finish());
     }
 
-    private void getLikedJobs() {
+    private void getLikedUsers() {
         SwipeeApiClient.swipeeServiceInstance().getLikedUser(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
 
 

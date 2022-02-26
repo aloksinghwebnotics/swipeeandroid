@@ -124,6 +124,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
         instance = this;
         rest = new Rest(mContext);
         init(rootView);
+
         return rootView;
     }
 
@@ -244,6 +245,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     hashMap.put(ParaName.KEY_JOBPOSTID, mArrayUser.get(position).getJob_post_id());
                     hashMap.put(ParaName.KEY_USERSTATUS, "R");
                     hashMap.put(ParaName.KEY_COMPANYID, mArrayUser.get(position).getCompany_id());
+                    hashMap.put(ParaName.KEY_MATCHID, mArrayUser.get(position).getMatch_id());
+                    hashMap.put(ParaName.KEY_COMPANYSTATUS, mArrayUser.get(position).getCompany_match_status());
 
                     if (rest.isInterentAvaliable()) {
                         AppController.ShowDialogue("", mContext);
@@ -258,6 +261,9 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     hashMap.put(ParaName.KEY_JOBPOSTID, mArrayUser.get(position).getJob_post_id());
                     hashMap.put(ParaName.KEY_USERSTATUS, "R");
                     hashMap.put(ParaName.KEY_COMPANYID, mArrayUser.get(position).getCompany_id());
+                    hashMap.put(ParaName.KEY_MATCHID, mArrayUser.get(position).getMatch_id());
+                    hashMap.put(ParaName.KEY_COMPANYSTATUS, mArrayUser.get(position).getCompany_match_status());
+
                     if (rest.isInterentAvaliable()) {
                         AppController.ShowDialogue("", mContext);
                         postLikeDislike(hashMap);
@@ -292,6 +298,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                             hashMap.put(ParaName.KEY_JOBPOSTID, mArrayUser.get(position).getJob_post_id());
                             hashMap.put(ParaName.KEY_USERSTATUS, "A");
                             hashMap.put(ParaName.KEY_COMPANYID, mArrayUser.get(position).getCompany_id());
+                            hashMap.put(ParaName.KEY_MATCHID, mArrayUser.get(position).getMatch_id());
+                            hashMap.put(ParaName.KEY_COMPANYSTATUS, mArrayUser.get(position).getCompany_match_status());
 
                             if (rest.isInterentAvaliable()) {
                                 AppController.ShowDialogue("", mContext);
@@ -311,6 +319,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                         hashMap.put(ParaName.KEY_JOBPOSTID, mArrayUser.get(position).getJob_post_id());
                         hashMap.put(ParaName.KEY_USERSTATUS, "A");
                         hashMap.put(ParaName.KEY_COMPANYID, mArrayUser.get(position).getCompany_id());
+                        hashMap.put(ParaName.KEY_MATCHID, mArrayUser.get(position).getMatch_id());
+                        hashMap.put(ParaName.KEY_COMPANYSTATUS, mArrayUser.get(position).getCompany_match_status());
 
                         if (rest.isInterentAvaliable()) {
                             AppController.ShowDialogue("", mContext);
@@ -330,6 +340,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                             hashMap.put(ParaName.KEY_JOBPOSTID, mArrayUser.get(position).getJob_post_id());
                             hashMap.put(ParaName.KEY_USERSTATUS, "A");
                             hashMap.put(ParaName.KEY_COMPANYID, mArrayUser.get(position).getCompany_id());
+                            hashMap.put(ParaName.KEY_MATCHID, mArrayUser.get(position).getMatch_id());
+                            hashMap.put(ParaName.KEY_COMPANYSTATUS, mArrayUser.get(position).getCompany_match_status());
 
                             if (rest.isInterentAvaliable()) {
                                 AppController.ShowDialogue("", mContext);
@@ -349,6 +361,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                         hashMap.put(ParaName.KEY_JOBPOSTID, mArrayUser.get(position).getJob_post_id());
                         hashMap.put(ParaName.KEY_USERSTATUS, "A");
                         hashMap.put(ParaName.KEY_COMPANYID, mArrayUser.get(position).getCompany_id());
+                        hashMap.put(ParaName.KEY_MATCHID, mArrayUser.get(position).getMatch_id());
+                        hashMap.put(ParaName.KEY_COMPANYSTATUS, mArrayUser.get(position).getCompany_match_status());
 
                         if (rest.isInterentAvaliable()) {
                             AppController.ShowDialogue("", mContext);

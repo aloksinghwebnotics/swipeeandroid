@@ -134,11 +134,12 @@ public class ParaName {
     public static final String KEY_PACKAGETYPE = "package_type";
     public static final String KEY_PAYMENTSTATUS = "payment_status";
     public static final String KEY_PACKAGEPRICE = "package_price";
-    public static final String KEY_AMOUNT = "amount";
     public static final String KEY_PACKAGENAME = "package_name";
     public static final String KEY_ORDERID = "order_id";
     public static final String KEY_PAYSIGN = "pay_signature";
     public static final String KEY_UNIQUENOTIFYNUMBER = "unique_notify_number";
     public static final String KEY_FCMMUTE = "fcm_mute";
+    public static final String KEY_ISEMAILVERIFY = "is_email_verify";
+    public static final String KEY_ISEPROFILEUPDATED = "is_profile_updated";
 
 }

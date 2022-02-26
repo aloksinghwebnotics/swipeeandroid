@@ -207,7 +207,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                     progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v1 -> {
 
                         if (TextUtils.isEmpty(slotSelected)) {
-                            rest.showToast("Select Time Slot");
+                            rest.showToast("Select time slot");
                         } else {
                             tv_time.setText(slotSelected);
                             progressdialog.dismiss();
@@ -224,9 +224,9 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                 break;
             case R.id.tv_appointment:
                 if (TextUtils.isEmpty(tv_date.getText().toString())) {
-                    rest.showToast("Select Appointment Date");
+                    rest.showToast("Select appointment date");
                 } else if (TextUtils.isEmpty(tv_time.getText().toString())) {
-                    rest.showToast("Select Appointment Time");
+                    rest.showToast("Select appointment time");
                 } else {
                     if (!Config.isSeeker()) {
                         if (rest.isInterentAvaliable()) {

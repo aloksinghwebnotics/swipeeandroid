@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        style="?android:attr/progressBarStyleLarge"
+         android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <LinearLayout

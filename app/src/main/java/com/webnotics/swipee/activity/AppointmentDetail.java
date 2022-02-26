@@ -260,7 +260,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                  tv_start_appointment.setOnClickListener(AppointmentDetail.this);
                              } else{
                                  tv_start_appointment.setBackgroundResource(R.drawable.gray_semiround_bg);
-                                 tv_start_appointment.setOnClickListener(null);
+                                 tv_start_appointment.setOnClickListener(AppointmentDetail.this);
                              }
                     }
 
@@ -294,7 +294,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                         Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO},
                             REQUEST_CODE_ASK_PERMISSIONS);
                 } else {
-                    if (isLive==1) {
+                    if (isLive==0) {
                         if (!TextUtils.isEmpty(appointment_id)&&!TextUtils.isEmpty(appointment_number)){
                             if (appointment_type.equalsIgnoreCase("chat")) {
                                startActivity(new Intent(mContext, MainChatActivity.class)

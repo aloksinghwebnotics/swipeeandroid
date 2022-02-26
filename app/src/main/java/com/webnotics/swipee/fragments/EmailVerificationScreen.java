@@ -183,8 +183,11 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                     Log.d("dbhdfhkjgd",responseBody.toString());
                     if (responseBody.get("status").getAsBoolean()){
                         Config.SetEmailVERIFY(true);
-                        if (BasicInfoActivity.instance!=null)
+                        if (BasicInfoActivity.instance!=null){
+                            BasicInfoActivity.instance.sendMobile=false;
                             BasicInfoActivity.instance.attachMobileVerification();
+                        }
+
                         rest.showToast(responseBody.get("message").getAsString());
                     }else {
                         if (responseBody.has("message"))
@@ -212,8 +215,10 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                     Log.d("dbhdfhkjgd",responseBody.toString());
                     if (responseBody.get("status").getAsBoolean()){
                         Config.SetEmailVERIFY(true);
-                        if (BasicInfoActivity.instance!=null)
+                        if (BasicInfoActivity.instance!=null){
+                            BasicInfoActivity.instance.sendMobile=false;
                             BasicInfoActivity.instance.attachMobileVerification();
+                        }
                         rest.showToast(responseBody.get("message").getAsString());
                     }else {
                         if (responseBody.has("message"))

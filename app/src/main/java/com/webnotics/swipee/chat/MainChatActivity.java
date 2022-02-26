@@ -44,7 +44,6 @@ import com.twilio.conversations.Message;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.activity.ChatActivity;
 import com.webnotics.swipee.activity.CompanyProfile;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
@@ -103,7 +102,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
     private RelativeLayout rl_scroll;
     private BottomSheetBehavior bottomsheet_intent;
     @SuppressLint("StaticFieldLeak")
-    public static ChatActivity instance;
+    public static MainChatActivity instance;
 
     ImageView iv_camera,  iv_doc, iv_scroll,iv_refresh;
     TextView  tv_action, tv_newmsgcount;
@@ -119,6 +118,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.white));
         mContext=this;
+        instance=this;
         quickstartConversationsManager.setListener(this);
 
          recyclerView = findViewById(R.id.rv_chat);
@@ -367,7 +367,10 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
             Message message = quickstartConversationsManager.getMessages().get(position);
             String messageText = String.format("%s\n%s",message.getBody(),message.getAuthor());
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+            /*format.setTimeZone(TimeZone.getTimeZone("UTC"));*/
             SimpleDateFormat formatout = new SimpleDateFormat("dd MMM hh:mm aa");
+            Calendar calendar = Calendar.getInstance();
+            formatout.setTimeZone(calendar.getTimeZone());
             Date dateFinal;
             String date1="";
             try {
@@ -663,7 +666,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         if (Config.isSeeker()) {
             startActivity(new Intent(mContext, CompanyProfile.class).putExtra("company_id", user_id));
         } else {
-            mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from", ChatActivity.class.getSimpleName()).
+            mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from", MainChatActivity.class.getSimpleName()).
                     putExtra("id", user_id).putExtra("job_id", job_id).putExtra("name", name));
         }
 
@@ -902,4 +905,6 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         }catch (Exception ignored){}
 
     }
+
+
 }

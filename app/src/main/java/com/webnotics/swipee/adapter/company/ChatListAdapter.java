@@ -57,6 +57,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
         Glide.with(mContext).load(data.get(position).getUser_profile()).
                 error(R.drawable.ic_profile_select).placeholder(R.drawable.ic_profile_select).into(holder.civ_logo);
         holder.tv_name.setText(Config.isSeeker()?data.get(position).getCompany_name():data.get(position).getFirst_name());
+        holder.tv_lastchat.setText(data.get(position).getLast_msg_content());
 
         if (Config.isSeeker())
             holder.tv_action.setVisibility(View.GONE);

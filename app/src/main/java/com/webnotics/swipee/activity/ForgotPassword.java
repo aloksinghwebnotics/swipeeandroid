@@ -83,9 +83,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     } else {
                         rest.AlertForInternet();
                     }
-
                 }
-
                 break;
 
             case R.id.tv_seeker:
@@ -146,7 +144,6 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 }else {
                     rest.showToast("Something went wrong");
                 }
-
             }
 
             @Override

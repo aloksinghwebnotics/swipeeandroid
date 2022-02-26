@@ -717,6 +717,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
         map.put(ParaName.KEY_STATE, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), stateId));
         map.put(ParaName.KEY_CITY, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), cityId));
         map.put(ParaName.KEY_COUNTRY, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), countryId));
+        map.put(ParaName.KEY_ISEPROFILEUPDATED, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "N"));
         map.put(ParaName.KEY_SKILLID, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), mArrayListid.toString()));
         SwipeeApiClient.swipeeServiceInstance().saveBasicInfo(map, body1,body2).enqueue(new Callback<JsonObject>() {
             @Override
@@ -893,9 +894,14 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                 outputStream.writeBytes("Content-Disposition: form-data; name=\"skill_ids\"" + lineEnd);
                 outputStream.writeBytes(lineEnd);
                 outputStream.writeBytes(mArrayListid.toString());
-
-
                 outputStream.writeBytes(lineEnd);
+
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"is_profile_updated\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes("Y");
+                outputStream.writeBytes(lineEnd);
+
                 outputStream.writeBytes(twoHyphens + boundary + lineEnd);
                 outputStream.writeBytes("Content-Disposition: form-data; name=\"user_cv\";filename=\"" + "Resume.pdf" + "\"" + lineEnd);
                 outputStream.writeBytes(lineEnd);

@@ -191,26 +191,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
-            android:id="@+id/tv_accept"
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen48dp"
-            android:layout_marginEnd="@dimen/dimen2dp"
-            android:background="@drawable/green_semiround_bg"
-            android:gravity="center"
-            android:text="Accept"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dimen14sp" />
+
         <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
             android:id="@+id/tv_cancel"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen48dp"
-            android:layout_marginStart="@dimen/dimen2dp"
+            android:layout_marginEnd="@dimen/dimen2dp"
             android:background="@drawable/red_semiround_bg"
             android:gravity="center"
             android:text="Cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen14sp" />
+        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+            android:id="@+id/tv_accept"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen48dp"
+            android:layout_marginStart="@dimen/dimen2dp"
+            android:background="@drawable/green_semiround_bg"
+            android:gravity="center"
+            android:text="Accept"
             android:textColor="@color/white"
             android:textSize="@dimen/dimen14sp" />
     </LinearLayout>

@@ -113,7 +113,6 @@ public class ApiUrls {
   public static final String URL_REPORTUSER = "companies/company_report_action";
   public static final String URL_SETMSGSEEN = "chat/setMsgSeen";
   public static final String URL_SENDMSG = "chat/sendMessage";
-  public static final String URL_VERIFYCOMPANYMOBILE = "verify_company_mobile";
   public static final String URL_APPOINTMENTSLOTFORUSER = "appointments/company_appointment_open_slots";
   public static final String URL_USERAPPOINTMENTSTATUS = "appointments/user_appointment_status";
   public static final String URL_ORDERFEATUREJOB = "packages/employer_order_featuredjob";
@@ -130,7 +129,6 @@ public class ApiUrls {
   public static final String URL_STARTAUDIO = "appointments/company_start_audio";
   public static final String URL_SEEKERSTARTAUDIO = "appointments/user_start_audio";
   public static final String URL_FCMSETTING = "auth/fcm_settings";
-
 
 
 

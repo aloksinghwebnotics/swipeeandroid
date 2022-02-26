@@ -37,6 +37,13 @@
             {
               "client_id": "66833447938-ua1crj240davigm8tbh8rrsvc0727j25.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "66833447938-fg1p0d45t7flsiqrtn76p5ksfota1b2s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.webnotics.InstaCareers"
+              }
             }
           ]
         }

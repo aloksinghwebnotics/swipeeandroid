@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/dimen18dp"
             android:paddingEnd="@dimen/dimen18dp"
+            android:gravity="center"
             android:text="@string/nolikedjobs"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/dimen14sp"/>

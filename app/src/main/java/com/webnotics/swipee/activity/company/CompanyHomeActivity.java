@@ -66,7 +66,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
     public ImageView filter_icon;
     private TextView neartxt, matchtxt, planstxt, chattxt, accounttxt, counter11, tv_name, tv_email;
     private DrawerLayout drawer;
-    RelativeLayout headerlay, notilay;
+    RelativeLayout headerlay, notilay,rl_match_top;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     CircleImageView civ_profile;
@@ -217,6 +217,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         ll_nav_posted = findViewById(R.id.ll_nav_posted);
         ll_nav_appoiment = findViewById(R.id.ll_nav_appoiment);
         ll_nav_setting = findViewById(R.id.ll_nav_setting);
+        rl_match_top = findViewById(R.id.rl_match_top);
 
         civ_profile = findViewById(R.id.civ_profile);
         tv_name = findViewById(R.id.tv_name);
@@ -268,7 +269,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.VISIBLE);
+        rl_match_top.setVisibility(View.VISIBLE);
     }
 
     private void setNearFragment() {
@@ -293,7 +294,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
     }
 
     public void setPlansFragment() {
@@ -315,7 +316,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         planstxt.setTextColor(getResources().getColor(R.color.colorPrimary));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
     }
 
     private void setChatFragment() {
@@ -337,7 +338,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.colorPrimary));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
     }
 
     private void setProfileFragment() {
@@ -359,7 +360,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.colorPrimary));
-        headerlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
     }
 
     @Override

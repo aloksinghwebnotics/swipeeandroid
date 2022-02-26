@@ -476,13 +476,12 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
 
         String imageFileName = "JPEG_" + "profile" + "_swipee";
         File storageDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpeg",         /* suffix */
-                storageDir      /* directory */
-        );
 
-        return image;
+        return File.createTempFile(
+                imageFileName,
+                ".jpeg",
+                storageDir
+        );
     }
     private void callAllDataService(MultipartBody.Part body1,MultipartBody.Part body2) {
         String MULTIPART_FORM_DATA = "multipart/form-data";
@@ -497,6 +496,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         map.put(ParaName.KEY_COMPANYEMPCOUNT, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_companysize.getText().toString()));
         map.put(ParaName.KEY_COMPANYSTABLISHED, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_founded.getText().toString()));
         map.put(ParaName.KEY_COMPANYNAME, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), name));
+        map.put(ParaName.KEY_ISEPROFILEUPDATED, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "Y"));
         map.put(ParaName.KEY_COMPANYWEBSITE, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_website.getText().toString()));
         SwipeeApiClient.swipeeServiceInstance().saveCompanyInfo(map, body1,body2).enqueue(new Callback<JsonObject>() {
             @Override

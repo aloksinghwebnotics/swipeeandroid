@@ -63,10 +63,11 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
     public ImageView filter_icon;
     private TextView neartxt, matchtxt, planstxt, chattxt, accounttxt, counter11, tv_name, tv_email;
     private DrawerLayout drawer;
-    RelativeLayout headerlay, notilay;
+    RelativeLayout headerlay, notilay,rl_match_top,rl_near_top;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     CircleImageView civ_profile;
+    public TextView tv_viewAll;
 
     @SuppressLint("StaticFieldLeak")
     public static SeekerHomeActivity instance;
@@ -99,6 +100,10 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         planlay = findViewById(R.id.ll_plans);
         chatlay = findViewById(R.id.ll_chat);
         accountlay = findViewById(R.id.ll_profile);
+
+        rl_match_top=findViewById(R.id.rl_match_top);
+        rl_near_top=findViewById(R.id.rl_near_top);
+        tv_viewAll=findViewById(R.id.tv_viewAll);
 
         nearimg = findViewById(R.id.iv_near);
         matchimg = findViewById(R.id.iv_match);
@@ -153,6 +158,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         ll_nav_appoiment.setOnClickListener(this);
         ll_nav_setting.setOnClickListener(this);
         notilay.setOnClickListener(this);
+        tv_viewAll.setOnClickListener(this);
 
         civ_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -328,8 +334,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.VISIBLE);
-        bottomlay.setVisibility(View.VISIBLE);
+        rl_match_top.setVisibility(View.VISIBLE);
+        rl_near_top.setVisibility(View.GONE);
     }
 
     private void setNearFragment() {
@@ -352,8 +358,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.GONE);
-        bottomlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
+        rl_near_top.setVisibility(View.VISIBLE);
     }
 
     public void setPlansFragment() {
@@ -375,7 +381,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         planstxt.setTextColor(getResources().getColor(R.color.colorPrimary));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
+        rl_near_top.setVisibility(View.GONE);
     }
 
     private void setChatFragment() {
@@ -397,7 +404,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.colorPrimary));
         accounttxt.setTextColor(getResources().getColor(R.color.gray));
-        headerlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
+        rl_near_top.setVisibility(View.GONE);
     }
 
     private void setProfileFragment() {
@@ -419,7 +427,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         planstxt.setTextColor(getResources().getColor(R.color.gray));
         chattxt.setTextColor(getResources().getColor(R.color.gray));
         accounttxt.setTextColor(getResources().getColor(R.color.colorPrimary));
-        headerlay.setVisibility(View.GONE);
+        rl_match_top.setVisibility(View.GONE);
+        rl_near_top.setVisibility(View.GONE);
     }
 
     @Override
@@ -506,6 +515,11 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             case R.id.ll_nav_setting:
                 isDrawerOpen();
                 startActivity(new Intent(this, SettingsActivity.class));
+                break;
+ case R.id.tv_viewAll:
+                 tv_viewAll.setVisibility(View.GONE);
+                 if (NearFragments.instance!=null)
+              NearFragments.instance.setViewAll();
                 break;
 
             default:

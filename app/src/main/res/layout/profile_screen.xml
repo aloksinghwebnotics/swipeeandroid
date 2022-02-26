@@ -7,13 +7,12 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:paddingTop="@dimen/dimen16dp"
+       android:paddingTop="@dimen/dimen4dp"
        android:paddingBottom="@dimen/dimen2dp"
        android:orientation="vertical">
        <RelativeLayout
            android:layout_marginStart="@dimen/dimen16dp"
            android:layout_marginEnd="@dimen/dimen16dp"
-           android:layout_marginTop="@dimen/dimen16dp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:background="@drawable/primarystroke_dash_bg"

@@ -79,7 +79,7 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
                             getActivity().finish();
                         }else
                         if (recentChatModel.isStatus() && recentChatModel.getCode()==200){
-                            rv_chatList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                            rv_chatList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, true));
                             ChatListAdapter chatListAdapter = new ChatListAdapter(mContext, recentChatModel.getData());
                             rv_chatList.setAdapter(chatListAdapter);
                             tv_nodata.setVisibility(View.GONE);
@@ -107,21 +107,5 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
     }
 
 
-   /* private  void caalToken(){
-        String twilioAccountSid = System.getenv("TWILIO_ACCOUNT_SID");
-        String twilioApiKey = System.getenv("TWILIO_API_KEY");
-        String twilioApiSecret = System.getenv("TWILIO_API_SECRET");
-
-        String serviceSid = System.getenv("TWILIO_SERVICE_SID");
-        String identity = "user@example.com";
-
-        ChatGrant grant = new ChatGrant();
-        grant.setServiceSid(serviceSid);
-
-        AccessToken token = new AccessToken.Builder(twilioAccountSid, twilioApiKey, twilioApiSecret)
-                .identity(identity).grant(grant).build();
-
-        System.out.println(token.toJwt());
-    }*/
 
 }

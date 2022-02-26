@@ -45,7 +45,7 @@ import retrofit2.Response;
 public class NearFragments extends Basefragment implements View.OnClickListener {
     Context mContext;
     Rest rest;
-    ImageView iv_back, iv_back1;
+    ImageView  iv_back1;
     Radar radar;
     RelativeLayout rl_allcompany, rl_main;
     ArrayList<ObjectModel> mDataSet = new ArrayList<>();
@@ -55,7 +55,7 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
     BubbleSeekBar bubbleSeekBar;
     int radiessprogress = 10;
     String industys = "";
-    TextView viewalltext, nodatatxt, tv_search;
+    TextView  nodatatxt, tv_search;
     String id = "";
     @SuppressLint("StaticFieldLeak")
     public static NearFragments instance;
@@ -66,7 +66,6 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
         mContext = getActivity();
         rest = new Rest(mContext);
         instance = this;
-        iv_back = rootView.findViewById(R.id.iv_back);
         iv_back1 = rootView.findViewById(R.id.iv_back1);
         rv_company = rootView.findViewById(R.id.rv_company);
         mRadarCustom = rootView.findViewById(R.id.mRadarCustom);
@@ -75,14 +74,11 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
         rl_allcompany.setVisibility(View.GONE);
         bubbleSeekBar = rootView.findViewById(R.id.seekbar);
         bubbleSeekBar.setProgress(radiessprogress);
-        viewalltext = rootView.findViewById(R.id.tv_viewAll);
         RelativeLayout nodatalay = rootView.findViewById(R.id.nolay);
         nodatatxt = rootView.findViewById(R.id.nodatatxt);
         tv_search = rootView.findViewById(R.id.tv_search);
         radar = rootView.findViewById(R.id.radar);
         radar.start();
-        viewalltext.setVisibility(View.GONE);
-        viewalltext.setOnClickListener(this);
         tv_search.setOnClickListener(this);
         bubbleSeekBar.setProgress(10);
         if (Config.GetPACKAGEEXP().equalsIgnoreCase("N")) {
@@ -94,10 +90,10 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
             nodatatxt.setText(R.string.packageexpseekr);
         }
 
-        iv_back.setOnClickListener(v -> {
-            backPressed();
-        });
+
         iv_back1.setOnClickListener(v -> {
+            if (SeekerHomeActivity.instance!=null)
+                SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.VISIBLE);
             rl_allcompany.setVisibility(View.GONE);
         });
         bubbleSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
@@ -197,8 +193,12 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                             rv_company.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             CompanyListAdapter stateAdapter = new CompanyListAdapter(mContext, mArrayLisCompaniesListing);
                             rv_company.setAdapter(stateAdapter);
-                            viewalltext.setVisibility(View.VISIBLE);
-                        } else viewalltext.setVisibility(View.GONE);
+                            if ( SeekerHomeActivity.instance!=null)
+                            SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.VISIBLE);
+                        } else {
+                            if ( SeekerHomeActivity.instance!=null)
+                            SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.GONE);
+                        }
                     } else  if (userRaderView.getCode()==203){
                         rest.showToast(userRaderView.getMessage());
                         AppController.loggedOut(mContext);
@@ -228,13 +228,12 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
     @Override
     protected void backPressed() {
         if (rl_allcompany.getVisibility() == View.VISIBLE) {
+            if (SeekerHomeActivity.instance!=null)
+                SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.VISIBLE);
             rl_allcompany.setVisibility(View.GONE);
         } else {
             rl_main.setVisibility(View.GONE);
             radar.stop();
-            if (SeekerHomeActivity.instance != null) {
-                SeekerHomeActivity.instance.setMatchFragment();
-            }
         }
 
     }
@@ -247,7 +246,6 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.tv_viewAll:
-                rl_allcompany.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -342,6 +340,10 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
             mContext.startActivity(new Intent(mContext, JobListActivity.class).putExtra("id", id));
         });
 
+    }
+
+    public void setViewAll(){
+        rl_allcompany.setVisibility(View.VISIBLE);
     }
 
 }

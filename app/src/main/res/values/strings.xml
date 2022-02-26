@@ -17,7 +17,7 @@
     <string name="space1"><![CDATA[<font color=\'#00FFFFFF\'>....</font>]]></string>
     <string name="nextline"><![CDATA[<br><br>]]></string>
     <string name="next1"><![CDATA[<br>]]></string>
-    <string name="termcondtn">By continuing, I allow SWIPEE to collect data on how i use the app, which will be used to improve the SWIPEE app.</string>
+    <string name="termcondtn">By continuing, I allow SWIPEE to collect data on how I use the app, which will be used to improve the SWIPEE app.</string>
     <string name="enteryourphone">Enter your phone number</string>
     <string name="enteryourphoneerror">Please enter a valid phone number.</string>
     <string name="haveanaccount">Have an account? Login here</string>
@@ -27,7 +27,7 @@
     <string name="enteremailaddress">Please Enter Your Email Address.</string>
     <string name="plzverify">Please Verify</string>
     <string name="plzenterotp">Please enter the OTP. Which we have sent on your email address.</string>
-    <string name="resendotp">Resend OTP ?</string>
+    <string name="resendotp">Resend OTP</string>
     <string name="next">Next</string>
     <string name="plzenterphone">Please enter your phone no.</string>
     <string name="plzenterotponphone">Please enter the OTP. Which we have sent on your phone number.</string>
@@ -199,5 +199,5 @@
     <string name="write_message">Write Message</string>
     <string name="test_access_token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzhjMGQ1OTg2MjU1MDRiM2YyZGIwODU3ZGRiNWI4OGJiLTE2NDU1MTExOTgiLCJpc3MiOiJTSzhjMGQ1OTg2MjU1MDRiM2YyZGIwODU3ZGRiNWI4OGJiIiwic3ViIjoiQUM5ZDI5YTdhZDkzNGY0MDFmYjQ1N2I3ODlkYjFmZWY4ZiIsImV4cCI6MTY0NTUxNDc5OCwiZ3JhbnRzIjp7ImlkZW50aXR5IjoiSmhvbm55IEx1Y2FzIiwiY2hhdCI6eyJzZXJ2aWNlX3NpZCI6IklTYTUwNTNkZTkyOGU1NGFhZmEyZjk3NjE2ZTE0YTM3YzkifX19.nzdJn5ZEE1VcpNO72i1BeojX9UIX2I0PboCb8bwljTc</string>
     <string name="planmsg">You have already an active plan, do you want to switch from existing plan to new plan.</string>
-
+    <string name="com.google.firebase.crashlytics.mapping_file_id">none</string>
 </resources>

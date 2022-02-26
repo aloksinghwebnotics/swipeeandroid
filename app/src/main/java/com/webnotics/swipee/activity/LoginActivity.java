@@ -352,7 +352,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
 
                 email = acct.getEmail();
-              //  email="";
                 socialid = acct.getId();
 
                 Log.e("loginimageurl", "Name: " + personName + ", email: " + email
@@ -379,7 +378,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
             String phone_code = "+91";
             String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-            String device_token = FirebaseInstanceId.getInstance().getId();
             String user_app_language = Locale.getDefault().getDisplayLanguage().toLowerCase(Locale.ROOT);
 
             Log.d("djdjdjdj", "android_id  " + refreshedToken);
@@ -658,13 +656,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 String lastq_name=!personName.substring(personName.indexOf(" ")+1).isEmpty()?personName.substring(personName.indexOf(" ")+1):"";
                                 Config.SetFName(first_name);
                                 Config.SetLName(lastq_name);
-
                             }else {
                                 Config.SetFName(personName);
                                 Config.SetLName("");
                             }
                             Config.SetName(personName);
-
                             Config.SetPICKURI(personPhotoUrl);
                             if (is_social_login){
                                 if (!TextUtils.isEmpty(mobile_no)){

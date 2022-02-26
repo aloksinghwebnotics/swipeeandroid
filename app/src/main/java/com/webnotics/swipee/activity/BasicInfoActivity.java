@@ -28,6 +28,7 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     public boolean isSeeker = true;
+    public boolean sendMobile = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

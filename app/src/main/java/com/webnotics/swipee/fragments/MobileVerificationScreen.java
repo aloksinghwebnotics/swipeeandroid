@@ -69,6 +69,18 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
         et_otp2.addTextChangedListener(textWatcher);
         et_otp3.addTextChangedListener(textWatcher);
         et_otp4.addTextChangedListener(textWatcher);
+
+        if (BasicInfoActivity.instance!=null)
+        if (BasicInfoActivity.instance.sendMobile)
+            if (rest.isInterentAvaliable()) {
+                AppController.ShowDialogue("", mContext);
+                if (isSeeker)
+                    resendOtp();
+                else  callChangeCompanyMobile(Config.GetMobileNo());;
+            } else {
+                rest.AlertForInternet();
+            }
+
         return rootView;
     }
     @Override

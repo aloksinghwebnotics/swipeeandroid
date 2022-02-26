@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/dimen16dp"
+    android:paddingTop="@dimen/dimen4dp"
     android:orientation="vertical">
     <ImageView
         android:visibility="visible"
@@ -38,14 +38,6 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/dimen8dp">
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen26dp"
-                android:gravity="center"
-                android:text="Profile"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimen16sp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_profile"

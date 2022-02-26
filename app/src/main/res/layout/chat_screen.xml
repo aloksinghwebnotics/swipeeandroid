@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/dimen16dp"
+    android:paddingTop="@dimen/dimen4dp"
     android:orientation="vertical">
     <ImageView
         android:visibility="visible"
@@ -32,20 +32,11 @@
             android:paddingBottom="@dimen/dimen4dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
-                android:layout_marginBottom="@dimen/dimen12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Chat"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimen16sp" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chatList"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
             <LinearLayout
                 android:id="@+id/ll_nodata"
                 android:layout_width="match_parent"

@@ -91,7 +91,6 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                 String degree_level_id = getIntent().getStringExtra("degree_level_id") != null ? getIntent().getStringExtra("degree_level_id") : "";
                 String start_date = getIntent().getStringExtra("start_date") != null ? getIntent().getStringExtra("start_date") : "";
                 String end_date = getIntent().getStringExtra("end_date") != null ? getIntent().getStringExtra("end_date") : "";
-                String degree_level = getIntent().getStringExtra("degree_level") != null ? getIntent().getStringExtra("degree_level") : "";
                 String degree_type_id = getIntent().getStringExtra("degree_type_id") != null ? getIntent().getStringExtra("degree_type_id") : "";
                 String degree_name = getIntent().getStringExtra("degree_name") != null ? getIntent().getStringExtra("degree_name") : "";
                 String currently_pursuing = getIntent().getStringExtra("currently_pursuing") != null ? getIntent().getStringExtra("currently_pursuing") : "";
@@ -100,9 +99,7 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                 tv_degree.setText(degree_name);
                 tv_startdate.setText(start_date);
                 tv_enddate.setText(end_date);
-                if (currently_pursuing.equalsIgnoreCase("Y")) {
-                    cb_pursuing.setChecked(true);
-                } else cb_pursuing.setChecked(false);
+                cb_pursuing.setChecked(currently_pursuing.equalsIgnoreCase("Y"));
                 collegeId = college_university_id;
                 degreeId = degree_type_id;
                 degreeLevel = degree_level_id;

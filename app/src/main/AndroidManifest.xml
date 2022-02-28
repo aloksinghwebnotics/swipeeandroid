@@ -96,11 +96,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
         <activity
-            android:name=".activity.ChatActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/basictheme" />
-        <activity
             android:name=".activity.company.CreateAppointment"
             android:exported="true"
             android:screenOrientation="portrait"

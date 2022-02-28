@@ -552,7 +552,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
 
         RecyclerView rv_sizelist=progressdialog.findViewById(R.id.rv_sizelist);
         rv_sizelist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-       SizeAdapter sizeAdapter=new SizeAdapter(mContext);
+       SizeAdapter sizeAdapter=new SizeAdapter();
         rv_sizelist.setAdapter(sizeAdapter);
         rv_sizelist.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
 
@@ -572,13 +572,10 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
 
     public class SizeAdapter extends RecyclerView.Adapter<SizeAdapter.MyViewHolder> {
 
-        Context mContext;
 
-        public SizeAdapter(Context mContext) {
+        public SizeAdapter() {
 
             // TODO Auto-generated constructor stub
-
-
 
         }
 
@@ -596,12 +593,9 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         public void onBindViewHolder(@NonNull SizeAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
             holder.tv_item.setText(company_size.get(position).getAsString());
             holder.radioButton.setClickable(false);
-            holder.tv_item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    et_companysize.setText(company_size.get(position).getAsString());
-                    progressdialog.dismiss();
-                }
+            holder.tv_item.setOnClickListener(v -> {
+                et_companysize.setText(company_size.get(position).getAsString());
+                progressdialog.dismiss();
             });
         }
 

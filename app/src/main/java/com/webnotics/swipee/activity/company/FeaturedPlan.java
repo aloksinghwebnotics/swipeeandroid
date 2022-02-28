@@ -102,9 +102,7 @@ public class FeaturedPlan extends AppCompatActivity implements PaymentResultWith
                                     Payment payment = new Payment();
                                     payment.startPayment(FeaturedPlan.this, order_id, package_name, package_price);
                                 }
-
                             }
-
                         }
                     }
 

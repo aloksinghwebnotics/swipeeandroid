@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -335,9 +336,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                         JsonObject data = responceBody.has("data") ? responceBody.get("data").getAsJsonObject() : new JsonObject();
                         JsonArray available_open_slots = data.has("available_open_slots") ? data.get("available_open_slots").getAsJsonArray() : new JsonArray();
                         slotList = new ArrayList<>();
-                        for (int i = 0; i < available_open_slots.size(); i++) {
-                            slotList.add(slotList.size(), available_open_slots.get(i).getAsString());
-                        }
+                        IntStream.range(0, available_open_slots.size()).forEach(i -> slotList.add(slotList.size(), available_open_slots.get(i).getAsString()));
                     }
 
                 } else rest.showToast("Something went wrong");
@@ -368,9 +367,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                         JsonObject data = responceBody.has("data") ? responceBody.get("data").getAsJsonObject() : new JsonObject();
                         JsonArray available_open_slots = data.has("available_open_slots") ? data.get("available_open_slots").getAsJsonArray() : new JsonArray();
                         slotList = new ArrayList<>();
-                        for (int i = 0; i < available_open_slots.size(); i++) {
-                            slotList.add(slotList.size(), available_open_slots.get(i).getAsString());
-                        }
+                        IntStream.range(0, available_open_slots.size()).forEach(i -> slotList.add(slotList.size(), available_open_slots.get(i).getAsString()));
                     }
 
                 } else rest.showToast("Something went wrong");

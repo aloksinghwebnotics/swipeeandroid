@@ -63,7 +63,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
     public ImageView filter_icon;
     private TextView neartxt, matchtxt, planstxt, chattxt, accounttxt, counter11, tv_name, tv_email;
     private DrawerLayout drawer;
-    RelativeLayout headerlay, notilay,rl_match_top,rl_near_top;
+    RelativeLayout headerlay, notilay, rl_match_top, rl_near_top;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     CircleImageView civ_profile;
@@ -101,9 +101,9 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         chatlay = findViewById(R.id.ll_chat);
         accountlay = findViewById(R.id.ll_profile);
 
-        rl_match_top=findViewById(R.id.rl_match_top);
-        rl_near_top=findViewById(R.id.rl_near_top);
-        tv_viewAll=findViewById(R.id.tv_viewAll);
+        rl_match_top = findViewById(R.id.rl_match_top);
+        rl_near_top = findViewById(R.id.rl_near_top);
+        tv_viewAll = findViewById(R.id.tv_viewAll);
 
         nearimg = findViewById(R.id.iv_near);
         matchimg = findViewById(R.id.iv_match);
@@ -124,7 +124,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         drawer = findViewById(R.id.drawer_layout);
         headerlay = findViewById(R.id.headerlay);
         bottomlay = findViewById(R.id.bottomlay);
-
 
         ll_nav_home = findViewById(R.id.ll_nav_home);
         ll_nav_liked = findViewById(R.id.ll_nav_liked);
@@ -174,28 +173,27 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         try {
             @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             @SuppressLint("SimpleDateFormat") SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
-            if (TextUtils.isEmpty(Config.GetCollegeRefreshDate())){
+            if (TextUtils.isEmpty(Config.GetCollegeRefreshDate())) {
                 callCollegeList();
-            }else {
-                Date d1   = format.parse(Config.GetCollegeRefreshDate());
+            } else {
+                Date d1 = format.parse(Config.GetCollegeRefreshDate());
                 Date d2 = format.parse(Calendar.getInstance().getTime().toString());
-                if (d1!=null && d2!=null){
-                    String date1=formatout.format(d1);
-                    String date2=formatout.format(d2);
-                    Date final1=formatout.parse(date1);
-                    Date final2=formatout.parse(date2);
-                    if (final1!=null && final2!=null){
-                        if(final1.compareTo(final2) != 0) {
+                if (d1 != null && d2 != null) {
+                    String date1 = formatout.format(d1);
+                    String date2 = formatout.format(d2);
+                    Date final1 = formatout.parse(date1);
+                    Date final2 = formatout.parse(date2);
+                    if (final1 != null && final2 != null) {
+                        if (final1.compareTo(final2) != 0) {
                             callCollegeList();
-                        }else {
+                        } else {
                             callLocation();
                         }
-                    }else {
+                    } else {
 
                         callCollegeList();
                     }
-                }else callCollegeList();
-
+                } else callCollegeList();
 
 
             }
@@ -204,36 +202,34 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         }
 
 
-
-
     }
 
     private void callLocation() {
         try {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
-            if (TextUtils.isEmpty(Config.GetLocationRefreshDate())){
+            if (TextUtils.isEmpty(Config.GetLocationRefreshDate())) {
                 callLocationList();
-            }else {
-                Date d1   = format.parse(Config.GetLocationRefreshDate());
+            } else {
+                Date d1 = format.parse(Config.GetLocationRefreshDate());
                 Date d2 = format.parse(Calendar.getInstance().getTime().toString());
-                if (d1!=null && d2!=null){
-                    String date1=formatout.format(d1);
-                    String date2=formatout.format(d2);
-                    Date final1=formatout.parse(date1);
-                    Date final2=formatout.parse(date2);
-                    if (final1!=null && final2!=null){
-                        if(final1.compareTo(final2) != 0) {
-                            Log.d("hhhhh","Hit from date");
+                if (d1 != null && d2 != null) {
+                    String date1 = formatout.format(d1);
+                    String date2 = formatout.format(d2);
+                    Date final1 = formatout.parse(date1);
+                    Date final2 = formatout.parse(date2);
+                    if (final1 != null && final2 != null) {
+                        if (final1.compareTo(final2) != 0) {
+                            Log.d("hhhhh", "Hit from date");
                             callLocationList();
-                        }else {
+                        } else {
 
                         }
-                    }else {
-                        Log.d("hhhhh","Hit from null");
+                    } else {
+                        Log.d("hhhhh", "Hit from null");
                         callLocationList();
                     }
-                }else    callLocationList();
+                } else callLocationList();
 
             }
         } catch (ParseException e) {
@@ -248,14 +244,12 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
                     JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                    if (mArrayListData.size()>0){
+                    if (mArrayListData.size() > 0) {
                         writeCollege(mArrayListData.toString());
                         Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
                         callLocation();
                     }
-
                 }
-
             }
 
             @Override
@@ -271,8 +265,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("college.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
@@ -288,10 +281,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                         JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
                         writeToFile(mArrayListData.toString());
                         Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
-
                     }
-
-
                 }
 
             }
@@ -308,8 +298,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("location.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
@@ -516,10 +505,10 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                 isDrawerOpen();
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
- case R.id.tv_viewAll:
-                 tv_viewAll.setVisibility(View.GONE);
-                 if (NearFragments.instance!=null)
-              NearFragments.instance.setViewAll();
+            case R.id.tv_viewAll:
+                tv_viewAll.setVisibility(View.GONE);
+                if (NearFragments.instance != null)
+                    NearFragments.instance.setViewAll();
                 break;
 
             default:
@@ -639,8 +628,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
-/*
-    *//**
+    /*
+     *//**
      * The name of the function has to be
      * onPaymentSuccess
      * Wrap your code in try catch, as shown, to ensure that this method runs correctly
@@ -658,7 +647,9 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    *//**
+    */
+
+    /**
      * The name of the function has to be
      * onPaymentError
      * Wrap your code in try catch, as shown, to ensure that this method runs correctly
@@ -673,13 +664,12 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             Log.e("RazorPay", "Exception in onPaymentError", e);
         }
     }*/
-
     @Override
     public void onPaymentSuccess(String s, PaymentData paymentData) {
 
         try {
             Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show();
-            if (PlansFragments.instance != null){
+            if (PlansFragments.instance != null) {
                 PlansFragments.instance.setTransactionData(paymentData);
             }
         } catch (Exception e) {

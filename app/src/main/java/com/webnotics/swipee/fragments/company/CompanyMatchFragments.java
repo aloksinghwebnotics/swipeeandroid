@@ -844,6 +844,14 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                     packgeID = companyuserlisting.getData().getPackage_id();
                     Config.SetPACKAGEEXP(companyuserlisting.getData().getLeft_package_days()>0?"N":"Y");
                     Config.SetLeftPostCount(companyuserlisting.getData().getLeft_posted_jobs());
+
+                    if (companyuserlisting.getData().getLeft_package_days()>0) {
+                        if ( left_swipes > 0 || packgeID.equalsIgnoreCase("8")){
+                            CompanyHomeActivity.instance.filter_icon.setVisibility(View.VISIBLE);
+                        }else   CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
+                    } else {
+                        CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
+                    }
                     if (companyuserlisting.getData().getLeft_package_days()>0) {
                         if (mArrayUser != null) {
                             try {
@@ -859,11 +867,9 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                                     if (left_swipes > 0 || packgeID.equalsIgnoreCase("8")) {
                                         noleftswipelay.setVisibility(View.GONE);
                                         datalay.setVisibility(View.VISIBLE);
-                                        CompanyHomeActivity.instance.filter_icon.setVisibility(View.VISIBLE);
                                     } else {
                                         noleftswipelay.setVisibility(View.VISIBLE);
                                         datalay.setVisibility(View.GONE);
-                                        CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                                     }
                                 } else {
                                     nolay.setVisibility(View.VISIBLE);
@@ -892,11 +898,12 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                     countersInterface.notification(companyuserlisting.getData().getCompany_notification_counter(), 0, 0);
 
                 } else {
-                    iv_nodata.setImageResource(R.drawable.ic_no_data);
-                    nolay.setVisibility(View.VISIBLE);
-                    nodatatxt.setText(getResources().getString(R.string.nodatatxt1First));
+                    CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                     noleftswipelay.setVisibility(View.GONE);
+                    iv_nodata.setImageResource(R.drawable.ic_plan_exp);
+                    nolay.setVisibility(View.VISIBLE);
                     datalay.setVisibility(View.GONE);
+                    nodatatxt.setText(R.string.packageexpseekr);
                 }
 
             } else if (companyuserlisting.getCode() == 203){

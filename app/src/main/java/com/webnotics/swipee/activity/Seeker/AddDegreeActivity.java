@@ -24,6 +24,8 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -112,10 +114,7 @@ public class AddDegreeActivity extends AppCompatActivity implements View.OnClick
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
                     JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                    ArrayList<JsonObject> jsonObjectArrayList = new ArrayList<>();
-                    for (int i = 0; i < mArrayListData.size(); i++) {
-                        jsonObjectArrayList.add(mArrayListData.get(i).getAsJsonObject());
-                    }
+                    ArrayList<JsonObject> jsonObjectArrayList = IntStream.range(0, mArrayListData.size()).mapToObj(i -> mArrayListData.get(i).getAsJsonObject()).collect(Collectors.toCollection(ArrayList::new));
                     if (mArrayListData.size() > 0) {
                         degreeAdapter = new DegreeAdapter(AddDegreeActivity.this, jsonObjectArrayList);
                         mListView.setAdapter(degreeAdapter);

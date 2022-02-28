@@ -48,6 +48,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -104,28 +105,24 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
             // TODO Auto-generated method stub
             FlowLayout ll = (FlowLayout) v.getParent();
 
-            for (int j = 0; j < mArrayListSkills.size(); j++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())) {
-                    AddSkillsModel model1 = new AddSkillsModel();
-                    model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
-                    model1.setSelected(false);
-                    model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
-                    model1.setStatename(mArrayListSkills.get(j).getStatename());
-                    mArrayListSkills.set(j, model1);
-                    if (skilladapter != null)
-                        skilladapter.notifyDataSetChanged();
-                }
-            }
-            for (int z = 0; z < mArrayListdesiredindustries.size(); z++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))) {
-                    mArrayListdesiredindustries.remove(z);
-                    mArrayListid.remove(z);
-                    mArrayListName.remove(z);
-                    if (skilladapter != null)
-                        skilladapter.getFilter().filter("");
-                    et_search.setText("");
-                }
-            }
+            IntStream.range(0, mArrayListSkills.size()).filter(j -> v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())).forEach(j -> {
+                AddSkillsModel model1 = new AddSkillsModel();
+                model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
+                model1.setSelected(false);
+                model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
+                model1.setStatename(mArrayListSkills.get(j).getStatename());
+                mArrayListSkills.set(j, model1);
+                if (skilladapter != null)
+                    skilladapter.notifyDataSetChanged();
+            });
+            IntStream.range(0, mArrayListdesiredindustries.size()).filter(z -> v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))).forEach(z -> {
+                mArrayListdesiredindustries.remove(z);
+                mArrayListid.remove(z);
+                mArrayListName.remove(z);
+                if (skilladapter != null)
+                    skilladapter.getFilter().filter("");
+                et_search.setText("");
+            });
             ll.removeView(v);
             if (flowlay.getMeasuredHeight() > 400) {
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
@@ -138,7 +135,8 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
             JSONArray jarray = new JSONArray(data);
             if (jarray.length()>0){
                 mArrayListSkills.clear();
-                for (int i = 0; i < jarray.length(); i++) {
+                int i = 0;
+                while (i < jarray.length()) {
                     model = new AddSkillsModel();
                     JSONObject jsonObject= jarray.getJSONObject(i);
                     String location_id=jsonObject.getString("location_id");
@@ -149,12 +147,11 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                     model.setSelected(false);
                     model.setStatename(state_name);
                     mArrayListSkills.add(model);
+                    i++;
                 }
 
                 skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                 mListView.setAdapter(skilladapter);
-
-
 
             }else {
                 if (rest.isInterentAvaliable()) {
@@ -196,7 +193,8 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                                JSONArray jarray = new JSONArray(data);
                                if (jarray.length()>0){
                                    mArrayListSkills.clear();
-                                   for (int i = 0; i < jarray.length(); i++) {
+                                   int i = 0;
+                                   while (i < jarray.length()) {
                                        model = new AddSkillsModel();
                                        JSONObject jsonObject= jarray.getJSONObject(i);
                                        String location_id=jsonObject.getString("location_id");
@@ -207,6 +205,7 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                                        model.setSelected(false);
                                        model.setStatename(state_name);
                                        mArrayListSkills.add(model);
+                                       i++;
                                    }
                                    Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
                                    skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);

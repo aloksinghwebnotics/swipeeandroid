@@ -135,9 +135,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         tv_dob.setText(Config.GetDob().replaceAll("-", "/"));
         stateId = Config.GetStateId();
         cityId = Config.GetCityId();
-        if (getIntent()!=null){
-            String videoUrl=getIntent().getStringExtra("videoUrl")!=null?getIntent().getStringExtra("videoUrl"):"";
-            if (!TextUtils.isEmpty(videoUrl)){
+        if (getIntent() != null) {
+            String videoUrl = getIntent().getStringExtra("videoUrl") != null ? getIntent().getStringExtra("videoUrl") : "";
+            if (!TextUtils.isEmpty(videoUrl)) {
                 Glide
                         .with(mContext)
                         .load(videoUrl)
@@ -237,7 +237,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 else rest.showToast("Select state first");
                 break;
             case R.id.tv_state:
-                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id",stateId).putExtra("from", EditProfileActivity.class.getSimpleName()));
+                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id", stateId).putExtra("from", EditProfileActivity.class.getSimpleName()));
                 break;
             case R.id.tv_dob:
                 setDate();
@@ -278,22 +278,20 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         String dateCurrent = Calendar.getInstance().getTime().toString();
         SimpleDateFormat formatCurrent = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
-        try
-        {
+        try {
             Date myDate = formatCurrent.parse(dateCurrent);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(myDate);
-            calendar.add(Calendar.YEAR , -11 );
+            calendar.add(Calendar.YEAR, -11);
             datePickerDialog.getDatePicker().setMaxDate(calendar.getTime().getTime());
 
-        }
-        catch ( Exception e )
-        {
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
         datePickerDialog.show();
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -321,7 +319,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, SELECT_VIDEO);
     }
-
 
 
     private void industryBottomSheet() {

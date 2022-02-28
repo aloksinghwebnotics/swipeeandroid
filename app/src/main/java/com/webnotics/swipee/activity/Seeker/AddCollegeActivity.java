@@ -90,7 +90,8 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
             JSONArray jarray = new JSONArray(data);
             if (jarray.length()>0){
                   ArrayList<JsonObject> collegeList=new ArrayList<>();
-                for (int i = 0; i < jarray.length(); i++) {
+                int i = 0;
+                while (i < jarray.length()) {
                     JSONObject jsonObject= jarray.getJSONObject(i);
                     String university_college_id=jsonObject.getString("university_college_id");
                     String university_college_name=jsonObject.getString("university_college_name");
@@ -100,6 +101,7 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                     object.addProperty("university_college_name",university_college_name);
                     object.addProperty("selected",selected);
                     collegeList.add(collegeList.size(),object);
+                    i++;
                 }
 
                 collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);
@@ -202,7 +204,8 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                             JSONArray jarray = new JSONArray(data);
                             if (jarray.length()>0){
                                 ArrayList<JsonObject> collegeList=new ArrayList<>();
-                                for (int i = 0; i < jarray.length(); i++) {
+                                int i = 0;
+                                while (i < jarray.length()) {
                                     JSONObject jsonObject= jarray.getJSONObject(i);
                                     String university_college_id=jsonObject.getString("university_college_id");
                                     String university_college_name=jsonObject.getString("university_college_name");
@@ -212,6 +215,7 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                                     object.addProperty("university_college_name",university_college_name);
                                     object.addProperty("selected",selected);
                                     collegeList.add(collegeList.size(),object);
+                                    i++;
                                 }
 
                                 collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);

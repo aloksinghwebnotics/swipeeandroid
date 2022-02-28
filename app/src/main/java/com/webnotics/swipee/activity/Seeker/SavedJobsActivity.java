@@ -28,6 +28,7 @@ import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,8 +85,7 @@ public class SavedJobsActivity extends AppCompatActivity {
                         JsonArray job_data = dataObject.has("job_data") ? dataObject.get("job_data").getAsJsonArray() : new JsonArray();
                         if (job_data.size() > 0) {
                             appliedJobDataList = new ArrayList<>();
-                            for (int i = 0; i < job_data.size(); i++) {
-                                JsonObject object = job_data.get(i).getAsJsonObject();
+                            IntStream.range(0, job_data.size()).mapToObj(i -> job_data.get(i).getAsJsonObject()).forEach(object -> {
                                 String job_post_id = object.has("job_post_id") ? object.get("job_post_id").isJsonNull() ? "" : object.get("job_post_id").getAsString() : "";
                                 String company_name = object.has("company_name") ? object.get("company_name").isJsonNull() ? "" : object.get("company_name").getAsString() : "";
                                 String company_logo = object.has("company_logo") ? object.get("company_logo").isJsonNull() ? "" : object.get("company_logo").getAsString() : "";
@@ -101,7 +101,7 @@ public class SavedJobsActivity extends AppCompatActivity {
                                 AppliedJobData jobData = new AppliedJobData(job_post_id, company_name, company_logo, job_title, job_experience, job_type, job_city,
                                         job_state, job_country, job_skills, user_job_status, company_action_status);
                                 appliedJobDataList.add(appliedJobDataList.size(), jobData);
-                            }
+                            });
                             rv_savedjob.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             appliedJobsAdapter = new AppliedJobsAdapter(mContext, appliedJobDataList);
                             rv_savedjob.setAdapter(appliedJobsAdapter);

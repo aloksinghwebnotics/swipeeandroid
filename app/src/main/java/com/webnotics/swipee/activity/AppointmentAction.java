@@ -64,7 +64,6 @@ public class AppointmentAction extends AppCompatActivity {
     private String state = "";
     private String posted_by = "";
     private String is_own_job = "";
-    private String job_id = "";
     private String apply_id = "";
     private String from = "";
     private String company_country_name = "";
@@ -103,7 +102,7 @@ public class AppointmentAction extends AppCompatActivity {
             state = getIntent().getStringExtra("company_state_name") != null ? getIntent().getStringExtra("company_state_name") : "";
             posted_by = getIntent().getStringExtra("posted_by") != null ? getIntent().getStringExtra("posted_by") : "";
             is_own_job = getIntent().getStringExtra("is_own_job") != null ? getIntent().getStringExtra("is_own_job") : "";
-            job_id = getIntent().getStringExtra("job_id") != null ? getIntent().getStringExtra("job_id") : "";
+            String job_id = getIntent().getStringExtra("job_id") != null ? getIntent().getStringExtra("job_id") : "";
             apply_id = getIntent().getStringExtra("apply_id") != null ? getIntent().getStringExtra("apply_id") : "";
             from = getIntent().getStringExtra("from") != null ? getIntent().getStringExtra("from") : "";
             notify_number = getIntent().getStringExtra("notify_number") != null ? getIntent().getStringExtra("notify_number") : "";
@@ -184,14 +183,11 @@ public class AppointmentAction extends AppCompatActivity {
         public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
             JsonObject jsonObject = data.get(position);
-            String appointment_id = jsonObject.has("appointment_id") ? jsonObject.get("appointment_id").getAsString() : "";
             String appointment_number = jsonObject.has("appointment_number") ? jsonObject.get("appointment_number").getAsString() : "";
             String appointment_type = jsonObject.has("appointment_type") ? jsonObject.get("appointment_type").getAsString() : "";
             String appointment_date = jsonObject.has("appointment_date") ? jsonObject.get("appointment_date").getAsString() : "";
             String appointment_start_at = jsonObject.has("appointment_start_at") ? jsonObject.get("appointment_start_at").getAsString() : "";
             String appointment_end_at = jsonObject.has("appointment_end_at") ? jsonObject.get("appointment_end_at").getAsString() : "";
-            String appointment_status = jsonObject.has("appointment_status") ? jsonObject.get("appointment_status").getAsString() : "";
-            String status = jsonObject.has("status") ? jsonObject.get("status").getAsString() : "";
             String job_title = jsonObject.has("job_title") ? jsonObject.get("job_title").getAsString() : "";
             holder.tv_jobtitle.setText(job_title);
             if (appointment_type.equalsIgnoreCase("online_meeting")) {
@@ -273,8 +269,6 @@ public class AppointmentAction extends AppCompatActivity {
         String appointment_date = jsonObject.has("appointment_date") ? jsonObject.get("appointment_date").getAsString() : "";
         String appointment_start_at = jsonObject.has("appointment_start_at") ? jsonObject.get("appointment_start_at").getAsString() : "";
         String appointment_end_at = jsonObject.has("appointment_end_at") ? jsonObject.get("appointment_end_at").getAsString() : "";
-        String appointment_status = jsonObject.has("appointment_status") ? jsonObject.get("appointment_status").getAsString() : "";
-        String status = jsonObject.has("status") ? jsonObject.get("status").getAsString() : "";
         String job_title = jsonObject.has("job_title") ? jsonObject.get("job_title").getAsString() : "";
         String job_id = jsonObject.has("job_id") ? jsonObject.get("job_id").getAsString() : "";
         String apply_id = jsonObject.has("apply_id") ? jsonObject.get("apply_id").getAsString() : "";

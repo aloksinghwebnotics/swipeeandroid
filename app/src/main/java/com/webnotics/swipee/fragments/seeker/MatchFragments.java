@@ -874,6 +874,14 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     Config.SetPACKAGEEXP(companyuserlisting.getData().getPackage_expire());
                     Config.SetLeftApplyCount(companyuserlisting.getData().getLeft_apply_jobs());
                     Config.SetPackageId(companyuserlisting.getData().getPackage_id());
+
+                    if (!companyuserlisting.getData().getPackage_expire().equalsIgnoreCase("Y")) {
+                        if ( left_swipes > 0 || packgeID.equalsIgnoreCase("3")){
+                            SeekerHomeActivity.instance.filter_icon.setVisibility(View.VISIBLE);
+                        }else   SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
+                    } else {
+                        SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
+                    }
                     if (companyuserlisting.getData().getPackage_expire().equalsIgnoreCase("N")) {
                         if (mArrayUser != null) {
                             try {
@@ -887,9 +895,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                                     if (left_swipes > 0 || packgeID.equalsIgnoreCase("3")) {
                                         noleftswipelay.setVisibility(View.GONE);
                                         datalay.setVisibility(View.VISIBLE);
-                                        SeekerHomeActivity.instance.filter_icon.setVisibility(View.VISIBLE);
                                     } else {
-                                        SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                                         noleftswipelay.setVisibility(View.VISIBLE);
                                         datalay.setVisibility(View.GONE);
                                     }
@@ -919,11 +925,12 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     countersInterface.notification(companyuserlisting.getData().getUser_notification_counter(), 0, 0);
 
                 } else {
-                    iv_nodata.setImageResource(R.drawable.ic_no_data);
-                    nolay.setVisibility(View.VISIBLE);
-                    nodatatxt.setText(getResources().getString(R.string.nodatatxt1First));
+                    SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                     noleftswipelay.setVisibility(View.GONE);
+                    nolay.setVisibility(View.VISIBLE);
                     datalay.setVisibility(View.GONE);
+                    iv_nodata.setImageResource(R.drawable.ic_plan_exp);
+                    nodatatxt.setText(R.string.packageexpseekr);
                 }
 
             }else if (companyuserlisting.getCode() == 203){

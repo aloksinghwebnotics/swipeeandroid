@@ -36,6 +36,7 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -95,26 +96,22 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
             // TODO Auto-generated method stub
             FlowLayout ll = (FlowLayout) v.getParent();
 
-            for (int j = 0; j < mArrayListSkills.size(); j++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())) {
-                    AddSkillsModel model1 = new AddSkillsModel();
-                    model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
-                    model1.setSelected(false);
-                    model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
-                    mArrayListSkills.set(j, model1);
-                    if (skilladapter != null)
-                        skilladapter.notifyDataSetChanged();
-                }
-            }
-            for (int z = 0; z < mArrayListdesiredindustries.size(); z++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))) {
-                    mArrayListdesiredindustries.remove(z);
-                    mArrayListid.remove(z);
-                    if (skilladapter != null)
-                        skilladapter.getFilter().filter("");
-                    et_search.setText("");
-                }
-            }
+            IntStream.range(0, mArrayListSkills.size()).filter(j -> v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())).forEach(j -> {
+                AddSkillsModel model1 = new AddSkillsModel();
+                model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
+                model1.setSelected(false);
+                model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
+                mArrayListSkills.set(j, model1);
+                if (skilladapter != null)
+                    skilladapter.notifyDataSetChanged();
+            });
+            IntStream.range(0, mArrayListdesiredindustries.size()).filter(z -> v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))).forEach(z -> {
+                mArrayListdesiredindustries.remove(z);
+                mArrayListid.remove(z);
+                if (skilladapter != null)
+                    skilladapter.getFilter().filter("");
+                et_search.setText("");
+            });
             ll.removeView(v);
             if (flowlay.getMeasuredHeight() > 400) {
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
@@ -132,26 +129,29 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
                 if (response.code() == 200 && response.body() != null) {
                     responseBody = response.body();
                     JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                    for (int i = 0; i < mArrayListData.size(); i++) {
-                        model = new AddSkillsModel();
-                        model.setSkill_id(mArrayListData.get(i).getAsJsonObject().get("skill_id").getAsString());
-                        model.setSkill_name(mArrayListData.get(i).getAsJsonObject().get("skill_name").getAsString());
-                        boolean select = false;
-                        for (int j = 0; j < getIntent().getStringArrayListExtra("StringArrayList").size(); j++) {
-                            if (mArrayListData.get(i).getAsJsonObject().get("skill_id").getAsString().equalsIgnoreCase(getIntent().getStringArrayListExtra("StringArrayList").get(j))) {
-                                select = true;
-                                break;
+                    {
+                        int i = 0;
+                        while (i < mArrayListData.size()) {
+                            model = new AddSkillsModel();
+                            model.setSkill_id(mArrayListData.get(i).getAsJsonObject().get("skill_id").getAsString());
+                            model.setSkill_name(mArrayListData.get(i).getAsJsonObject().get("skill_name").getAsString());
+                            boolean select = false;
+                            int j = 0;
+                            while (j < getIntent().getStringArrayListExtra("StringArrayList").size()) {
+                                if (mArrayListData.get(i).getAsJsonObject().get("skill_id").getAsString().equalsIgnoreCase(getIntent().getStringArrayListExtra("StringArrayList").get(j))) {
+                                    select = true;
+                                    break;
+                                }
+                                j++;
                             }
+                            model.setSelected(select);
+                            mArrayListSkills.add(model);
+                            i++;
                         }
-                        model.setSelected(select);
-                        mArrayListSkills.add(model);
                     }
                     skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                     mListView.setAdapter(skilladapter);
-                    for (int i = 0; i < mArrayListSkills.size(); i++) {
-                        if (mArrayListSkills.get(i).isSelected())
-                            setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id());
-                    }
+                    IntStream.range(0, mArrayListSkills.size()).filter(i -> mArrayListSkills.get(i).isSelected()).forEach(i -> setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id()));
 
                 } else {
                     rest.showToast("Something went wrong");
@@ -286,7 +286,6 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
         imageView.setLayoutParams(layoutParams2);
         imageView.getLayoutParams().height = (int) (mContext.getResources().getDisplayMetrics().density * 22);
         imageView.getLayoutParams().width = (int) (mContext.getResources().getDisplayMetrics().density * 22);
-
 
         linearLayoutF.addView(linearLayout);
         linearLayout.addView(bt);

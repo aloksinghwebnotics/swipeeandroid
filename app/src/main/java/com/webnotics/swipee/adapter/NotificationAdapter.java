@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
-import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.CompanyProfile;
@@ -76,13 +75,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         Glide.with(mContext).load(data.get(position).getNotification_image()).
                 error(R.drawable.ic_profile_select).placeholder(R.drawable.ic_profile_select).into(holder.civ_logo);
 
-        holder.civ_logo.setOnClickListener(new View.OnClickListener() {
+      /*  holder.civ_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(data.get(position).getNotification_image()))
                     AppController.callFullImage(mContext,data.get(position).getNotification_image());
             }
-        });
+        });*/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

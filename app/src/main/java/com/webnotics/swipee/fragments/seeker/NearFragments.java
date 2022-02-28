@@ -232,8 +232,8 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                 SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.VISIBLE);
             rl_allcompany.setVisibility(View.GONE);
         } else {
-            rl_main.setVisibility(View.GONE);
             radar.stop();
+            getActivity().finish();
         }
 
     }

@@ -850,8 +850,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                         AppController.ShowDialogue("", mContext);
                         postLikeDislike(hashMap1);
                     } else rest.AlertForInternet();
-
-
                 }
                 break;
             case R.id.iv_accept:

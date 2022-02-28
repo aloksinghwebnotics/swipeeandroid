@@ -175,19 +175,18 @@ public class JobPostRule extends AppCompatActivity {
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject respo = response.body();
-                    if (respo != null)
-                        if (respo.get("code").getAsInt() == 200 && respo.get("status").getAsBoolean()) {
-                            rest.showToast(respo.get("message").getAsString());
-                            callDialogFinish();
-                        } else if (respo.get("code").getAsInt() == 203) {
-                            rest.showToast(respo.get("message").getAsString());
-                            AppController.loggedOut(mContext);
-                            finish();
-                        } else {
-                            rest.showToast(respo.get("message").getAsString());
-                            startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
-                            finish();
-                        }
+                    if (respo.get("code").getAsInt() == 200 && respo.get("status").getAsBoolean()) {
+                        rest.showToast(respo.get("message").getAsString());
+                        callDialogFinish();
+                    } else if (respo.get("code").getAsInt() == 203) {
+                        rest.showToast(respo.get("message").getAsString());
+                        AppController.loggedOut(mContext);
+                        finish();
+                    } else {
+                        rest.showToast(respo.get("message").getAsString());
+                        startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
+                        finish();
+                    }
                 }
 
 
@@ -206,20 +205,19 @@ public class JobPostRule extends AppCompatActivity {
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject respo = response.body();
-                    if (respo != null)
-                        if (respo.get("code").getAsInt() == 200 && respo.get("status").getAsBoolean()) {
-                            rest.showToast(respo.get("message").getAsString());
-                            startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
-                            finish();
-                        } else if (respo.get("code").getAsInt() == 203) {
-                            rest.showToast(respo.get("message").getAsString());
-                            AppController.loggedOut(mContext);
-                            finish();
-                        } else {
-                            rest.showToast(respo.get("message").getAsString());
-                            startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
-                            finish();
-                        }
+                    if (respo.get("code").getAsInt() == 200 && respo.get("status").getAsBoolean()) {
+                        rest.showToast(respo.get("message").getAsString());
+                        startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
+                        finish();
+                    } else if (respo.get("code").getAsInt() == 203) {
+                        rest.showToast(respo.get("message").getAsString());
+                        AppController.loggedOut(mContext);
+                        finish();
+                    } else {
+                        rest.showToast(respo.get("message").getAsString());
+                        startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
+                        finish();
+                    }
                 }
 
 

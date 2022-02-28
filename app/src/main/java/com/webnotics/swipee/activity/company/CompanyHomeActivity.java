@@ -490,10 +490,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onPaymentSuccess(String s, PaymentData paymentData) {
-        Log.d("sssssssss", paymentData.getData().toString());
-        Log.d("sssssssss", paymentData.getPaymentId());
-        Log.d("sssssssss", paymentData.getOrderId());
-        Log.d("sssssssss", paymentData.getSignature());
+
         try {
             if (CompanyPlansFragments.instance != null){
                 CompanyPlansFragments.instance.setTransactionData(paymentData);

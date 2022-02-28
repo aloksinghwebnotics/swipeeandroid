@@ -29,6 +29,7 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -119,13 +120,10 @@ public class SearchIndustryActivity extends AppCompatActivity implements View.On
                     } else if (response.body().get("code").getAsInt() == 200) {
                         JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
                         ArrayList<JsonObject> arrayList = new ArrayList<>();
-                        for (int i = 0; i < mArrayListData.size(); i++) {
-                            arrayList.add(arrayList.size(), mArrayListData.get(i).getAsJsonObject());
-                        }
+                        IntStream.range(0, mArrayListData.size()).forEach(i -> arrayList.add(arrayList.size(), mArrayListData.get(i).getAsJsonObject()));
                         collegeAdapter = new SearchIndustryAdapter(SearchIndustryActivity.this, arrayList);
                         mListView.setAdapter(collegeAdapter);
                     } else rest.showToast("Something went wrong");
-
 
                 } else {
                     rest.showToast("Something went wrong");

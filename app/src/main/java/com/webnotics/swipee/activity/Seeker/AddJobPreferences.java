@@ -34,6 +34,7 @@ import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -121,11 +122,11 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
             case R.id.tv_save:
 
                 if (stringListid.size() == 0) {
-                    rest.showToast("Select Job Location");
+                    rest.showToast("Select jb location");
                 } else if (desiredIdList.size() == 0) {
-                    rest.showToast("Select Desired Industry");
+                    rest.showToast("Select desired industry");
                 } else if (spn_sallery.getSelectedItemPosition() == 0) {
-                    rest.showToast("Select Salary");
+                    rest.showToast("Select salary");
                 } else {
                     if (rest.isInterentAvaliable()) {
                         AppController.ShowDialogue("", mContext);
@@ -154,11 +155,10 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                     JsonObject responseBody = response.body();
                     JsonArray mArrayListData = responseBody.get("data").getAsJsonArray();
                     salaryList = new ArrayList<>();
-                    for (int i = 0; i < mArrayListData.size(); i++) {
-                        String salary = mArrayListData.get(i).getAsJsonObject().get("salary_range").getAsString();
+                    IntStream.range(0, mArrayListData.size()).mapToObj(i -> mArrayListData.get(i).getAsJsonObject().get("salary_range").getAsString()).forEach(salary -> {
                         salaryList.add(salaryList.size(), salary.substring(0, salary.indexOf("-")));
                         salaryList.add(salaryList.size(), salary.substring(salary.indexOf("-") + 1));
-                    }
+                    });
                     salaryList.add(0, "Select Salary");
                     ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, salaryList);
                     genderAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -189,8 +189,7 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                 stringListid.addAll(intent.getStringArrayListExtra("StringArrayList"));
                 stringList.addAll(intent.getStringArrayListExtra("StringArrayName"));
                 flow_location.removeAllViews();
-                for (int i = 0; i < stringList.size(); i++) {
-
+                IntStream.range(0, stringList.size()).forEach(i -> {
                     LinearLayout linearLayout = new LinearLayout(mContext);
                     LinearLayout linearLayoutF = new LinearLayout(mContext);
                     FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
@@ -216,21 +215,19 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                             LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     layoutParams1.setMargins(0, 0, 0, 0);
                     bt.setLayoutParams(layoutParams1);
-
                     linearLayout.addView(bt);
                     linearLayoutF.addView(linearLayout);
                     linearLayout.setTag(stringList.get(i));
                     linearLayoutF.setTag(stringList.get(i));
                     flow_location.addView(linearLayoutF);
-
-                }
+                });
             } else if (from.equalsIgnoreCase("desired")) {
                 desiredIdList.clear();
                 desiredNameList.clear();
                 desiredIdList.addAll(intent.getStringArrayListExtra("StringArrayList"));
                 desiredNameList.addAll(intent.getStringArrayListExtra("StringArrayName"));
                 flow_desired.removeAllViews();
-                for (int i = 0; i < desiredNameList.size(); i++) {
+                IntStream.range(0, desiredNameList.size()).forEach(i -> {
                     LinearLayout linearLayout = new LinearLayout(mContext);
                     LinearLayout linearLayoutF = new LinearLayout(mContext);
                     FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
@@ -260,7 +257,7 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                     linearLayoutF.addView(linearLayout);
                     linearLayoutF.setTag(desiredNameList.get(i));
                     flow_desired.addView(linearLayoutF);
-                }
+                });
             }
         }
     }
@@ -291,22 +288,18 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                                 ArrayList<EmployeeUserDetails.Data.User_Preferences.Location_Data> locationData = new ArrayList<>();
                                 ArrayList<EmployeeUserDetails.Data.User_Preferences.Industry_Data> industryData = new ArrayList<>();
                                 EmployeeUserDetails.Data.User_Preferences.Expected_Salary expectedSalary = new EmployeeUserDetails.Data.User_Preferences.Expected_Salary(expected_salary_number, expected_salary_words);
-                                for (int i = 0; i < location_data.size(); i++) {
-                                    JsonObject locationObj = location_data.get(i).getAsJsonObject();
+                                IntStream.range(0, location_data.size()).mapToObj(i -> location_data.get(i).getAsJsonObject()).forEach(locationObj -> {
                                     long location_id = locationObj.has("location_id") ? locationObj.get("location_id").getAsLong() : 0;
                                     String location_name = locationObj.has("location_name") ? locationObj.get("location_name").getAsString() : "";
                                     EmployeeUserDetails.Data.User_Preferences.Location_Data locationData1 = new EmployeeUserDetails.Data.User_Preferences.Location_Data(String.valueOf(location_id), location_name);
                                     locationData.add(locationData.size(), locationData1);
-
-                                }
-                                for (int i = 0; i < industry_data.size(); i++) {
-                                    JsonObject industryObj = industry_data.get(i).getAsJsonObject();
+                                });
+                                IntStream.range(0, industry_data.size()).mapToObj(i -> industry_data.get(i).getAsJsonObject()).forEach(industryObj -> {
                                     long industry_id = industryObj.has("industry_id") ? industryObj.get("industry_id").getAsLong() : 0;
                                     String industry_name = industryObj.has("industry_name") ? industryObj.get("industry_name").getAsString() : "";
                                     EmployeeUserDetails.Data.User_Preferences.Industry_Data industry_data1 = new EmployeeUserDetails.Data.User_Preferences.Industry_Data(String.valueOf(industry_id), industry_name);
                                     industryData.add(industryData.size(), industry_data1);
-
-                                }
+                                });
                                 EmployeeUserDetails.Data.User_Preferences user_preferences = new EmployeeUserDetails.Data.User_Preferences(preference_id, locationData, industryData, expectedSalary);
 
                                 mArrayuseruserpreference.add(user_preferences);

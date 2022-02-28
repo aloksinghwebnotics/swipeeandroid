@@ -38,6 +38,7 @@ import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,26 +92,22 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
             // TODO Auto-generated method stub
             FlowLayout ll = (FlowLayout) v.getParent();
 
-            for (int j = 0; j < mArrayListSkills.size(); j++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())) {
-                    AddSkillsModel model1 = new AddSkillsModel();
-                    model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
-                    model1.setSelected(false);
-                    model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
-                    mArrayListSkills.set(j, model1);
-                    if (skilladapter != null)
-                        skilladapter.notifyDataSetChanged();
-                }
-            }
-            for (int z = 0; z < mArrayListdesiredindustries.size(); z++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))) {
-                    mArrayListdesiredindustries.remove(z);
-                    mArrayListid.remove(z);
-                    if (skilladapter != null)
-                        skilladapter.getFilter().filter("");
-                    et_search.setText("");
-                }
-            }
+            IntStream.range(0, mArrayListSkills.size()).filter(j -> v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())).forEach(j -> {
+                AddSkillsModel model1 = new AddSkillsModel();
+                model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
+                model1.setSelected(false);
+                model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
+                mArrayListSkills.set(j, model1);
+                if (skilladapter != null)
+                    skilladapter.notifyDataSetChanged();
+            });
+            IntStream.range(0, mArrayListdesiredindustries.size()).filter(z -> v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))).forEach(z -> {
+                mArrayListdesiredindustries.remove(z);
+                mArrayListid.remove(z);
+                if (skilladapter != null)
+                    skilladapter.getFilter().filter("");
+                et_search.setText("");
+            });
             ll.removeView(v);
             if (flowlay.getMeasuredHeight() > 400) {
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
@@ -125,19 +122,16 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
                 if (PostJobFragments.instance != null) {
                     mArrayListSkills = new ArrayList<>();
                     ArrayList<CommonModel> data = PostJobFragments.instance.commonModelsLanguage;
-                    for (int i = 0; i < data.size(); i++) {
+                    IntStream.range(0, data.size()).forEach(i -> {
                         model = new AddSkillsModel();
                         model.setSkill_id(data.get(i).getId());
                         model.setSkill_name(data.get(i).getName());
                         model.setSelected(data.get(i).isSelected());
                         mArrayListSkills.add(model);
-                    }
+                    });
                     skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                     mListView.setAdapter(skilladapter);
-                    for (int i = 0; i < mArrayListSkills.size(); i++) {
-                        if (mArrayListSkills.get(i).isSelected())
-                            setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id());
-                    }
+                    IntStream.range(0, mArrayListSkills.size()).filter(i -> mArrayListSkills.get(i).isSelected()).forEach(i -> setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id()));
                 }
             } else {
                 if (rest.isInterentAvaliable()) {
@@ -168,26 +162,29 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
                     responseBody = response.body();
                     if (responseBody.get("code").getAsInt() == 200) {
                         JsonArray mArrayListData = responseBody.get("data").getAsJsonArray();
-                        for (int i = 0; i < mArrayListData.size(); i++) {
-                            model = new AddSkillsModel();
-                            model.setSkill_id(mArrayListData.get(i).getAsJsonObject().get("language_id").getAsString());
-                            model.setSkill_name(mArrayListData.get(i).getAsJsonObject().get("language_name").getAsString());
-                            boolean select = false;
-                            for (int j = 0; j < getIntent().getStringArrayListExtra("StringArrayList").size(); j++) {
-                                if (mArrayListData.get(i).getAsJsonObject().get("language_id").getAsString().equalsIgnoreCase(getIntent().getStringArrayListExtra("StringArrayList").get(j))) {
-                                    select = true;
-                                    break;
+                        {
+                            int i = 0;
+                            while (i < mArrayListData.size()) {
+                                model = new AddSkillsModel();
+                                model.setSkill_id(mArrayListData.get(i).getAsJsonObject().get("language_id").getAsString());
+                                model.setSkill_name(mArrayListData.get(i).getAsJsonObject().get("language_name").getAsString());
+                                boolean select = false;
+                                int j = 0;
+                                while (j < getIntent().getStringArrayListExtra("StringArrayList").size()) {
+                                    if (mArrayListData.get(i).getAsJsonObject().get("language_id").getAsString().equalsIgnoreCase(getIntent().getStringArrayListExtra("StringArrayList").get(j))) {
+                                        select = true;
+                                        break;
+                                    }
+                                    j++;
                                 }
+                                model.setSelected(select);
+                                mArrayListSkills.add(model);
+                                i++;
                             }
-                            model.setSelected(select);
-                            mArrayListSkills.add(model);
                         }
                         skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                         mListView.setAdapter(skilladapter);
-                        for (int i = 0; i < mArrayListSkills.size(); i++) {
-                            if (mArrayListSkills.get(i).isSelected())
-                                setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id());
-                        }
+                        IntStream.range(0, mArrayListSkills.size()).filter(i -> mArrayListSkills.get(i).isSelected()).forEach(i -> setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id()));
                     } else if (responseBody.get("code").getAsInt() == 203) {
                         rest.showToast(responseBody.get("message").getAsString());
                         AppController.loggedOut(mContext);

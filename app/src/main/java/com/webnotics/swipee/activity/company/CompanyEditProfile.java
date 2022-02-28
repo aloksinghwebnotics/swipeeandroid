@@ -362,6 +362,7 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
         map.put(ParaName.KEY_CITY, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), cityId));
         map.put(ParaName.KEY_COMPANYPIN, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_pincode.getText().toString()));
         map.put(ParaName.KEY_INDUSTRY, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), industryId));
+        map.put(ParaName.KEY_ISEPROFILEUPDATED, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "Y"));
         map.put(ParaName.KEY_COMPANYEMPCOUNT, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), tv_companysize.getText().toString()));
         map.put(ParaName.KEY_COMPANYSTABLISHED, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_founded.getText().toString()));
         map.put(ParaName.KEY_COMPANYNAME, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_companyname.getText().toString()));

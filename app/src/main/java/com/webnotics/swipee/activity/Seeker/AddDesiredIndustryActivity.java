@@ -36,6 +36,7 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -97,27 +98,23 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
             // TODO Auto-generated method stub
             FlowLayout ll = (FlowLayout) v.getParent();
 
-            for (int j = 0; j < mArrayListSkills.size(); j++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())) {
-                    AddSkillsModel model1 = new AddSkillsModel();
-                    model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
-                    model1.setSelected(false);
-                    model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
-                    mArrayListSkills.set(j, model1);
-                    if (skilladapter != null)
-                        skilladapter.notifyDataSetChanged();
-                }
-            }
-            for (int z = 0; z < mArrayListdesiredindustries.size(); z++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))) {
-                    mArrayListdesiredindustries.remove(z);
-                    mArrayListid.remove(z);
-                    mArrayListName.remove(z);
-                    if (skilladapter != null)
-                        skilladapter.getFilter().filter("");
-                    et_search.setText("");
-                }
-            }
+            IntStream.range(0, mArrayListSkills.size()).filter(j -> v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())).forEach(j -> {
+                AddSkillsModel model1 = new AddSkillsModel();
+                model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
+                model1.setSelected(false);
+                model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
+                mArrayListSkills.set(j, model1);
+                if (skilladapter != null)
+                    skilladapter.notifyDataSetChanged();
+            });
+            IntStream.range(0, mArrayListdesiredindustries.size()).filter(z -> v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))).forEach(z -> {
+                mArrayListdesiredindustries.remove(z);
+                mArrayListid.remove(z);
+                mArrayListName.remove(z);
+                if (skilladapter != null)
+                    skilladapter.getFilter().filter("");
+                et_search.setText("");
+            });
             ll.removeView(v);
             if (flowlay.getMeasuredHeight() > 400) {
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));

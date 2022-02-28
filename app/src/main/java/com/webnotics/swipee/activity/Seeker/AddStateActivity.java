@@ -47,7 +47,7 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
     public String stateId = "";
     EditText et_search;
     private StateAdapter stateAdapter;
-    private String state_id="";
+    private String state_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +64,8 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
         iv_back = findViewById(R.id.iv_back);
         et_search = findViewById(R.id.et_search);
 
-        if (getIntent()!=null)
-            state_id=getIntent().getStringExtra("state_id")!=null?getIntent().getStringExtra("state_id"):"";
+        if (getIntent() != null)
+            state_id = getIntent().getStringExtra("state_id") != null ? getIntent().getStringExtra("state_id") : "";
 
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
@@ -91,7 +91,7 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
                                 IntStream.range(0, data.size()).filter(i -> data.get(i).getState_id().equalsIgnoreCase(state_id)).findFirst().ifPresent(i -> data.get(i).setSelected(true));
                             rv_stateList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             rv_stateList.setNestedScrollingEnabled(false);
-                             stateAdapter = new StateAdapter(AddStateActivity.this, data);
+                            stateAdapter = new StateAdapter(AddStateActivity.this, data);
                             rv_stateList.setAdapter(stateAdapter);
                             rv_stateList.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
                         } else if (stateModel.getCode() == 203) {

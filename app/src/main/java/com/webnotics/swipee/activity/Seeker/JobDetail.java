@@ -52,6 +52,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.stream.IntStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -359,7 +360,6 @@ public class JobDetail extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -468,11 +468,9 @@ public class JobDetail extends AppCompatActivity {
                             tv_opening.setText(job_opening_numbers);
                             tv_industry.setText(job_industry);
 
-                            String job_apply_status = job_data.has("job_apply_status") ? job_data.get("job_apply_status").isJsonNull() ? "" : job_data.get("job_apply_status").getAsString() : "";
                             company_state_name = job_data.has("company_state_name") ? job_data.get("company_state_name").isJsonNull() ? "" : job_data.get("company_state_name").getAsString() : "";
                             company_city_name = job_data.has("company_city_name") ? job_data.get("company_city_name").isJsonNull() ? "" : job_data.get("company_city_name").getAsString() : "";
                             company_country_name = job_data.has("company_country_name") ? job_data.get("company_country_name").isJsonNull() ? "" : job_data.get("company_country_name").getAsString() : "";
-                            String job_status = job_data.has("job_status") ? job_data.get("job_status").isJsonNull() ? "" : job_data.get("job_status").getAsString() : "";
                             is_own_job = job_data.has("is_own_job") ? job_data.get("is_own_job").isJsonNull() ? "" : job_data.get("is_own_job").getAsString() : "";
                             posted_by = job_data.has("posted_by") ? job_data.get("posted_by").isJsonNull() ? "" : job_data.get("posted_by").getAsString() : "";
                             apply_id = job_data.has("job_apply_id") ? job_data.get("job_apply_id").isJsonNull() ? "" : job_data.get("job_apply_id").getAsString() : "";
@@ -561,24 +559,15 @@ public class JobDetail extends AppCompatActivity {
                                 if (appointments.size() > 0) {
                                     JsonObject appointment = appointments.get(0).getAsJsonObject();
                                     String appointment_id = appointment.has("appointment_id") ? appointment.get("appointment_id").getAsString() : "";
-                                    String appointment_number = appointment.has("appointment_number") ? appointment.get("appointment_number").getAsString() : "";
                                     String appointment_type = appointment.has("appointment_type") ? appointment.get("appointment_type").getAsString() : "";
                                     String appointment_date = appointment.has("appointment_date") ? appointment.get("appointment_date").getAsString() : "";
                                     String appointment_start_at = appointment.has("appointment_start_at") ? appointment.get("appointment_start_at").getAsString() : "";
                                     String appointment_end_at = appointment.has("appointment_end_at") ? appointment.get("appointment_end_at").getAsString() : "";
-                                    String appointment_status = appointment.has("appointment_status") ? appointment.get("appointment_status").getAsString() : "";
-                                    String status = appointment.has("status") ? appointment.get("status").getAsString() : "";
                                     String job_title1 = appointment.has("job_title") ? appointment.get("job_title").getAsString() : "";
 
                                     tv_appointment.setText(job_title1);
                                     ll_appointment.setVisibility(View.VISIBLE);
-                                    boolean isShow = false;
-                                    for (int i = 0; i < appointments.size(); i++) {
-                                        if (appointments.get(i).getAsJsonObject().get("appointment_status").getAsString().equalsIgnoreCase("A")) {
-                                            isShow = true;
-                                            break;
-                                        }
-                                    }
+                                    boolean isShow = IntStream.range(0, appointments.size()).anyMatch(i -> appointments.get(i).getAsJsonObject().get("appointment_status").getAsString().equalsIgnoreCase("A"));
                                     if (isShow) {
                                         tv_reschedule.setVisibility(View.VISIBLE);
                                     } else {
@@ -675,7 +664,7 @@ public class JobDetail extends AppCompatActivity {
                                     ll_applied.setVisibility(View.GONE);
                                     tv_reschedule.setVisibility(View.GONE);
                                     tv_cancel_application.setVisibility(View.GONE);
-                                } else if (!company_match_status.equalsIgnoreCase("A") || !user_match_status.equalsIgnoreCase("A")) {
+                                } else if (!user_match_status.equalsIgnoreCase("A")) {
                                     ll_button.setVisibility(View.GONE);
                                     tv_apply.setVisibility(View.GONE);
                                     iv_reject.setVisibility(View.VISIBLE);

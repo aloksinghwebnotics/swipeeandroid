@@ -332,11 +332,7 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
                     JsonObject responseBody = response.body();
                     JsonArray mArrayListData = responseBody.get("data").getAsJsonArray();
                     jsonObjectArrayList.clear();
-                    for (int i = 0; i < mArrayListData.size(); i++) {
-                        JsonObject jsonObject = mArrayListData.get(i).getAsJsonObject();
-                        JobTitleModel jobTitleModel = new JobTitleModel(jsonObject.get("functional_id").getAsString(), jsonObject.get("functional_name").getAsString(), jsonObject.get("functional_id").getAsString().equalsIgnoreCase(functional_id));
-                        jsonObjectArrayList.add(jsonObjectArrayList.size(), jobTitleModel);
-                    }
+                    IntStream.range(0, mArrayListData.size()).mapToObj(i -> mArrayListData.get(i).getAsJsonObject()).map(jsonObject -> new JobTitleModel(jsonObject.get("functional_id").getAsString(), jsonObject.get("functional_name").getAsString(), jsonObject.get("functional_id").getAsString().equalsIgnoreCase(functional_id))).forEach(jobTitleModel -> jsonObjectArrayList.add(jsonObjectArrayList.size(), jobTitleModel));
                 } else {
                     rest.showToast("Something went wrong");
                 }

@@ -117,7 +117,6 @@ public class JobPreview extends AppCompatActivity {
             ArrayList<String> degreeIds = (ArrayList<String>) intent.getSerializableExtra("degreeIds");
             ArrayList<String> languageIds = (ArrayList<String>) intent.getSerializableExtra("languageIds");
 
-
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
             hashMap.put(ParaName.KEY_COMPANYNAME, company);
@@ -140,7 +139,6 @@ public class JobPreview extends AppCompatActivity {
             hashMap.put(ParaName.KEY_JOBSHIFTID, workShiftId);
             hashMap.put(ParaName.KEY_JOBWORKINGDAY, workDayId);
             hashMap.put(ParaName.KEY_JOBLANGUAGE, languageIds.toString());
-
 
             tv_title.setText(industryName);
             tv_title1.setText(Config.GeCompanyName());

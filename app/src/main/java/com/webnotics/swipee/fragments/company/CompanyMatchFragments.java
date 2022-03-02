@@ -96,7 +96,7 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
     ArrayList<FilterModel.Data.Experience> mExperience_nameArrayList = new ArrayList<>();
     ArrayList<FilterModel.Data.Industry> mIndustryArrayList = new ArrayList<>();
     ArrayList<FilterModel.Data.Salary> mSalaryArrayList = new ArrayList<>();
-    public int pos;
+    public int pos=-1;
     SwipeDeckAdapter adapter;
     String status = "";
     RelativeLayout nolay, datalay, noleftswipelay, filter_sheet, rl_filtersheet;
@@ -152,8 +152,6 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                         callFeatureSavePayment(map);
                     }
                 }
-
-
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1353,7 +1351,14 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                         AppController.loggedOut(mContext);
                         getActivity().finish();
                     }else
-                    if (repo.get("status").getAsBoolean()){
+                    if (response.body().get("code").getAsInt()==200 && repo.get("status").getAsBoolean()){
+                        if (pos==mArrayUser.size()-1){
+                            iv_nodata.setImageResource(R.drawable.ic_no_data);
+                            nolay.setVisibility(View.VISIBLE);
+                            nodatatxt.setText(getResources().getString(R.string.nodatatxt));
+                            datalay.setVisibility(View.GONE);
+                            noleftswipelay.setVisibility(View.GONE);
+                        }
                           rest.showToast(repo.get("message").getAsString());
                           left_swipes=left_swipes-1;
                         if (left_swipes>0 || packgeID.equalsIgnoreCase("8")){}
@@ -1361,6 +1366,7 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                             noleftswipelay.setVisibility(View.VISIBLE);
                             CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                             datalay.setVisibility(View.GONE);
+                            nolay.setVisibility(View.GONE);
                         }
                           if (hashMap.get(ParaName.KEY_COMPANYSTATUS)!=null)
                           if (Objects.requireNonNull(hashMap.get(ParaName.KEY_COMPANYSTATUS)).equalsIgnoreCase("A")){
@@ -1371,6 +1377,8 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                                               putExtra("name",mArrayUser.get(pos).getFirst_name()). putExtra("id",mArrayUser.get(pos).getUser_id()).putExtra("job_id",mArrayUser.get(pos).getJob_id()));                        }
                               }
                           }
+                    }else if (response.body().get("code").getAsInt()==401){
+                        rest.showToast(repo.get("message").getAsString());
                     }
 
                 }

@@ -325,15 +325,15 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
-                    JsonObject responceBody = response.body();
+                    JsonObject responseBody = response.body();
                     if (response.body().get("code").getAsInt() == 203) {
                         rest.showToast(response.body().get("message").getAsString());
                         if (AppointmentAction.instance != null)
                             AppointmentAction.instance.setBackPressed();
                         AppController.loggedOut(mContext);
                         finish();
-                    } else if (responceBody.get("status").getAsBoolean()) {
-                        JsonObject data = responceBody.has("data") ? responceBody.get("data").getAsJsonObject() : new JsonObject();
+                    } else if (responseBody.get("status").getAsBoolean()) {
+                        JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : new JsonObject();
                         JsonArray available_open_slots = data.has("available_open_slots") ? data.get("available_open_slots").getAsJsonArray() : new JsonArray();
                         slotList = new ArrayList<>();
                         IntStream.range(0, available_open_slots.size()).forEach(i -> slotList.add(slotList.size(), available_open_slots.get(i).getAsString()));
@@ -400,9 +400,7 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                             AppointmentAction.instance.setBackPressed();
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());
-
                 } else rest.showToast("Something went wrong");
-
             }
 
             @Override

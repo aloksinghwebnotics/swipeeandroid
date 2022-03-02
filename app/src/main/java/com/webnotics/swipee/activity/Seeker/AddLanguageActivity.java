@@ -249,7 +249,6 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
                     }
                 } else rest.showToast("Select at least one languages.");
 
-
                 break;
             case R.id.iv_back:
                 finish();

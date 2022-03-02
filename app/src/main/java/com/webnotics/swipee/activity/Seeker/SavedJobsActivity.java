@@ -139,7 +139,6 @@ public class SavedJobsActivity extends AppCompatActivity {
         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
         hashMap.put(ParaName.KEY_JOBPOSTID, job_post_id);
         hashMap.put(ParaName.KEY_SAVESTATUS, "0");
-
         SwipeeApiClient.swipeeServiceInstance().postSaveJob(hashMap).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
@@ -155,8 +154,6 @@ public class SavedJobsActivity extends AppCompatActivity {
                         AppController.loggedOut(mContext);
                         finish();
                     }
-
-
                 } else {
                     AppController.dismissProgressdialog();
                     rest.showToast("Something went wrong");
@@ -168,7 +165,5 @@ public class SavedJobsActivity extends AppCompatActivity {
                 AppController.dismissProgressdialog();
             }
         });
-
-
     }
 }

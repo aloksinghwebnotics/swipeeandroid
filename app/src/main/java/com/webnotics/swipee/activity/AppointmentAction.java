@@ -64,7 +64,6 @@ public class AppointmentAction extends AppCompatActivity {
     private String state = "";
     private String posted_by = "";
     private String is_own_job = "";
-    private String apply_id = "";
     private String from = "";
     private String company_country_name = "";
     private Rest rest;
@@ -103,14 +102,14 @@ public class AppointmentAction extends AppCompatActivity {
             posted_by = getIntent().getStringExtra("posted_by") != null ? getIntent().getStringExtra("posted_by") : "";
             is_own_job = getIntent().getStringExtra("is_own_job") != null ? getIntent().getStringExtra("is_own_job") : "";
             String job_id = getIntent().getStringExtra("job_id") != null ? getIntent().getStringExtra("job_id") : "";
-            apply_id = getIntent().getStringExtra("apply_id") != null ? getIntent().getStringExtra("apply_id") : "";
+            String apply_id = getIntent().getStringExtra("apply_id") != null ? getIntent().getStringExtra("apply_id") : "";
             from = getIntent().getStringExtra("from") != null ? getIntent().getStringExtra("from") : "";
             notify_number = getIntent().getStringExtra("notify_number") != null ? getIntent().getStringExtra("notify_number") : "";
             action = getIntent().getStringExtra("action") != null ? getIntent().getStringExtra("action") : "";
             company_country_name = getIntent().getStringExtra("company_country_name") != null ? getIntent().getStringExtra("company_country_name") : "";
 
 
-            if (action.equalsIgnoreCase("cancel")) {
+            if (action.equalsIgnoreCase("Cancel")) {
                 tv_username.setText("Cancel Appointment");
             } else tv_username.setText("Reschedule Appointment");
             Glide.with(mContext).load(company_logo)

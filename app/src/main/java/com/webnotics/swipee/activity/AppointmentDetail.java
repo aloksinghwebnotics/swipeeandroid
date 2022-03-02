@@ -110,6 +110,15 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                 }else rest.AlertForInternet();
             }
         }
+
+        iv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(user_profile)){
+                    AppController.callFullImage(mContext,user_profile);
+                }
+            }
+        });
     }
 
     private void callSeekerAppointmentDetail(String appointmentId) {
@@ -180,19 +189,15 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                             tv_start_appointment.setOnClickListener(null);
                         }
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<SeekerAppointmentDetailModel> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });
-
     }
 
     private void callAppointmentDetail(String appointmentId) {
@@ -260,19 +265,15 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                  tv_start_appointment.setOnClickListener(AppointmentDetail.this);
                              } else{
                                  tv_start_appointment.setBackgroundResource(R.drawable.gray_semiround_bg);
-                                 tv_start_appointment.setOnClickListener(AppointmentDetail.this);
+                                 tv_start_appointment.setOnClickListener(null);
                              }
                     }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<AppointmentDetailModel> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });
@@ -294,7 +295,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                         Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO},
                             REQUEST_CODE_ASK_PERMISSIONS);
                 } else {
-                    if (isLive==0) {
+                    if (isLive==1) {
                         if (!TextUtils.isEmpty(appointment_id)&&!TextUtils.isEmpty(appointment_number)){
                             if (appointment_type.equalsIgnoreCase("chat")) {
                                startActivity(new Intent(mContext, MainChatActivity.class)
@@ -349,12 +350,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         String appointment_id=responseBody.getData().getAppointment_id();
                         String room_name=responseBody.getData().getRoom_name();
-                        String room_sid=responseBody.getData().getRoom_sid();
-                        String company_id=responseBody.getData().getCompany_id();
                         String company_access_token=responseBody.getData().getCompany_access_token();
-                        String user_id=responseBody.getData().getUser_id();
-                        String user_access_token=responseBody.getData().getUser_access_token();
-                        String created_role_id=responseBody.getData().getCreated_role_id();
                         Intent intent = new Intent(mContext, AudioActivity.class);
                         intent.putExtra("accestoken", company_access_token);
                         intent.putExtra("rroom",room_name);
@@ -407,12 +403,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         String appointment_id=responseBody.getData().getAppointment_id();
                         String room_name=responseBody.getData().getRoom_name();
-                        String room_sid=responseBody.getData().getRoom_sid();
-                        String company_id=responseBody.getData().getCompany_id();
                         String company_access_token=responseBody.getData().getCompany_access_token();
-                        String user_id=responseBody.getData().getUser_id();
-                        String user_access_token=responseBody.getData().getUser_access_token();
-                        String created_role_id=responseBody.getData().getCreated_role_id();
                         Intent intent = new Intent(mContext, VideoActivity.class);
                         intent.putExtra("accestoken", company_access_token);
                         intent.putExtra("rroom", room_name);
@@ -433,9 +424,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         finish();
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -483,12 +472,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         String appointment_id=responseBody.getData().getAppointment_id();
                         String room_name=responseBody.getData().getRoom_name();
-                        String room_sid=responseBody.getData().getRoom_sid();
-                        String company_id=responseBody.getData().getCompany_id();
                         String company_access_token=responseBody.getData().getCompany_access_token();
-                        String user_id=responseBody.getData().getUser_id();
-                        String user_access_token=responseBody.getData().getUser_access_token();
-                        String created_role_id=responseBody.getData().getCreated_role_id();
                         Intent intent = new Intent(mContext, VideoActivity.class);
                         intent.putExtra("accestoken", company_access_token);
                         intent.putExtra("rroom", room_name);
@@ -509,9 +493,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         finish();
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -527,11 +509,10 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
             if (NotificationActivity.instance!=null)
                 NotificationActivity.instance.finish();
-            if (Config.isSeeker()){
+            if (Config.isSeeker())
                 startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            }else {
+            else
                 startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
-            }
         }else if ( from.equalsIgnoreCase(UserDetail.class.getSimpleName())){
             if (UserDetail.instance!=null)
                 UserDetail.instance.setBackPressed();
@@ -553,17 +534,11 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
                         setLogoutRecruiter();
-
                     }else
                     if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         String appointment_id=responseBody.getData().getAppointment_id();
                         String room_name=responseBody.getData().getRoom_name();
-                        String room_sid=responseBody.getData().getRoom_sid();
-                        String company_id=responseBody.getData().getCompany_id();
                         String company_access_token=responseBody.getData().getCompany_access_token();
-                        String user_id=responseBody.getData().getUser_id();
-                        String user_access_token=responseBody.getData().getUser_access_token();
-                        String created_role_id=responseBody.getData().getCreated_role_id();
                         Intent intent = new Intent(mContext, AudioActivity.class);
                         intent.putExtra("accestoken", company_access_token);
                         intent.putExtra("rroom",room_name);
@@ -586,15 +561,12 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         finish();
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<TwillioDetailModel> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });
@@ -603,11 +575,10 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         if (from.equalsIgnoreCase("Notification")){
-            if (Config.isSeeker()){
+            if (Config.isSeeker())
                 startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            }else {
+            else
                 startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
-            }
         }
         super.onBackPressed();
     }

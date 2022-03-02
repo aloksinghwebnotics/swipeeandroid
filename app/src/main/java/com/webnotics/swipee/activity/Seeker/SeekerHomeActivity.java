@@ -190,7 +190,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                             callLocation();
                         }
                     } else {
-
                         callCollegeList();
                     }
                 } else callCollegeList();
@@ -206,8 +205,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
 
     private void callLocation() {
         try {
-            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
-            SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
             if (TextUtils.isEmpty(Config.GetLocationRefreshDate())) {
                 callLocationList();
             } else {
@@ -222,8 +221,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                         if (final1.compareTo(final2) != 0) {
                             Log.d("hhhhh", "Hit from date");
                             callLocationList();
-                        } else {
-
                         }
                     } else {
                         Log.d("hhhhh", "Hit from null");

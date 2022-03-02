@@ -77,7 +77,6 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
         iv_back = findViewById(R.id.iv_back);
         tv_save = findViewById(R.id.tv_save);
 
-
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
             callSkillList();

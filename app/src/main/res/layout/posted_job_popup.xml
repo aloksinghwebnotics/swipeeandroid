@@ -38,7 +38,7 @@
             android:minHeight="@dimen/dimen96dp"
             android:layout_height="wrap_content"
             android:text="This job will be publish as feature job after 24 hours."
-            android:gravity="center_horizontal"
+            android:gravity="start"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen12sp"/>
         <View

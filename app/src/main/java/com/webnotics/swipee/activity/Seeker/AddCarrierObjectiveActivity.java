@@ -61,7 +61,7 @@ public class AddCarrierObjectiveActivity extends AppCompatActivity implements Vi
         switch (v.getId()) {
             case R.id.tv_save:
                 if (TextUtils.isEmpty(et_objective.getText().toString().replaceAll(" ", ""))) {
-                    rest.showToast("Enter Career Objective");
+                    rest.showToast("Enter career objective");
                 } else {
                     AppController.ShowDialogue("", mContext);
                     saveObjective(et_objective.getText().toString());
@@ -90,15 +90,11 @@ public class AddCarrierObjectiveActivity extends AppCompatActivity implements Vi
                     } else if (response.body().get("status").getAsBoolean()) {
                         if (ProfileFragments.instance != null) {
                             ProfileFragments.instance.setObjective(obj);
-
                         }
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

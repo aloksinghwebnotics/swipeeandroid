@@ -191,7 +191,6 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                     cancelAppointment(appointmentId,"A",appointment_number);
                 }
 
-
                 break;
             case R.id.tv_appointment:
                 startActivity(new Intent(mContext, RescheduleAppointment.class)
@@ -283,9 +282,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     }
 
 
-
     public void statusAppointment(HashMap<String,String> hashMap) {
-
         SwipeeApiClient.swipeeServiceInstance().setUserAppointmentStatus(hashMap).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {

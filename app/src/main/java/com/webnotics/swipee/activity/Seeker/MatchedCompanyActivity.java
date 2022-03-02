@@ -80,7 +80,7 @@ public class MatchedCompanyActivity extends AppCompatActivity {
                         JsonObject dataObject = jsonObject.has("data") ? jsonObject.get("data").getAsJsonObject() : new JsonObject();
                         JsonArray job_data = dataObject.has("jobs_listing") ? dataObject.get("jobs_listing").getAsJsonArray() : new JsonArray();
                         if (job_data.size() > 0) {
-                            ArrayList<AppliedJobData> appliedJobDataList = new ArrayList<>();
+                            ArrayList<AppliedJobData> matchedJobDataList = new ArrayList<>();
                             IntStream.range(0, job_data.size()).mapToObj(i -> job_data.get(i).getAsJsonObject()).forEach(object -> {
                                 String job_post_id = object.has("job_post_id") ? object.get("job_post_id").isJsonNull() ? "" : object.get("job_post_id").getAsString() : "";
                                 String company_name = object.has("company_name") ? object.get("company_name").isJsonNull() ? "" : object.get("company_name").getAsString() : "";
@@ -96,10 +96,10 @@ public class MatchedCompanyActivity extends AppCompatActivity {
                                 String company_action_status = "";
                                 AppliedJobData jobData = new AppliedJobData(job_post_id, company_name, company_logo, job_title, job_experience, job_type, job_city,
                                         job_state, job_country, job_skills, user_job_status, company_action_status);
-                                appliedJobDataList.add(appliedJobDataList.size(), jobData);
+                                matchedJobDataList.add(matchedJobDataList.size(), jobData);
                             });
                             rv_Likejob.setLayoutManager(new GridLayoutManager(mContext, 2));
-                            LikedJobsAdapter appliedJobsAdapter = new LikedJobsAdapter(mContext, appliedJobDataList);
+                            LikedJobsAdapter appliedJobsAdapter = new LikedJobsAdapter(mContext, matchedJobDataList);
                             rv_Likejob.setAdapter(appliedJobsAdapter);
                             rv_Likejob.setVisibility(View.VISIBLE);
                             ll_nodata.setVisibility(View.GONE);

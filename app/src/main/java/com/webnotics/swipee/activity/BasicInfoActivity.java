@@ -7,7 +7,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -21,7 +20,7 @@ import com.webnotics.swipee.fragments.company.ProfileDetailScreen;
 import com.webnotics.swipee.fragments.seeker.ProfileInfoScreen;
 
 
-public class BasicInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class BasicInfoActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 211;
     @SuppressLint("StaticFieldLeak")
     public static BasicInfoActivity instance;
@@ -109,19 +108,11 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onPause() {
-
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
-    }
-
-
-    @Override
-    public void onClick(View view) {
-
     }
 }

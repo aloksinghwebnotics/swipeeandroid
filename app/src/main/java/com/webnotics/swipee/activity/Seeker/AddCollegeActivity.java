@@ -84,7 +84,6 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
 
         }*/
 
-
         String data=  readFromFile();
         try {
             JSONArray jarray = new JSONArray(data);

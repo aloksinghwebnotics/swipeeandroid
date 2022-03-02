@@ -132,16 +132,13 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
             public void onResponse(@NonNull Call<CompanyProfileModel> call, @NonNull Response<CompanyProfileModel> response) {
                 AppController.dismissProgressdialog();
                 parsResponse(response);
-
             }
 
             @Override
             public void onFailure(@NonNull Call<CompanyProfileModel> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });
-
     }
 
     private void parsResponse(Response<CompanyProfileModel> response) {
@@ -155,7 +152,6 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
                 if (employeeuserdetail.getCode() == 200 && employeeuserdetail.getData()!=null) {
                     String state=employeeuserdetail.getData().getState();
                     String city=employeeuserdetail.getData().getCity();
-                    String country=employeeuserdetail.getData().getCountry();
                     String address=employeeuserdetail.getData().getCompany_address();
                     tv_companyaddress.setText(String.format("%s, %s, %s", address, city, state));
                     civ_url=employeeuserdetail.getData().getCompany_logo();
@@ -183,14 +179,8 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
                         rl_video.setVisibility(View.GONE);
                     }
                     ll_main.setVisibility(View.VISIBLE);
-                } else {
-                    rest.showToast(response.body().getMessage());
-                }
-            }else {
-                rest.showToast(response.body().getMessage());
-            }
-        } else {
-            rest.showToast("Something went wrong");
-        }
+                } else rest.showToast(response.body().getMessage());
+            }else rest.showToast(response.body().getMessage());
+        } else rest.showToast("Something went wrong");
     }
 }

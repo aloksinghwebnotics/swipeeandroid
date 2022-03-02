@@ -50,7 +50,10 @@ public class FeaturedPlanAdapter extends RecyclerView.Adapter<FeaturedPlanAdapte
     public void onBindViewHolder(@NonNull FeaturedPlanAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tv_name.setText(data.get(position).getAsJsonObject().get("package_name").getAsString());
         holder.tv_amount.setText(MessageFormat.format("Rs {0}", data.get(position).getAsJsonObject().get("package_price").getAsInt()));
+        holder.tv_plandetail.setText(Html.fromHtml(data.get(position).getAsJsonObject().get("package_description").getAsString()));
+/*
         holder.tv_plandetail.setText(Html.fromHtml(data.get(position).getAsJsonObject().get("package_description").getAsString()+"<br>-Feature job post limit "+data.get(position).getAsJsonObject().get("post_limit").getAsString()+"<br>-Validity "+data.get(position).getAsJsonObject().get("package_days_duration").getAsString()+" days"));
+*/
       // String period=data.get(position).getAsJsonObject().get("package_name").getAsString();
         holder.rl_planDetail.setBackgroundResource(R.drawable.gray_stroke_round_bk);
         if (position==0){
@@ -80,8 +83,6 @@ public class FeaturedPlanAdapter extends RecyclerView.Adapter<FeaturedPlanAdapte
                 String package_type=data.get(position).getAsJsonObject().get("package_type").getAsString();
                 String post_limit=data.get(position).getAsJsonObject().get("post_limit").getAsString();
                 mContext.setPlan(is_purchase,package_price,package_id,package_name,package_type,post_limit);
-
-
             }
         });
     }

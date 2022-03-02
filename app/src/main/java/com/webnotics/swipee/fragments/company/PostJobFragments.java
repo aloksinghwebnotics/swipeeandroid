@@ -182,10 +182,12 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
             rl_nodata.setVisibility(View.VISIBLE);
             iv_nodata.setImageResource(R.drawable.ic_plan_exp);
             tv_nodata.setText(getString(R.string.packageexprectr));
+            rl_nodata.setOnClickListener(this);
         }else if (Config.GetLeftPostCount()<=0){
             iv_nodata.setImageResource(R.drawable.ic_np_post);
             rl_nodata.setVisibility(View.VISIBLE);
             tv_nodata.setText(getString(R.string.planexpire));
+            rl_nodata.setOnClickListener(this);
         }else {
             rl_nodata.setVisibility(View.GONE);
             if (rest.isInterentAvaliable()) {

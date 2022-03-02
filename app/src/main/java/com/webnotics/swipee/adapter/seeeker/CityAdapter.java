@@ -35,8 +35,6 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
         this.mContext = mContext;
         this.data = data;
         this.filterList = data;
-
-
     }
 
 
@@ -73,7 +71,6 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
                     oldHolder.radioButton.setChecked(false);
                 }
                 IntStream.range(0, data.size()).forEach(i -> data.get(i).setSelected(false));
-
 
                 holder.radioButton.setChecked(true);
                 oldHolder = holder;

@@ -73,19 +73,26 @@
         </LinearLayout>
 
     </RelativeLayout>
+
     <com.webnotics.swipee.CustomUi.PopinsMediumTextView
         android:id="@+id/tv_participant_name"
         android:layout_width="wrap_content"
-        android:layout_margin="@dimen/dimen18dp"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/dimen42dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/dimen18dp"
+        android:layout_marginTop="@dimen/dimen18dp"
+        android:layout_marginEnd="@dimen/dimen18dp"
+        android:layout_marginBottom="@dimen/dimen18dp"
+        android:paddingStart="@dimen/dimen8dp"
+        android:paddingEnd="@dimen/dimen8dp"
         android:background="@drawable/white_semiround_bg"
+        android:gravity="center"
+        android:maxWidth="@dimen/dimen250dp"
         android:minWidth="@dimen/dimen156dp"
-        android:textSize="@dimen/dimen14sp"
+        android:minHeight="@dimen/dimen42dp"
         android:textColor="@color/colorPrimary"
-        android:gravity="center" />
+        android:textSize="@dimen/dimen14sp" />
 
 </RelativeLayout>
 

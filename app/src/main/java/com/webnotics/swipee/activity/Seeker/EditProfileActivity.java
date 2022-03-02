@@ -119,7 +119,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         StrictMode.setVmPolicy(builder.build());
         builder.detectFileUriExposure();
 
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=

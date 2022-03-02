@@ -119,10 +119,7 @@ public class AddDegreeActivity extends AppCompatActivity implements View.OnClick
                         degreeAdapter = new DegreeAdapter(AddDegreeActivity.this, jsonObjectArrayList);
                         mListView.setAdapter(degreeAdapter);
                     }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

@@ -125,7 +125,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
          layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
 
-        identity= "8";
+        identity= Config.GetId();
         // for a chat app, show latest messages at the bottom
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);

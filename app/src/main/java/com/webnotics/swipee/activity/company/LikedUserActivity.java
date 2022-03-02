@@ -69,7 +69,6 @@ public class LikedUserActivity extends AppCompatActivity {
     private void getLikedUsers() {
         SwipeeApiClient.swipeeServiceInstance().getLikedUser(Config.GetUserToken()).enqueue(new Callback<JsonObject>() {
 
-
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
                 AppController.dismissProgressdialog();

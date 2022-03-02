@@ -125,9 +125,7 @@ public class SearchIndustryActivity extends AppCompatActivity implements View.On
                         mListView.setAdapter(collegeAdapter);
                     } else rest.showToast("Something went wrong");
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

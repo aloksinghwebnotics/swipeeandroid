@@ -238,8 +238,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
                         //        String device_token = FirebaseInstanceId.getInstance().getId();
                         String user_app_language = Locale.getDefault().getDisplayLanguage().toLowerCase(Locale.ROOT);
-
-                        Log.d("djdjdjdj", "android_id  " + refreshedToken);
                         HashMap<String, String> hashMap = new HashMap();
                         hashMap.put(ParaName.KEY_EMAIL, email1);
                         hashMap.put(ParaName.KEY_PASSWORD, password);

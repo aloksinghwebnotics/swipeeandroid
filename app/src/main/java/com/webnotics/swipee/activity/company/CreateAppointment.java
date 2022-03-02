@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -157,7 +158,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
 
     private void setFlowData(JSONArray jsonData) {
         if (jsonData.length() > 0) {
-            for (int k = 0; k < jsonData.length(); k++) {
+            IntStream.range(0, jsonData.length()).forEach(k -> {
                 try {
                     String data = jsonData.get(k).toString();
 
@@ -193,8 +194,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-            }
+            });
         }
     }
 

@@ -308,11 +308,15 @@ public class FeaturedPlan extends AppCompatActivity implements PaymentResultWith
                         boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
                         if (response.body().get("code").getAsInt() == 203) {
                             rest.showToast(response.body().get("message").getAsString());
+                            if (JobPostRule.instance!=null)
+                                JobPostRule.instance.finish();
                             AppController.loggedOut(mContext);
                             finish();
                         } else if (response.body().get("code").getAsInt() == 200 && status) {
                             rest.showToast(response.body().get("message").getAsString());
                             Config.SetTransaction("");
+                            if (JobPostRule.instance!=null)
+                                JobPostRule.instance.finish();
                             publishFeaturedJob(String.valueOf(job_post_id));
                         } else if (response.body().get("code").getAsInt() == 402) {
                             Config.SetTransaction("");

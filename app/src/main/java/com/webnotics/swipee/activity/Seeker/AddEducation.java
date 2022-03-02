@@ -126,7 +126,6 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                 } else if (TextUtils.isEmpty(tv_enddate.getText().toString()) && !cb_pursuing.isChecked()) {
                     rest.showToast("Select End Date");
                 } else {
-
                     if (rest.isInterentAvaliable()) {
                         HashMap<String, String> hashMap = new HashMap<>();
                         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
@@ -140,8 +139,6 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                         AppController.ShowDialogue("", mContext);
                         saveEducation(hashMap);
                     } else rest.AlertForInternet();
-
-
                 }
 
                 break;

@@ -36,7 +36,9 @@ import com.webnotics.swipee.rest.Rest;
 import com.xw.repo.BubbleSeekBar;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -263,8 +265,8 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
                 Double.parseDouble(Config.GetLat()),
                 Double.parseDouble(Config.GetLongg()));
         if (mArrayListUserListing.size() > 10) {
-            for (int i = 0; i < 10; i++) {
-                de.hdodenhof.circleimageview.CircleImageView t1 = new de.hdodenhof.circleimageview.CircleImageView(mContext);
+            IntStream.range(0, 10).forEach(i -> {
+                CircleImageView t1 = new CircleImageView(mContext);
                 t1.setLayoutParams(new ViewGroup.LayoutParams(52, 52));
                 if (!isFinishing()) {
                     Glide.with(mContext)
@@ -290,11 +292,10 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
                             Double.parseDouble("10"), t1, mArrayListUserListing.get(i).getUser_id()));
 
                 }
-
-            }
+            });
         } else {
-            for (int i = 0; i < mArrayListUserListing.size(); i++) {
-                de.hdodenhof.circleimageview.CircleImageView t1 = new de.hdodenhof.circleimageview.CircleImageView(mContext);
+            IntStream.range(0, mArrayListUserListing.size()).forEach(i -> {
+                CircleImageView t1 = new CircleImageView(mContext);
                 t1.setLayoutParams(new ViewGroup.LayoutParams(52, 52));
                 if (!isFinishing()) {
                     Glide.with(mContext)
@@ -320,8 +321,7 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
                             Double.parseDouble("10"), t1, mArrayListUserListing.get(i).getUser_id()));
 
                 }
-
-            }
+            });
         }
 
         mRadarCustom.setupData(Double.parseDouble("" + radiessprogress * 2000), mDataSet, latLongCs, mCenterView);

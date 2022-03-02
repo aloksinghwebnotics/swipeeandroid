@@ -122,7 +122,7 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
             case R.id.tv_save:
 
                 if (stringListid.size() == 0) {
-                    rest.showToast("Select jb location");
+                    rest.showToast("Select job location");
                 } else if (desiredIdList.size() == 0) {
                     rest.showToast("Select desired industry");
                 } else if (spn_sallery.getSelectedItemPosition() == 0) {
@@ -164,9 +164,7 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                     genderAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                     spn_sallery.setAdapter(genderAdapter);
                     spn_sallery.setSelection(0);
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -303,20 +301,15 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                                 EmployeeUserDetails.Data.User_Preferences user_preferences = new EmployeeUserDetails.Data.User_Preferences(preference_id, locationData, industryData, expectedSalary);
 
                                 mArrayuseruserpreference.add(user_preferences);
-                                if (ProfileFragments.instance != null) {
+                                if (ProfileFragments.instance != null)
                                     ProfileFragments.instance.setPreferences(mArrayuseruserpreference);
-                                }
-
                             }
                         }
 
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

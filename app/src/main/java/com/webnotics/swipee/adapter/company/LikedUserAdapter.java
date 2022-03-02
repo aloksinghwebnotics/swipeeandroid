@@ -93,10 +93,8 @@ public class LikedUserAdapter extends RecyclerView.Adapter<LikedUserAdapter.MyVi
             tv_name = view.findViewById(R.id.tv_name);
             tv_loaction = view.findViewById(R.id.tv_loaction);
             iv_backimg = view.findViewById(R.id.iv_backimg);
-
         }
     }
-
 
 }
 

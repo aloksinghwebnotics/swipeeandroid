@@ -284,8 +284,7 @@ public class JobDetail extends AppCompatActivity {
                     .putExtra("job_id", job_id)
                     .putExtra("appointment_id", appointment_id)
                     .putExtra("from", JobDetail.class.getSimpleName())
-                    .putExtra("action", "reschedule")
-
+                    .putExtra("action", "Reschedule")
             );
         });
 
@@ -507,14 +506,11 @@ public class JobDetail extends AppCompatActivity {
                                         tv_active.setTextColor(getColor(R.color.black));
                                         tv_inactive.setTextColor(getColor(R.color.black));
                                     }
-
                                 }
-
                             }
 
                             JsonObject resume = job_data.has("user_resumes") ? job_data.get("user_resumes").isJsonNull() ? new JsonObject() : job_data.get("user_resumes").getAsJsonObject() : new JsonObject();
                             appointments = job_data.has("appointment") ? job_data.get("appointment").isJsonNull() ? new JsonArray() : job_data.get("appointment").getAsJsonArray() : new JsonArray();
-
 
                             resumeId = resume.has("cv_id") ? resume.get("cv_id").getAsString() : "";
                             Config.SetCVID(resumeId);

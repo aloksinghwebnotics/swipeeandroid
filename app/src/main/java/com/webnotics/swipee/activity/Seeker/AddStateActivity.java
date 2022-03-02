@@ -137,8 +137,6 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
                         }
                         finish();
                     }
-
-
                 }
                 break;
 

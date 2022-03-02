@@ -91,7 +91,6 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
         tv_title = findViewById(R.id.tv_title);
         tv_title.setText("Add Location");
 
-
         tv_save.setOnClickListener(this);
         iv_back.setOnClickListener(this);
 
@@ -216,19 +215,13 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                                e.printStackTrace();
                            }
                        }
-
                     } else rest.showToast("Something went wrong");
-
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });

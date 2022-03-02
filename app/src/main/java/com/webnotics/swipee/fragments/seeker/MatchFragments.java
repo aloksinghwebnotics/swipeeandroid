@@ -96,7 +96,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
     ArrayList<FilterModel.Data.Experience> mExperience_nameArrayList = new ArrayList<>();
     ArrayList<FilterModel.Data.Industry> mIndustryArrayList = new ArrayList<>();
     ArrayList<FilterModel.Data.Salary> mSalaryArrayList = new ArrayList<>();
-    public int pos;
+    public int pos=-1;
     SwipeDeckAdapter adapter;
     EditText et_search;
     String status = "";
@@ -1379,6 +1379,13 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                         AppController.loggedOut(mContext);
                         getActivity().finish();
                     }else if (response.body().get("code").getAsInt()==200 &&repo.get("status").getAsBoolean()){
+                        if (pos==mArrayUser.size()-1){
+                            iv_nodata.setImageResource(R.drawable.ic_no_data);
+                            nolay.setVisibility(View.VISIBLE);
+                            nodatatxt.setText(getResources().getString(R.string.nodatatxt1));
+                            datalay.setVisibility(View.GONE);
+                            noleftswipelay.setVisibility(View.GONE);
+                        }
                         rest.showToast(repo.get("message").getAsString());
                         left_swipes=left_swipes-1;
                         if (left_swipes>0 || packgeID.equalsIgnoreCase("3")){}
@@ -1386,6 +1393,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                             noleftswipelay.setVisibility(View.VISIBLE);
                             SeekerHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                             datalay.setVisibility(View.GONE);
+                            nolay.setVisibility(View.GONE);
                         }
                         if (hashMap.get(ParaName.KEY_USERSTATUS)!=null)
                             if (Objects.requireNonNull(hashMap.get(ParaName.KEY_USERSTATUS)).equalsIgnoreCase("A")){

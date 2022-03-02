@@ -1,5 +1,6 @@
 package com.webnotics.swipee.activity.company;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,6 +43,10 @@ public class JobPostRule extends AppCompatActivity {
     private String total_post_limit="";
     private String used_listing="";
     private String featured_package_expire="";
+    @SuppressLint("StaticFieldLeak")
+    public static JobPostRule instance;
+    private Object package_price="";
+    private Object package_days_duration="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,7 @@ public class JobPostRule extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getColor(R.color.white));
         mContext = this;
+        instance = this;
         rest = new Rest(mContext);
 
         tv_data = findViewById(R.id.tv_data);
@@ -91,6 +97,10 @@ public class JobPostRule extends AppCompatActivity {
                             tv_data.setText(Html.fromHtml(page_title));
                             tv_datavalue.setText(Html.fromHtml(page_description));
                             JsonObject featured_package_details= data.has("featured_package_details")?data.get("featured_package_details").getAsJsonObject():new JsonObject();
+                            JsonObject package_details= data.has("package_details")?data.get("package_details").getAsJsonObject():new JsonObject();
+                            package_price= package_details.has("package_price")?package_details.get("package_price").getAsString():"";
+                            package_days_duration= package_details.has("package_days_duration")?package_details.get("package_days_duration").getAsString():"";
+
                              company_featured_id= featured_package_details.has("company_featured_id")?featured_package_details.get("company_featured_id").getAsString():"";
                              total_post_limit= featured_package_details.has("total_post_limit")?featured_package_details.get("total_post_limit").getAsString():"";
                              used_listing= featured_package_details.has("used_listing")?featured_package_details.get("used_listing").getAsString():"";
@@ -128,7 +138,8 @@ public class JobPostRule extends AppCompatActivity {
         TextView tv_detail=progressdialog.findViewById(R.id.tv_detail);
         if (featured_package_expire.equalsIgnoreCase("N") &&!TextUtils.isEmpty(total_post_limit) &&!TextUtils.isEmpty(used_listing) &&!total_post_limit.equalsIgnoreCase(used_listing)){
             tv_submit.setText("Post featured job");
-            tv_detail.setText(MessageFormat.format("Total Post Limit: {0}\n\nUsed Post Limit: {1}\n\nThis job will be publish as feature job, after 24 hours.", total_post_limit, total_post_limit));
+            tv_detail.setText(MessageFormat.format("You have an active feature job package. You can post your job as feature job.\n\n" +
+                    "Price:  Rs.{0}\nTotal Post Limit:  {1}\nUsed Post Limit:  {2}\n\nThis job will be publish as feature job, after 24 hours.", package_price,total_post_limit, used_listing));
         }else {
             tv_detail.setText("You don't have any active feature job package. If you want to post this job as a featured job purchase a package or you can publish your job.");
             tv_submit.setText("Purchase feature");
@@ -158,7 +169,7 @@ public class JobPostRule extends AppCompatActivity {
 
     private void callPurchaseFeatured() {
         mContext.startActivity(new Intent(mContext, FeaturedPlan.class).putExtra(ParaName.KEY_JOBPOSTID,job_post_id));
-        finish();
+
     }
 
     @Override
@@ -188,8 +199,6 @@ public class JobPostRule extends AppCompatActivity {
                         finish();
                     }
                 }
-
-
             }
 
             @Override
@@ -219,7 +228,6 @@ public class JobPostRule extends AppCompatActivity {
                         finish();
                     }
                 }
-
 
             }
 

@@ -246,7 +246,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                     .putExtra("apply_id", apply_id)
                     .putExtra("job_id", jobId)
                     .putExtra("from", UserDetail.class.getSimpleName())
-                    .putExtra("action", "cancel")
+                    .putExtra("action", "Cancel")
             );
         });
         tv_reschedule.setOnClickListener(v -> {
@@ -263,7 +263,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                     .putExtra("apply_id", apply_id)
                     .putExtra("job_id", jobId)
                     .putExtra("from", UserDetail.class.getSimpleName())
-                    .putExtra("action", "reschedule")
+                    .putExtra("action", "Reschedule")
             );
         });
 
@@ -519,10 +519,12 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                 tv_video.setVisibility(View.VISIBLE);
                                 iv_videoplay.setVisibility(View.VISIBLE);
                                 vv_video.setVisibility(View.GONE);
-                                Glide.with(mContext)
-                                        .load(video_file_link)
-                                        .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 16))))
-                                        .into(iv_video);
+                                try {
+                                    Glide.with(mContext)
+                                            .load(video_file_link)
+                                            .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 16))))
+                                            .into(iv_video);
+                                }catch (Exception e){}
                             }
 
                             if (Config.isSeeker()) {
@@ -808,7 +810,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
             tv_shortlisted.setBackgroundResource(R.color.white_light);
             tv_hire.setBackgroundResource(R.color.colorPrimary);
             tv_reject.setBackgroundResource(R.color.white_light);
-        } else if (company_action.equalsIgnoreCase("Reject")) {
+        } else if (company_action.equalsIgnoreCase("Cancel")) {
             tv_shortlisted.setTextColor(getColor(R.color.black));
             tv_hire.setTextColor(getColor(R.color.black));
             tv_reject.setTextColor(getColor(R.color.white));
@@ -907,7 +909,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                     if (rest.isInterentAvaliable()) {
                         if (!TextUtils.isEmpty(userId)) {
                             AppController.ShowDialogue("", mContext);
-                            callActionService("Reject");
+                            callActionService("Cancel");
                         }
 
                     } else rest.AlertForInternet();

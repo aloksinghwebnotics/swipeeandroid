@@ -280,9 +280,7 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
             }
         } catch (Exception ignored) {
         }
-/*
-        startActivity(new Intent(mContext,JobPostRule.class).putExtra("job_post_id",334));
-*/
+       // startActivity(new Intent(mContext,JobPostRule.class).putExtra("job_post_id",10));
         matchimg.setImageResource(R.drawable.ic_match_unselected);
         nearimg.setImageResource(R.drawable.ic_post_job_selected);
         planimg.setImageResource(R.drawable.ic_plan_unselect);

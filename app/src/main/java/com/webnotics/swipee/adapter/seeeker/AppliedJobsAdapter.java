@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.activity.Seeker.AppliedJobsActivity;
 import com.webnotics.swipee.activity.Seeker.FeaturedJobsActivity;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
+import com.webnotics.swipee.activity.JobDetail;
 import com.webnotics.swipee.activity.Seeker.SavedJobsActivity;
 import com.webnotics.swipee.model.seeker.AppliedJobData;
 

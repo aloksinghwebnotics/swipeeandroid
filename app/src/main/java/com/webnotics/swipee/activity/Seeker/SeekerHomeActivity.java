@@ -184,14 +184,9 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     Date final1 = formatout.parse(date1);
                     Date final2 = formatout.parse(date2);
                     if (final1 != null && final2 != null) {
-                        if (final1.compareTo(final2) != 0) {
-                            callCollegeList();
-                        } else {
-                            callLocation();
-                        }
-                    } else {
-                        callCollegeList();
-                    }
+                        if (final1.compareTo(final2) != 0) callCollegeList();
+                        else callLocation();
+                    } else callCollegeList();
                 } else callCollegeList();
 
 
@@ -219,13 +214,9 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     Date final2 = formatout.parse(date2);
                     if (final1 != null && final2 != null) {
                         if (final1.compareTo(final2) != 0) {
-                            Log.d("hhhhh", "Hit from date");
                             callLocationList();
                         }
-                    } else {
-                        Log.d("hhhhh", "Hit from null");
-                        callLocationList();
-                    }
+                    } else callLocationList();
                 } else callLocationList();
 
             }
@@ -280,7 +271,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                         Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
                     }
                 }
-
             }
 
             @Override

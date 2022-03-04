@@ -18,8 +18,14 @@ import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.company.ChatListAdapter;
 import com.webnotics.swipee.fragments.Basefragment;
 import com.webnotics.swipee.model.RecentChatModel;
-import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,7 +85,9 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
                             getActivity().finish();
                         }else
                         if (recentChatModel.isStatus() && recentChatModel.getCode()==200){
-                            rv_chatList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, true));
+                            ArrayList<RecentChatModel.Data> chatArray = recentChatModel.getData();
+                            chatArray.sort(new ChatComparator());
+                            rv_chatList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             ChatListAdapter chatListAdapter = new ChatListAdapter(mContext, recentChatModel.getData());
                             rv_chatList.setAdapter(chatListAdapter);
                             tv_nodata.setVisibility(View.GONE);
@@ -107,5 +115,28 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
     }
 
 
+    private class ChatComparator implements Comparator<RecentChatModel.Data> {
+        public int compare(RecentChatModel.Data s2, RecentChatModel.Data s1) {
+            SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date date2 = formatDate.parse(s1.getMsg_created_at());
+                Date date3 = formatDate.parse(s2.getMsg_created_at());
+                if (date2 != null && date3 != null) {
+                    if (date2.before(date3)) {
+                        return -1;
+                    }else   if (date2.after(date3)) {
+                        return 1;
+                    }else {
+                        return 0;
+                    }
 
+                }else return 0;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+
+        }
+
+    }
 }

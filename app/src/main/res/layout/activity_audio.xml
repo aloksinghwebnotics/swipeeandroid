@@ -16,6 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <include layout="@layout/content_video" />
 
             <LinearLayout
@@ -62,8 +63,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_profile"
@@ -88,11 +89,25 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@+id/name"
                 android:layout_marginTop="@dimen/dimen5dp"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen16sp" />
+
+            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dimen5dp"
+                android:gravity="start"
+                android:minWidth="@dimen/dimen84dp"
+                android:paddingStart="@dimen/dimen2dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen14sp" />
 
 
             <ImageView
@@ -101,7 +116,7 @@
                 android:layout_height="@dimen/dimen72dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/dimen42dp"
-                android:layout_marginBottom="@dimen/dimen98dp"
+                android:layout_marginBottom="@dimen/dimen42dp"
                 android:padding="@dimen/dimen13dp"
                 android:src="@drawable/mute"
                 app:tint="@color/white" />
@@ -113,7 +128,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/dimen98dp"
+                android:layout_marginBottom="@dimen/dimen42dp"
                 android:padding="@dimen/dimen18dp"
                 android:src="@drawable/ic_mic_white_24dp"
                 app:tint="@color/white_light" />
@@ -125,7 +140,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="@dimen/dimen42dp"
-                android:layout_marginBottom="@dimen/dimen98dp"
+                android:layout_marginBottom="@dimen/dimen42dp"
                 android:padding="@dimen/dimen12dp"
                 android:src="@drawable/ic_cancel_incoming" />
         </RelativeLayout>

@@ -169,7 +169,6 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         tv_language = rootView.findViewById(R.id.tv_language);
         tv_perk = rootView.findViewById(R.id.tv_perk);
 
-
         jobtypeBottomSheet(rootView);
         qualificationBottomSheet(rootView);
         perkBottomSheet(rootView);

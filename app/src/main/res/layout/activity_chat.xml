@@ -25,8 +25,8 @@
                 android:layout_width="@dimen/dimen42dp"
                 android:layout_height="@dimen/dimen42dp"
                 android:layout_centerVertical="true"
-                android:paddingEnd="@dimen/dimen12dp"
                 android:paddingStart="@dimen/dimen12dp"
+                android:paddingEnd="@dimen/dimen12dp"
                 android:src="@drawable/ic_back" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -69,6 +69,7 @@
             <ImageView
                 android:id="@+id/iv_refresh"
                 android:layout_width="@dimen/dimen36dp"
+                android:visibility="gone"
                 android:layout_height="@dimen/dimen36dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"

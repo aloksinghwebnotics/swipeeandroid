@@ -44,12 +44,10 @@ public class ForgotConfirm extends AppCompatActivity {
         iv_back=findViewById(R.id.iv_back);
         tv_emailresend.setText(Html.fromHtml(getString(R.string.didntgetemail)));
 
-
         if (getIntent()!=null){
             email=getIntent().getStringExtra("email")!=null? getIntent().getStringExtra("email"):"";
             isSeeker=getIntent().getBooleanExtra("isSeeker",true);
         }
-
 
         tv_emailsent.setText("We have send introduction link to pick a new password to "+email);
 

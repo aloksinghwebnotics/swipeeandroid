@@ -35,9 +35,9 @@
                   android:paddingStart="@dimen/dimen4dp"
                   android:paddingEnd="@dimen/dimen4dp"
                   android:gravity="start"
-                  android:minWidth="@dimen/dimen105dp"
+                  android:minWidth="@dimen/dimen96dp"
                   android:minHeight="@dimen/dimen24dp"
-                  android:maxWidth="@dimen/dimen204dp"
+                  android:maxWidth="@dimen/dimen250dp"
                   android:layout_width="wrap_content"
                   android:linksClickable="true"
                   android:autoLink="all"
@@ -65,7 +65,6 @@
                   android:id="@+id/img"
                   android:layout_width="@dimen/dimen204dp"
                   android:layout_height="@dimen/dimen196dp"
-                  android:src="@drawable/white_light_semiround_bg"
                   android:visibility="visible" />
               <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                   android:layout_below="@+id/img"

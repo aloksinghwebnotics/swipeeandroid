@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.webnotics.swipee.R;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
+import com.webnotics.swipee.activity.JobDetail;
 import com.webnotics.swipee.activity.Seeker.JobListActivity;
 import com.webnotics.swipee.model.seeker.AppliedJobData;
 

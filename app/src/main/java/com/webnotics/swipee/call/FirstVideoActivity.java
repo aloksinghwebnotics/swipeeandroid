@@ -1,10 +1,13 @@
 package com.webnotics.swipee.call;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -43,6 +47,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
     private MediaPlayer mediaPlayer;
 */
     private Ringtone ringtone;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,12 +102,36 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
         callaccept.setOnClickListener(this);
         calldecline.setOnClickListener(this);
         if (!getIntent().getStringExtra("appointment_type").equalsIgnoreCase("call")) {
-             name.setVisibility(View.GONE);
+             name.setVisibility(View.VISIBLE);
              email.setVisibility(View.GONE);
         }else {
             name.setVisibility(View.VISIBLE);
-            email.setVisibility(View.VISIBLE);
+            email.setVisibility(View.GONE);
         }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=
+                PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) !=
+                PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    111);
+        }
+
+        countDownTimer= new CountDownTimer(30000, 500) {
+
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+                callDecline();
+            }
+
+        }.start();
 
     }
 
@@ -137,24 +166,28 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.calldecline:
-                if (ringtone!=null && ringtone.isPlaying()) {
-                    ringtone.stop();
-                }
-
-                if (getIntent().getStringExtra("appointment_type").equalsIgnoreCase("call")){
-                    if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3")){
-                        userRejectAudioCall(getIntent().getStringExtra("Aid"));
-                    }else {
-                        companyRejectAudioCall(getIntent().getStringExtra("Aid"));
-                    }
-                } else{
-                    if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3")){
-                            userRejectVideoCall(getIntent().getStringExtra("Aid"));
-                    }else {
-                        companyRejectVideoCall(getIntent().getStringExtra("Aid"));
-                    }
-                }
+                   callDecline();
                 break;
+        }
+    }
+
+    private void callDecline() {
+        if (ringtone!=null && ringtone.isPlaying()) {
+            ringtone.stop();
+        }
+
+        if (getIntent().getStringExtra("appointment_type").equalsIgnoreCase("call")){
+            if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3")){
+                userRejectAudioCall(getIntent().getStringExtra("Aid"));
+            }else {
+                companyRejectAudioCall(getIntent().getStringExtra("Aid"));
+            }
+        } else{
+            if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3")){
+                userRejectVideoCall(getIntent().getStringExtra("Aid"));
+            }else {
+                companyRejectVideoCall(getIntent().getStringExtra("Aid"));
+            }
         }
     }
 
@@ -293,5 +326,15 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        try {
+            if (countDownTimer!=null)
+                countDownTimer.cancel();
+            if (ringtone!=null && ringtone.isPlaying()) {
+                ringtone.stop();
+            }
+        }catch (Exception e){}
+        super.onDestroy();
+    }
 }

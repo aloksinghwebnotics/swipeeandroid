@@ -38,7 +38,7 @@ import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
+import com.webnotics.swipee.activity.JobDetail;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.adapter.seeeker.FilterAdapter;
 import com.webnotics.swipee.fragments.Basefragment;

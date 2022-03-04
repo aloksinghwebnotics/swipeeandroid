@@ -31,7 +31,6 @@ import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.company.UserDetail;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
@@ -146,7 +145,6 @@ public class AppointmentAction extends AppCompatActivity {
                     rv_appointment.setAdapter(actionAdapter);
                 }
             }
-
 
         }
     }

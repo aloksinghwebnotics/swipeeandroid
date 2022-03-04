@@ -187,9 +187,7 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
             default:
                 break;
         }
-
     }
-
 
     @Override
     public void onPause() {

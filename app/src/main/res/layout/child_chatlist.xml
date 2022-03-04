@@ -20,10 +20,9 @@
         android:id="@+id/ll_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/ll_time"
         android:layout_toEndOf="@+id/civ_logo"
-        android:minHeight="@dimen/dimen72dp"
+        android:layout_marginTop="@dimen/dimen4dp"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -55,19 +54,22 @@
                 android:textSize="@dimen/dimen12sp" />
         </RelativeLayout>
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
-            android:id="@+id/tv_lastchat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimen2dp"
-            android:maxLines="2"
-            android:visibility="visible"
-            android:ellipsize="end"
-            android:drawablePadding="@dimen/dimen2dp"
-            android:textColor="@color/nav_gray"
-            android:textSize="@dimen/dimen12sp" />
+
 
     </LinearLayout>
+    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        android:id="@+id/tv_lastchat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/dimen2dp"
+        android:layout_below="@+id/ll_data"
+        android:layout_toEndOf="@+id/civ_logo"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="@dimen/dimen2dp"
+        android:textColor="@color/nav_gray"
+        android:textSize="@dimen/dimen12sp"
+        android:visibility="visible" />
    <LinearLayout
        android:id="@+id/ll_time"
        android:layout_width="wrap_content"
@@ -80,7 +82,6 @@
            android:id="@+id/tv_createdat"
            android:layout_gravity="end"
            android:layout_width="wrap_content"
-           android:text="@string/email"
            android:layout_height="wrap_content"
            android:paddingTop="@dimen/dimen4dp"
            android:paddingBottom="@dimen/dimen4dp"
@@ -109,7 +110,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen2dp"
-        android:layout_below="@+id/ll_data"
+        android:layout_below="@+id/civ_logo"
         android:layout_marginStart="@dimen/dimen8dp"
         android:layout_marginTop="@dimen/dimen12dp"
         android:layout_marginEnd="@dimen/dimen8dp"

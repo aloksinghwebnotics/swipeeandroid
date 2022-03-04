@@ -62,15 +62,12 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -1105,6 +1102,12 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                 outputStream.writeBytes("Content-Disposition: form-data; name=\"cv_id\"" + lineEnd);
                 outputStream.writeBytes(lineEnd);
                 outputStream.writeBytes(Config.GetCVID());
+                outputStream.writeBytes(lineEnd);
+
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"is_profile_updated\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes("Y");
                 outputStream.writeBytes(lineEnd);
 
                 outputStream.writeBytes(twoHyphens + boundary + lineEnd);

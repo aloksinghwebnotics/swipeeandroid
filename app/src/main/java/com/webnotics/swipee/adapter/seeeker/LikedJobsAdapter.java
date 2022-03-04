@@ -17,7 +17,7 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.webnotics.swipee.R;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
+import com.webnotics.swipee.activity.JobDetail;
 import com.webnotics.swipee.activity.Seeker.LikedJobsActivity;
 import com.webnotics.swipee.activity.Seeker.MatchedCompanyActivity;
 import com.webnotics.swipee.model.seeker.AppliedJobData;

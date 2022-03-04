@@ -401,7 +401,7 @@
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:maxLength="4"
+                    android:maxLength="6"
                     android:inputType="number"
                     android:ellipsize="end"
                     android:paddingStart="@dimen/dimen2dp"

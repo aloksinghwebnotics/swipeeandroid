@@ -951,9 +951,10 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
         @Override
         protected void onPostExecute(String s) {
             AppController.dismissProgressdialog();
-            JsonParser parser = new JsonParser();
-            JsonObject json = (JsonObject) parser.parse(s);
+
             try {
+                JsonParser parser = new JsonParser();
+                JsonObject json = (JsonObject) parser.parse(s);
                 if (json != null) {
                     if (json.has("status"))
                         if (json.get("status").getAsBoolean()) {

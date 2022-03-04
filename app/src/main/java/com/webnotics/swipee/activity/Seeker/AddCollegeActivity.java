@@ -221,7 +221,6 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                                 mListView.setAdapter(collegeAdapter);
                                 Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
 
-
                             }
                         } catch (JSONException e) {
                         }

@@ -219,7 +219,6 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                 AppController.dismissProgressdialog();
                 if (response.code()==200 && response.body()!=null){
                     JsonObject responseBody= response.body();
-                    Log.d("dbhdfhkjgd",responseBody.toString());
                     if (responseBody.get("status").getAsBoolean()){
                         Config.SetMobileNo(mobile);
                         rest.showToast(responseBody.get("message").getAsString());

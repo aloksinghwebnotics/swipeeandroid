@@ -73,10 +73,10 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
 
     private static final int RESULT_CROP = 321;
     private static final int REQUEST_IMAGE_CAPTURE = 211;
-    ImageView iv_shaddowleft, iv_shaddowright, iv_pickimg, iv_userpickimg,iv_userpickvideo;
-    LinearLayout rl_name, rl_pick,rl_about;
-    TextView tv_next, tv_back,tv_pickimg,tv_heycompany,tv_uploadvedio,et_industry,et_companysize,tv_country, tv_state, tv_city;
-    EditText et_name,et_website,et_founded,et_pincode,et_address;
+    ImageView iv_shaddowleft, iv_shaddowright, iv_pickimg, iv_userpickimg, iv_userpickvideo;
+    LinearLayout rl_name, rl_pick, rl_about;
+    TextView tv_next, tv_back, tv_pickimg, tv_heycompany, tv_uploadvedio, et_industry, et_companysize, tv_country, tv_state, tv_city;
+    EditText et_name, et_website, et_founded, et_pincode, et_address;
     Context mContext;
     private Rest rest;
     private static final int SELECT_VIDEO = 212;
@@ -87,14 +87,13 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
     private String selectedVideoPath;
     @SuppressLint("StaticFieldLeak")
     public static ProfileDetailScreen instance;
-    private String industryId="";
-    private JsonArray company_size=new JsonArray();
+    private String industryId = "";
+    private JsonArray company_size = new JsonArray();
     private Dialog progressdialog;
     private String stateId = "";
     private String cityId = "";
-    private String countryId = "101";
+    private final String countryId = "101";
     private File tempfile;
-    private RelativeLayout intent_sheet;
     private BottomSheetBehavior bottomsheet_intent;
 
     @Override
@@ -102,7 +101,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         View rootView = inflater.inflate(R.layout.profile_detail_screen, container, false);
         mContext = getActivity();
         rest = new Rest(mContext);
-        instance=this;
+        instance = this;
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -133,7 +132,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         tv_pickimg = rootView.findViewById(R.id.tv_pickimg);
         iv_userpickimg = rootView.findViewById(R.id.iv_userpickimg);
         tv_country.setText("India");
-      // et_name.setText(Config.GeCompanyName());
+        // et_name.setText(Config.GeCompanyName());
 
         tv_next.setOnClickListener(this);
         tv_back.setOnClickListener(this);
@@ -144,10 +143,10 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         tv_city.setOnClickListener(this);
         tv_state.setOnClickListener(this);
 
-        if (rest.isInterentAvaliable()){
-            AppController.ShowDialogue("",mContext);
+        if (rest.isInterentAvaliable()) {
+            AppController.ShowDialogue("", mContext);
             callCompanySize();
-        }else rest.AlertForInternet();
+        } else rest.AlertForInternet();
         industryBottomSheet(rootView);
 
         return rootView;
@@ -163,10 +162,11 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         callBackPressed();
     }
 
-    public  void setCityData(String cityName, String cityId) {
+    public void setCityData(String cityName, String cityId) {
         tv_city.setText(cityName);
         this.cityId = cityId;
     }
+
     @Override
     public void onClick(View view) {
 
@@ -181,33 +181,33 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                         iv_shaddowright.setVisibility(View.GONE);
                         tv_back.setVisibility(View.VISIBLE);
                         name = et_name.getText().toString();
-                        tv_heycompany.setText("Hey "+name+" !");
+                        tv_heycompany.setText("Hey " + name + " !");
                     } else {
                         rest.showToast("Enter company name");
                     }
 
                 } else if (rl_about.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(et_industry.getText().toString()) || et_industry.getText().toString().replaceAll(" ", "").length() == 0) {
-                               rest.showToast("Select industry");
+                        rest.showToast("Select industry");
                     } else if (TextUtils.isEmpty(et_companysize.getText().toString()) || et_companysize.getText().toString().replaceAll(" ", "").length() == 0) {
                         rest.showToast("Select company size");
-                    }else if (TextUtils.isEmpty(et_website.getText().toString()) || et_website.getText().toString().replaceAll(" ", "").length() == 0) {
+                    } else if (TextUtils.isEmpty(et_website.getText().toString()) || et_website.getText().toString().replaceAll(" ", "").length() == 0) {
                         rest.showToast("Enter company website");
-                    }else if (TextUtils.isEmpty(et_address.getText().toString()) || et_address.getText().toString().replaceAll(" ", "").length() == 0) {
+                    } else if (TextUtils.isEmpty(et_address.getText().toString()) || et_address.getText().toString().replaceAll(" ", "").length() == 0) {
                         rest.showToast("Enter company address");
-                    }else if (TextUtils.isEmpty(et_pincode.getText().toString()) || et_pincode.getText().toString().replaceAll(" ", "").length() == 0) {
+                    } else if (TextUtils.isEmpty(et_pincode.getText().toString()) || et_pincode.getText().toString().replaceAll(" ", "").length() == 0) {
                         rest.showToast("Enter 6 digit pincode");
-                    }else if (et_pincode.getText().toString().replaceAll(" ", "").length() !=6 ) {
+                    } else if (et_pincode.getText().toString().replaceAll(" ", "").length() != 6) {
                         rest.showToast("Enter 6 digit pincode");
-                    }else if (TextUtils.isEmpty(et_founded.getText().toString()) || et_founded.getText().toString().replaceAll(" ", "").length() == 0) {
+                    } else if (TextUtils.isEmpty(et_founded.getText().toString()) || et_founded.getText().toString().replaceAll(" ", "").length() == 0) {
                         rest.showToast("Enter established year");
-                    }else if (et_founded.getText().toString().replaceAll(" ", "").length()!=4) {
+                    } else if (et_founded.getText().toString().replaceAll(" ", "").length() != 4) {
                         rest.showToast("Enter 4 digit established year");
-                    }else if (TextUtils.isEmpty(tv_country.getText().toString())){
+                    } else if (TextUtils.isEmpty(tv_country.getText().toString())) {
                         rest.showToast("Select country");
-                    }else if (TextUtils.isEmpty(tv_state.getText().toString())){
+                    } else if (TextUtils.isEmpty(tv_state.getText().toString())) {
                         rest.showToast("Select state");
-                    }else if (TextUtils.isEmpty(tv_city.getText().toString())){
+                    } else if (TextUtils.isEmpty(tv_city.getText().toString())) {
                         rest.showToast("Select city");
                     } else {
                         rl_about.setVisibility(View.GONE);
@@ -220,24 +220,24 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
 
                 } else if (rl_pick.getVisibility() == View.VISIBLE) {
                     if (picturePath != null && !TextUtils.isEmpty(picturePath.toString())) {
-                            MultipartBody.Part image = null;
-                            MultipartBody.Part video = null;
-                            File file = new File(picturePath);
+                        MultipartBody.Part image = null;
+                        MultipartBody.Part video = null;
+                        File file = new File(picturePath);
                         if (selectedVideoPath != null && !TextUtils.isEmpty(selectedVideoPath)) {
                             File file1 = new File(selectedVideoPath);
-                            if ( file1.exists()){
+                            if (file1.exists()) {
                                 RequestBody requestFile1 = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
                                 video = MultipartBody.Part.createFormData(ParaName.KEY_COMPANYVIDEO, file1.getName(), requestFile1);
                             }
                         }
-                            if (file != null && file.exists()) {
-                                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                                image = MultipartBody.Part.createFormData(ParaName.KEY_COMPANYLOGO, file.getName(), requestFile);
-                                if (rest.isInterentAvaliable()) {
-                                    AppController.ShowDialogue("", mContext);
-                                    callAllDataService(image,video);
-                                } else rest.AlertForInternet();
-                            }
+                        if (file != null && file.exists()) {
+                            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                            image = MultipartBody.Part.createFormData(ParaName.KEY_COMPANYLOGO, file.getName(), requestFile);
+                            if (rest.isInterentAvaliable()) {
+                                AppController.ShowDialogue("", mContext);
+                                callAllDataService(image, video);
+                            } else rest.AlertForInternet();
+                        }
                     } else rest.showToast("Select profile image");
                 }
                 break;
@@ -246,8 +246,8 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                 callBackPressed();
                 break;
 
-                case R.id.et_companysize:
-                    callCompanySizePopup();
+            case R.id.et_companysize:
+                callCompanySizePopup();
                 break;
             case R.id.iv_pickimg:
                 callProfilePick();
@@ -256,8 +256,8 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                 callVideoPick();
                 break;
             case R.id.et_industry:
-     Intent intent = new Intent(mContext, SearchIndustryActivity.class);
-     startActivity(intent);
+                Intent intent = new Intent(mContext, SearchIndustryActivity.class);
+                startActivity(intent);
                 break;
             case R.id.tv_city:
                 if (!TextUtils.isEmpty(stateId) && !stateId.equalsIgnoreCase("0"))
@@ -265,7 +265,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                 else rest.showToast("Select state first");
                 break;
             case R.id.tv_state:
-                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id",stateId).putExtra("from",ProfileDetailScreen.class.getSimpleName()));
+                startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id", stateId).putExtra("from", ProfileDetailScreen.class.getSimpleName()));
                 break;
             default:
                 break;
@@ -281,12 +281,13 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
     private void callProfilePick() {
         bottomsheet_intent.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
+
     private void industryBottomSheet(View roorview) {
-        intent_sheet = roorview.findViewById(R.id.intent_sheet);
+        RelativeLayout intent_sheet = roorview.findViewById(R.id.intent_sheet);
         bottomsheet_intent = BottomSheetBehavior.from(intent_sheet);
-        TextView tv_camera=intent_sheet.findViewById(R.id.tv_camera);
-        TextView tv_gallery=intent_sheet.findViewById(R.id.tv_gallery);
-        TextView tv_cancel=intent_sheet.findViewById(R.id.tv_cancel);
+        TextView tv_camera = intent_sheet.findViewById(R.id.tv_camera);
+        TextView tv_gallery = intent_sheet.findViewById(R.id.tv_gallery);
+        TextView tv_cancel = intent_sheet.findViewById(R.id.tv_cancel);
         tv_camera.setOnClickListener(v -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             try {
@@ -306,18 +307,19 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         tv_cancel.setOnClickListener(v -> bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED));
 
     }
+
     private void callBackPressed() {
 
-        if (rl_name.getVisibility()==View.VISIBLE){
+        if (rl_name.getVisibility() == View.VISIBLE) {
             getActivity().finish();
-        }else if (rl_about.getVisibility()==View.VISIBLE){
+        } else if (rl_about.getVisibility() == View.VISIBLE) {
             rl_name.setVisibility(View.VISIBLE);
             rl_about.setVisibility(View.GONE);
             rl_pick.setVisibility(View.GONE);
             iv_shaddowleft.setVisibility(View.GONE);
             iv_shaddowright.setVisibility(View.GONE);
             tv_back.setVisibility(View.GONE);
-        }else if (rl_pick.getVisibility()==View.VISIBLE){
+        } else if (rl_pick.getVisibility() == View.VISIBLE) {
             rl_name.setVisibility(View.GONE);
             rl_about.setVisibility(View.VISIBLE);
             rl_pick.setVisibility(View.GONE);
@@ -336,23 +338,23 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
             Cursor cursor = mContext.getContentResolver().query(imageUri, filePathColumn, null, null, null);
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-             tempfile=new File( cursor.getString(columnIndex));
+            tempfile = new File(cursor.getString(columnIndex));
             performCrop(tempfile);
             cursor.close();
 
 
-        } else if (resultCode==RESULT_OK && requestCode==SELECT_VIDEO){
+        } else if (resultCode == RESULT_OK && requestCode == SELECT_VIDEO) {
             String selectedVideo = getPath(data.getData());
-        double size=    getFileSizeMegaBytes(new File( selectedVideo ));
-        if (size<=15){
-            selectedVideoPath=selectedVideo;
-            Glide
-                    .with( mContext )
-                    .load( Uri.fromFile( new File( selectedVideoPath ) ) )
-                    .transform(new MultiTransformation(new CenterCrop(),new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density*16))))
-                    .into( iv_userpickvideo );
-            iv_userpickvideo.setVisibility(View.VISIBLE);
-        }else rest.showToast("Please select video max 15 MB.");
+            double size = getFileSizeMegaBytes(new File(selectedVideo));
+            if (size <= 15) {
+                selectedVideoPath = selectedVideo;
+                Glide
+                        .with(mContext)
+                        .load(Uri.fromFile(new File(selectedVideoPath)))
+                        .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 16))))
+                        .into(iv_userpickvideo);
+                iv_userpickvideo.setVisibility(View.VISIBLE);
+            } else rest.showToast("Please select video max 15 MB.");
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
             Bundle extras = data.getExtras();
@@ -368,7 +370,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                 imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                 fos.close();
                 if (pictureFile != null) {
-                    picturePath=pictureFile.getAbsolutePath();
+                    picturePath = pictureFile.getAbsolutePath();
                     Glide.with(mContext)
                             .load(picturePath)
                             .apply(RequestOptions.bitmapTransform(new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * (24)))))
@@ -381,8 +383,8 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
             }
         }
 
-        if (requestCode == RESULT_CROP ) {
-            if(resultCode ==RESULT_OK){
+        if (requestCode == RESULT_CROP) {
+            if (resultCode == RESULT_OK) {
                 try {
                     Bundle extras = data.getExtras();
                     Bitmap selectedBitmap = extras.getParcelable("data");
@@ -397,7 +399,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                         selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                         fos.close();
                         if (pictureFile != null) {
-                            picturePath=pictureFile.getAbsolutePath();
+                            picturePath = pictureFile.getAbsolutePath();
                             Glide.with(mContext)
                                     .load(picturePath)
                                     .apply(RequestOptions.bitmapTransform(new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * (24)))))
@@ -408,9 +410,9 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                     } catch (FileNotFoundException e) {
                     } catch (IOException e) {
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     if (tempfile != null) {
-                        picturePath=tempfile.getAbsolutePath();
+                        picturePath = tempfile.getAbsolutePath();
                         Glide.with(mContext)
                                 .load(picturePath)
                                 .apply(RequestOptions.bitmapTransform(new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * (24)))))
@@ -423,15 +425,15 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
             }
         }
     }
+
     public String getPath(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = mContext.getContentResolver().query(uri, projection, null, null, null);
-        if(cursor!=null) {
+        if (cursor != null) {
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
-        }
-        else return null;
+        } else return null;
     }
 
     private void performCrop(File picUri) {
@@ -461,7 +463,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         // respond to users whose devices do not support the crop action
         catch (ActivityNotFoundException anfe) {
             if (tempfile != null) {
-                picturePath=tempfile.getAbsolutePath();
+                picturePath = tempfile.getAbsolutePath();
                 Glide.with(mContext)
                         .load(picturePath)
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * (24)))))
@@ -471,6 +473,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
             }
         }
     }
+
     private File createImageFile() throws IOException {
         // Create an image file name
 
@@ -483,7 +486,8 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                 storageDir
         );
     }
-    private void callAllDataService(MultipartBody.Part body1,MultipartBody.Part body2) {
+
+    private void callAllDataService(MultipartBody.Part body1, MultipartBody.Part body2) {
         String MULTIPART_FORM_DATA = "multipart/form-data";
         HashMap<String, RequestBody> map = new HashMap<>();
         map.put(ParaName.KEYTOKEN, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), Config.GetUserToken()));
@@ -498,7 +502,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         map.put(ParaName.KEY_COMPANYNAME, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), name));
         map.put(ParaName.KEY_ISEPROFILEUPDATED, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "Y"));
         map.put(ParaName.KEY_COMPANYWEBSITE, RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), et_website.getText().toString()));
-        SwipeeApiClient.swipeeServiceInstance().saveCompanyInfo(map, body1,body2).enqueue(new Callback<JsonObject>() {
+        SwipeeApiClient.swipeeServiceInstance().saveCompanyInfo(map, body1, body2).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
                 AppController.dismissProgressdialog();
@@ -510,7 +514,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                         Config.SetIsSeeker(false);
                         mContext.startActivity(new Intent(mContext, CompanyHomeActivity.class));
                         getActivity().finish();
-                    } else{
+                    } else {
                         rest.showToast(response.body().get("message").getAsString());
                     }
                 } else {
@@ -533,9 +537,9 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
     }
 
     public void selectIndustry(String name, String id) {
-        if (et_industry!=null){
+        if (et_industry != null) {
             et_industry.setText(name);
-            industryId=id;
+            industryId = id;
         }
     }
 
@@ -550,15 +554,16 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
         lp.gravity = Gravity.CENTER;
         progressdialog.getWindow().setAttributes(lp);
 
-        RecyclerView rv_sizelist=progressdialog.findViewById(R.id.rv_sizelist);
+        RecyclerView rv_sizelist = progressdialog.findViewById(R.id.rv_sizelist);
         rv_sizelist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-       SizeAdapter sizeAdapter=new SizeAdapter();
+        SizeAdapter sizeAdapter = new SizeAdapter();
         rv_sizelist.setAdapter(sizeAdapter);
         rv_sizelist.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
 
         try {
             progressdialog.show();
-        }catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
 
 
     }
@@ -611,7 +616,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
             return company_size.size();
         }
 
-        public  class MyViewHolder extends RecyclerView.ViewHolder {
+        public class MyViewHolder extends RecyclerView.ViewHolder {
 
             PopinsRegularTextView tv_item;
             RadioButton radioButton;
@@ -627,6 +632,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
 
 
     }
+
     private void callCompanySize() {
         SwipeeApiClient.swipeeServiceInstance().companySize().enqueue(new Callback<JsonObject>() {
             @Override
@@ -634,10 +640,10 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
-                    if (!responseBody.isJsonNull()){
-                        if (responseBody.get("status").getAsBoolean()){
-                            JsonObject data= responseBody.get("data").getAsJsonObject();
-                            company_size=data.isJsonNull()? new JsonArray():data.has("company_size")?data.get("company_size").getAsJsonArray():new JsonArray();
+                    if (!responseBody.isJsonNull()) {
+                        if (responseBody.get("status").getAsBoolean()) {
+                            JsonObject data = responseBody.get("data").getAsJsonObject();
+                            company_size = data.isJsonNull() ? new JsonArray() : data.has("company_size") ? data.get("company_size").getAsJsonArray() : new JsonArray();
                         }
                     }
                 } else {

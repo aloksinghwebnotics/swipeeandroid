@@ -1,4 +1,4 @@
-package com.webnotics.swipee.activity.Seeker;
+package com.webnotics.swipee.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -32,13 +32,16 @@ import com.webnotics.swipee.CustomUi.PopinsRegularTextView;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.activity.AppointmentAction;
-import com.webnotics.swipee.activity.AppointmentDetail;
-import com.webnotics.swipee.activity.CompanyProfile;
-import com.webnotics.swipee.activity.NotificationActivity;
+import com.webnotics.swipee.activity.Seeker.AppliedJobsActivity;
+import com.webnotics.swipee.activity.Seeker.AppoimentActivity;
+import com.webnotics.swipee.activity.Seeker.FeaturedJobsActivity;
+import com.webnotics.swipee.activity.Seeker.JobListActivity;
+import com.webnotics.swipee.activity.Seeker.LikedJobsActivity;
+import com.webnotics.swipee.activity.Seeker.MatchedCompanyActivity;
+import com.webnotics.swipee.activity.Seeker.SavedJobsActivity;
+import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
-import com.webnotics.swipee.activity.company.NotificationAppointmentAction;
 import com.webnotics.swipee.activity.company.PostedJobActivity;
 import com.webnotics.swipee.fragments.seeker.MatchFragments;
 import com.webnotics.swipee.rest.ParaName;
@@ -582,14 +585,13 @@ public class JobDetail extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                     Date calendarDate = Calendar.getInstance().getTime();
-                                    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                                     try {
                                         Date date2 = formatDate.parse(appointment_date + " " + appointment_start_at);
                                         Date date3 = formatDate.parse(appointment_date + " " + appointment_end_at);
                                         if (date2 != null && date3 != null) {
                                             if (date2.before(calendarDate) && date3.after(calendarDate)) {
                                                 join.setVisibility(View.VISIBLE);
-                                                iv_more.setVisibility(View.GONE);
                                                 if (appointment_type.equalsIgnoreCase("chat")) {
                                                     iv_meetingType.setImageResource(R.drawable.ic_icon_material_chat_bubble);
                                                 } else if (appointment_type.equalsIgnoreCase("online_meeting")) {
@@ -815,9 +817,7 @@ public class JobDetail extends AppCompatActivity {
                     } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
                         rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
-                    } else {
-                        rest.showToast(response.body().get("message").getAsString());
-                    }
+                    } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }

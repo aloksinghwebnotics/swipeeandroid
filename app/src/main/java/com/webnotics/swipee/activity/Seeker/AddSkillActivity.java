@@ -152,9 +152,7 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
                     mListView.setAdapter(skilladapter);
                     IntStream.range(0, mArrayListSkills.size()).filter(i -> mArrayListSkills.get(i).isSelected()).forEach(i -> setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id()));
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -201,9 +199,7 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
                         AppController.ShowDialogue("", mContext);
                         saveSkill(mArrayListid, mArrayListdesiredindustries);
                     } else rest.AlertForInternet();
-                } else {
-                    rest.showToast("Select at least 1 skill.");
-                }
+                } else rest.showToast("Select at least 1 skill.");
 
                 break;
             case R.id.iv_back:

@@ -44,6 +44,7 @@ public class RecentChatModel {
         String appointment_id;
         String appointment_number;
         String user_id;
+        String company_id;
         String first_name;
         String last_name;
         String user_profile;
@@ -58,6 +59,13 @@ public class RecentChatModel {
         int unseen_msg_count;
         String msg_created_at;
 
+        public String getCompany_id() {
+            return company_id;
+        }
+
+        public void setCompany_id(String company_id) {
+            this.company_id = company_id;
+        }
 
         public String getCompany_name() {
             return company_name;

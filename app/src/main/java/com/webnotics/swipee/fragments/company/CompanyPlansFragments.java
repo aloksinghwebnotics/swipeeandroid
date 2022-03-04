@@ -134,9 +134,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
                                 Payment payment = new Payment();
                                 payment.startPayment(getActivity(), order_id,package_name, package_price);
                             }
-
                         }
-
                     }
                 }
 
@@ -167,8 +165,6 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v -> {
             progressdialog.dismiss();
             callOrderID();
-
-
         });
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {

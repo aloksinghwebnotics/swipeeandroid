@@ -76,9 +76,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(mContext, ContactUsActivity.class));
                 break;
             case R.id.tv_privacy:
-
                 startActivity(new Intent(mContext,WebViewActivity.class).putExtra("url",ApiUrls.POLICY_URL).putExtra("title","Privacy Policy"));
-
 
                 break;
             case R.id.tv_imprint:

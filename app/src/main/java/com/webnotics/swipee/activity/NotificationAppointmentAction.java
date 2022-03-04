@@ -1,4 +1,4 @@
-package com.webnotics.swipee.activity.company;
+package com.webnotics.swipee.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -24,10 +24,10 @@ import com.google.gson.JsonObject;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.activity.NotificationActivity;
-import com.webnotics.swipee.activity.RescheduleAppointment;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
+import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
+import com.webnotics.swipee.activity.company.CompanyHomeActivity;
+import com.webnotics.swipee.activity.company.UserDetail;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;

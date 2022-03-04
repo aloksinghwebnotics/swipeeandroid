@@ -69,6 +69,7 @@ import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.Collections;
+import java.util.Locale;
 
 import kotlin.Unit;
 
@@ -140,6 +141,7 @@ public class VideoActivity extends AppCompatActivity {
     private ProgressBar reconnectingProgressBar;
     private AlertDialog connectDialog;
     private String remoteParticipantIdentity;
+    TextView timer;
     Handler handler;
     Runnable runnable;
     TextView tv_participant_name;
@@ -158,6 +160,9 @@ public class VideoActivity extends AppCompatActivity {
     Rest rest;
     Context mContext;
     private String appointment_id="";
+    private int seconds=0;
+    private Handler handler1;
+    private Runnable runnable1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +185,7 @@ public class VideoActivity extends AppCompatActivity {
         switchCameraActionFab = findViewById(R.id.switch_camera_action_fab);
         localVideoActionFab = findViewById(R.id.local_video_action_fab);
         muteActionFab = findViewById(R.id.mute_action_fab);
+        timer = findViewById(R.id.time);
 
         /*
          * Get shared preferences to read settings
@@ -277,7 +283,9 @@ public class VideoActivity extends AppCompatActivity {
                     true,
                     cameraCapturerCompat.getVideoCapturer(),
                     LOCAL_VIDEO_TRACK_NAME);
-            localVideoTrack.addRenderer(localVideoView);
+            if (localVideoTrack != null) {
+                localVideoTrack.addRenderer(localVideoView);
+            }
             // Get AudioManager
 
 
@@ -285,7 +293,7 @@ public class VideoActivity extends AppCompatActivity {
             /*
              * If connected to a Room then share the local video track.
              */
-            if (localParticipant != null) {
+            if (localParticipant != null && localVideoTrack != null) {
                 localParticipant.publishTrack(localVideoTrack);
 
                 /*
@@ -398,6 +406,13 @@ public class VideoActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+
+        if (handler1!=null){
+            handler1.removeCallbacks(runnable1);
+            runnable1=null;
+            handler1=null;
+        }
+
         /*
          * Tear down audio management and restore previous volume stream
          */
@@ -709,6 +724,30 @@ public class VideoActivity extends AppCompatActivity {
         return new Room.Listener() {
             @Override
             public void onConnected(Room room) {
+                timer.setVisibility(View.VISIBLE);
+                handler1 = new Handler();
+                runnable1 = new Runnable() {
+                    @Override
+                    public void run() {
+                        int hour = (seconds / 3600) ;
+                        int minutes = (seconds % 3600) / 60;
+                        int secs = seconds % 60;
+                        String time
+                                = String
+                                .format(Locale.getDefault(),
+                                        "%02d : %02d : %02d",hour, minutes, secs);
+
+                        // Set the text view text.
+                        Log.d("jdhfhfhfhfhf",time);
+                        timer.setText(time);
+                        // Toast.makeText(mContext,time,Toast.LENGTH_SHORT).show();
+                        seconds++;
+                        handler1.postDelayed(this, 1000);
+                    }
+                };
+                handler1.post(runnable1);
+
+
                 localParticipant = room.getLocalParticipant();
                 setTitle(room.getName());
 

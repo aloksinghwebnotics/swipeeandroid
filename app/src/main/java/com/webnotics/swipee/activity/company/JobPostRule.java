@@ -141,7 +141,7 @@ public class JobPostRule extends AppCompatActivity {
             tv_detail.setText(MessageFormat.format("You have an active feature job package. You can post your job as feature job.\n\n" +
                     "Price:  Rs.{0}\nTotal Post Limit:  {1}\nUsed Post Limit:  {2}\n\nThis job will be publish as feature job, after 24 hours.", package_price,total_post_limit, used_listing));
         }else {
-            tv_detail.setText("You don't have any active feature job package. If you want to post this job as a featured job purchase a package or you can publish your job.");
+            tv_detail.setText("You don't have any active feature job package. If you want to post this job as a featured job, purchase a package or you can publish your job.");
             tv_submit.setText("Purchase feature");
         }
 

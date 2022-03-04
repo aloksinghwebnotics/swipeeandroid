@@ -72,6 +72,7 @@ import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.rest.Rest;
 
 import java.util.Collections;
+import java.util.Locale;
 
 import kotlin.Unit;
 
@@ -79,7 +80,7 @@ public class AudioActivity extends AppCompatActivity {
     private static final int CAMERA_MIC_PERMISSION_REQUEST_CODE = 1;
     private static final String TAG = "AudioActivity";
     public static AudioActivity instance;
-
+    int seconds = 0;
     /*
      * Audio and video tracks can be created with names. This feature is useful for categorizing
      * tracks of participants. For example, if one participant publishes a video track with
@@ -159,10 +160,12 @@ public class AudioActivity extends AppCompatActivity {
     Rest rest;
     Context mContext;
     ImageView img_profile, lodspker, callcut;
-    TextView name, email;
+    TextView name, email,timer;
     boolean chklouder = false;
     ConnectOptions.Builder connectOptionsBuilder;
     private String appointment_id="";
+    private Handler handler1;
+    private Runnable runnable1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +177,7 @@ public class AudioActivity extends AppCompatActivity {
         img_profile = findViewById(R.id.img_profile);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
+        timer = findViewById(R.id.time);
         lodspker = findViewById(R.id.louder);
         callcut = findViewById(R.id.callcut);
 
@@ -216,7 +220,7 @@ public class AudioActivity extends AppCompatActivity {
                 .apply(new RequestOptions().placeholder(R.drawable.ic_profile_select).error(R.drawable.ic_profile_select))
                 .into(img_profile);
         name.setText(getIntent().getStringExtra("user_name"));
-        email.setText(getIntent().getStringExtra("phnno"));
+
 
         lodspker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -322,7 +326,6 @@ public class AudioActivity extends AppCompatActivity {
                     LOCAL_VIDEO_TRACK_NAME);
             localVideoTrack.addRenderer(localVideoView);
             // Get AudioManager
-
 
 
             /*
@@ -438,6 +441,11 @@ public class AudioActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        if (handler1!=null){
+            handler1.removeCallbacks(runnable1);
+            runnable1=null;
+            handler1=null;
+        }
         /*
          * Tear down audio management and restore previous volume stream
          */
@@ -747,6 +755,27 @@ public class AudioActivity extends AppCompatActivity {
         return new Room.Listener() {
             @Override
             public void onConnected(Room room) {
+                handler1 = new Handler();
+                runnable1 = new Runnable() {
+                    @Override
+                    public void run() {
+                        int hour = (seconds / 3600) ;
+                        int minutes = (seconds % 3600) / 60;
+                        int secs = seconds % 60;
+                        String time
+                                = String
+                                .format(Locale.getDefault(),
+                                        "%02d : %02d : %02d",hour, minutes, secs);
+
+                        // Set the text view text.
+                        Log.d("jdhfhfhfhfhf",time);
+                        timer.setText(time);
+                       // Toast.makeText(mContext,time,Toast.LENGTH_SHORT).show();
+                        seconds++;
+                        handler1.postDelayed(this, 1000);
+                    }
+                };
+                handler1.post(runnable1);
                 localParticipant = room.getLocalParticipant();
                 setTitle(room.getName());
 

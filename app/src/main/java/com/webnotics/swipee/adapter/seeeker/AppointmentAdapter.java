@@ -19,7 +19,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.Seeker.AppoimentActivity;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
+import com.webnotics.swipee.activity.JobDetail;
 import com.webnotics.swipee.model.seeker.AppointmentModel;
 import com.webnotics.swipee.rest.ParaName;
 

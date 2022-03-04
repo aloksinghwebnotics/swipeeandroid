@@ -32,8 +32,6 @@ public class CompanyPlanAdapter extends RecyclerView.Adapter<CompanyPlanAdapter.
 
         this.mContext = mContext;
         this.data = data;
-
-
     }
 
 
@@ -81,7 +79,6 @@ public class CompanyPlanAdapter extends RecyclerView.Adapter<CompanyPlanAdapter.
                 String post_limit=data.get(position).getAsJsonObject().get("post_limit").getAsString();
                 mContext.setPlan(is_purchase,package_price,package_id,package_name,package_type,post_limit);
 
-
             }
         });
     }
@@ -116,11 +113,4 @@ public class CompanyPlanAdapter extends RecyclerView.Adapter<CompanyPlanAdapter.
 
         }
     }
-
-
 }
-
-
-
-
-

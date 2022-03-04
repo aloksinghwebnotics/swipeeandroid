@@ -52,7 +52,7 @@ interface AccessTokenListener {
 public class QuickstartConversationsManager {
 
     // This is the unique name of the conversation  we are using
-    private  static String DEFAULT_CONVERSATION_NAME = "#SW-52538918";
+    private  static String DEFAULT_CONVERSATION_NAME = "";
 
     final private ArrayList<Message> messages = new ArrayList<>();
 
@@ -199,6 +199,7 @@ public class QuickstartConversationsManager {
 
                 @Override
                 public void onError(ErrorInfo errorInfo) {
+                    AppController.dismissProgressdialog();
                     Log.e(MainChatActivity.TAG, "Error creating Twilio Conversations Client: " + errorInfo.getMessage());
                 }
             };
@@ -308,19 +309,24 @@ public class QuickstartConversationsManager {
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
                 Log.d(MainChatActivity.TAG, "Response from server: " + response.body());
-                AppController.dismissProgressdialog();
                 TokenResponse tokenResponse = new TokenResponse();
                 if (response.body() != null) {
-                    DEFAULT_CONVERSATION_NAME = response.body().getAsJsonObject().getAsJsonObject("data").get("channel_name").getAsString();
-                    if (Config.isSeeker()){
-                        tokenResponse.token = response.body().getAsJsonObject().getAsJsonObject("data").get("user_access_token").getAsString();
-                    }else {
-                        tokenResponse.token = response.body().getAsJsonObject().getAsJsonObject("data").get("company_access_token").getAsString();
-                    }
-                    String accessToken = tokenResponse.token;
-                    Log.d(MainChatActivity.TAG, "Retrieved access token from server: " + accessToken);
-                    listener.receivedAccessToken(accessToken, null);
-                }
+                    if (response.body().getAsJsonObject().has("data")){
+                        if (response.body().getAsJsonObject().getAsJsonObject("data").has("channel_name")){
+                            DEFAULT_CONVERSATION_NAME = response.body().getAsJsonObject().getAsJsonObject("data").get("channel_name").getAsString();
+                            if (Config.isSeeker()){
+                                tokenResponse.token = response.body().getAsJsonObject().getAsJsonObject("data").get("user_access_token").getAsString();
+                            }else {
+                                tokenResponse.token = response.body().getAsJsonObject().getAsJsonObject("data").get("company_access_token").getAsString();
+                            }
+                            String accessToken = tokenResponse.token;
+                            Log.d(MainChatActivity.TAG, "Retrieved access token from server: " + accessToken);
+                            listener.receivedAccessToken(accessToken, null);
+                        }else AppController.dismissProgressdialog();
+
+                    }else AppController.dismissProgressdialog();
+
+                }else AppController.dismissProgressdialog();
             }
 
             @Override
@@ -333,7 +339,6 @@ public class QuickstartConversationsManager {
     }
 
     void sendMessage(String messageBody) {
-
         if (conversation != null) {
             Log.d(MainChatActivity.TAG, "Message created");
             conversation.prepareMessage()
@@ -370,6 +375,7 @@ public class QuickstartConversationsManager {
     private void loadChannels() {
         if (conversationsClient == null || conversationsClient.getMyConversations() == null) {
             Log.d(MainChatActivity.TAG, "Test loadChannels");
+            AppController.dismissProgressdialog();
             return;
         }
         conversationsClient.getConversation(DEFAULT_CONVERSATION_NAME, new CallbackListener<Conversation>() {
@@ -383,6 +389,7 @@ public class QuickstartConversationsManager {
                         QuickstartConversationsManager.this.conversation = conversation;
                         QuickstartConversationsManager.this.conversation.addListener(mDefaultConversationListener);
                         QuickstartConversationsManager.this.loadPreviousMessages(conversation);
+                        AppController.dismissProgressdialog();
                     } else {
                       conversation.setUniqueName(DEFAULT_CONVERSATION_NAME, new StatusListener() {
                           @Override
@@ -393,6 +400,7 @@ public class QuickstartConversationsManager {
 
                           @Override
                           public void onError(ErrorInfo errorInfo) {
+                              AppController.dismissProgressdialog();
                               StatusListener.super.onError(errorInfo);
                           }
                       });
@@ -422,11 +430,12 @@ public class QuickstartConversationsManager {
                                 if (conversation != null) {
                                     Log.d(MainChatActivity.TAG, "Joining Conversation: " + DEFAULT_CONVERSATION_NAME);
                                     joinConversation(conversation);
-                                }
+                                }else AppController.dismissProgressdialog();
                             }
                             @Override
                             public void onError(ErrorInfo errorInfo) {
                                 StatusListener.super.onError(errorInfo);
+                                AppController.dismissProgressdialog();
                             }
                         });
 
@@ -434,17 +443,19 @@ public class QuickstartConversationsManager {
 
                     @Override
                     public void onError(ErrorInfo errorInfo) {
+                        AppController.dismissProgressdialog();
                         Log.e(MainChatActivity.TAG, "Error creating conversation: " + errorInfo.getMessage());
                     }
                 });
     }
 
-    private void joinConversation(final Conversation conversation) {
+    private void  joinConversation(final Conversation conversation) {
         Log.d(MainChatActivity.TAG, "Joining Conversation: " + conversation.getUniqueName());
         if (conversation.getStatus() == Conversation.ConversationStatus.JOINED) {
             QuickstartConversationsManager.this.conversation = conversation;
             Log.d(MainChatActivity.TAG, "Already joined default conversation");
             QuickstartConversationsManager.this.conversation.addListener(mDefaultConversationListener);
+            AppController.dismissProgressdialog();
             return;
         }
 
@@ -456,17 +467,19 @@ public class QuickstartConversationsManager {
                 Log.d(MainChatActivity.TAG, "Joined default conversation");
                 QuickstartConversationsManager.this.conversation.addListener(mDefaultConversationListener);
                 QuickstartConversationsManager.this.loadPreviousMessages(conversation);
+                AppController.dismissProgressdialog();
             }
 
             @Override
             public void onError(ErrorInfo errorInfo) {
+                AppController.dismissProgressdialog();
                 Log.e(MainChatActivity.TAG, "Error joining conversation: " + errorInfo.getMessage());
             }
         });
     }
 
     private void loadPreviousMessages(final Conversation conversation) {
-        conversation.getLastMessages(100,
+        conversation.getLastMessages(500,
                 new CallbackListener<List<Message>>() {
                     @Override
                     public void onSuccess(List<Message> result) {

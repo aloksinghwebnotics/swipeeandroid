@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.webnotics.swipee.R;
-import com.webnotics.swipee.activity.Seeker.JobDetail;
+import com.webnotics.swipee.activity.JobDetail;
 import com.webnotics.swipee.activity.company.PostedJobActivity;
 import com.webnotics.swipee.model.company.PostedJobModel;
 import com.webnotics.swipee.rest.ParaName;

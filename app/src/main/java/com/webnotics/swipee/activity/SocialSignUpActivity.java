@@ -368,7 +368,6 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                             }else  if (!is_mobile_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker",false));
                             }else    startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
-                            rest.showToast(responseBody.get("message").getAsString());
                             finish();
                         }
 

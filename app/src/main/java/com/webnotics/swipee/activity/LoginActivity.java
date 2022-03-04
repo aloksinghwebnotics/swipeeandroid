@@ -205,7 +205,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
 
-
         }
 
     }
@@ -312,7 +311,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             iv_google.setClickable(false);
             RC_SIGN_IN = 7;
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-
                     .requestEmail()
                     .build();
             GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(mContext, gso);

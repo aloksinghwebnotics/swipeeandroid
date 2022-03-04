@@ -131,7 +131,6 @@ public class ApiUrls {
   public static final String URL_FCMSETTING = "auth/fcm_settings";
 
 
-
   public static final String PAYPALURGMENT = "https://www.paypal.com/webapps/mpp/ua/useragreement-full";
   public static final String PAYPALPOLICY="https://www.paypal.com/webapps/mpp/ua/privacy-full";
 

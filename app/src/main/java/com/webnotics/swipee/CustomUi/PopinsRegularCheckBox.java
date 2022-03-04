@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatCheckBox;
  *  Created by Developer on 10/23/2021.
  */
 
+
 public class PopinsRegularCheckBox extends AppCompatCheckBox {
 
     public PopinsRegularCheckBox(Context context) {

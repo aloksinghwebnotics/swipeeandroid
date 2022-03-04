@@ -65,7 +65,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
         holder.tv_action.setText(data.get(position).getCompany_action());
         holder.tv_unseencount.setText(MessageFormat.format("{0}", data.get(position).getUnseen_msg_count()));
         String date=data.get(position).getMsg_created_at();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat formatout = new SimpleDateFormat("dd MMM hh:mm aa");
         Date dateFinal;
         String date1="";
@@ -84,7 +84,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
             .putExtra("action",data.get(position).getCompany_action())
             .putExtra("appointment_id",data.get(position).getAppointment_id())
             .putExtra("appointment_number",data.get(position).getAppointment_number())
-            .putExtra("user_id",data.get(position).getUser_id())
+            .putExtra("user_id",Config.isSeeker()?data.get(position).getCompany_id():data.get(position).getUser_id())
             .putExtra("sender_id",data.get(position).getMsg_sender_id())
             .putExtra("receiver_id",data.get(position).getMsg_receiver_id())
             .putExtra("name",Config.isSeeker()? data.get(position).getCompany_name():data.get(position).getFirst_name())

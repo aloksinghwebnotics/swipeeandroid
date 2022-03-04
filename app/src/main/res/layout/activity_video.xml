@@ -17,56 +17,57 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <include layout="@layout/content_video" />
 
         <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/dimen16dp"
             android:layout_marginBottom="@dimen/dimen8dp"
-            android:layout_gravity="bottom|end"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/switch_camera_action_fab"
                 android:layout_width="@dimen/dimen40dp"
                 android:layout_height="@dimen/dimen40dp"
                 android:layout_gravity="center"
-                android:padding="@dimen/dimen6dp"
-                android:background="@drawable/primary_circle_bg"
                 android:layout_marginBottom="@dimen/fab_margin"
+                android:background="@drawable/primary_circle_bg"
+                android:padding="@dimen/dimen6dp"
                 android:src="@drawable/ic_switch_camera_white_24dp" />
 
             <ImageView
                 android:id="@+id/local_video_action_fab"
                 android:layout_width="@dimen/dimen40dp"
                 android:layout_height="@dimen/dimen40dp"
-                android:layout_marginBottom="@dimen/fab_margin"
                 android:layout_gravity="center"
-                android:padding="@dimen/dimen6dp"
+                android:layout_marginBottom="@dimen/fab_margin"
                 android:background="@drawable/primary_circle_bg"
+                android:padding="@dimen/dimen6dp"
                 android:src="@drawable/ic_videocam_white_24dp" />
 
             <ImageView
                 android:id="@+id/mute_action_fab"
                 android:layout_width="@dimen/dimen40dp"
                 android:layout_height="@dimen/dimen40dp"
-                android:layout_marginBottom="@dimen/fab_margin"
                 android:layout_gravity="center"
-                android:padding="@dimen/dimen6dp"
+                android:layout_marginBottom="@dimen/fab_margin"
                 android:background="@drawable/primary_circle_bg"
+                android:padding="@dimen/dimen6dp"
                 android:src="@drawable/ic_mic_white_24dp" />
 
             <ImageView
                 android:id="@+id/connect_action_fab"
                 android:layout_width="@dimen/dimen46dp"
                 android:layout_height="@dimen/dimen46dp"
-                android:layout_marginBottom="@dimen/fab_margin"
                 android:layout_gravity="center"
-                android:padding="@dimen/dimen8dp"
+                android:layout_marginBottom="@dimen/fab_margin"
                 android:background="@drawable/white_semiround_bg"
+                android:padding="@dimen/dimen8dp"
                 android:src="@drawable/ic_call_end_white_24px"
                 app:tint="@color/red" />
 
@@ -84,16 +85,28 @@
         android:layout_marginTop="@dimen/dimen18dp"
         android:layout_marginEnd="@dimen/dimen18dp"
         android:layout_marginBottom="@dimen/dimen18dp"
-        android:paddingStart="@dimen/dimen8dp"
-        android:paddingEnd="@dimen/dimen8dp"
         android:background="@drawable/white_semiround_bg"
         android:gravity="center"
         android:maxWidth="@dimen/dimen250dp"
         android:minWidth="@dimen/dimen156dp"
         android:minHeight="@dimen/dimen42dp"
+        android:paddingStart="@dimen/dimen8dp"
+        android:paddingEnd="@dimen/dimen8dp"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/dimen14sp" />
 
+    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        android:id="@+id/time"
+        android:layout_width="@dimen/dimen132dp"
+        android:layout_height="@dimen/dimen40dp"
+        android:layout_below="@+id/email"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/dimen18dp"
+        android:background="@drawable/white_semiround_bg"
+        android:gravity="center"
+         android:visibility="gone"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/dimen14sp" />
 </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -39,6 +39,7 @@ import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.AppointmentAction;
 import com.webnotics.swipee.activity.AppointmentDetail;
 import com.webnotics.swipee.activity.NotificationActivity;
+import com.webnotics.swipee.activity.NotificationAppointmentAction;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.adapter.seeeker.UserPreferenceAdapter;
 import com.webnotics.swipee.chat.MainChatActivity;
@@ -566,7 +567,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                         e.printStackTrace();
                                     }
                                     Date calendarDate = Calendar.getInstance().getTime();
-                                    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     try {
                                         Date date2 = formatDate.parse(appointment_date + " " + appointment_start_at);
                                         Date date3 = formatDate.parse(appointment_date + " " + appointment_end_at);

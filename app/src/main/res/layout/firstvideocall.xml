@@ -44,7 +44,7 @@
             android:layout_height="@dimen/dimen78dp"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/dimen60dp"
-            android:layout_marginBottom="@dimen/dimen98dp"
+            android:layout_marginBottom="@dimen/dimen42dp"
             android:padding="@dimen/dimen12dp"
             android:src="@drawable/ic_cancel_incoming" />
 
@@ -55,7 +55,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/dimen60dp"
-            android:layout_marginBottom="@dimen/dimen98dp"
+            android:layout_marginBottom="@dimen/dimen42dp"
             android:padding="@dimen/dimen12dp"
             android:src="@drawable/callaccept" />
     </RelativeLayout>

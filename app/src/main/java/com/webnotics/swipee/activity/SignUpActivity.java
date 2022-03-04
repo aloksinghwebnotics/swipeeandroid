@@ -151,13 +151,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             lat = location.getLatitude() + "";
                             longg = location.getLongitude() + "";
                             getAddress(mContext, location.getLatitude(), location.getLongitude());
-
                         }
-
                     }
                 });
-
-
 
        /* try {
             mFusedLocationClient.getLastLocation().addOnCompleteListener(
@@ -211,7 +207,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 longg = LONGITUDE + "";
                 String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                 String postalCode = addresses.get(0).getPostalCode();
-
 
             }
         } catch (IOException e) {
@@ -340,7 +335,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Config.SetIsSeeker(true);
                         startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",true));
                         finish();
-                        rest.showToast(responseBody.get("message").getAsString());
                     } else {
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString().replace(". ", ".\n"));
@@ -377,7 +371,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Config.SetIsSeeker(false);
                         startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
                         finish();
-                        rest.showToast(responseBody.get("message").getAsString());
                     } else {
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString().replace(". ", ".\n"));

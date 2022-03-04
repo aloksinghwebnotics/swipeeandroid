@@ -138,7 +138,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
         <activity
-            android:name=".activity.Seeker.JobDetail"
+            android:name=".activity.JobDetail"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
@@ -328,7 +328,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.company.NotificationAppointmentAction"
+            android:name=".activity.NotificationAppointmentAction"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />

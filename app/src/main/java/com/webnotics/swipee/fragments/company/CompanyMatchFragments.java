@@ -198,7 +198,6 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
         iv_accept = rootView.findViewById(R.id.iv_accept);
         iv_reject = rootView.findViewById(R.id.iv_reject);
 
-
         nodatatxt.setText(getResources().getString(R.string.nodatatxt1First));
         iv_nodata.setImageResource(R.drawable.ic_no_data);
         String text = mContext.getResources().getString(R.string.noleftswipe);
@@ -231,8 +230,6 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
         tv_apply.setOnClickListener(this);
         iv_reject.setOnClickListener(this);
         iv_accept.setOnClickListener(this);
-
-
 
         swipeDeck.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
@@ -276,7 +273,6 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                     datalay.setVisibility(View.GONE);
                     CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                 }
-
             }
 
             @Override

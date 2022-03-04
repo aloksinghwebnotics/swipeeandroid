@@ -171,7 +171,7 @@
     <string name="salaryoffered">Salary Offered (₹/month)</string>
     <string name="plantxt">"\"Economical plans that provide extra than ever before"\"\nFind the plan that is best suited to your hiring needs. You can upgrade your subscription whenever you like!!</string>
     <string name="app_id">308982814513406</string>
-    <string name="errorloginfb">Error to Login Facebook</string>
+    <string name="errorloginfb">Error to login facebook</string>
 
     <string name="multiplusercall">Multiple participants are not currently support in this UI</string>
     <string name="connromm">Connect to a room</string>
@@ -197,7 +197,7 @@
     <string name="chat_token_url">https://swipee.in/app_api/</string>
     <!-- <string name="chat_token_url">https://swipee.in.twil.io/chat-token/</string>-->
     <string name="write_message">Write Message</string>
-    <string name="test_access_token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzhjMGQ1OTg2MjU1MDRiM2YyZGIwODU3ZGRiNWI4OGJiLTE2NDU1MTExOTgiLCJpc3MiOiJTSzhjMGQ1OTg2MjU1MDRiM2YyZGIwODU3ZGRiNWI4OGJiIiwic3ViIjoiQUM5ZDI5YTdhZDkzNGY0MDFmYjQ1N2I3ODlkYjFmZWY4ZiIsImV4cCI6MTY0NTUxNDc5OCwiZ3JhbnRzIjp7ImlkZW50aXR5IjoiSmhvbm55IEx1Y2FzIiwiY2hhdCI6eyJzZXJ2aWNlX3NpZCI6IklTYTUwNTNkZTkyOGU1NGFhZmEyZjk3NjE2ZTE0YTM3YzkifX19.nzdJn5ZEE1VcpNO72i1BeojX9UIX2I0PboCb8bwljTc</string>
+    <string name="test_access_token">..nzdJn5ZEE1VcpNO72i1BeojX9UIX2I0PboCb8bwljTc</string>
     <string name="planmsg">You have already an active plan, do you want to switch from existing plan to new plan.</string>
     <string name="com.google.firebase.crashlytics.mapping_file_id">none</string>
 </resources>

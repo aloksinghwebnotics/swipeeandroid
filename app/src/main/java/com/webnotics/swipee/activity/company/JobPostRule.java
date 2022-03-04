@@ -113,7 +113,6 @@ public class JobPostRule extends AppCompatActivity {
                         }
                 }
 
-
             }
 
             @Override

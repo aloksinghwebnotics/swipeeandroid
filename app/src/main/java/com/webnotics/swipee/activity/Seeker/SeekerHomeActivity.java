@@ -63,7 +63,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
     public ImageView filter_icon;
     private TextView neartxt, matchtxt, planstxt, chattxt, accounttxt, counter11, tv_name, tv_email;
     private DrawerLayout drawer;
-    RelativeLayout headerlay, notilay, rl_match_top, rl_near_top;
+    public RelativeLayout headerlay, notilay, rl_match_top, rl_near_top;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     CircleImageView civ_profile;
@@ -494,6 +494,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.tv_viewAll:
                 tv_viewAll.setVisibility(View.GONE);
+                headerlay.setVisibility(View.GONE);
                 if (NearFragments.instance != null)
                     NearFragments.instance.setViewAll();
                 break;

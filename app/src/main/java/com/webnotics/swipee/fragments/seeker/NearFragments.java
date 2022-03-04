@@ -92,8 +92,11 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
 
 
         iv_back1.setOnClickListener(v -> {
-            if (SeekerHomeActivity.instance!=null)
+            if (SeekerHomeActivity.instance!=null){
                 SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.VISIBLE);
+                SeekerHomeActivity.instance.headerlay.setVisibility(View.VISIBLE);
+            }
+
             rl_allcompany.setVisibility(View.GONE);
         });
         bubbleSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
@@ -228,8 +231,10 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
     @Override
     protected void backPressed() {
         if (rl_allcompany.getVisibility() == View.VISIBLE) {
-            if (SeekerHomeActivity.instance!=null)
+            if (SeekerHomeActivity.instance!=null){
                 SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.VISIBLE);
+                SeekerHomeActivity.instance.headerlay.setVisibility(View.VISIBLE);
+            }
             rl_allcompany.setVisibility(View.GONE);
         } else {
             radar.stop();

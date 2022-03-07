@@ -13,8 +13,7 @@
         android:layout_centerVertical="true"
         app:civ_border_width="@dimen/dimen1dp"
         app:civ_border_color="@color/white_light"
-        android:layout_marginEnd="@dimen/dimen6dp"
-        />
+        android:layout_marginEnd="@dimen/dimen6dp" />
 
     <LinearLayout
         android:id="@+id/ll_data"
@@ -111,9 +110,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen2dp"
         android:layout_below="@+id/civ_logo"
-        android:layout_marginStart="@dimen/dimen8dp"
+        android:layout_marginStart="@dimen/dimen4dp"
         android:layout_marginTop="@dimen/dimen12dp"
-        android:layout_marginEnd="@dimen/dimen8dp"
+        android:layout_marginEnd="@dimen/dimen4dp"
         android:background="@color/white_light" />
 
 

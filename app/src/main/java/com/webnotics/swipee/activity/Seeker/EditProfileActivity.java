@@ -156,11 +156,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         genderAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spn_gender.setAdapter(genderAdapter);
 
-        if (Config.GetGender().equalsIgnoreCase("Male")) {
-            spn_gender.setSelection(2);
-        } else if (Config.GetGender().equalsIgnoreCase("Female")) {
-            spn_gender.setSelection(1);
-        } else spn_gender.setSelection(0);
+        if (Config.GetGender().equalsIgnoreCase("Female")) spn_gender.setSelection(1);
+        else if (Config.GetGender().equalsIgnoreCase("Male")) spn_gender.setSelection(2);
+        else spn_gender.setSelection(0);
 
         tv_save.setOnClickListener(this);
         iv_back.setOnClickListener(this);

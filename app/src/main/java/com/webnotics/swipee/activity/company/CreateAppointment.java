@@ -229,7 +229,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.tv_time:
                 if (TextUtils.isEmpty(tv_date.getText().toString())){
-                    rest.showToast("Please select appointment date first");
+                    rest.showToast("Please select appointment date first.");
                 }else {
                     if (slotList.size() > 0) {
                         progressdialog = new Dialog(mContext);
@@ -315,9 +315,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (responceBody.get("status").getAsBoolean()) {
-                        if (UserDetail.instance != null) {
-                            UserDetail.instance.setBackPressed();
-                        }
+                        if (UserDetail.instance != null) UserDetail.instance.setBackPressed();
                         rest.showToast(responceBody.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CreateAppointment.class.getSimpleName()));
                         finish();
@@ -349,9 +347,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                         JsonObject data = responceBody.has("data") ? responceBody.get("data").getAsJsonObject() : new JsonObject();
                         JsonArray available_open_slots = data.has("available_open_slots") ? data.get("available_open_slots").getAsJsonArray() : new JsonArray();
                         slotList = new ArrayList<>();
-                        for (int i = 0; i < available_open_slots.size(); i++) {
-                            slotList.add(slotList.size(), available_open_slots.get(i).getAsString());
-                        }
+                        IntStream.range(0, available_open_slots.size()).forEach(i -> slotList.add(slotList.size(), available_open_slots.get(i).getAsString()));
                     }
 
                 } else rest.showToast("Something went wrong");

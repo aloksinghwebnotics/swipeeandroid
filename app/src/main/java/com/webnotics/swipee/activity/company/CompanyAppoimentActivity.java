@@ -66,7 +66,6 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
         rv_appointment = findViewById(R.id.rv_appointment);
         ll_nodata = findViewById(R.id.ll_nodata);
 
-
         iv_back.setOnClickListener(v -> finish());
     }
 
@@ -122,11 +121,8 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
 
         progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v -> {
             progressdialog.dismiss();
-            if (rest.isInterentAvaliable()) {
-                cancelAppointment(id,appointment_number,user_id);
-            } else {
-                rest.AlertForInternet();
-            }
+            if (rest.isInterentAvaliable()) cancelAppointment(id, appointment_number, user_id);
+            else rest.AlertForInternet();
 
         });
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());

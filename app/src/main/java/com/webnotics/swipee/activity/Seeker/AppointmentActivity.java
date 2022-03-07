@@ -27,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AppoimentActivity extends AppCompatActivity {
+public class AppointmentActivity extends AppCompatActivity {
     Rest rest;
     Context mContext;
     ImageView iv_back;
@@ -35,7 +35,7 @@ public class AppoimentActivity extends AppCompatActivity {
     RecyclerView rv_appointment;
     LinearLayout ll_nodata;
     @SuppressLint("StaticFieldLeak")
-    public static AppoimentActivity instance;
+    public static AppointmentActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

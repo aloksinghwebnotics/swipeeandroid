@@ -159,7 +159,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         progressdialog.getWindow().setAttributes(lp);
         TextView tv_title = progressdialog.findViewById(R.id.tv_title);
         TextView tv_detail = progressdialog.findViewById(R.id.tv_detail);
-        tv_title.setText("Swipee");
+        tv_title.setText(getString(R.string.app_name));
         tv_detail.setText(getString(R.string.planmsg));
 
         progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v -> {

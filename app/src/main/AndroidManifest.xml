@@ -197,7 +197,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
         <activity
-            android:name=".activity.Seeker.AppoimentActivity"
+            android:name=".activity.Seeker.AppointmentActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />

@@ -33,7 +33,7 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.Seeker.AppliedJobsActivity;
-import com.webnotics.swipee.activity.Seeker.AppoimentActivity;
+import com.webnotics.swipee.activity.Seeker.AppointmentActivity;
 import com.webnotics.swipee.activity.Seeker.FeaturedJobsActivity;
 import com.webnotics.swipee.activity.Seeker.JobListActivity;
 import com.webnotics.swipee.activity.Seeker.LikedJobsActivity;
@@ -162,12 +162,9 @@ public class JobDetail extends AppCompatActivity {
                 AppController.ShowDialogue("", mContext);
                 getJobDetail();
             }
-
         } else rest.AlertForInternet();
 
-        iv_back.setOnClickListener(v -> {
-           onBackPressed();
-        });
+        iv_back.setOnClickListener(v -> onBackPressed());
         iv_accept.setOnClickListener(v -> {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
@@ -264,7 +261,7 @@ public class JobDetail extends AppCompatActivity {
 
             try {
                 progressdialog.show();
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         });
         tv_cancel_application.setOnClickListener(v -> {
@@ -357,7 +354,7 @@ public class JobDetail extends AppCompatActivity {
                 progressdialog.findViewById(R.id.iv_close).setOnClickListener(v12 -> progressdialog.dismiss());
                 try {
                     progressdialog.show();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
         });
@@ -397,7 +394,7 @@ public class JobDetail extends AppCompatActivity {
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
     }
@@ -427,7 +424,7 @@ public class JobDetail extends AppCompatActivity {
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
     }
@@ -600,14 +597,11 @@ public class JobDetail extends AppCompatActivity {
                                                     iv_meetingType.setImageResource(R.drawable.ic_telephonefill);
                                                 }
 
-                                                ll_appointment.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        Intent resultIntent = new Intent(mContext, AppointmentDetail.class);
-                                                        resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, appointment_id);
-                                                        resultIntent.putExtra("from", JobDetail.class.getSimpleName());
-                                                        mContext.startActivity(resultIntent);
-                                                    }
+                                                ll_appointment.setOnClickListener(v -> {
+                                                    Intent resultIntent = new Intent(mContext, AppointmentDetail.class);
+                                                    resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, appointment_id);
+                                                    resultIntent.putExtra("from", JobDetail.class.getSimpleName());
+                                                    mContext.startActivity(resultIntent);
                                                 });
 
                                             } else join.setVisibility(View.GONE);
@@ -932,9 +926,9 @@ public class JobDetail extends AppCompatActivity {
                 JobListActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "near"));
             finish();
-        } else if (from.equalsIgnoreCase(AppoimentActivity.class.getSimpleName())) {
-            if (AppoimentActivity.instance != null)
-                AppoimentActivity.instance.onBackPressed();
+        } else if (from.equalsIgnoreCase(AppointmentActivity.class.getSimpleName())) {
+            if (AppointmentActivity.instance != null)
+                AppointmentActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
             finish();
         } else if (from.equalsIgnoreCase(CompanyAppoimentActivity.class.getSimpleName())) {

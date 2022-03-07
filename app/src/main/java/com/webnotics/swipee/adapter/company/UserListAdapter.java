@@ -56,13 +56,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         Glide.with(mContext).load(data.get(position).getUser_profile()).
                 error(R.drawable.ic_profile_select).placeholder(R.drawable.ic_profile_select).into(holder.civ_logo);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String from= CompanyNearBy.class.getSimpleName();
-                mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",from).putExtra("name",data.get(position).getFirst_name()).
-                        putExtra("id",data.get(position).getUser_id()).putExtra("job_id",data.get(position).getJob_id()));            }
-        });
+        holder.itemView.setOnClickListener(v -> {
+            String from= CompanyNearBy.class.getSimpleName();
+            mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",from).putExtra("name",data.get(position).getFirst_name()).
+                    putExtra("id",data.get(position).getUser_id()).putExtra("job_id",data.get(position).getJob_id()));            });
     }
 
     @Override

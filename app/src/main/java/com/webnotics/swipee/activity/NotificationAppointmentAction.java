@@ -169,9 +169,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                         statusAppointment(hashMap);
                     }else rest.AlertForInternet();
-                }else {
-                    cancelAppointment(appointmentId,"C",appointment_number);
-                }
+                }else cancelAppointment(appointmentId, "C", appointment_number);
 
                 break;
             case R.id.tv_accept:
@@ -187,9 +185,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                         statusAppointment(hashMap);
                     }else rest.AlertForInternet();
-                }else {
-                    cancelAppointment(appointmentId,"A",appointment_number);
-                }
+                }else cancelAppointment(appointmentId, "A", appointment_number);
 
                 break;
             case R.id.tv_appointment:
@@ -251,18 +247,16 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                     JsonObject responceBody = response.body();
                     if (response.body().get("code").getAsInt() == 203) {
                         if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null){
+                            if (NotificationActivity.instance!=null)
                                 NotificationActivity.instance.onBackPressed();
-                            }
                         }
                         rest.showToast(response.body().get("message").getAsString());
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (responceBody.get("status").getAsBoolean()) {
                         if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null){
+                            if (NotificationActivity.instance!=null)
                                 NotificationActivity.instance.onBackPressed();
-                            }
                         }
                         rest.showToast(responceBody.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()));
@@ -292,18 +286,16 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                     if (response.body().get("code").getAsInt() == 203) {
                         rest.showToast(response.body().get("message").getAsString());
                         if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null){
+                            if (NotificationActivity.instance!=null)
                                 NotificationActivity.instance.onBackPressed();
-                            }
                         }
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("code").getAsInt() == 200 &&responceBody.get("status").getAsBoolean()) {
                         rest.showToast(responceBody.get("message").getAsString());
                         if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null){
+                            if (NotificationActivity.instance!=null)
                                 NotificationActivity.instance.onBackPressed();
-                            }
                         }
                         if (Config.isSeeker())
                             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
@@ -324,9 +316,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
 
     public void setBackPressed() {
         if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-            if (NotificationActivity.instance!=null){
-                NotificationActivity.instance.onBackPressed();
-            }
+            if (NotificationActivity.instance!=null) NotificationActivity.instance.onBackPressed();
         }
         finish();
 

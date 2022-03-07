@@ -15,10 +15,9 @@
         <RelativeLayout
             android:id="@+id/rl_toollbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen46dp"
+            android:layout_height="@dimen/dimen52dp"
             android:paddingStart="@dimen/dimen10dp"
             android:paddingEnd="@dimen/dimen18dp">
-
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -31,11 +30,12 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile"
-                android:layout_width="@dimen/dimen46dp"
-                android:layout_height="@dimen/dimen46dp"
+                android:layout_width="@dimen/dimen52dp"
+                android:layout_height="@dimen/dimen52dp"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/iv_back"
-                android:src="@drawable/ic_profile_select" />
+                app:civ_border_color="@color/white_light"
+                app:civ_border_width="@dimen/dimen1dp" />
 
             <com.webnotics.swipee.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_name"
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen1dp"
             android:layout_below="@+id/rl_toollbar"
-            android:layout_marginTop="@dimen/dimen8dp"
+            android:layout_marginTop="@dimen/dimen6dp"
             android:background="@color/white_light" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -91,7 +91,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/cons_layout"
             android:layout_below="@+id/rl_toollbar"
-            android:layout_marginTop="@dimen/dimen18dp"
+            android:layout_marginTop="@dimen/dimen8dp"
             android:layout_marginBottom="@dimen/dimen2dp"
             android:paddingStart="@dimen/dimen18dp"
             android:paddingEnd="@dimen/dimen18dp" />
@@ -186,7 +186,7 @@
                     android:layout_marginStart="@dimen/dimen8dp"
                     android:layout_marginEnd="@dimen/dimen36dp"
                     android:background="#00FFFFFF"
-                    android:hint="Type a Message"
+                    android:hint="Type a message"
                     android:maxHeight="@dimen/dimen120dp"
                     android:maxLength="500"
                     android:minHeight="@dimen/dimen36dp"

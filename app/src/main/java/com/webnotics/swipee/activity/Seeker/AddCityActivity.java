@@ -128,13 +128,11 @@ public class AddCityActivity extends AppCompatActivity implements View.OnClickLi
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase(CompanyEditProfile.class.getSimpleName())) {
                             startActivity(new Intent(mContext, CompanyEditProfile.class).putExtra("from", "City").putExtra("id", cityId).putExtra("name", cityName));
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase(ProfileDetailScreen.class.getSimpleName())) {
-                            if (ProfileDetailScreen.instance != null) {
+                            if (ProfileDetailScreen.instance != null)
                                 ProfileDetailScreen.instance.setCityData(cityName, cityId);
-                            }
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase(ProfileInfoScreen.class.getSimpleName())) {
-                            if (ProfileInfoScreen.instance != null) {
+                            if (ProfileInfoScreen.instance != null)
                                 ProfileInfoScreen.instance.setCityData(cityName, cityId);
-                            }
                         }
                     finish();
                 }

@@ -138,15 +138,10 @@ public class SearchIndustryActivity extends AppCompatActivity implements View.On
     }
 
     public void selectedData(String name, String id) {
-        if (CompanyEditProfile.instance != null) {
-            CompanyEditProfile.instance.selectIndustry(name, id);
-        } else if (ProfileDetailScreen.instance != null) {
-            ProfileDetailScreen.instance.selectIndustry(name, id);
-        } else if (NearFragments.instance != null) {
-            NearFragments.instance.setIndustryData(name, id);
-        } else if (CompanyNearBy.instance != null) {
-            CompanyNearBy.instance.setIndustryData(name, id);
-        }
+        if (CompanyEditProfile.instance != null) CompanyEditProfile.instance.selectIndustry(name, id);
+        else if (ProfileDetailScreen.instance != null) ProfileDetailScreen.instance.selectIndustry(name, id);
+        else if (NearFragments.instance != null) NearFragments.instance.setIndustryData(name, id);
+        else if (CompanyNearBy.instance != null) CompanyNearBy.instance.setIndustryData(name, id);
         finish();
     }
 

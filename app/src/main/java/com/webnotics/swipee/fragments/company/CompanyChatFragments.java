@@ -117,7 +117,7 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
 
     private class ChatComparator implements Comparator<RecentChatModel.Data> {
         public int compare(RecentChatModel.Data s2, RecentChatModel.Data s1) {
-            SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
                 Date date2 = formatDate.parse(s1.getMsg_created_at());
                 Date date3 = formatDate.parse(s2.getMsg_created_at());

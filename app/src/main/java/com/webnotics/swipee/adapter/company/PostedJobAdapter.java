@@ -96,13 +96,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.MyVi
                           mContext.setJob(data.get(position).getJob_post_id(),hashMap,2);
                       });
 
-                  holder.itemView.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View v) {
-                          mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", PostedJobActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_post_id()));
-
-                      }
-                  });
+                  holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", PostedJobActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_post_id())));
                   holder.tv_close.setOnClickListener(v -> {
 
                       if (data.get(position).getJobTypeCount()==2 ){
@@ -155,7 +149,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.MyVi
                           progressdialog.findViewById(R.id.iv_close).setOnClickListener(v12 -> progressdialog.dismiss());
                           try {
                               progressdialog.show();
-                          }catch (Exception e){}
+                          }catch (Exception ignored){}
                       }
 
                   });

@@ -24,7 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
-import com.webnotics.swipee.activity.Seeker.AppoimentActivity;
+import com.webnotics.swipee.activity.Seeker.AppointmentActivity;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyAppoimentActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
@@ -377,8 +377,8 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                  JobDetail.instance.setBackPressed();
                          }else
                         if (!from.equalsIgnoreCase("Notification")){
-                            if (AppoimentActivity.instance!=null)
-                                AppoimentActivity.instance.onBackPressed();
+                            if (AppointmentActivity.instance!=null)
+                                AppointmentActivity.instance.onBackPressed();
                         }
                         finish();
                     }
@@ -428,8 +428,8 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                 JobDetail.instance.setBackPressed();
                         }else
                         if (!from.equalsIgnoreCase("Notification")){
-                            if (AppoimentActivity.instance!=null)
-                                AppoimentActivity.instance.onBackPressed();
+                            if (AppointmentActivity.instance!=null)
+                                AppointmentActivity.instance.onBackPressed();
                         }
                         finish();
                     }
@@ -450,18 +450,15 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
         if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
             if (NotificationActivity.instance!=null)
                 NotificationActivity.instance.finish();
-            if (Config.isSeeker()){
-                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            }else {
-                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
-            }
+            if (Config.isSeeker()) startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            else startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
         }else if ( from.equalsIgnoreCase(JobDetail.class.getSimpleName())){
             if (JobDetail.instance!=null)
                 JobDetail.instance.setBackPressed();
         }else
         if (!from.equalsIgnoreCase("Notification")){
-            if (AppoimentActivity.instance!=null)
-                AppoimentActivity.instance.onBackPressed();
+            if (AppointmentActivity.instance!=null)
+                AppointmentActivity.instance.onBackPressed();
         }
         AppController.loggedOut(mContext);
     }
@@ -477,7 +474,6 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                     if (responseBody.getCode()==203){
                         rest.showToast(responseBody.getMessage());
                         setLogoutRecruiter();
-
                     }else
                     if (responseBody.getCode()==200 &&responseBody.isStatus()){
                         String appointment_id=responseBody.getData().getAppointment_id();

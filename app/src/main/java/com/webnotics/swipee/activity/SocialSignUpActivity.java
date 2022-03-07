@@ -196,7 +196,6 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
     };
 
     public void getAddress(Context context, double LATITUDE, double LONGITUDE) {
-
         //Set Address
         try {
             Geocoder geocoder = new Geocoder(context, Locale.getDefault());

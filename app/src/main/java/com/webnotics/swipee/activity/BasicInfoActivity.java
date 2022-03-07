@@ -44,13 +44,9 @@ public class BasicInfoActivity extends AppCompatActivity {
         if (intent != null) {
             String fragmentOpen = intent.getStringExtra("fragment");
             isSeeker = intent.getBooleanExtra("isSeeker", true);
-            if (fragmentOpen.equalsIgnoreCase("profileinfo")) {
-                attachProfileInfo();
-            } else if (fragmentOpen.equalsIgnoreCase("mobile")) {
-                attachMobileVerification();
-            } else {
-                attachEmailVerification();
-            }
+            if (fragmentOpen.equalsIgnoreCase("profileinfo")) attachProfileInfo();
+            else if (fragmentOpen.equalsIgnoreCase("mobile")) attachMobileVerification();
+            else attachEmailVerification();
         } else attachEmailVerification();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=

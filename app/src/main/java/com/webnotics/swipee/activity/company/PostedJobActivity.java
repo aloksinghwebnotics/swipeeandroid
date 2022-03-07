@@ -29,6 +29,7 @@ import com.webnotics.swipee.rest.Rest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -119,9 +120,7 @@ public class PostedJobActivity extends AppCompatActivity {
 
         } else if (position == 1) {
             finalJobList.clear();
-            for (int j = 0; j < jobList.size(); j++) {
-                jobList.get(j).setClose(false);
-            }
+            IntStream.range(0, jobList.size()).forEach(j -> jobList.get(j).setClose(false));
             for (int i = 0; i < jobList.size(); i++) {
                 if (jobList.get(i).getJobTypeCount() == 0) {
                     boolean available = false;
@@ -150,9 +149,7 @@ public class PostedJobActivity extends AppCompatActivity {
         } else if (position == 2) {
             {
                 finalJobList.clear();
-                for (int j = 0; j < jobList.size(); j++) {
-                    jobList.get(j).setClose(false);
-                }
+                IntStream.range(0, jobList.size()).forEach(j -> jobList.get(j).setClose(false));
                 for (int i = 0; i < jobList.size(); i++) {
                     if (jobList.get(i).getJobTypeCount() == 1) {
                         boolean available = false;
@@ -180,36 +177,32 @@ public class PostedJobActivity extends AppCompatActivity {
                 }
             }
         } else if (position == 3) {
-            {
-                finalJobList.clear();
-                for (int j = 0; j < jobList.size(); j++) {
-                    jobList.get(j).setClose(true);
-                }
-                for (int i = 0; i < jobList.size(); i++) {
-                    if (jobList.get(i).getJobTypeCount() == 2) {
-                        boolean available = false;
-                        for (int k = 0; k < finalJobList.size(); k++) {
-                            if (finalJobList.get(k).getJob_post_id().equalsIgnoreCase(jobList.get(i).getJob_post_id())) {
-                                available = true;
-                                break;
-                            }
+            finalJobList.clear();
+            IntStream.range(0, jobList.size()).forEach(j -> jobList.get(j).setClose(true));
+            for (int i = 0; i < jobList.size(); i++) {
+                if (jobList.get(i).getJobTypeCount() == 2) {
+                    boolean available = false;
+                    for (int k = 0; k < finalJobList.size(); k++) {
+                        if (finalJobList.get(k).getJob_post_id().equalsIgnoreCase(jobList.get(i).getJob_post_id())) {
+                            available = true;
+                            break;
                         }
-                        if (!available)
-                            finalJobList.add(finalJobList.size(), jobList.get(i));
                     }
+                    if (!available)
+                        finalJobList.add(finalJobList.size(), jobList.get(i));
                 }
-                if (stateAdapter != null)
-                    stateAdapter.notifyDataSetChanged();
-                if (finalJobList.size() > 0) {
-                    tv_nodata.setVisibility(View.GONE);
-                    ll_nodata.setVisibility(View.GONE);
-                    rv_appointment.setVisibility(View.VISIBLE);
-                } else {
-                    rv_appointment.setVisibility(View.GONE);
-                    tv_nodata.setText("No inactive jobs data found");
-                    tv_nodata.setVisibility(View.VISIBLE);
-                    ll_nodata.setVisibility(View.VISIBLE);
-                }
+            }
+            if (stateAdapter != null)
+                stateAdapter.notifyDataSetChanged();
+            if (finalJobList.size() > 0) {
+                tv_nodata.setVisibility(View.GONE);
+                ll_nodata.setVisibility(View.GONE);
+                rv_appointment.setVisibility(View.VISIBLE);
+            } else {
+                rv_appointment.setVisibility(View.GONE);
+                tv_nodata.setText("No inactive jobs data found");
+                tv_nodata.setVisibility(View.VISIBLE);
+                ll_nodata.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -284,12 +277,12 @@ public class PostedJobActivity extends AppCompatActivity {
                         rv_appointment.setVisibility(View.VISIBLE);
                         ArrayList<PostedJobModel.Data> dataArrayList = new ArrayList<>(responceBody.getData().getFilter_jobs());
                         for (int i = 0; i < dataArrayList.size(); i++) {
-                            if (dataArrayList.get(i).getHiring_status_type().equalsIgnoreCase("Closed")) {
+                            if (dataArrayList.get(i).getHiring_status_type().equalsIgnoreCase("Closed"))
                                 dataArrayList.get(i).setJobTypeCount(1);
-                            } else if (dataArrayList.get(i).getHiring_status_type().equalsIgnoreCase("Open")) {
-                                if (dataArrayList.get(i).getJob_status_type().equalsIgnoreCase("Active")) {
+                            else if (dataArrayList.get(i).getHiring_status_type().equalsIgnoreCase("Open")) {
+                                if (dataArrayList.get(i).getJob_status_type().equalsIgnoreCase("Active"))
                                     dataArrayList.get(i).setJobTypeCount(0);
-                                } else dataArrayList.get(i).setJobTypeCount(2);
+                                else dataArrayList.get(i).setJobTypeCount(2);
 
                             }
 

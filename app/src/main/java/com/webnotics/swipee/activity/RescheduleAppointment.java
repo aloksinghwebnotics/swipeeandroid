@@ -205,9 +205,8 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
 
                     progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v1 -> {
 
-                        if (TextUtils.isEmpty(slotSelected)) {
-                            rest.showToast("Select time slot");
-                        } else {
+                        if (TextUtils.isEmpty(slotSelected)) rest.showToast("Select time slot");
+                        else {
                             tv_time.setText(slotSelected);
                             progressdialog.dismiss();
                         }
@@ -286,9 +285,8 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                             if (AppointmentAction.instance != null)
                                 AppointmentAction.instance.setBackPressed();
                         } else if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
-                            if (NotificationAppointmentAction.instance!=null){
+                            if (NotificationAppointmentAction.instance!=null)
                                 NotificationAppointmentAction.instance.setBackPressed();
-                            }
                             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
                         }
                         AppController.loggedOut(mContext);
@@ -299,9 +297,8 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                             if (AppointmentAction.instance != null)
                                 AppointmentAction.instance.setBackPressed();
                         } else if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
-                            if (NotificationAppointmentAction.instance!=null){
+                            if (NotificationAppointmentAction.instance!=null)
                                 NotificationAppointmentAction.instance.onBackPressed();
-                            }
                         }
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());

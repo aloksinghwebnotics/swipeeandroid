@@ -116,13 +116,11 @@ public class AddIndustryActivity extends AppCompatActivity implements View.OnCli
                 } else {
                     if (getIntent() != null) {
                         if (getIntent().getStringExtra("from").equalsIgnoreCase("industry")) {
-                            if (PostJobFragments.instance != null) {
+                            if (PostJobFragments.instance != null)
                                 PostJobFragments.instance.setIndustry(name, id);
-                            }
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase("location")) {
-                            if (PostJobFragments.instance != null) {
+                            if (PostJobFragments.instance != null)
                                 PostJobFragments.instance.setLocation(name, id);
-                            }
                         }
                         finish();
                     }

@@ -67,7 +67,7 @@ public class ForgotConfirm extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_APP_EMAIL);
                 startActivity(intent);
-            } catch (android.content.ActivityNotFoundException anfe) {
+            } catch (android.content.ActivityNotFoundException ignored) {
 
             }
         });

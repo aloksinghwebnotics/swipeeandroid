@@ -64,6 +64,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -563,30 +564,14 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
 
                 break;
             case R.id.tv_clear:
-                for (int i = 0; i < jobTypeSelected.size(); i++) {
-                    jobTypeSelected.get(i).setSelected(false);
-                }
-                for (int i = 0; i < locationSelected.size(); i++) {
-                    locationSelected.get(i).setSelected(false);
-                }
-                for (int i = 0; i < distanceSelected.size(); i++) {
-                    distanceSelected.get(i).setSelected(false);
-                }
-                for (int i = 0; i < designationSelected.size(); i++) {
-                    designationSelected.get(i).setSelected(false);
-                }
-                for (int i = 0; i < qualificationSelected.size(); i++) {
-                    qualificationSelected.get(i).setSelected(false);
-                }
-                for (int i = 0; i < expSelected.size(); i++) {
-                    expSelected.get(i).setSelected(false);
-                }
-                for (int i = 0; i < industrySelected.size(); i++) {
-                    industrySelected.get(i).setSelected(false);
-                }
-                for (int i = 0; i < salarySelected.size(); i++) {
-                    salarySelected.get(i).setSelected(false);
-                }
+                IntStream.range(0, jobTypeSelected.size()).forEach(i -> jobTypeSelected.get(i).setSelected(false));
+                IntStream.range(0, locationSelected.size()).forEach(i -> locationSelected.get(i).setSelected(false));
+                IntStream.range(0, distanceSelected.size()).forEach(i -> distanceSelected.get(i).setSelected(false));
+                IntStream.range(0, designationSelected.size()).forEach(i -> designationSelected.get(i).setSelected(false));
+                IntStream.range(0, qualificationSelected.size()).forEach(i -> qualificationSelected.get(i).setSelected(false));
+                IntStream.range(0, expSelected.size()).forEach(i -> expSelected.get(i).setSelected(false));
+                IntStream.range(0, industrySelected.size()).forEach(i -> industrySelected.get(i).setSelected(false));
+                IntStream.range(0, salarySelected.size()).forEach(i -> salarySelected.get(i).setSelected(false));
                 hideKeyboardFrom(mContext,et_search);
                 et_search.setVisibility(View.GONE);
                 et_search.setText("");

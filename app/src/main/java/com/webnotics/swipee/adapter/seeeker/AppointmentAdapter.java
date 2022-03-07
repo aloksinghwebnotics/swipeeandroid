@@ -18,7 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.webnotics.swipee.R;
 import com.webnotics.swipee.activity.AppointmentDetail;
-import com.webnotics.swipee.activity.Seeker.AppoimentActivity;
+import com.webnotics.swipee.activity.Seeker.AppointmentActivity;
 import com.webnotics.swipee.activity.JobDetail;
 import com.webnotics.swipee.model.seeker.AppointmentModel;
 import com.webnotics.swipee.rest.ParaName;
@@ -96,7 +96,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", AppoimentActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_id()));
+                mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", AppointmentActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_id()));
 
             }
         });

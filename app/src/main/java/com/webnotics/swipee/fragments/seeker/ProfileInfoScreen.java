@@ -184,6 +184,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
         iv_pickvideo.setOnClickListener(this);
         tv_city.setOnClickListener(this);
         tv_state.setOnClickListener(this);
+        iv_userpickimg.setOnClickListener(this);
         et_name.setText(Config.GetFName());
         et_lname.setText(Config.GetLName());
 
@@ -229,6 +230,45 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
             } else
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         };
+     /*   iv_userpickimg.setImageURI(Uri.parse(Config.GetPICKURI()));
+        if (!TextUtils.isEmpty(Config.GetPICKURI())){
+            Glide.with(mContext)
+                    .load(Config.GetPICKURI())
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * (24)))))
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                           iv_userpickimg.destroyDrawingCache();
+                            iv_userpickimg.setDrawingCacheEnabled(true);
+                            BitmapDrawable draw = (BitmapDrawable) iv_userpickimg.getDrawable();
+                            Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
+                            File cachePath = null;
+                            try {
+                                cachePath = createImageFile();
+                                try {
+                                    FileOutputStream ostream = new FileOutputStream(cachePath);
+                                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, ostream);
+                                    ostream.close();
+                                    picturePath=cachePath.getAbsolutePath();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            return false;
+                        }
+                    })
+                    .into(iv_userpickimg);
+            iv_pickimg.setVisibility(View.GONE);
+            tv_pickimg.setVisibility(View.GONE);
+
+        }*/
 
 
         return rootView;
@@ -360,6 +400,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                 callBackPressed();
                 break;
             case R.id.iv_pickimg:
+            case R.id.iv_userpickimg:
                 callProfilePick();
                 break;
 

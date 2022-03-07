@@ -424,13 +424,9 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.filter_icon:
                 if (isFilterShowing) {
-                    if (MatchFragments.instance != null) {
-                        MatchFragments.instance.callFilter(false);
-                    }
+                    if (MatchFragments.instance != null) MatchFragments.instance.callFilter(false);
                 } else {
-                    if (MatchFragments.instance != null) {
-                        MatchFragments.instance.callFilter(true);
-                    }
+                    if (MatchFragments.instance != null) MatchFragments.instance.callFilter(true);
                 }
 
                 break;
@@ -485,7 +481,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.ll_nav_appoiment:
                 isDrawerOpen();
-                startActivity(new Intent(this, AppoimentActivity.class));
+                startActivity(new Intent(this, AppointmentActivity.class));
                 break;
 
             case R.id.ll_nav_setting:

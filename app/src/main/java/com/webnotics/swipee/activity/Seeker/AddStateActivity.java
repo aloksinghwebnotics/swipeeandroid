@@ -127,13 +127,11 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase(CompanyEditProfile.class.getSimpleName())) {
                             startActivity(new Intent(mContext, CompanyEditProfile.class).putExtra("from", "State").putExtra("id", stateId).putExtra("name", stateName));
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase(ProfileDetailScreen.class.getSimpleName())) {
-                            if (ProfileDetailScreen.instance != null) {
+                            if (ProfileDetailScreen.instance != null)
                                 ProfileDetailScreen.instance.setStateData(stateName, stateId);
-                            }
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase(ProfileInfoScreen.class.getSimpleName())) {
-                            if (ProfileInfoScreen.instance != null) {
+                            if (ProfileInfoScreen.instance != null)
                                 ProfileInfoScreen.instance.setStateData(stateName, stateId);
-                            }
                         }
                         finish();
                     }

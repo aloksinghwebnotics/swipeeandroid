@@ -162,31 +162,22 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
         }
 
-
-        iv_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String messageBody = et_msg.getText().toString();
-                if (messageBody.replaceAll(" ", "").length() > 0) {
-                    if (layoutManager != null) {
-                        layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
-                    }
-                    quickstartConversationsManager.sendMessage(messageBody.trim());
-                    et_msg.setText("");
-                    rl_scroll.setVisibility(View.GONE);
-                    tv_newmsgcount.setVisibility(View.GONE);
-                    et_msg.setText("");
-                    recentMsg = 0;
-
+        iv_send.setOnClickListener(view -> {
+            String messageBody = et_msg.getText().toString();
+            if (messageBody.replaceAll(" ", "").length() > 0) {
+                if (layoutManager != null) {
+                    layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
                 }
+                quickstartConversationsManager.sendMessage(messageBody.trim());
+                et_msg.setText("");
+                rl_scroll.setVisibility(View.GONE);
+                tv_newmsgcount.setVisibility(View.GONE);
+                et_msg.setText("");
+                recentMsg = 0;
+
             }
         });
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        iv_back.setOnClickListener(view -> onBackPressed());
 
 
         iv_profile.setOnClickListener(v -> callProfile());
@@ -278,35 +269,19 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
     @Override
     public void receivedNewMessage() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // need to modify user interface elements on the UI thread
-                setDataToView();
-
-            }
-        });
+        runOnUiThread(this::setDataToView);
     }
 
     @Override
     public void reloadMessages() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // need to modify user interface elements on the UI thread
-                setDataToView();
-            }
-        });
+        // need to modify user interface elements on the UI thread
+        runOnUiThread(this::setDataToView);
     }
 
     @Override
     public void messageSentCallback() {
-        MainChatActivity.this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // need to modify user interface elements on the UI thread
-                et_msg.setText("");
-            }
+        runOnUiThread(() -> {
+            et_msg.setText("");
         });
     }
 
@@ -356,7 +331,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             Message message = quickstartConversationsManager.getMessages().get(position);
             String messageText = String.format("%s", message.getBody());
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
@@ -373,10 +348,6 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                 e.printStackTrace();
             }
             if (message.getAttachedMedia().size() > 0) {
-                Log.d(MainChatActivity.TAG, message.getAttachedMedia().get(0).getContentType());
-                Log.d(MainChatActivity.TAG, message.getAttachedMedia().get(0).getFilename());
-                Log.d(MainChatActivity.TAG, message.getAttachedMedia().get(0).getCategory().getValue());
-
 
                 if (message.getAttachedMedia().get(0).getContentType().equalsIgnoreCase("image")) {
                     holder.dateagoImg.setText(date1);
@@ -396,11 +367,11 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                                                 .load(result)
                                                 .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
                                                 .into(holder.img);
-                                    } catch (Exception e) {
+                                    } catch (Exception ignored) {
                                     }
                                 }
                             });
-                        } catch (Exception e) {
+                        } catch (Exception ignored) {
                         }
 
                         holder.ll_main2.setBackgroundResource(R.drawable.ic_receiver_bubble);
@@ -420,11 +391,11 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                                                 .load(result)
                                                 .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
                                                 .into(holder.img);
-                                    } catch (Exception e) {
+                                    } catch (Exception ignored) {
                                     }
                                 }
                             });
-                        } catch (Exception e) {
+                        } catch (Exception ignored) {
                         }
 
                         holder.mainlay.setGravity(Gravity.START);
@@ -535,25 +506,18 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
             holder.doclay.setOnClickListener(view -> {
                 try {
-                    message.getAttachedMedia().get(0).getTemporaryContentUrl(new CallbackListener<String>() {
-                        @Override
-                        public void onSuccess(String result) {
-                            AppController.callResume(mContext, result);
-                        }
-                    });
-                } catch (Exception e) {
+                    message.getAttachedMedia().get(0).getTemporaryContentUrl(result -> AppController.callResume(mContext, result));
+                } catch (Exception ignored) {
                 }
 
             });
             holder.img.setOnClickListener(view -> {
                 try {
-                    message.getAttachedMedia().get(0).getTemporaryContentUrl(new CallbackListener<String>() {
-                        @Override
-                        public void onSuccess(String result) {
-                            AppController.callFullImage(mContext, result);
-                        }
+                    message.getAttachedMedia().get(0).getTemporaryContentUrl(result -> {
+                        if (MainChatActivity.instance!=null)
+                        AppController.callFullImage(mContext, result);
                     });
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             });
         }
@@ -603,13 +567,14 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
     private void setDataToView() {
         mainChatList.clear();
+        int size=mainChatListTemp.size();
         mainChatList.addAll(quickstartConversationsManager.getMessages());
         ArrayList<Message> listTemp = new ArrayList<>(mainChatListTemp);
         recentMsg = recentMsg + (mainChatList.size() - mainChatListTemp.size());
         mainChatListTemp.clear();
         mainChatListTemp.addAll(mainChatList);
         if (messagesAdapter != null) {
-            messagesAdapter.notifyDataSetChanged();
+            messagesAdapter.notifyItemInserted(size);
         }
         rl_scroll.setVisibility(View.GONE);
         recyclerView.addOnScrollListener(new CustomScrollListener());
@@ -713,7 +678,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                         baos.close();
                         callSendImage(pictureFile.getName(), is, bitmap);
                     }
-                } catch (FileNotFoundException e) {
+                } catch (FileNotFoundException ignored) {
                 } catch (IOException e) {
                 }
             }
@@ -807,7 +772,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                     if (pictureFile != null && pictureFile.exists()) {
 
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        imageBitmap.compress(pictureFile.getName().contains(".png") ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, 100, baos);
+                        imageBitmap.compress(pictureFile.getName().contains(".png") ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, 99, baos);
                         InputStream is = new ByteArrayInputStream(baos.toByteArray());
                         baos.close();
                         callSendImage(pictureFile.getName(), is, imageBitmap);
@@ -895,4 +860,9 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
     }
 
+    @Override
+    protected void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
 }

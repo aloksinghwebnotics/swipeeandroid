@@ -123,7 +123,7 @@ public class AddIndustryAdapter extends RecyclerView.Adapter<AddIndustryAdapter.
             if (constraint != null && constraint.length() > 0) {
                 //CONSTARINT TO UPPER
                 constraint = constraint.toString().toUpperCase();
-                ArrayList<CommonModel> filters = new ArrayList<CommonModel>();
+                ArrayList<CommonModel> filters = new ArrayList<>();
                 //get specific items
                 for (int i = 0; i < data1.size(); i++) {
                     if (data1.get(i).getName().toUpperCase().contains(constraint) || data1.get(i).getLevel().toUpperCase().contains(constraint)) {

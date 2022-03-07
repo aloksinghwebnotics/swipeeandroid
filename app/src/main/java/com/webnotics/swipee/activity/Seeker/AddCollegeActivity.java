@@ -106,8 +106,6 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                 collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);
                 mListView.setAdapter(collegeAdapter);
 
-
-
             }else {
                 if (rest.isInterentAvaliable()) {
                     AppController.ShowDialogue("", mContext);

@@ -69,25 +69,15 @@ public class NotificationActivity extends AppCompatActivity {
             tv_mute.setText("Unmute");
         }else tv_mute.setText("Mute");
 
-        tv_mute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Config.isMute()){
-                    setNotificationSetting("N");
-                }else {
-                    setNotificationSetting("Y");
-                }
-                ll_mute.setVisibility(View.GONE);
-            }
+        tv_mute.setOnClickListener(v -> {
+            setNotificationSetting(Config.isMute() ? "N" : "Y");
+            ll_mute.setVisibility(View.GONE);
         });
-        iv_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ll_mute.getVisibility()==View.VISIBLE){
-                    ll_mute.setVisibility(View.GONE);
-                }else {
-                    ll_mute.setVisibility(View.VISIBLE);
-                }
+        iv_more.setOnClickListener(v -> {
+            if (ll_mute.getVisibility()==View.VISIBLE){
+                ll_mute.setVisibility(View.GONE);
+            }else {
+                ll_mute.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -52,9 +52,8 @@ public class AddDegreeActivity extends AppCompatActivity implements View.OnClick
         mContext = this;
         rest = new Rest(mContext);
 
-        if (getIntent() != null) {
+        if (getIntent() != null)
             degreeId = getIntent().getStringExtra("degreeId") != null ? getIntent().getStringExtra("degreeId") : "";
-        }
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
             callDegreeList();

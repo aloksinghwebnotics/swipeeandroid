@@ -116,8 +116,6 @@ public class PostedJobActivity extends AppCompatActivity {
                     getActiveJobList("");
                 } else rest.AlertForInternet();
             }
-
-
         } else if (position == 1) {
             finalJobList.clear();
             IntStream.range(0, jobList.size()).forEach(j -> jobList.get(j).setClose(false));
@@ -147,34 +145,32 @@ public class PostedJobActivity extends AppCompatActivity {
                 ll_nodata.setVisibility(View.VISIBLE);
             }
         } else if (position == 2) {
-            {
-                finalJobList.clear();
-                IntStream.range(0, jobList.size()).forEach(j -> jobList.get(j).setClose(false));
-                for (int i = 0; i < jobList.size(); i++) {
-                    if (jobList.get(i).getJobTypeCount() == 1) {
-                        boolean available = false;
-                        for (int k = 0; k < finalJobList.size(); k++) {
-                            if (finalJobList.get(k).getJob_post_id().equalsIgnoreCase(jobList.get(i).getJob_post_id())) {
-                                available = true;
-                                break;
-                            }
+            finalJobList.clear();
+            IntStream.range(0, jobList.size()).forEach(j -> jobList.get(j).setClose(false));
+            for (int i = 0; i < jobList.size(); i++) {
+                if (jobList.get(i).getJobTypeCount() == 1) {
+                    boolean available = false;
+                    for (int k = 0; k < finalJobList.size(); k++) {
+                        if (finalJobList.get(k).getJob_post_id().equalsIgnoreCase(jobList.get(i).getJob_post_id())) {
+                            available = true;
+                            break;
                         }
-                        if (!available)
-                            finalJobList.add(finalJobList.size(), jobList.get(i));
                     }
+                    if (!available)
+                        finalJobList.add(finalJobList.size(), jobList.get(i));
                 }
-                if (stateAdapter != null)
-                    stateAdapter.notifyDataSetChanged();
-                if (finalJobList.size() > 0) {
-                    tv_nodata.setVisibility(View.GONE);
-                    ll_nodata.setVisibility(View.GONE);
-                    rv_appointment.setVisibility(View.VISIBLE);
-                } else {
-                    tv_nodata.setText("No closed jobs data found");
-                    rv_appointment.setVisibility(View.GONE);
-                    tv_nodata.setVisibility(View.VISIBLE);
-                    ll_nodata.setVisibility(View.VISIBLE);
-                }
+            }
+            if (stateAdapter != null)
+                stateAdapter.notifyDataSetChanged();
+            if (finalJobList.size() > 0) {
+                tv_nodata.setVisibility(View.GONE);
+                ll_nodata.setVisibility(View.GONE);
+                rv_appointment.setVisibility(View.VISIBLE);
+            } else {
+                tv_nodata.setText("No closed jobs data found");
+                rv_appointment.setVisibility(View.GONE);
+                tv_nodata.setVisibility(View.VISIBLE);
+                ll_nodata.setVisibility(View.VISIBLE);
             }
         } else if (position == 3) {
             finalJobList.clear();

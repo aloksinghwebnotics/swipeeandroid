@@ -96,12 +96,10 @@ public class LikedUserActivity extends AppCompatActivity {
                                 String job_id = object.has("job_id") ? object.get("job_id").isJsonNull() ? "" : object.get("job_id").getAsString() : "";
                                 String skill_name1 = "";
                                 if (skill_name.size() > 0) {
-                                    for (int j = 0; j < skill_name.size(); j++) {
+                                    for (int j = 0; j < skill_name.size(); j++)
                                         skill_name1 = skill_name1 + skill_name.get(j).getAsString() + ((j == skill_name.size() - 1) ? "" : ", ");
-                                    }
                                 } else skill_name1 = "";
                                 LikedUserModel jobData = new LikedUserModel(user_id, first_name, last_name, user_profile, skill_name1.toString(), country, state, city, job_id);
-
                                 likedDataList.add(likedDataList.size(), jobData);
                             }
                             rv_Likejob.setLayoutManager(new GridLayoutManager(mContext, 2));

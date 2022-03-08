@@ -1005,9 +1005,11 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                             Config.SetIsSeeker(true);
                             mContext.startActivity(new Intent(mContext, SeekerHomeActivity.class));
                             getActivity().finish();
+                        }else {
+                            if (json.has("message"))
+                                Toast.makeText(context, json.get("message").getAsString(), Toast.LENGTH_SHORT).show();
                         }
-                    if (json.has("message"))
-                        Toast.makeText(context, json.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+
                 }
             } catch (Exception ignored) {
             }

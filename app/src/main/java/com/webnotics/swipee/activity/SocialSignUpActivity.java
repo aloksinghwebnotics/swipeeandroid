@@ -317,9 +317,14 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                             Config.SetIsSeeker(true);
                             if (!is_email_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",true));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }else  if (!is_mobile_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker",true));
-                            }else    startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",true));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
+                            }else {
+                                startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",true));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
+                            }
                             finish();
                         }
 
@@ -364,9 +369,14 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                             Config.SetIsSeeker(false);
                             if (!is_email_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }else  if (!is_mobile_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker",false));
-                            }else    startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
+                            }else {
+                                startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
+                            }
                             finish();
                         }
 
@@ -388,5 +398,11 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.enter, R.anim.exit);
+        super.onBackPressed();
+    }
 }

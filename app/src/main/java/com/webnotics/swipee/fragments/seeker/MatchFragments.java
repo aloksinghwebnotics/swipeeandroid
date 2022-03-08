@@ -668,7 +668,6 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                     } else rest.isInterentAvaliable();
                 }else rest.showToast("Select at least 1 filter value");
 
-
                 break;
 
             default:
@@ -1046,9 +1045,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                                 }
                                 mLocationArrayList = mLocationArray;
 
-                            }else {
-                                location.setVisibility(View.GONE);
-                            }
+                            }else location.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             location.setVisibility(View.GONE);
                         }

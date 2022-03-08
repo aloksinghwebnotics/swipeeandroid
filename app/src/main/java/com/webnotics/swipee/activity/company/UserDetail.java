@@ -175,12 +175,9 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         tv_reject.setOnClickListener(this);
         iv_accept.setOnClickListener(this);
         iv_reject.setOnClickListener(this);
-        iv_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(user_profile))
-                    AppController.callFullImage(mContext, user_profile);
-            }
+        iv_profile.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(user_profile))
+                AppController.callFullImage(mContext, user_profile);
         });
 
         iv_videoplay.setOnClickListener(v -> {
@@ -229,7 +226,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
 
             try {
                 progressdialog.show();
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         });
         tv_cancel_application.setOnClickListener(v -> {
@@ -290,12 +287,11 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
             AppController.ShowDialogue("", mContext);
             if (!Config.isSeeker())
                 blockUser(userId);
-
         });
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         ll_job_action.setVisibility(View.GONE);
@@ -364,35 +360,27 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())) {
             onBackPressed();
         } else if (from.equalsIgnoreCase("Notification")) {
-            if (Config.isSeeker()) {
+            if (Config.isSeeker())
                 startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            } else {
+            else
                 startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
-            }
             onBackPressed();
         } else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())) {
             if (NotificationActivity.instance != null)
                 NotificationActivity.instance.finish();
-            if (Config.isSeeker()) {
+            if (Config.isSeeker())
                 startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            } else {
+            else
                 startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
-            }
             onBackPressed();
         } else if (from.equalsIgnoreCase(MatchedUserActivity.class.getSimpleName())) {
-            if (MatchedUserActivity.instance != null) {
-                MatchedUserActivity.instance.onBackPressed();
-            }
+            if (MatchedUserActivity.instance != null) MatchedUserActivity.instance.onBackPressed();
             onBackPressed();
         } else if (from.equalsIgnoreCase(LikedUserActivity.class.getSimpleName())) {
-            if (LikedUserActivity.instance != null) {
-                LikedUserActivity.instance.onBackPressed();
-            }
+            if (LikedUserActivity.instance != null) LikedUserActivity.instance.onBackPressed();
             onBackPressed();
         } else if (from.equalsIgnoreCase(CompanyNearBy.class.getSimpleName())) {
-            if (CompanyNearBy.instance != null) {
-                CompanyNearBy.instance.onBackPressed();
-            }
+            if (CompanyNearBy.instance != null) CompanyNearBy.instance.onBackPressed();
             onBackPressed();
         }
         if (from.equalsIgnoreCase(CompanyAppoimentActivity.class.getSimpleName())) {
@@ -455,7 +443,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                             JsonArray user_languages = job_data.has("user_languages") ? job_data.get("user_languages").isJsonNull() ? new JsonArray() : job_data.get("user_languages").getAsJsonArray() : new JsonArray();
                             appointment_data = dataObject.has("appointment_data") ? dataObject.get("appointment_data").isJsonNull() ? new JsonArray() : dataObject.get("appointment_data").getAsJsonArray() : new JsonArray();
 
-
                             if (user_job_types.size() > 0) {
                                 setJobtypeFlow(user_job_types);
                                 flow_jobtype.setVisibility(View.VISIBLE);
@@ -484,7 +471,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                         String location_name = locationObj.has("location_name") ? locationObj.get("location_name").getAsString() : "";
                                         EmployeeUserDetails.Data.User_Preferences.Location_Data locationData1 = new EmployeeUserDetails.Data.User_Preferences.Location_Data(String.valueOf(location_id), location_name);
                                         locationData.add(locationData.size(), locationData1);
-
                                     }
                                     for (int i = 0; i < industry_data.size(); i++) {
                                         JsonObject industryObj = industry_data.get(i).getAsJsonObject();
@@ -492,7 +478,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                         String industry_name = industryObj.has("industry_name") ? industryObj.get("industry_name").getAsString() : "";
                                         EmployeeUserDetails.Data.User_Preferences.Industry_Data industry_data1 = new EmployeeUserDetails.Data.User_Preferences.Industry_Data(String.valueOf(industry_id), industry_name);
                                         industryData.add(industryData.size(), industry_data1);
-
                                     }
                                     EmployeeUserDetails.Data.User_Preferences user_preferencesF = new EmployeeUserDetails.Data.User_Preferences(preference_id, locationData, industryData, expectedSalary);
                                     mArrayuseruserpreference.add(user_preferencesF);
@@ -525,7 +510,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                             .load(video_file_link)
                                             .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 16))))
                                             .into(iv_video);
-                                }catch (Exception e){}
+                                }catch (Exception ignored){}
                             }
 
                             if (Config.isSeeker()) {

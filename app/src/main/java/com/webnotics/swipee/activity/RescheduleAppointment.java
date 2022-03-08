@@ -166,8 +166,6 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                         if (Config.isSeeker()){
                             getAppointmentSlot(tv_date.getText().toString(), company_id);
                         }else getAppointmentSlotCompany(tv_date.getText().toString(), company_id);
-
-
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(new Date().getTime());

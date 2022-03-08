@@ -306,7 +306,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
     private void createAppointment(HashMap<String, String> hashMap) {
         SwipeeApiClient.swipeeServiceInstance().createAppointment(hashMap).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responceBody = response.body();
@@ -326,7 +326,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
             }
         });

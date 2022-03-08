@@ -25,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddCarrierObjectiveActivity extends AppCompatActivity implements View.OnClickListener {
+public class  AddCarrierObjectiveActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context mContext;
     private Rest rest;

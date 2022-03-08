@@ -220,6 +220,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()) {
             case R.id.donothaveanaccount:
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
                 break;
             case R.id.btn_signup:
@@ -334,6 +337,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Config.SetUserToken(token);
                         Config.SetIsSeeker(true);
                         startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",true));
+                        overridePendingTransition(R.anim.enter, R.anim.exit);
                         finish();
                     } else {
                         if (responseBody.has("message"))
@@ -370,6 +374,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Config.SetUserToken(token);
                         Config.SetIsSeeker(false);
                         startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
+                        overridePendingTransition(R.anim.enter, R.anim.exit);
                         finish();
                     } else {
                         if (responseBody.has("message"))
@@ -389,5 +394,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.enter, R.anim.exit);
+        super.onBackPressed();
+    }
 }

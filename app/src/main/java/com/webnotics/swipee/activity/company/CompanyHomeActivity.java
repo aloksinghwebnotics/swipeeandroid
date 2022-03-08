@@ -107,13 +107,11 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.filter_icon:
                 if (isFilterShowing) {
-                    if (CompanyMatchFragments.instance != null) {
+                    if (CompanyMatchFragments.instance != null)
                         CompanyMatchFragments.instance.callFilter(false);
-                    }
                 } else {
-                    if (CompanyMatchFragments.instance != null) {
+                    if (CompanyMatchFragments.instance != null)
                         CompanyMatchFragments.instance.callFilter(true);
-                    }
                 }
 
                 break;

@@ -96,9 +96,8 @@ public class MatchedUserActivity extends AppCompatActivity {
                                 String apply_id = object.has("apply_id") ? object.get("apply_id").isJsonNull() ? "" : object.get("apply_id").getAsString() : "";
                                 String skill_name1 = "";
                                 if (skill_name.size() > 0) {
-                                    for (int j = 0; j < skill_name.size(); j++) {
+                                    for (int j = 0; j < skill_name.size(); j++)
                                         skill_name1 = skill_name1 + skill_name.get(j).getAsString() + ((j == skill_name.size() - 1) ? "" : ", ");
-                                    }
                                 } else skill_name1 = "";
                                 LikedUserModel jobData = new LikedUserModel(user_id, first_name, last_name, user_profile, skill_name1, country, state, city, job_id, apply_id);
                                 likedDataList.add(likedDataList.size(), jobData);

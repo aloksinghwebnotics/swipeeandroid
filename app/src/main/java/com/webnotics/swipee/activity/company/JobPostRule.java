@@ -161,14 +161,12 @@ public class JobPostRule extends AppCompatActivity {
         });
         try {
             progressdialog.show();
-        } catch (Exception e) {
-        }
+        } catch (Exception ignored) {}
 
     }
 
     private void callPurchaseFeatured() {
         mContext.startActivity(new Intent(mContext, FeaturedPlan.class).putExtra(ParaName.KEY_JOBPOSTID,job_post_id));
-
     }
 
     @Override
@@ -254,8 +252,7 @@ public class JobPostRule extends AppCompatActivity {
         progressdialog.findViewById(R.id.tv_submit).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception e) {
-        }
+        } catch (Exception ignored) {}
 
         progressdialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override

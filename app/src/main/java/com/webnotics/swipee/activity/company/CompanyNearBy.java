@@ -279,18 +279,15 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
                         mDataSet.add(new ObjectModel(Double.parseDouble(mArrayListUserListing.get(i).getLatitude()),
                                 Double.parseDouble(mArrayListUserListing.get(i).getLongitude()),
                                 Double.parseDouble("10"), t1, mArrayListUserListing.get(i).getUser_id()));
-
                     } else {
                         mDataSet.add(new ObjectModel(Double.parseDouble(mArrayListUserListing.get(i).getLatitude()),
                                 Double.parseDouble(mArrayListUserListing.get(i).getLongitude()),
                                 Double.parseDouble(mArrayListUserListing.get(i).getUser_radius()), t1, mArrayListUserListing.get(i).getUser_id()));
-
                     }
                 } else {
                     mDataSet.add(new ObjectModel(Double.parseDouble(mArrayListUserListing.get(i).getLatitude()),
                             Double.parseDouble(mArrayListUserListing.get(i).getLongitude()),
                             Double.parseDouble("10"), t1, mArrayListUserListing.get(i).getUser_id()));
-
                 }
             });
         } else {
@@ -308,18 +305,15 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
                         mDataSet.add(new ObjectModel(Double.parseDouble(mArrayListUserListing.get(i).getLatitude()),
                                 Double.parseDouble(mArrayListUserListing.get(i).getLongitude()),
                                 Double.parseDouble("10"), t1, mArrayListUserListing.get(i).getUser_id()));
-
                     } else {
                         mDataSet.add(new ObjectModel(Double.parseDouble(mArrayListUserListing.get(i).getLatitude()),
                                 Double.parseDouble(mArrayListUserListing.get(i).getLongitude()),
                                 Double.parseDouble(mArrayListUserListing.get(i).getUser_radius()), t1, mArrayListUserListing.get(i).getUser_id()));
-
                     }
                 } else {
                     mDataSet.add(new ObjectModel(Double.parseDouble(mArrayListUserListing.get(i).getLatitude()),
                             Double.parseDouble(mArrayListUserListing.get(i).getLongitude()),
                             Double.parseDouble("10"), t1, mArrayListUserListing.get(i).getUser_id()));
-
                 }
             });
         }

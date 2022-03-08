@@ -169,18 +169,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
 
-            iv_show_or_hide_pass.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (show) {
-                        iv_show_or_hide_pass.setImageResource(R.drawable.img_show_password);
-                        et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        show = false;
-                    } else {
-                        iv_show_or_hide_pass.setImageResource(R.drawable.img_hide_password);
-                        et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        show = true;
-                    }
+            iv_show_or_hide_pass.setOnClickListener(v -> {
+                if (show) {
+                    iv_show_or_hide_pass.setImageResource(R.drawable.img_show_password);
+                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    show = false;
+                } else {
+                    iv_show_or_hide_pass.setImageResource(R.drawable.img_hide_password);
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    show = true;
                 }
             });
         }
@@ -259,9 +256,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.donothaveanaccount:
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class).putExtra("isSeeker", isSeeker));
+                overridePendingTransition(R.anim.enter, R.anim.exit);
+                finish();
                 break;
             case R.id.tv_forgot:
                 startActivity(new Intent(LoginActivity.this, ForgotPassword.class).putExtra("isSeeker", isSeeker));
+                overridePendingTransition(R.anim.enter, R.anim.exit);
                 break;
             case R.id.iv_google:
                 email = "";
@@ -427,7 +427,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Config.SetMobileNo(mobile_no);
                             Config.SetLName(last_name);
                             Config.SetName(fname + " " + last_name);
-                            Config.SetPICKURI(company_logo);
+
                             Config.SetUserToken(user_token);
                             Config.SetPhoneCode(phone_code);
                             Config.SetCompanyName(company_name);
@@ -436,17 +436,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Config.SetIsSeeker(false);
                             if (!email_verify.equalsIgnoreCase("Y")) {
                                 startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker", false));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             } else if (!mobile_verify.equalsIgnoreCase("Y")) {
                                 startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker", false));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             } else if (!profile_status.equalsIgnoreCase("Y")) {
                                 startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker", false));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             } else {
+                                Config.SetPICKURI(company_logo);
                                 Config.SetIsProfileUpdate(profile_status);
                                 Config.SetIsUserLogin(true);
                                 startActivity(new Intent(LoginActivity.this, CompanyHomeActivity.class));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             }
                         }
@@ -501,7 +506,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Config.setRemember(cb_remember.isChecked());
                                     Config.SetEmail(email);
                                     Config.SetMobileNo(mobile_no);
-                                    Config.SetPICKURI(company_logo);
                                     Config.SetUserToken(user_token);
                                     Config.SetPhoneCode(phone_code);
                                     Config.SetLat(latitude);
@@ -509,26 +513,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Config.SetIsSeeker(false);
 
                                     if (!email_verify.equalsIgnoreCase("Y")) {
-                                        startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker", false));
+                                        startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class)
+                                                .putExtra("fragment", "email")
+                                                .putExtra("isSeeker", false));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     } else if (!mobile_verify.equalsIgnoreCase("Y")) {
-                                        startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker", false));
+                                        startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class)
+                                                .putExtra("fragment", "mobile")
+                                                .putExtra("isSeeker", false));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     } else if (!profile_status.equalsIgnoreCase("Y")) {
-                                        startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker", false));
+                                        startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class)
+                                                .putExtra("fragment", "profileinfo")
+                                                .putExtra("isSeeker", false));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     } else {
+                                        Config.SetPICKURI(company_logo);
                                         Config.SetIsProfileUpdate(profile_status);
                                         Config.SetIsUserLogin(true);
                                         startActivity(new Intent(LoginActivity.this, CompanyHomeActivity.class));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     }
                                 } else {
-                                    startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
+                                    startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class)
+                                            .putExtra("is_email", is_email)
+                                            .putExtra("isSeeker", isSeeker)
+                                            .putExtra(ParaName.KEY_OAUTHUID, socialid)
+                                            .putExtra(ParaName.KEY_SOCIALTYPE, socialtype)
+                                            .putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
+                                    overridePendingTransition(R.anim.enter, R.anim.exit);
+                                    finish();
                                 }
 
                             } else {
-                                startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
+                                startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class)
+                                        .putExtra("is_email", is_email)
+                                        .putExtra("isSeeker", isSeeker)
+                                        .putExtra(ParaName.KEY_OAUTHUID, socialid)
+                                        .putExtra(ParaName.KEY_SOCIALTYPE, socialtype)
+                                        .putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_COMPANYEMAIL)));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
+                                finish();
                             }
 
 
@@ -560,7 +589,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
-                    Log.d("responce", responseBody.toString());
                     if (responseBody.get("code").getAsInt() == 200 && responseBody.get("status").getAsBoolean()) {
                         JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : null;
                         if (data != null && !data.isJsonNull()) {
@@ -587,21 +615,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Config.SetPhoneCode(phone_code);
                             Config.SetIsSeeker(true);
                             Config.SetLat(latitude);
-                            Config.SetPICKURI(user_profile);
                             Config.SetLongg(longitude);
                             if (!email_verify.equalsIgnoreCase("Y")) {
                                 startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker", true));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             } else if (!mobile_verify.equalsIgnoreCase("Y")) {
                                 startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker", true));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             } else if (!is_profile_updated.equalsIgnoreCase("Y")) {
                                 startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker", true));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             } else {
+                                Config.SetPICKURI(user_profile);
                                 Config.SetIsProfileUpdate(is_profile_updated);
                                 Config.SetIsUserLogin(true);
                                 startActivity(new Intent(LoginActivity.this, SeekerHomeActivity.class));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
                             }
                         }
@@ -647,9 +679,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             boolean is_email = data.has("is_email") && (!data.get("is_email").isJsonNull() && data.get("is_email").getAsBoolean());
                             if (personName.contains(" ")) {
                                 String first_name = personName.substring(0, personName.indexOf(" "));
-                                String lastq_name = !personName.substring(personName.indexOf(" ") + 1).isEmpty() ? personName.substring(personName.indexOf(" ") + 1) : "";
+                                String last_name = !personName.substring(personName.indexOf(" ") + 1).isEmpty() ? personName.substring(personName.indexOf(" ") + 1) : "";
                                 Config.SetFName(first_name);
-                                Config.SetLName(lastq_name);
+                                Config.SetLName(last_name);
                             } else {
                                 Config.SetFName(personName);
                                 Config.SetLName("");
@@ -665,29 +697,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Config.SetPhoneCode(phone_code);
                                     Config.SetIsSeeker(true);
                                     Config.SetLat(latitude);
-                                    Config.SetPICKURI(user_profile);
                                     Config.SetLongg(longitude);
                                     if (!email_verify.equalsIgnoreCase("Y")) {
                                         startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker", true));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     } else if (!mobile_verify.equalsIgnoreCase("Y")) {
                                         startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker", true));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     } else if (!is_profile_updated.equalsIgnoreCase("Y")) {
                                         startActivity(new Intent(LoginActivity.this, BasicInfoActivity.class).putExtra("fragment", "profileinfo").putExtra("isSeeker", true));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     } else {
+                                        Config.SetPICKURI(user_profile);
                                         Config.SetIsProfileUpdate(is_profile_updated);
                                         Config.SetIsUserLogin(true);
                                         startActivity(new Intent(LoginActivity.this, SeekerHomeActivity.class));
+                                        overridePendingTransition(R.anim.enter, R.anim.exit);
                                         finish();
                                     }
                                 } else {
                                     startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_EMAIL)));
+                                    overridePendingTransition(R.anim.enter, R.anim.exit);
+                                    finish();
                                 }
 
                             } else {
                                 startActivity(new Intent(LoginActivity.this, SocialSignUpActivity.class).putExtra("is_email", is_email).putExtra("isSeeker", isSeeker).putExtra(ParaName.KEY_OAUTHUID, socialid).putExtra(ParaName.KEY_SOCIALTYPE, socialtype).putExtra(ParaName.KEY_EMAIL, hashMap.get(ParaName.KEY_EMAIL)));
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
+                                finish();
                             }
 
                         }

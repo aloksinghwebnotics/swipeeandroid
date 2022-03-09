@@ -72,9 +72,7 @@ public class FeaturedPlan extends AppCompatActivity implements PaymentResultWith
          */
         Checkout.preload(mContext.getApplicationContext());
 
-        if (getIntent() != null) {
-            job_post_id = getIntent().getIntExtra("job_post_id", 0);
-        }
+        if (getIntent() != null) job_post_id = getIntent().getIntExtra("job_post_id", 0);
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
             callPlanList();

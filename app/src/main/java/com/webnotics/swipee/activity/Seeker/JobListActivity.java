@@ -54,15 +54,12 @@ public class JobListActivity extends AppCompatActivity {
         mContext = this;
         instance = this;
         rest = new Rest(mContext);
-        if (getIntent() != null) {
-            companyId = getIntent().getStringExtra("id") != null ? getIntent().getStringExtra("id") : "";
-        }
+        if (getIntent() != null) companyId = getIntent().getStringExtra("id") != null ? getIntent().getStringExtra("id") : "";
         if (rest.isInterentAvaliable()) {
             if (!TextUtils.isEmpty(companyId)) {
                 AppController.ShowDialogue("", mContext);
                 getCompanyJobList();
             }
-
         } else rest.AlertForInternet();
 
         iv_back = findViewById(R.id.iv_back);

@@ -372,6 +372,7 @@
             android:name=".chat.MainChatActivity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:theme="@style/basictheme" /> <!-- Api key RazorPay -->
         <meta-data
             android:name="com.razorpay.ApiKey"

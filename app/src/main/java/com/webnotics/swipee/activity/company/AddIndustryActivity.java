@@ -59,7 +59,7 @@ public class AddIndustryActivity extends AppCompatActivity implements View.OnCli
             String from = getIntent().getStringExtra("from");
             if (from.equalsIgnoreCase("industry")) {
                 tv_title.setText("Add Industry");
-                if (PostJobFragments.instance != null) {
+                if (PostJobFragments.instance != null)
                     if (PostJobFragments.instance.commonModels.size() > 0) {
                         commonModels.addAll(PostJobFragments.instance.commonModels);
                         rv_stateList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
@@ -67,10 +67,9 @@ public class AddIndustryActivity extends AppCompatActivity implements View.OnCli
                         rv_stateList.setAdapter(stateAdapter);
                         rv_stateList.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
                     }
-                }
             } else if (from.equalsIgnoreCase("location")) {
                 tv_title.setText("Add Location");
-                if (PostJobFragments.instance != null) {
+                if (PostJobFragments.instance != null)
                     if (PostJobFragments.instance.commonModelsLocation.size() > 0) {
                         commonModels.addAll(PostJobFragments.instance.commonModelsLocation);
                         rv_stateList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
@@ -78,7 +77,6 @@ public class AddIndustryActivity extends AppCompatActivity implements View.OnCli
                         rv_stateList.setAdapter(stateAdapter);
                         rv_stateList.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
                     }
-                }
             }
         }
 
@@ -111,9 +109,8 @@ public class AddIndustryActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.tv_next:
 
-                if (TextUtils.isEmpty(id)) {
-                    rest.showToast("Select State");
-                } else {
+                if (TextUtils.isEmpty(id)) rest.showToast("Select State");
+                else {
                     if (getIntent() != null) {
                         if (getIntent().getStringExtra("from").equalsIgnoreCase("industry")) {
                             if (PostJobFragments.instance != null)

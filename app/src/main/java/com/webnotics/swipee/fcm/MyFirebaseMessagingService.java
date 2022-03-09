@@ -30,6 +30,7 @@ import com.webnotics.swipee.activity.NotificationAppointmentAction;
 import com.webnotics.swipee.activity.company.UserDetail;
 import com.webnotics.swipee.call.AudioActivity;
 import com.webnotics.swipee.call.VideoActivity;
+import com.webnotics.swipee.chat.MainChatActivity;
 import com.webnotics.swipee.rest.ParaName;
 
 import org.json.JSONException;
@@ -169,7 +170,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             ///////////////////
             Intent resultIntent;
-            if (notify_category.equalsIgnoreCase("company_reject_audio_call")) {
+            if (notify_category.equalsIgnoreCase("chat_push_message")) {
+                resultIntent = new Intent(getApplicationContext(), MainChatActivity.class);
+                resultIntent.putExtra("image", payload.getString("user_profile"));
+                resultIntent.putExtra("msg_id", payload.getString("msg_sender_id"));
+                resultIntent.putExtra("name",  Config.isSeeker()?payload.getString("first_name"):payload.getString("company_name"));
+                resultIntent.putExtra("appointment_id",  payload.getString("appointment_id"));
+                resultIntent.putExtra("appointment_number", payload.getString("appointment_number"));
+                resultIntent.putExtra("user_id", Config.isSeeker()?payload.getString("company_id"):payload.getString("user_id"));
+                resultIntent.putExtra("job_id", "");
+                if (MainChatActivity.instance!=null){
+                    if (!MainChatActivity.instance.appointment_number.equalsIgnoreCase(payload.getString("appointment_number")))
+                        showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                }else showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+
+            }else if (notify_category.equalsIgnoreCase("company_reject_audio_call")) {
                 if (AudioActivity.instance!=null){
                     AudioActivity.instance.rejectCall(payload.getString("appointment_id"));
                     showNotificationMessage(getApplicationContext(), title, message, timestamp, new Intent());

@@ -159,12 +159,9 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         notilay.setOnClickListener(this);
         tv_viewAll.setOnClickListener(this);
 
-        civ_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(Config.GetPICKURI()))
-                    AppController.callFullImage(mContext, Config.GetPICKURI());
-            }
+        civ_profile.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(Config.GetPICKURI()))
+                AppController.callFullImage(mContext, Config.GetPICKURI());
         });
 
         setMatchFragment();
@@ -173,9 +170,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         try {
             @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             @SuppressLint("SimpleDateFormat") SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
-            if (TextUtils.isEmpty(Config.GetCollegeRefreshDate())) {
-                callCollegeList();
-            } else {
+            if (TextUtils.isEmpty(Config.GetCollegeRefreshDate())) callCollegeList();
+            else {
                 Date d1 = format.parse(Config.GetCollegeRefreshDate());
                 Date d2 = format.parse(Calendar.getInstance().getTime().toString());
                 if (d1 != null && d2 != null) {

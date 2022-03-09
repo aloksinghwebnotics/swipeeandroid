@@ -125,7 +125,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                 try {
                     JSONArray jsonData = new JSONArray(job_skills);
                     setFlowData(jsonData);
-                } catch (JSONException err) {
+                } catch (JSONException ignored) {
                 }
             }
             iv_profile.setOnClickListener(v -> {
@@ -250,9 +250,8 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
 
                         progressdialog.findViewById(R.id.tv_yes).setOnClickListener(v1 -> {
 
-                            if (TextUtils.isEmpty(slotSelected)) {
-                                rest.showToast("Select Time Slot");
-                            } else {
+                            if (TextUtils.isEmpty(slotSelected)) rest.showToast("Select Time Slot");
+                            else {
                                 tv_time.setText(slotSelected);
                                 progressdialog.dismiss();
                             }
@@ -260,8 +259,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v12 -> progressdialog.dismiss());
                         try {
                             progressdialog.show();
-                        } catch (Exception e) {
-                        }
+                        } catch (Exception ignored) {}
 
                     }
                 }
@@ -269,13 +267,13 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
 
                 break;
             case R.id.tv_appointment:
-                if (TextUtils.isEmpty(tv_date.getText().toString())) {
+                if (TextUtils.isEmpty(tv_date.getText().toString()))
                     rest.showToast("Select Appointment Date");
-                } else if (TextUtils.isEmpty(tv_time.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_time.getText().toString()))
                     rest.showToast("Select Appointment Time");
-                } else if (TextUtils.isEmpty(appointmentType)) {
+                else if (TextUtils.isEmpty(appointmentType))
                     rest.showToast("Select Appointment Mode");
-                } else {
+                else {
                     if (rest.isInterentAvaliable()) {
                         HashMap<String, String> hashMap = new HashMap<>();
                         String time = tv_time.getText().toString();

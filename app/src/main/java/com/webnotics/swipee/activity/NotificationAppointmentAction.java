@@ -169,7 +169,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                         statusAppointment(hashMap);
                     }else rest.AlertForInternet();
-                }else cancelAppointment(appointmentId, "C", appointment_number);
+                }else companyAppointmentStatus(appointmentId, "C", appointment_number);
 
                 break;
             case R.id.tv_accept:
@@ -185,7 +185,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         hashMap.put(ParaName.KEY_UNIQUENOTIFYNUMBER, notify_number);
                         statusAppointment(hashMap);
                     }else rest.AlertForInternet();
-                }else cancelAppointment(appointmentId, "A", appointment_number);
+                }else companyAppointmentStatus(appointmentId, "A", appointment_number);
 
                 break;
             case R.id.tv_appointment:
@@ -230,7 +230,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     }
 
 
-    public void cancelAppointment(String id, String action, String appointment_number) {
+    public void companyAppointmentStatus(String id, String action, String appointment_number) {
         AppController.ShowDialogue("", mContext);
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(ParaName.KEY_APPOINTMENTID, id);
@@ -258,7 +258,6 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                             if (NotificationActivity.instance!=null)
                                 NotificationActivity.instance.onBackPressed();
                         }
-                        rest.showToast(responceBody.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()));
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());
@@ -292,7 +291,6 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("code").getAsInt() == 200 &&responceBody.get("status").getAsBoolean()) {
-                        rest.showToast(responceBody.get("message").getAsString());
                         if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
                             if (NotificationActivity.instance!=null)
                                 NotificationActivity.instance.onBackPressed();

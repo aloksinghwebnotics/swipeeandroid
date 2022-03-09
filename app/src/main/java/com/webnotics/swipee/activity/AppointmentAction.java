@@ -351,7 +351,6 @@ public class AppointmentAction extends AppCompatActivity {
                         AppController.loggedOut(mContext);
                         setBackPressed();
                     } else if (response.body().get("code").getAsInt() == 200 && responceBody.get("status").getAsBoolean()) {
-                        rest.showToast(responceBody.get("message").getAsString());
                         setBackPressed();
                     } else rest.showToast(responceBody.get("message").getAsString());
 

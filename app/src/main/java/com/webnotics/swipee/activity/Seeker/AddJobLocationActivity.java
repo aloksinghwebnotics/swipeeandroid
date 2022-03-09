@@ -123,10 +123,8 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                 et_search.setText("");
             });
             ll.removeView(v);
-            if (flowlay.getMeasuredHeight() > 400) {
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-            } else
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            if (flowlay.getMeasuredHeight() > 400) kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
+            else kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         };
 
         String data=  readFromFile();
@@ -156,17 +154,13 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                 if (rest.isInterentAvaliable()) {
                     AppController.ShowDialogue("", mContext);
                     callLocationList();
-                } else {
-                    rest.AlertForInternet();
-                }
+                } else rest.AlertForInternet();
             }
         } catch (JSONException e) {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
                 callLocationList();
-            } else {
-                rest.AlertForInternet();
-            }
+            } else rest.AlertForInternet();
         }
 
     }
@@ -257,20 +251,16 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) !=   null ) {
+                while ( (receiveString = bufferedReader.readLine()) !=   null )
                     stringBuilder.append(receiveString);
-                }
 
                 inputStream.close();
                 ret = stringBuilder.toString();
-                Log.d("skskskksks",ret);
             }
         }
         catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
             return ret;
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
             return ret;
         }
 
@@ -286,11 +276,7 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (s.toString().length() == 0) {
-            //  close.setVisibility(View.GONE);
-        } else {
-            //  close.setVisibility(View.VISIBLE);
-        }
+
     }
 
     @Override
@@ -303,14 +289,10 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
 
         switch (v.getId()) {
             case R.id.tv_save:
-                if (mArrayListid.size() > 3) {
-                    rest.showToast("Please select maximum 3");
-                } else if (mArrayListid.size() == 0) {
-                    rest.showToast("Please select at least 1");
-                } else {
-                    mContext.startActivity(new Intent(mContext, AddJobPreferences.class).putExtra("from", "location").putStringArrayListExtra("StringArrayList", mArrayListid)
+                if (mArrayListid.size() > 3) rest.showToast("Please select maximum 3");
+                else if (mArrayListid.size() == 0) rest.showToast("Please select at least 1");
+                else mContext.startActivity(new Intent(mContext, AddJobPreferences.class).putExtra("from", "location").putStringArrayListExtra("StringArrayList", mArrayListid)
                             .putStringArrayListExtra("StringArrayName", mArrayListName));
-                }
                 break;
             case R.id.iv_back:
                 finish();
@@ -371,10 +353,8 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
         mArrayListdesiredindustries.add(data);
         mArrayListid.add(id);
         mArrayListName.add(data);
-        if (flowlay.getMeasuredHeight() > 400) {
-            kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-        } else
-            kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        if (flowlay.getMeasuredHeight() > 400) kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
+        else kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
 

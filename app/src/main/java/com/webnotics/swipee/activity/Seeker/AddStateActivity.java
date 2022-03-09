@@ -118,15 +118,14 @@ public class AddStateActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.tv_next:
 
-                if (TextUtils.isEmpty(stateId)) {
-                    rest.showToast("Select State");
-                } else {
+                if (TextUtils.isEmpty(stateId)) rest.showToast("Select State");
+                else {
                     if (getIntent() != null) {
-                        if (getIntent().getStringExtra("from").equalsIgnoreCase(EditProfileActivity.class.getSimpleName())) {
+                        if (getIntent().getStringExtra("from").equalsIgnoreCase(EditProfileActivity.class.getSimpleName()))
                             startActivity(new Intent(mContext, EditProfileActivity.class).putExtra("from", "State").putExtra("id", stateId).putExtra("name", stateName));
-                        } else if (getIntent().getStringExtra("from").equalsIgnoreCase(CompanyEditProfile.class.getSimpleName())) {
+                        else if (getIntent().getStringExtra("from").equalsIgnoreCase(CompanyEditProfile.class.getSimpleName()))
                             startActivity(new Intent(mContext, CompanyEditProfile.class).putExtra("from", "State").putExtra("id", stateId).putExtra("name", stateName));
-                        } else if (getIntent().getStringExtra("from").equalsIgnoreCase(ProfileDetailScreen.class.getSimpleName())) {
+                        else if (getIntent().getStringExtra("from").equalsIgnoreCase(ProfileDetailScreen.class.getSimpleName())) {
                             if (ProfileDetailScreen.instance != null)
                                 ProfileDetailScreen.instance.setStateData(stateName, stateId);
                         } else if (getIntent().getStringExtra("from").equalsIgnoreCase(ProfileInfoScreen.class.getSimpleName())) {

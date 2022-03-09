@@ -91,7 +91,7 @@ public class NotificationUtils {
             }
         } else {
             showSmallNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
-            if(!title.equalsIgnoreCase("Welcome Messsage")){
+            if(!title.equalsIgnoreCase("Welcome Message")){
                 playNotificationSound();
             }
 

@@ -193,10 +193,8 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
         } else rest.AlertForInternet();
 
         civ_profile.setOnClickListener(v -> {
-            if (!TextUtils.isEmpty(picturePath)) {
-                AppController.callFullImage(mContext, picturePath);
-            } else if (!TextUtils.isEmpty(Config.GetPICKURI()))
-                AppController.callFullImage(mContext, Config.GetPICKURI());
+            if (!TextUtils.isEmpty(picturePath)) AppController.callFullImage(mContext, picturePath);
+            else if (!TextUtils.isEmpty(Config.GetPICKURI())) AppController.callFullImage(mContext, Config.GetPICKURI());
         });
 
         industryBottomSheet();
@@ -284,36 +282,36 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(mContext, AddStateActivity.class).putExtra("state_id",stateId).putExtra("from", CompanyEditProfile.class.getSimpleName()));
                 break;
             case R.id.tv_save:
-                if (TextUtils.isEmpty(et_companyname.getText().toString())) {
+                if (TextUtils.isEmpty(et_companyname.getText().toString()))
                     rest.showToast("Enter company name");
-                } else if (TextUtils.isEmpty(tv_industry.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_industry.getText().toString()))
                     rest.showToast("Select industry");
-                } else if (TextUtils.isEmpty(tv_companysize.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_companysize.getText().toString()))
                     rest.showToast("Select company size");
-                } else if (TextUtils.isEmpty(et_website.getText().toString())) {
+                else if (TextUtils.isEmpty(et_website.getText().toString()))
                     rest.showToast("Enter company website");
-                } else if (TextUtils.isEmpty(et_address.getText().toString())) {
+                else if (TextUtils.isEmpty(et_address.getText().toString()))
                     rest.showToast("Enter company address");
-                } else if (TextUtils.isEmpty(et_pincode.getText().toString())) {
+                else if (TextUtils.isEmpty(et_pincode.getText().toString()))
                     rest.showToast("Enter 6 digit pincode");
-                }else if (et_pincode.getText().toString().length()!=6) {
+                else if (et_pincode.getText().toString().length()!=6)
                     rest.showToast("Enter 6 digit pincode");
-                } else if (TextUtils.isEmpty(et_founded.getText().toString())) {
+                else if (TextUtils.isEmpty(et_founded.getText().toString()))
                     rest.showToast("Enter 4 digit established year");
-                }else if (et_founded.getText().toString().replaceAll(" ", "").length()!=4) {
+                else if (et_founded.getText().toString().replaceAll(" ", "").length()!=4)
                     rest.showToast("Enter 4 digit established year");
-                } else if (TextUtils.isEmpty(tv_country.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_country.getText().toString()))
                     rest.showToast("Select country");
-                } else if (TextUtils.isEmpty(tv_state.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_state.getText().toString()))
                     rest.showToast("Select state");
-                } else if (TextUtils.isEmpty(tv_city.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_city.getText().toString()))
                     rest.showToast("Select city");
-                } else {
+                else {
                     MultipartBody.Part image = null;
                     MultipartBody.Part video = null;
                     if (picturePath != null && !TextUtils.isEmpty(picturePath)) {
                         File file = new File(picturePath);
-                        if (file != null && file.exists()) {
+                        if (file.exists()) {
                             RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                             image = MultipartBody.Part.createFormData(ParaName.KEY_COMPANYLOGO, file.getName(), requestFile);
                         }
@@ -374,9 +372,7 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
                 if (response.code() == 200 && response.body() != null) {
                     rest.showToast(response.body().get("message").getAsString());
                     if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
-                        if (CompanyProfileFragments.instance != null) {
-                            CompanyProfileFragments.instance.hitService();
-                        }
+                        if (CompanyProfileFragments.instance != null) CompanyProfileFragments.instance.hitService();
                         finish();
                     } else if (response.body().get("code").getAsInt() == 203) {
                         AppController.loggedOut(mContext);
@@ -577,10 +573,8 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
         rv_sizelist.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         try {
             progressdialog.show();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
-
-
     }
 
     public void selectIndustry(String name, String id) {

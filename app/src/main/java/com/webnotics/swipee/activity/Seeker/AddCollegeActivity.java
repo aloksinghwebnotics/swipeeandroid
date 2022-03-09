@@ -62,9 +62,8 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
 
         mContext = this;
         rest = new Rest(mContext);
-        if (getIntent() != null) {
+        if (getIntent() != null)
             collegeId = getIntent().getStringExtra("collegeId") != null ? getIntent().getStringExtra("collegeId") : "";
-        }
 
         mListView = findViewById(R.id.mlistview);
         et_search = findViewById(R.id.et_search);
@@ -110,17 +109,13 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                 if (rest.isInterentAvaliable()) {
                     AppController.ShowDialogue("", mContext);
                     callCollegeList();
-                } else {
-                    rest.AlertForInternet();
-                }
+                } else rest.AlertForInternet();
             }
         } catch (JSONException e) {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
                 callCollegeList();
-            } else {
-                rest.AlertForInternet();
-            }
+            } else rest.AlertForInternet();
         }
     }
 
@@ -136,9 +131,8 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ( (receiveString = bufferedReader.readLine()) != null )
                     stringBuilder.append(receiveString);
-                }
 
                 inputStream.close();
                 ret = stringBuilder.toString();
@@ -214,25 +208,19 @@ public class AddCollegeActivity extends AppCompatActivity implements View.OnClic
                                     collegeList.add(collegeList.size(),object);
                                     i++;
                                 }
-
                                 collegeAdapter = new CollegeAdapter(AddCollegeActivity.this, collegeList);
                                 mListView.setAdapter(collegeAdapter);
                                 Config.SetCollegeRefreshDate(Calendar.getInstance().getTime().toString());
-
                             }
-                        } catch (JSONException e) {
-                        }
+                        } catch (JSONException ignored) {}
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });

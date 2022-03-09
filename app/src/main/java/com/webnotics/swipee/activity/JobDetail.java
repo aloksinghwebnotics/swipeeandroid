@@ -564,11 +564,7 @@ public class JobDetail extends AppCompatActivity {
                                     tv_appointment.setText(job_title1);
                                     ll_appointment.setVisibility(View.VISIBLE);
                                     boolean isShow = IntStream.range(0, appointments.size()).anyMatch(i -> appointments.get(i).getAsJsonObject().get("appointment_status").getAsString().equalsIgnoreCase("A"));
-                                    if (isShow) {
-                                        tv_reschedule.setVisibility(View.VISIBLE);
-                                    } else {
-                                        tv_reschedule.setVisibility(View.GONE);
-                                    }
+                                    tv_reschedule.setVisibility(isShow ? View.VISIBLE : View.GONE);
                                     tv_cancel_application.setVisibility(View.VISIBLE);
                                     ll_applied.setVisibility(View.GONE);
                                     SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");

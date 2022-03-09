@@ -82,9 +82,7 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
             callDesIndustryList();
-        } else {
-            rest.AlertForInternet();
-        }
+        } else rest.AlertForInternet();
         tv_save.setOnClickListener(this);
         iv_back.setOnClickListener(this);
 
@@ -116,10 +114,8 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
                 et_search.setText("");
             });
             ll.removeView(v);
-            if (flowlay.getMeasuredHeight() > 400) {
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-            } else
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            if (flowlay.getMeasuredHeight() > 400) kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
+            else kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         };
 
     }
@@ -148,16 +144,12 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
                         mListView.setAdapter(skilladapter);
                     } else rest.showToast("Something went wrong");
 
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });
@@ -176,11 +168,7 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (s.toString().length() == 0) {
-            //  close.setVisibility(View.GONE);
-        } else {
-            //  close.setVisibility(View.VISIBLE);
-        }
+
     }
 
     @Override
@@ -193,14 +181,10 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
 
         switch (v.getId()) {
             case R.id.tv_save:
-                if (mArrayListid.size() > 3) {
-                    rest.showToast("Please select maximum 3");
-                } else if (mArrayListid.size() == 0) {
-                    rest.showToast("Please select at least 1");
-                } else {
-                    mContext.startActivity(new Intent(mContext, AddJobPreferences.class).putExtra("from", "desired").putStringArrayListExtra("StringArrayList", mArrayListid)
+                if (mArrayListid.size() > 3) rest.showToast("Please select maximum 3");
+                else if (mArrayListid.size() == 0) rest.showToast("Please select at least 1");
+                else mContext.startActivity(new Intent(mContext, AddJobPreferences.class).putExtra("from", "desired").putStringArrayListExtra("StringArrayList", mArrayListid)
                             .putStringArrayListExtra("StringArrayName", mArrayListName));
-                }
                 break;
             case R.id.iv_back:
                 finish();
@@ -259,10 +243,8 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
         mArrayListdesiredindustries.add(data);
         mArrayListid.add(id);
         mArrayListName.add(data);
-        if (flowlay.getMeasuredHeight() > 400) {
-            kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-        } else
-            kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        if (flowlay.getMeasuredHeight() > 400) kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
+        else kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
 

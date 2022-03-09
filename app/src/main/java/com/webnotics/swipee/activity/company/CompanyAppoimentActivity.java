@@ -128,7 +128,7 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -152,7 +152,6 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (responceBody.get("status").getAsBoolean()) {
-                        rest.showToast(responceBody.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()));
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());

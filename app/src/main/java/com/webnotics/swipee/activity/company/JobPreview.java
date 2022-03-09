@@ -31,6 +31,7 @@ import com.webnotics.swipee.rest.SwipeeApiClient;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -171,8 +172,7 @@ public class JobPreview extends AppCompatActivity {
 
             } else tv_perk.setText("No perks added.");
             if (numbersList.size() > 0)
-                for (int i = 0; i < numbersList.size(); i++) {
-
+                IntStream.range(0, numbersList.size()).forEach(i -> {
                     LinearLayout linearLayout = new LinearLayout(mContext);
                     LinearLayout linearLayoutF = new LinearLayout(mContext);
                     FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
@@ -203,7 +203,7 @@ public class JobPreview extends AppCompatActivity {
                     linearLayoutF.setTag(numbersList.get(i));
                     linearLayoutF.addView(linearLayout);
                     flow_skill.addView(linearLayoutF);
-                }
+                });
             iv_logo.setOnClickListener(v -> {
                 if (!TextUtils.isEmpty(Config.GetPICKURI()))
                     AppController.callFullImage(mContext, Config.GetPICKURI());

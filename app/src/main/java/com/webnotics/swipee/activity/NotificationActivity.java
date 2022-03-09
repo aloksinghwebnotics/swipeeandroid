@@ -74,11 +74,7 @@ public class NotificationActivity extends AppCompatActivity {
             ll_mute.setVisibility(View.GONE);
         });
         iv_more.setOnClickListener(v -> {
-            if (ll_mute.getVisibility()==View.VISIBLE){
-                ll_mute.setVisibility(View.GONE);
-            }else {
-                ll_mute.setVisibility(View.VISIBLE);
-            }
+            ll_mute.setVisibility(ll_mute.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
         });
     }
 

@@ -3,7 +3,6 @@ package com.webnotics.swipee.activity.company;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -78,9 +77,7 @@ public class JobPostRule extends AppCompatActivity {
                 }
 
         );
-        tv_gotit.setOnClickListener(v ->{
-            callDialog();
-        } );
+        tv_gotit.setOnClickListener(v -> callDialog());
     }
 
     private void getPostRule(String id) {
@@ -155,9 +152,7 @@ public class JobPostRule extends AppCompatActivity {
             if (featured_package_expire.equalsIgnoreCase("N") &&!TextUtils.isEmpty(total_post_limit)&&!TextUtils.isEmpty(used_listing) &&!total_post_limit.equalsIgnoreCase(used_listing)){
                 AppController.ShowDialogue("", mContext);
                 publishFeaturedJob(String.valueOf(job_post_id));
-            }else {
-               callPurchaseFeatured();
-            }
+            }else callPurchaseFeatured();
         });
         try {
             progressdialog.show();
@@ -254,12 +249,9 @@ public class JobPostRule extends AppCompatActivity {
             progressdialog.show();
         } catch (Exception ignored) {}
 
-        progressdialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
-                finish();
-            }
+        progressdialog.setOnDismissListener(dialog -> {
+            startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
+            finish();
         });
 
     }

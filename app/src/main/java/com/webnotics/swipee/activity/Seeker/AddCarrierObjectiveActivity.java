@@ -60,7 +60,7 @@ public class  AddCarrierObjectiveActivity extends AppCompatActivity implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_save:
-                if (TextUtils.isEmpty(et_objective.getText().toString().replaceAll(" ", ""))) {
+                if (TextUtils.isEmpty(et_objective.getText().toString().trim())) {
                     rest.showToast("Enter career objective");
                 } else {
                     AppController.ShowDialogue("", mContext);
@@ -88,9 +88,8 @@ public class  AddCarrierObjectiveActivity extends AppCompatActivity implements V
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("status").getAsBoolean()) {
-                        if (ProfileFragments.instance != null) {
+                        if (ProfileFragments.instance != null)
                             ProfileFragments.instance.setObjective(obj);
-                        }
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }

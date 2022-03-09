@@ -65,7 +65,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
         holder.tv_action.setText(data.get(position).getCompany_action());
         holder.tv_unseencount.setText(MessageFormat.format("{0}", data.get(position).getUnseen_msg_count()));
         String date=data.get(position).getMsg_created_at();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat formatout = new SimpleDateFormat("dd MMM hh:mm aa");
         Date dateFinal;
         String date1="";

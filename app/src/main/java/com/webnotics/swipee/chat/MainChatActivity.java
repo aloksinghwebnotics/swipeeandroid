@@ -37,7 +37,6 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.twilio.conversations.CallbackListener;
 import com.twilio.conversations.ErrorInfo;
 import com.twilio.conversations.MediaUploadListener;
 import com.twilio.conversations.Message;
@@ -85,7 +84,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
     private String appointment_id = "";
     private String user_id = "";
     private String job_id = "";
-    private String appointment_number = "";
+     public String appointment_number = "";
 
     Context mContext;
     private LinearLayoutManager layoutManager;
@@ -359,16 +358,13 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                     if (message.getAuthor().equalsIgnoreCase(Config.GetEmail()+"_"+Config.GetId())) {
                         try {
                             Glide.with(mContext).clear(holder.img);
-                            message.getAttachedMedia().get(0).getTemporaryContentUrl(new CallbackListener<String>() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    try {
-                                        Glide.with(mContext)
-                                                .load(result)
-                                                .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
-                                                .into(holder.img);
-                                    } catch (Exception ignored) {
-                                    }
+                            message.getAttachedMedia().get(0).getTemporaryContentUrl(result -> {
+                                try {
+                                    Glide.with(mContext)
+                                            .load(result)
+                                            .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
+                                            .into(holder.img);
+                                } catch (Exception ignored) {
                                 }
                             });
                         } catch (Exception ignored) {
@@ -383,16 +379,13 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                     } else {
                         try {
                             Glide.with(mContext).clear(holder.img);
-                            message.getAttachedMedia().get(0).getTemporaryContentUrl(new CallbackListener<String>() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    try {
-                                        Glide.with(mContext)
-                                                .load(result)
-                                                .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
-                                                .into(holder.img);
-                                    } catch (Exception ignored) {
-                                    }
+                            message.getAttachedMedia().get(0).getTemporaryContentUrl(result -> {
+                                try {
+                                    Glide.with(mContext)
+                                            .load(result)
+                                            .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
+                                            .into(holder.img);
+                                } catch (Exception ignored) {
                                 }
                             });
                         } catch (Exception ignored) {
@@ -700,44 +693,42 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
             alertDialogBuilder
                     .setMessage("Send \"" + docName + "\" to " + "\"" + name + "\"?")
                     .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+                    .setPositiveButton("OK", (dialog, id) -> {
 
-                            try {
-                                InputStream inputStream = mContext.getContentResolver().openInputStream(selectedFileUri);
-                                quickstartConversationsManager.sendMedia(inputStream, "application/pdf", docName, new MediaUploadListener() {
-                                    @Override
-                                    public void onStarted() {
+                        try {
+                            InputStream inputStream = mContext.getContentResolver().openInputStream(selectedFileUri);
+                            quickstartConversationsManager.sendMedia(inputStream, "application/pdf", docName, new MediaUploadListener() {
+                                @Override
+                                public void onStarted() {
 
-                                    }
-
-                                    @Override
-                                    public void onProgress(long l) {
-
-                                    }
-
-                                    @Override
-                                    public void onCompleted(@NonNull String s) {
-
-                                    }
-
-                                    @Override
-                                    public void onFailed(@NonNull ErrorInfo errorInfo) {
-
-                                    }
-                                });
-                                if (layoutManager != null) {
-                                    layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
                                 }
-                                rl_scroll.setVisibility(View.GONE);
-                                tv_newmsgcount.setVisibility(View.GONE);
-                                recentMsg = 0;
-                                et_msg.setText("");
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
 
+                                @Override
+                                public void onProgress(long l) {
+
+                                }
+
+                                @Override
+                                public void onCompleted(@NonNull String s) {
+
+                                }
+
+                                @Override
+                                public void onFailed(@NonNull ErrorInfo errorInfo) {
+
+                                }
+                            });
+                            if (layoutManager != null) {
+                                layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
+                            }
+                            rl_scroll.setVisibility(View.GONE);
+                            tv_newmsgcount.setVisibility(View.GONE);
+                            recentMsg = 0;
+                            et_msg.setText("");
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
                         }
+
                     })
                     .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -769,8 +760,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                 fos.close();*/
 
                 if (pictureFile != null) {
-                    if (pictureFile != null && pictureFile.exists()) {
-
+                    if (pictureFile.exists()) {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         imageBitmap.compress(pictureFile.getName().contains(".png") ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, 99, baos);
                         InputStream is = new ByteArrayInputStream(baos.toByteArray());

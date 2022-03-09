@@ -114,6 +114,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
     ImageView iv_accept,iv_nodata,iv_reject,iv_jobtype,iv_location,iv_distance,iv_designation,iv_qualifications,iv_experience,iv_industrys,iv_salary;
 
     private ArrayList<UserJobListing.Data.Jobs_Listing> mArrayUserListing = new ArrayList<>();
+    private int isFiltered=1;
 
 
     @Override
@@ -585,88 +586,7 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                 getHomeJobList();
                 break;
             case R.id.tv_apply:
-                ArrayList<String> jobtypeStrings = new ArrayList<>();
-                ArrayList<String> locationStrings = new ArrayList<>();
-                ArrayList<String> distanceStrings = new ArrayList<>();
-                ArrayList<String> designationStrings = new ArrayList<>();
-                ArrayList<String> qualificationStrings = new ArrayList<>();
-                ArrayList<String> expStrings = new ArrayList<>();
-                ArrayList<String> industryStrings = new ArrayList<>();
-                ArrayList<String> salaryStrings = new ArrayList<>();
-                for (int i = 0; i < jobTypeSelected.size(); i++) {
-                    if (jobTypeSelected.get(i).isSelected()) {
-                        jobtypeStrings.add(jobTypeSelected.get(i).getId());
-                    }
-                }
-                for (int i = 0; i < locationSelected.size(); i++) {
-                    if (locationSelected.get(i).isSelected()) {
-                        locationStrings.add(locationSelected.get(i).getId());
-                    }
-                }
-                for (int i = 0; i < distanceSelected.size(); i++) {
-                    if (distanceSelected.get(i).isSelected()) {
-                        distanceStrings.add(distanceSelected.get(i).getId());
-                    }
-                }
-                for (int i = 0; i < designationSelected.size(); i++) {
-                    if (designationSelected.get(i).isSelected()) {
-                        designationStrings.add(designationSelected.get(i).getId());
-                    }
-                }
-                for (int i = 0; i < qualificationSelected.size(); i++) {
-                    if (qualificationSelected.get(i).isSelected()) {
-                        qualificationStrings.add(qualificationSelected.get(i).getId());
-                    }
-                }
-                for (int i = 0; i < expSelected.size(); i++) {
-                    if (expSelected.get(i).isSelected()) {
-                        expStrings.add(expSelected.get(i).getId());
-                    }
-                }
-                for (int i = 0; i < industrySelected.size(); i++) {
-                    if (industrySelected.get(i).isSelected()) {
-                        industryStrings.add(industrySelected.get(i).getId());
-                    }
-                }
-                for (int i = 0; i < salarySelected.size(); i++) {
-                    if (salarySelected.get(i).isSelected()) {
-                        salaryStrings.add(salarySelected.get(i).getId());
-                    }
-                }
-
-                HashMap<String, String> hashMap = new HashMap<>();
-
-                if (jobtypeStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_JOBTYPEID, jobtypeStrings.toString());
-                }
-                if (locationStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_LOCATIONID, locationStrings.toString());
-                }
-                if (distanceStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_DISTANCEID, distanceStrings.toString());
-                }
-                if (designationStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_DESIGNATIONID, designationStrings.toString());
-                }
-                if (qualificationStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_DEGREEID, qualificationStrings.toString());
-                }
-                if (expStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_EXPERIENCEID, expStrings.toString());
-                }
-                if (industryStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_INDUSTRY, industryStrings.toString());
-                }
-                if (salaryStrings.size() > 0) {
-                    hashMap.put(ParaName.KEY_RANGEID, salaryStrings.toString());
-                }
-                if (hashMap.size()>0){
-                    hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
-                    if (rest.isInterentAvaliable()) {
-                        AppController.ShowDialogue("", mContext);
-                        getFilterJobList(hashMap);
-                    } else rest.isInterentAvaliable();
-                }else rest.showToast("Select at least 1 filter value");
+               callFilteredData();
 
                 break;
 
@@ -675,6 +595,91 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
         }
 
 
+    }
+
+    private void callFilteredData() {
+        ArrayList<String> jobtypeStrings = new ArrayList<>();
+        ArrayList<String> locationStrings = new ArrayList<>();
+        ArrayList<String> distanceStrings = new ArrayList<>();
+        ArrayList<String> designationStrings = new ArrayList<>();
+        ArrayList<String> qualificationStrings = new ArrayList<>();
+        ArrayList<String> expStrings = new ArrayList<>();
+        ArrayList<String> industryStrings = new ArrayList<>();
+        ArrayList<String> salaryStrings = new ArrayList<>();
+        for (int i = 0; i < jobTypeSelected.size(); i++) {
+            if (jobTypeSelected.get(i).isSelected()) {
+                jobtypeStrings.add(jobTypeSelected.get(i).getId());
+            }
+        }
+        for (int i = 0; i < locationSelected.size(); i++) {
+            if (locationSelected.get(i).isSelected()) {
+                locationStrings.add(locationSelected.get(i).getId());
+            }
+        }
+        for (int i = 0; i < distanceSelected.size(); i++) {
+            if (distanceSelected.get(i).isSelected()) {
+                distanceStrings.add(distanceSelected.get(i).getId());
+            }
+        }
+        for (int i = 0; i < designationSelected.size(); i++) {
+            if (designationSelected.get(i).isSelected()) {
+                designationStrings.add(designationSelected.get(i).getId());
+            }
+        }
+        for (int i = 0; i < qualificationSelected.size(); i++) {
+            if (qualificationSelected.get(i).isSelected()) {
+                qualificationStrings.add(qualificationSelected.get(i).getId());
+            }
+        }
+        for (int i = 0; i < expSelected.size(); i++) {
+            if (expSelected.get(i).isSelected()) {
+                expStrings.add(expSelected.get(i).getId());
+            }
+        }
+        for (int i = 0; i < industrySelected.size(); i++) {
+            if (industrySelected.get(i).isSelected()) {
+                industryStrings.add(industrySelected.get(i).getId());
+            }
+        }
+        for (int i = 0; i < salarySelected.size(); i++) {
+            if (salarySelected.get(i).isSelected()) {
+                salaryStrings.add(salarySelected.get(i).getId());
+            }
+        }
+
+        HashMap<String, String> hashMap = new HashMap<>();
+
+        if (jobtypeStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_JOBTYPEID, jobtypeStrings.toString());
+        }
+        if (locationStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_LOCATIONID, locationStrings.toString());
+        }
+        if (distanceStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_DISTANCEID, distanceStrings.toString());
+        }
+        if (designationStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_DESIGNATIONID, designationStrings.toString());
+        }
+        if (qualificationStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_DEGREEID, qualificationStrings.toString());
+        }
+        if (expStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_EXPERIENCEID, expStrings.toString());
+        }
+        if (industryStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_INDUSTRY, industryStrings.toString());
+        }
+        if (salaryStrings.size() > 0) {
+            hashMap.put(ParaName.KEY_RANGEID, salaryStrings.toString());
+        }
+        if (hashMap.size()>0){
+            hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
+            if (rest.isInterentAvaliable()) {
+                AppController.ShowDialogue("", mContext);
+                getFilterJobList(hashMap);
+            } else rest.isInterentAvaliable();
+        }else rest.showToast("Select at least 1 filter value");
     }
 
     @Override
@@ -820,7 +825,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
             @Override
             public void onResponse(@NonNull Call<UserJobListing> call, @NonNull Response<UserJobListing> response) {
                 AppController.dismissProgressdialog();
-                parseResponse(response, 1);
+                isFiltered=1;
+                parseResponse(response, isFiltered);
             }
 
             @Override
@@ -835,7 +841,8 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
             @Override
             public void onResponse(@NonNull Call<UserJobListing> call, @NonNull Response<UserJobListing> response) {
                 AppController.dismissProgressdialog();
-                parseResponse(response, 2);
+                isFiltered=2;
+                parseResponse(response, isFiltered);
             }
 
             @Override
@@ -1383,7 +1390,6 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                             datalay.setVisibility(View.GONE);
                             noleftswipelay.setVisibility(View.GONE);
                         }
-                        rest.showToast(repo.get("message").getAsString());
                         left_swipes=left_swipes-1;
                         if (left_swipes>0 || packgeID.equalsIgnoreCase("3")){}
                         else {
@@ -1402,10 +1408,23 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
                                 }
                             }
                     }  else if (response.body().get("code").getAsInt()==401){
-                        rest.showToast(repo.get("message").getAsString());
-                }
 
+                        if ( isFiltered==1){
+                            AppController.ShowDialogue("", mContext);
+                            getHomeJobList();
+                        } else if ( isFiltered==2) callFilteredData();
+                }else {
+                        if ( isFiltered==1){
+                            AppController.ShowDialogue("", mContext);
+                            getHomeJobList();
+                        } else if ( isFiltered==2) callFilteredData();
+                    }
 
+                }else {
+                    if ( isFiltered==1){
+                        AppController.ShowDialogue("", mContext);
+                        getHomeJobList();
+                    } else if ( isFiltered==2) callFilteredData();
                 }
 
             }
@@ -1413,6 +1432,10 @@ public class MatchFragments extends Basefragment implements View.OnClickListener
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
+                if ( isFiltered==1){
+                    AppController.ShowDialogue("", mContext);
+                    getHomeJobList();
+                } else if ( isFiltered==2) callFilteredData();
             }
         });
     }

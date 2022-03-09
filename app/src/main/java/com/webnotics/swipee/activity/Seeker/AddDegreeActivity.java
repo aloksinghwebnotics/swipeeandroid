@@ -82,11 +82,7 @@ public class AddDegreeActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (s.toString().length() == 0) {
-            //  close.setVisibility(View.GONE);
-        } else {
-            //  close.setVisibility(View.VISIBLE);
-        }
+
     }
 
 

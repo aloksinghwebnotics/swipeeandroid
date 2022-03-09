@@ -372,11 +372,8 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
 
     public void isDrawerOpen() {
         if (drawer != null)
-            if (drawer.isDrawerOpen(Gravity.LEFT)) {
-                drawer.closeDrawer(Gravity.LEFT);
-            } else {
-                drawer.openDrawer(Gravity.LEFT);
-            }
+            if (drawer.isDrawerOpen(Gravity.LEFT)) drawer.closeDrawer(Gravity.LEFT);
+            else drawer.openDrawer(Gravity.LEFT);
     }
 
     @Override
@@ -394,10 +391,8 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null && intent.getStringExtra("from") != null) {
-             if (intent.getStringExtra("from").equalsIgnoreCase("chat")) {
-                setChatFragment();
-            } else setMatchFragment();
-
+             if (intent.getStringExtra("from").equalsIgnoreCase("chat")) setChatFragment();
+             else setMatchFragment();
         } else setMatchFragment();
 
     }
@@ -488,9 +483,8 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
     public void onPaymentSuccess(String s, PaymentData paymentData) {
 
         try {
-            if (CompanyPlansFragments.instance != null){
+            if (CompanyPlansFragments.instance != null)
                 CompanyPlansFragments.instance.setTransactionData(paymentData);
-            }
         } catch (Exception e) {
             Log.e("RazorPay", "Exception in onPaymentSuccess", e);
         }
@@ -506,9 +500,8 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         try {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             SimpleDateFormat formatout = new SimpleDateFormat("dd MM yyyy");
-            if (TextUtils.isEmpty(Config.GetLocationRefreshDate())){
-                callLocationList();
-            }else {
+            if (TextUtils.isEmpty(Config.GetLocationRefreshDate())) callLocationList();
+            else {
                 Date d1   = format.parse(Config.GetLocationRefreshDate());
                 Date d2 = format.parse(Calendar.getInstance().getTime().toString());
                 if (d1!=null && d2!=null){
@@ -517,14 +510,9 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
                     Date final1=formatout.parse(date1);
                     Date final2=formatout.parse(date2);
                     if (final1!=null && final2!=null){
-                        if(final1.compareTo(final2) != 0) {
-                            callLocationList();
-                        }
-                    }else {
-                        callLocationList();
-                    }
+                        if(final1.compareTo(final2) != 0) callLocationList();
+                    }else callLocationList();
                 }else    callLocationList();
-
             }
         } catch (ParseException e) {
             e.printStackTrace();

@@ -112,10 +112,8 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
                 et_search.setText("");
             });
             ll.removeView(v);
-            if (flowlay.getMeasuredHeight() > 400) {
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-            } else
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            if (flowlay.getMeasuredHeight() > 400) kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
+            else kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         };
 
     }
@@ -177,11 +175,6 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (s.toString().length() == 0) {
-            //  close.setVisibility(View.GONE);
-        } else {
-            //  close.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
@@ -225,9 +218,8 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("status").getAsBoolean()) {
-                        if (ProfileFragments.instance != null) {
+                        if (ProfileFragments.instance != null)
                             ProfileFragments.instance.setSkillFlowfromAddSkill(mArrayListdesiredindustries, obj);
-                        }
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }
@@ -291,9 +283,7 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
         flowlay.addView(linearLayoutF);
         mArrayListdesiredindustries.add(data);
         mArrayListid.add(id);
-        if (flowlay.getMeasuredHeight() > 400) {
-            kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-        } else
-            kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        if (flowlay.getMeasuredHeight() > 400) kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
+        else kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 }

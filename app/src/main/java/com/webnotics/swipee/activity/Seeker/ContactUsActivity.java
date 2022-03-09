@@ -58,9 +58,8 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
             case R.id.tv_next:
-                if (et_msg.getText().toString().replaceAll(" ", "").isEmpty()) {
-                    rest.showToast("Please write somethings");
-                } else {
+                if (et_msg.getText().toString().trim().isEmpty()) rest.showToast("Please write somethings");
+                else {
                     if (rest.isInterentAvaliable()) {
                         AppController.ShowDialogue("", mContext);
                         if (Config.isSeeker())
@@ -93,9 +92,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                         rest.showToast(msg);
                         finish();
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -125,9 +122,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                         rest.showToast(msg);
                         finish();
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

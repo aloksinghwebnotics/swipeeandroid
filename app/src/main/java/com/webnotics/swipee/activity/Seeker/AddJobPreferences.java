@@ -69,12 +69,9 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
             callSalaryList();
-        } else {
-            rest.AlertForInternet();
-        }
-        if (getIntent() != null) {
+        } else rest.AlertForInternet();
+        if (getIntent() != null)
             prefId = getIntent().getStringExtra("prefId") != null ? getIntent().getStringExtra("prefId") : "";
-        }
         iv_back = findViewById(R.id.iv_back);
         tv_save = findViewById(R.id.tv_save);
         spn_sallery = findViewById(R.id.spn_gender);
@@ -91,8 +88,7 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
         spn_sallery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0)
-                    spn_sallery.setAlpha(0.40f);
+                if (position == 0) spn_sallery.setAlpha(0.40f);
                 else spn_sallery.setAlpha(1);
             }
 
@@ -121,13 +117,10 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
 
             case R.id.tv_save:
 
-                if (stringListid.size() == 0) {
-                    rest.showToast("Select job location");
-                } else if (desiredIdList.size() == 0) {
-                    rest.showToast("Select desired industry");
-                } else if (spn_sallery.getSelectedItemPosition() == 0) {
-                    rest.showToast("Select salary");
-                } else {
+                if (stringListid.size() == 0) rest.showToast("Select job location");
+                else if (desiredIdList.size() == 0) rest.showToast("Select desired industry");
+                else if (spn_sallery.getSelectedItemPosition() == 0) rest.showToast("Select salary");
+                else {
                     if (rest.isInterentAvaliable()) {
                         AppController.ShowDialogue("", mContext);
                         HashMap<String, String> hashMap = new HashMap<>();
@@ -305,7 +298,6 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                                     ProfileFragments.instance.setPreferences(mArrayuseruserpreference);
                             }
                         }
-
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }

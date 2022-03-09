@@ -108,38 +108,23 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
         mCenterView = inflater.inflate(R.layout.layout_center, null);
         ImageView img_profile = mCenterView.findViewById(R.id.img_profile);
         Glide.with(mContext).load(Config.GetPICKURI()).error(R.drawable.ic_profile_select).into(img_profile);
-        iv_back.setOnClickListener(v -> {
-            onBackPressed();
-        });
-        iv_back1.setOnClickListener(v -> {
-            rl_allcompany.setVisibility(View.GONE);
-        });
+        iv_back.setOnClickListener(v -> onBackPressed());
+        iv_back1.setOnClickListener(v -> rl_allcompany.setVisibility(View.GONE));
         bubbleSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
             @Override
             public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
                 radiessprogress = progress;
                 if (fromUser) {
-                    if (progress <= 15) {
-                        bubbleSeekBar.setProgress(10);
-                    } else if (progress <= 25) {
-                        bubbleSeekBar.setProgress(20);
-                    } else if (progress <= 35) {
-                        bubbleSeekBar.setProgress(30);
-                    } else if (progress <= 45) {
-                        bubbleSeekBar.setProgress(40);
-                    } else if (progress <= 55) {
-                        bubbleSeekBar.setProgress(50);
-                    } else if (progress <= 65) {
-                        bubbleSeekBar.setProgress(60);
-                    } else if (progress <= 75) {
-                        bubbleSeekBar.setProgress(70);
-                    } else if (progress <= 85) {
-                        bubbleSeekBar.setProgress(80);
-                    } else if (progress <= 95) {
-                        bubbleSeekBar.setProgress(90);
-                    } else if (progress <= 100) {
-                        bubbleSeekBar.setProgress(100);
-                    }
+                    if (progress <= 15) bubbleSeekBar.setProgress(10);
+                    else if (progress <= 25) bubbleSeekBar.setProgress(20);
+                    else if (progress <= 35) bubbleSeekBar.setProgress(30);
+                    else if (progress <= 45) bubbleSeekBar.setProgress(40);
+                    else if (progress <= 55) bubbleSeekBar.setProgress(50);
+                    else if (progress <= 65) bubbleSeekBar.setProgress(60);
+                    else if (progress <= 75) bubbleSeekBar.setProgress(70);
+                    else if (progress <= 85) bubbleSeekBar.setProgress(80);
+                    else if (progress <= 95) bubbleSeekBar.setProgress(90);
+                    else if (progress <= 100) bubbleSeekBar.setProgress(100);
                 }
             }
 
@@ -230,9 +215,7 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
                         rest.showToast(userRaderView.getMessage());
                         AppController.loggedOut(mContext);
                         finish();
-                    } else {
-                        Toast.makeText(mContext, userRaderView.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    } else Toast.makeText(mContext, userRaderView.getMessage(), Toast.LENGTH_SHORT).show();
                 } else {
                     AppController.dismissProgressdialog();
                     rest.showToast("Something went wrong");

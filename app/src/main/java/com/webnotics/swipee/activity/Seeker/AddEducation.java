@@ -77,12 +77,7 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
         rl_enddate.setOnClickListener(this);
         tv_enddate.setOnClickListener(this);
         tv_startdate.setOnClickListener(this);
-        cb_pursuing.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                rl_enddate.setVisibility(View.INVISIBLE);
-            } else rl_enddate.setVisibility(View.VISIBLE);
-
-        });
+        cb_pursuing.setOnCheckedChangeListener((buttonView, isChecked) -> rl_enddate.setVisibility(isChecked ? View.INVISIBLE : View.VISIBLE));
         if (getIntent() != null) {
             if (getIntent().getStringExtra("user_education_id") != null) {
                 user_education_id = getIntent().getStringExtra("user_education_id") != null ? getIntent().getStringExtra("user_education_id") : "";
@@ -117,15 +112,15 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_save:
 
-                if (TextUtils.isEmpty(tv_college.getText().toString()) || TextUtils.isEmpty(collegeId)) {
+                if (TextUtils.isEmpty(tv_college.getText().toString()) || TextUtils.isEmpty(collegeId))
                     rest.showToast("Select College/University");
-                } else if (TextUtils.isEmpty(tv_degree.getText().toString()) || TextUtils.isEmpty(degreeId)) {
+                else if (TextUtils.isEmpty(tv_degree.getText().toString()) || TextUtils.isEmpty(degreeId))
                     rest.showToast("Select Degree");
-                } else if (TextUtils.isEmpty(tv_startdate.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_startdate.getText().toString()))
                     rest.showToast("Select Start Date");
-                } else if (TextUtils.isEmpty(tv_enddate.getText().toString()) && !cb_pursuing.isChecked()) {
+                else if (TextUtils.isEmpty(tv_enddate.getText().toString()) && !cb_pursuing.isChecked())
                     rest.showToast("Select End Date");
-                } else {
+                else {
                     if (rest.isInterentAvaliable()) {
                         HashMap<String, String> hashMap = new HashMap<>();
                         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
@@ -198,13 +193,11 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
         Date date;
         try {
             date = format.parse(dtStart);
-            {
                 Calendar c1 = Calendar.getInstance();
                 c1.setTime(date);
                 c1.add(Calendar.DATE, 1);
                 date = c1.getTime();
                 datePickerDialog.getDatePicker().setMinDate(date.getTime());
-            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -238,9 +231,8 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("status").getAsBoolean()) {
-                        if (ProfileFragments.instance != null) {
+                        if (ProfileFragments.instance != null)
                             ProfileFragments.instance.setEducationData(isEdit, response.body().has("data") ? response.body().get("data").isJsonObject() ? response.body().get("data").getAsJsonObject() : new JsonObject() : new JsonObject());
-                        }
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }

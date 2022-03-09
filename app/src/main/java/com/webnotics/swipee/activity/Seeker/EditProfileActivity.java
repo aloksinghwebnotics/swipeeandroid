@@ -191,25 +191,19 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_save:
-                if (TextUtils.isEmpty(et_fname.getText().toString())) {
+                if (TextUtils.isEmpty(et_fname.getText().toString()))
                     rest.showToast("Enter first name");
-                } else if (TextUtils.isEmpty(et_lname.getText().toString())) {
-                    rest.showToast("Enter last name");
-                } else if (genderId == 0) {
-                    rest.showToast("Select gender");
-                } else if (TextUtils.isEmpty(tv_dob.getText().toString())) {
-                    rest.showToast("Select DOB");
-                } else if (TextUtils.isEmpty(countryId)) {
-                    rest.showToast("Select country");
-                } else if (TextUtils.isEmpty(stateId)) {
-                    rest.showToast("Select state");
-                } else if (TextUtils.isEmpty(cityId)) {
-                    rest.showToast("Select city");
-                } else {
+                else if (TextUtils.isEmpty(et_lname.getText().toString())) rest.showToast("Enter last name");
+                else if (genderId == 0) rest.showToast("Select gender");
+                else if (TextUtils.isEmpty(tv_dob.getText().toString())) rest.showToast("Select DOB");
+                else if (TextUtils.isEmpty(countryId)) rest.showToast("Select country");
+                else if (TextUtils.isEmpty(stateId)) rest.showToast("Select state");
+                else if (TextUtils.isEmpty(cityId)) rest.showToast("Select city");
+                else {
                     MultipartBody.Part body1 = null;
                     MultipartBody.Part video = null;
                     File file = new File(picturePath);
-                    if (file != null && file.exists()) {
+                    if (file.exists()) {
                         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                         body1 = MultipartBody.Part.createFormData(ParaName.KEY_PROFILEIMAGE, file.getName(), requestFile);
                     }
@@ -243,11 +237,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 finish();
                 break;
             case R.id.civ_profile:
-                if (!TextUtils.isEmpty(picturePath)) {
-                    AppController.callFullImage(mContext, picturePath);
-                } else if (!TextUtils.isEmpty(Config.GetPICKURI())) {
-                    AppController.callFullImage(mContext, Config.GetPICKURI());
-                }
+                if (!TextUtils.isEmpty(picturePath)) AppController.callFullImage(mContext, picturePath);
+                else if (!TextUtils.isEmpty(Config.GetPICKURI())) AppController.callFullImage(mContext, Config.GetPICKURI());
 
                 break;
             case R.id.iv_edit:
@@ -284,7 +275,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         datePickerDialog.show();
     }
@@ -337,22 +327,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
-        tv_gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(intent, IMG_RESULT);
-                bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
+        tv_gallery.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, IMG_RESULT);
+            bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
-        tv_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+        tv_cancel.setOnClickListener(v -> bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED));
 
     }
 

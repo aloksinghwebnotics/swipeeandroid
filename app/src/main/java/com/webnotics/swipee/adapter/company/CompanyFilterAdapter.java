@@ -19,6 +19,7 @@ import com.webnotics.swipee.model.seeker.FilterModelSelected;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 
 public class CompanyFilterAdapter extends RecyclerView.Adapter<CompanyFilterAdapter.MyViewHolder> implements Filterable {
@@ -69,71 +70,47 @@ public class CompanyFilterAdapter extends RecyclerView.Adapter<CompanyFilterAdap
             holder.rb_radio.setVisibility(View.GONE);
             holder.chkimg.setVisibility(View.VISIBLE);
         }
-        if (TextUtils.isEmpty(data.get(position).getState())) {
-            holder.tv_state.setVisibility(View.GONE);
-        } else holder.tv_state.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(data.get(position).getState())) holder.tv_state.setVisibility(View.GONE);
+        else holder.tv_state.setVisibility(View.VISIBLE);
+
         holder.itemView.setOnClickListener(v -> {
             if (data.get(position).isDistance()) {
-                if (oldHolder != null) {
-                    oldHolder.rb_radio.setChecked(false);
-                }
+                if (oldHolder != null) oldHolder.rb_radio.setChecked(false);
                 oldHolder = holder;
                 if (data.get(position).isSelected()) {
-                    for (int i = 0; i < data.size(); i++) {
+                    IntStream.range(0, data.size()).forEach(i -> {
                         mContext.setSelectedFilterPosition(data.get(i).getId(), false);
                         data.get(i).setSelected(false);
                         data1.get(i).setSelected(false);
-                    }
+                    });
                     holder.rb_radio.setChecked(false);
                     data.get(position).setSelected(false);
                     mContext.setSelectedFilterPosition(data.get(position).getId(), false);
-                    for (int i = 0; i < data1.size(); i++) {
-                        if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())) {
-                            data1.get(i).setSelected(false);
-                            break;
-                        }
-                    }
+                    IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(false));
                 } else {
-                    for (int i = 0; i < data.size(); i++) {
+                    IntStream.range(0, data.size()).forEach(i -> {
                         mContext.setSelectedFilterPosition(data.get(i).getId(), false);
                         data.get(i).setSelected(false);
                         data1.get(i).setSelected(false);
-                    }
+                    });
                     holder.rb_radio.setChecked(true);
                     data.get(position).setSelected(true);
                     mContext.setSelectedFilterPosition(data.get(position).getId(), true);
-                    for (int i = 0; i < data1.size(); i++) {
-                        if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())) {
-                            data1.get(i).setSelected(true);
-                            break;
-                        }
-                    }
+                    IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(true));
                 }
             } else {
                 if (data.get(position).isSelected()) {
                     holder.chkimg.setChecked(false);
                     data.get(position).setSelected(false);
                     mContext.setSelectedFilterPosition(data.get(position).getId(), false);
-                    for (int i = 0; i < data1.size(); i++) {
-                        if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())) {
-                            data1.get(i).setSelected(false);
-                            break;
-                        }
-                    }
+                    IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(false));
                 } else {
                     holder.chkimg.setChecked(true);
                     data.get(position).setSelected(true);
                     mContext.setSelectedFilterPosition(data.get(position).getId(), true);
-                    for (int i = 0; i < data1.size(); i++) {
-                        if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())) {
-                            data1.get(i).setSelected(true);
-                            break;
-                        }
-                    }
+                    IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(true));
                 }
             }
-
-
         });
     }
 
@@ -151,10 +128,7 @@ public class CompanyFilterAdapter extends RecyclerView.Adapter<CompanyFilterAdap
 
     @Override
     public Filter getFilter() {
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
-
+        if (filter == null) filter = new CustomFilter();
         return filter;
     }
 
@@ -188,7 +162,7 @@ public class CompanyFilterAdapter extends RecyclerView.Adapter<CompanyFilterAdap
                 constraint = constraint.toString().toUpperCase();
                 ArrayList<FilterModelSelected> filters = new ArrayList<FilterModelSelected>();
                 //get specific items
-                for (int i = 0; i < data1.size(); i++) {
+                for (int i = 0; i < data1.size(); i++)
                     if (data1.get(i).getName().toUpperCase().contains(constraint) || data1.get(i).getState().toUpperCase().contains(constraint)) {
                         FilterModelSelected p = new FilterModelSelected();
                         p.setName(data1.get(i).getName());
@@ -198,7 +172,6 @@ public class CompanyFilterAdapter extends RecyclerView.Adapter<CompanyFilterAdap
                         p.setDistance(data1.get(i).isDistance());
                         filters.add(p);
                     }
-                }
                 results.count = filters.size();
                 results.values = filters;
             } else {

@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v12 -> progressdialog.dismiss());
                 try {
                     progressdialog.show();
-                }catch (Exception e){}
+                }catch (Exception ignored){}
 
                 break;
 
@@ -137,9 +137,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         }else rest.showToast(responseBody.get("message").getAsString());
 
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

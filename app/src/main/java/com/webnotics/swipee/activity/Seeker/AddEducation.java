@@ -146,9 +146,9 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.rl_enddate:
             case R.id.tv_enddate:
-                if (TextUtils.isEmpty(tv_startdate.getText().toString())) {
+                if (TextUtils.isEmpty(tv_startdate.getText().toString()))
                     rest.showToast("Select Start Date First");
-                } else setEndDate();
+                else setEndDate();
                 break;
             case R.id.rl_startdate:
             case R.id.tv_startdate:
@@ -236,10 +236,7 @@ public class AddEducation extends AppCompatActivity implements View.OnClickListe
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

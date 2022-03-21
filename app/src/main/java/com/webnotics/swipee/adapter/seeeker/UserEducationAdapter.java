@@ -70,43 +70,30 @@ public class UserEducationAdapter extends BaseAdapter {
         mtxtdesn.setText(mUserEduArrayList.get(pos).getDegree_name());
         descer.setText("");
         descer.setVisibility(View.GONE);
-        if (mUserEduArrayList.size()>1){
-            iv_delete.setVisibility(View.VISIBLE);
-        }else iv_delete.setVisibility(View.GONE);
+        if (mUserEduArrayList.size()>1) iv_delete.setVisibility(View.VISIBLE);
+        else iv_delete.setVisibility(View.GONE);
 
-        if (mUserEduArrayList.get(pos).getCurrently_pursuing().equalsIgnoreCase("N")) {
+        if (mUserEduArrayList.get(pos).getCurrently_pursuing().equalsIgnoreCase("N"))
             mtxtyear.setText(MessageFormat.format("{0} - {1}", mUserEduArrayList.get(pos).getFrom(), mUserEduArrayList.get(pos).getTo()));
-
-        } else {
+        else
             mtxtyear.setText(MessageFormat.format("{0}{1}", mUserEduArrayList.get(pos).getFrom(), mContext.getString(R.string.present)));
-        }
-        iv_edit.setOnClickListener(new View.OnClickListener() {
-                                       @Override
-                                       public void onClick(View v) {
-                                           mContext.startActivity(new Intent(mContext, AddEducation.class).putExtra("user_education_id",mUserEduArrayList.get(pos).getUser_education_id())
-                                                   .putExtra("college_university_name",mUserEduArrayList.get(pos).getCollege_university_name())
-                                                   .putExtra("college_university_id",mUserEduArrayList.get(pos).getCollege_university_id())
-                                                   .putExtra("degree_level_id",mUserEduArrayList.get(pos).getDegree_level_id())
-                                                   .putExtra("start_date",mUserEduArrayList.get(pos).getStart_date())
-                                                   .putExtra("end_date",mUserEduArrayList.get(pos).getEnd_date())
-                                                   .putExtra("degree_level",mUserEduArrayList.get(pos).getDegree_level())
-                                                   .putExtra("degree_type_id",mUserEduArrayList.get(pos).getDegree_type_id())
-                                                   .putExtra("degree_name",mUserEduArrayList.get(pos).getDegree_name())
-                                                   .putExtra("currently_pursuing",mUserEduArrayList.get(pos).getCurrently_pursuing())
-                                                   .putExtra("edit",true)
+        iv_edit.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AddEducation.class).putExtra("user_education_id",mUserEduArrayList.get(pos).getUser_education_id())
+                .putExtra("college_university_name",mUserEduArrayList.get(pos).getCollege_university_name())
+                .putExtra("college_university_id",mUserEduArrayList.get(pos).getCollege_university_id())
+                .putExtra("degree_level_id",mUserEduArrayList.get(pos).getDegree_level_id())
+                .putExtra("start_date",mUserEduArrayList.get(pos).getStart_date())
+                .putExtra("end_date",mUserEduArrayList.get(pos).getEnd_date())
+                .putExtra("degree_level",mUserEduArrayList.get(pos).getDegree_level())
+                .putExtra("degree_type_id",mUserEduArrayList.get(pos).getDegree_type_id())
+                .putExtra("degree_name",mUserEduArrayList.get(pos).getDegree_name())
+                .putExtra("currently_pursuing",mUserEduArrayList.get(pos).getCurrently_pursuing())
+                .putExtra("edit",true)
 
-                                           );
-                                       }
+        ));
 
-
-                                   });
-
-        iv_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                        if (ProfileFragments.instance!=null)
-                            ProfileFragments.instance.deleteEducation(mUserEduArrayList.get(pos).getUser_education_id());
-            }
+        iv_delete.setOnClickListener(v -> {
+                    if (ProfileFragments.instance!=null)
+                        ProfileFragments.instance.deleteEducation(mUserEduArrayList.get(pos).getUser_education_id());
         });
        /* rellay.setOnClickListener(view -> {
             Intent intent  =   new Intent(mContext, AddEducation.class);

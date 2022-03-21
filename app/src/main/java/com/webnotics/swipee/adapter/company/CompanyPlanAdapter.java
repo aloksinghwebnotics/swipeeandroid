@@ -63,23 +63,20 @@ public class CompanyPlanAdapter extends RecyclerView.Adapter<CompanyPlanAdapter.
             String post_limit=data.get(position).getAsJsonObject().get("post_limit").getAsString();
             mContext.setPlan(is_purchase,package_price,package_id,package_name,package_type,post_limit);
         }
-        holder.rb_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oldHolder.rb_plan.setChecked(false);
-                oldHolder.rl_planDetail.setBackgroundResource(R.drawable.gray_stroke_round_bk);
-                oldHolder=holder;
-                holder.rb_plan.setChecked(true);
-                holder.rl_planDetail.setBackgroundResource(R.drawable.primary_stroke_round);
-                int is_purchase=data.get(position).getAsJsonObject().get("is_purchase").getAsInt();
-                int package_price=data.get(position).getAsJsonObject().get("package_price").getAsInt();
-                String package_id=data.get(position).getAsJsonObject().get("package_id").getAsString();
-                String package_name=data.get(position).getAsJsonObject().get("package_name").getAsString();
-                String package_type=data.get(position).getAsJsonObject().get("package_type").getAsString();
-                String post_limit=data.get(position).getAsJsonObject().get("post_limit").getAsString();
-                mContext.setPlan(is_purchase,package_price,package_id,package_name,package_type,post_limit);
+        holder.rb_plan.setOnClickListener(v -> {
+            oldHolder.rb_plan.setChecked(false);
+            oldHolder.rl_planDetail.setBackgroundResource(R.drawable.gray_stroke_round_bk);
+            oldHolder=holder;
+            holder.rb_plan.setChecked(true);
+            holder.rl_planDetail.setBackgroundResource(R.drawable.primary_stroke_round);
+            int is_purchase=data.get(position).getAsJsonObject().get("is_purchase").getAsInt();
+            int package_price=data.get(position).getAsJsonObject().get("package_price").getAsInt();
+            String package_id=data.get(position).getAsJsonObject().get("package_id").getAsString();
+            String package_name=data.get(position).getAsJsonObject().get("package_name").getAsString();
+            String package_type=data.get(position).getAsJsonObject().get("package_type").getAsString();
+            String post_limit=data.get(position).getAsJsonObject().get("post_limit").getAsString();
+            mContext.setPlan(is_purchase,package_price,package_id,package_name,package_type,post_limit);
 
-            }
         });
     }
 

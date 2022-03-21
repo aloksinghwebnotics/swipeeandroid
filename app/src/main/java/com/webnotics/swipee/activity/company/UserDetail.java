@@ -159,7 +159,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         if (!TextUtils.isEmpty(name))
             tv_username.setText(MessageFormat.format("{0}''s Profile", name));
 
-
         if (rest.isInterentAvaliable()) {
             if (!TextUtils.isEmpty(userId)) {
                 AppController.ShowDialogue("", mContext);
@@ -189,14 +188,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
             }
 
         });
-        iv_more.setOnClickListener(v -> {
-            if (ll_job_action.getVisibility() == View.VISIBLE) {
-                ll_job_action.setVisibility(View.GONE);
-            } else {
-                ll_job_action.setVisibility(View.VISIBLE);
-
-            }
-        });
+        iv_more.setOnClickListener(v -> ll_job_action.setVisibility(ll_job_action.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE));
         tv_block.setOnClickListener(v -> blockUserPopup());
         tv_report.setOnClickListener(v -> {
             ll_job_action.setVisibility(View.GONE);
@@ -291,8 +283,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
 
         ll_job_action.setVisibility(View.GONE);
     }
@@ -308,12 +299,9 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                         setBackPressed();
                         AppController.loggedOut(mContext);
 
-                    } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
-                        rest.showToast(response.body().get("message").getAsString());
+                    } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean())
                         setBackPressed();
-                    } else {
-                        rest.showToast(response.body().get("message").getAsString());
-                    }
+                    else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -337,11 +325,8 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                         setBackPressed();
                         AppController.loggedOut(mContext);
                     } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
-                        rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
-                    } else {
-                        rest.showToast(response.body().get("message").getAsString());
-                    }
+                    } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -353,8 +338,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         });
 
     }
-
-
 
     public void setBackPressed() {
         if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())) {
@@ -486,7 +469,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                 UserPreferenceAdapter adapter = new UserPreferenceAdapter(mContext, mArrayuseruserpreference);
                                 list_preferences.setAdapter(adapter);
                                 list_preferences.setDivider(null);
-
                                 tv_title_prefrences.setVisibility(View.VISIBLE);
                                 list_preferences.setVisibility(View.VISIBLE);
 
@@ -560,21 +542,17 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                             if (date2.before(calendarDate) && date3.after(calendarDate)) {
                                                 join.setVisibility(View.VISIBLE);
                                                 iv_more.setVisibility(View.GONE);
-                                                if (appointment_type.equalsIgnoreCase("chat")) {
+                                                if (appointment_type.equalsIgnoreCase("chat"))
                                                     iv_meetingType.setImageResource(R.drawable.ic_icon_material_chat_bubble);
-                                                } else if (appointment_type.equalsIgnoreCase("online_meeting")) {
+                                                else if (appointment_type.equalsIgnoreCase("online_meeting"))
                                                     iv_meetingType.setImageResource(R.drawable.ic_icon_awesome_video_fill);
-                                                } else if (appointment_type.equalsIgnoreCase("call")) {
+                                                else if (appointment_type.equalsIgnoreCase("call"))
                                                     iv_meetingType.setImageResource(R.drawable.ic_telephonefill);
-                                                }
-                                                ll_appointment.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        Intent resultIntent = new Intent(mContext, AppointmentDetail.class);
-                                                        resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, appointment_id);
-                                                        resultIntent.putExtra("from", UserDetail.class.getSimpleName());
-                                                        mContext.startActivity(resultIntent);
-                                                    }
+                                                ll_appointment.setOnClickListener(v -> {
+                                                    Intent resultIntent = new Intent(mContext, AppointmentDetail.class);
+                                                    resultIntent.putExtra(ParaName.KEY_APPOINTMENTID, appointment_id);
+                                                    resultIntent.putExtra("from", UserDetail.class.getSimpleName());
+                                                    mContext.startActivity(resultIntent);
                                                 });
                                             } else join.setVisibility(View.GONE);
                                         }
@@ -761,10 +739,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                             rl_main.setVisibility(View.VISIBLE);
                         }
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -922,12 +897,8 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                         } else if (responseBody.get("status").getAsBoolean()) {
                             setAction(action);
                         }
-                        rest.showToast(responseBody.get("message").getAsString());
-
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -952,7 +923,6 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                         setBackPressed();
                         AppController.loggedOut(mContext);
                     } else if (repo.get("status").getAsBoolean()) {
-                        rest.showToast(repo.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", UserDetail.class.getSimpleName()));
                         UserDetail.instance.setBackPressed();
                     } else rest.showToast(repo.get("message").getAsString());
@@ -969,10 +939,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
 
     @Override
     protected void onPause() {
-
-        if (vv_video != null) {
-            vv_video.pausePlayer();
-        }
+        if (vv_video != null) vv_video.pausePlayer();
         super.onPause();
     }
 

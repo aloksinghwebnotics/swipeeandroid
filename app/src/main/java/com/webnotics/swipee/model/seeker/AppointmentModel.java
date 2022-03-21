@@ -72,6 +72,15 @@ public class AppointmentModel {
         String appointment_date;
         String appointment_start_at;
         String appointment_end_at;
+        String appointment_date_time;
+
+        public String getAppointment_date_time() {
+            return appointment_date_time;
+        }
+
+        public void setAppointment_date_time(String appointment_date_time) {
+            this.appointment_date_time = appointment_date_time;
+        }
 
         public String getAppointment_id() {
             return appointment_id;

@@ -43,9 +43,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         tv_seeker = findViewById(R.id.tv_seeker);
         tv_recruiter = findViewById(R.id.tv_recruiter);
         iv_back = findViewById(R.id.iv_back);
-        if (getIntent()!=null){
-            isSeeker=getIntent().getBooleanExtra("isSeeker",true);
-        }
+        if (getIntent()!=null) isSeeker = getIntent().getBooleanExtra("isSeeker", true);
         if (isSeeker){
             tv_seeker.setBackgroundResource(R.drawable.white_semiround_bg);
             tv_recruiter.setBackgroundResource(0);
@@ -70,19 +68,14 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_submit:
 
                 String email = et_email.getText().toString();
-                if (TextUtils.isEmpty(email)) {
-                    rest.showToast("Please enter email address.");
-                } else if (!Config.isEmailValid(email)) {
-                    rest.showToast("Please enter a valid email address.");
-                } else {
+                if (TextUtils.isEmpty(email)) rest.showToast("Please enter email address.");
+                else if (!Config.isEmailValid(email)) rest.showToast("Please enter a valid email address.");
+                else {
                     if (rest.isInterentAvaliable()) {
                          AppController.ShowDialogue("", mContext);
-                         if (isSeeker)
-                                   seekerForgot(email);
+                         if (isSeeker) seekerForgot(email);
                          else recruiterForgot(email);
-                    } else {
-                        rest.AlertForInternet();
-                    }
+                    } else rest.AlertForInternet();
                 }
                 break;
 
@@ -119,9 +112,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     if (responseBody.has("message"))
                     startActivity(new Intent(mContext,ForgotConfirm.class).putExtra("isSeeker",isSeeker).putExtra("email",email));
                     finish();
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -141,9 +132,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     if (responseBody.has("message"))
                     startActivity(new Intent(mContext,ForgotConfirm.class).putExtra("isSeeker",isSeeker).putExtra("email",email));
                     finish();
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
             }
 
             @Override

@@ -21,6 +21,7 @@ import com.webnotics.swipee.R;
 import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.seeeker.AppliedJobsAdapter;
+import com.webnotics.swipee.fragments.seeker.MatchFragments;
 import com.webnotics.swipee.model.seeker.AppliedJobData;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.SwipeeApiClient;
@@ -119,10 +120,7 @@ public class SavedJobsActivity extends AppCompatActivity {
                         ll_nodata.setVisibility(View.VISIBLE);
                         rv_savedjob.setVisibility(View.GONE);
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -149,15 +147,23 @@ public class SavedJobsActivity extends AppCompatActivity {
                             appliedJobDataList.remove(pos);
                         if (appliedJobsAdapter != null)
                             appliedJobsAdapter.notifyDataSetChanged();
+                        if (appliedJobDataList.size()<=0){
+                            tv_nodata.setText("You haven't saved any job yet.");
+                            tv_nodata.setVisibility(View.VISIBLE);
+                            ll_nodata.setVisibility(View.VISIBLE);
+                            rv_savedjob.setVisibility(View.GONE);
+                            if (MatchFragments.instance!=null){
+                                try {
+                                    MatchFragments.instance.reload();
+                                }catch (Exception ignored){}
+                            }
+                        }
                     } else if (response.body().get("code").getAsInt() == 203) {
                         rest.showToast(response.body().get("message").getAsString());
                         AppController.loggedOut(mContext);
                         finish();
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -166,4 +172,6 @@ public class SavedJobsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

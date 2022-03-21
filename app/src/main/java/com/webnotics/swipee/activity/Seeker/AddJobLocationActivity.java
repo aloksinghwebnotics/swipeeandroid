@@ -313,7 +313,8 @@ public class AddJobLocationActivity extends AppCompatActivity implements View.On
                 FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 36));
-        layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 4), (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 4), (int) (mContext.getResources().getDisplayMetrics().density * 5));
+        layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 4), (int) (mContext.getResources().getDisplayMetrics().density * 5),
+                (int) (mContext.getResources().getDisplayMetrics().density * 4), (int) (mContext.getResources().getDisplayMetrics().density * 5));
         linearLayoutF.setLayoutParams(layoutParams);
         linearLayout.setLayoutParams(layoutParamsF);
         linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 4), 0, (int) (mContext.getResources().getDisplayMetrics().density * 4), 0);

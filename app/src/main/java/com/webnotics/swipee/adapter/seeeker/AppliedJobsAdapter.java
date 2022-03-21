@@ -78,20 +78,15 @@ public class AppliedJobsAdapter extends RecyclerView.Adapter<AppliedJobsAdapter.
                     mContext instanceof FeaturedJobsActivity ? FeaturedJobsActivity.class.getSimpleName():"";
             mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", from).putExtra("id", data.get(position).getJob_post_id()));
         });
-        holder.iv_favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SavedJobsActivity.instance!=null){
-                    SavedJobsActivity.instance.callSaveJobService(data.get(position).getJob_post_id(),position);
-                }
-            }
+        holder.iv_favorite.setOnClickListener(v -> {
+            if (SavedJobsActivity.instance!=null)
+                SavedJobsActivity.instance.callSaveJobService(data.get(position).getJob_post_id(), position);
         });
     }
 
 
     @Override
     public long getItemId(int pos) {
-
         return 0;
     }
 

@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -155,34 +154,18 @@ public class QuickstartConversationsManager {
                 @Override
                 public void onTokenExpired() {
                     Log.i(MainChatActivity.TAG, "on token expired");
-                    retrieveToken(new AccessTokenListener() {
-                        @Override
-                        public void receivedAccessToken(@Nullable String token, @Nullable Exception exception) {
-                            if (token != null) {
-                                conversationsClient.updateToken(token, new StatusListener() {
-                                    @Override
-                                    public void onSuccess() {
-                                        Log.d(MainChatActivity.TAG, "Refreshed access token.");
-                                    }
-                                });
-                            }
+                    retrieveToken((token, exception) -> {
+                        if (token != null) {
+                            conversationsClient.updateToken(token, () -> Log.d(MainChatActivity.TAG, "Refreshed access token."));
                         }
                     });
                 }
 
                 @Override
                 public void onTokenAboutToExpire() {
-                    retrieveToken(new AccessTokenListener() {
-                        @Override
-                        public void receivedAccessToken(@Nullable String token, @Nullable Exception exception) {
-                            if (token != null) {
-                                conversationsClient.updateToken(token, new StatusListener() {
-                                    @Override
-                                    public void onSuccess() {
-                                        Log.d(MainChatActivity.TAG, "Refreshed access token.");
-                                    }
-                                });
-                            }
+                    retrieveToken((token, exception) -> {
+                        if (token != null) {
+                            conversationsClient.updateToken(token, () -> Log.d(MainChatActivity.TAG, "Refreshed access token."));
                         }
                     });
                 }
@@ -480,13 +463,10 @@ public class QuickstartConversationsManager {
 
     private void loadPreviousMessages(final Conversation conversation) {
         conversation.getLastMessages(500,
-                new CallbackListener<List<Message>>() {
-                    @Override
-                    public void onSuccess(List<Message> result) {
-                        messages.addAll(result);
-                        if (conversationsManagerListener != null) {
-                            conversationsManagerListener.reloadMessages();
-                        }
+                result -> {
+                    messages.addAll(result);
+                    if (conversationsManagerListener != null) {
+                        conversationsManagerListener.reloadMessages();
                     }
                 });
     }

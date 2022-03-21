@@ -30,6 +30,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonObject;
 import com.twilio.audioswitch.selection.AudioDevice;
 import com.twilio.audioswitch.selection.AudioDeviceSelector;
 import com.twilio.video.AudioCodec;
@@ -63,15 +64,21 @@ import com.twilio.video.VideoView;
 import com.twilio.video.Vp8Codec;
 import com.twilio.video.Vp9Codec;
 import com.webnotics.swipee.R;
+import com.webnotics.swipee.UrlManager.AppController;
 import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.activity.Seeker.SeekerHomeActivity;
 import com.webnotics.swipee.activity.company.CompanyHomeActivity;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
 
 import java.util.Collections;
 import java.util.Locale;
+import java.util.Objects;
 
 import kotlin.Unit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VideoActivity extends AppCompatActivity {
     private static final int CAMERA_MIC_PERMISSION_REQUEST_CODE = 1;
@@ -163,6 +170,7 @@ public class VideoActivity extends AppCompatActivity {
     private int seconds=0;
     private Handler handler1;
     private Runnable runnable1;
+    private boolean isConnected=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -576,13 +584,7 @@ public class VideoActivity extends AppCompatActivity {
         muteActionFab.setOnClickListener(muteClickListener());
         handler =   new Handler();
 
-        runnable    =   new Runnable() {
-            @Override
-            public void run() {
-                connectToRoom(getIntent().getStringExtra("rroom"));
-
-            }
-        };
+        runnable    = () -> connectToRoom(getIntent().getStringExtra("rroom"));
         handler.postDelayed(runnable,2000);
     }
 
@@ -636,9 +638,8 @@ public class VideoActivity extends AppCompatActivity {
             /*
              * Only render video tracks that are subscribed to
              */
-            if (remoteVideoTrackPublication.isTrackSubscribed()) {
-                addRemoteParticipantVideo(remoteVideoTrackPublication.getRemoteVideoTrack());
-            }
+            if (remoteVideoTrackPublication.isTrackSubscribed())
+                addRemoteParticipantVideo(Objects.requireNonNull(remoteVideoTrackPublication.getRemoteVideoTrack()));
         }
 
         /*
@@ -688,7 +689,7 @@ public class VideoActivity extends AppCompatActivity {
              * Remove video only if subscribed to participant track
              */
             if (remoteVideoTrackPublication.isTrackSubscribed()) {
-                removeParticipantVideo(remoteVideoTrackPublication.getRemoteVideoTrack());
+                removeParticipantVideo(Objects.requireNonNull(remoteVideoTrackPublication.getRemoteVideoTrack()));
             }
         }
 
@@ -736,11 +737,7 @@ public class VideoActivity extends AppCompatActivity {
                                 = String
                                 .format(Locale.getDefault(),
                                         "%02d : %02d : %02d",hour, minutes, secs);
-
-                        // Set the text view text.
-                        Log.d("jdhfhfhfhfhf",time);
                         timer.setText(time);
-                        // Toast.makeText(mContext,time,Toast.LENGTH_SHORT).show();
                         seconds++;
                         handler1.postDelayed(this, 1000);
                     }
@@ -753,6 +750,7 @@ public class VideoActivity extends AppCompatActivity {
 
                 for (RemoteParticipant remoteParticipant : room.getRemoteParticipants()) {
                     addRemoteParticipant(remoteParticipant);
+                    isConnected=true;
                     break;
                 }
             }
@@ -796,6 +794,7 @@ public class VideoActivity extends AppCompatActivity {
 
             @Override
             public void onParticipantConnected(Room room, RemoteParticipant remoteParticipant) {
+                isConnected=true;
                 addRemoteParticipant(remoteParticipant);
 
             }
@@ -1079,7 +1078,10 @@ public class VideoActivity extends AppCompatActivity {
             /*
              * Disconnect from room
              */
-            if (room != null) {
+            if (!isConnected){
+                AppController.ShowDialogueWhite("",mContext);
+                callDisconnected(Config.isSeeker()?"Y":"N");
+            }else if (room != null) {
                 room.disconnect();
             }
            /* if(Config.isSeeker()){
@@ -1163,9 +1165,32 @@ public class VideoActivity extends AppCompatActivity {
 
     public void rejectCall(String appointment_id) {
         if (this.appointment_id.equalsIgnoreCase(appointment_id)){
+            isConnected=true;
             if (room != null) {
                 room.disconnect();
             }
         }
+    }
+
+
+    private void callDisconnected(String isSeeker) {
+
+        SwipeeApiClient.swipeeServiceInstance().disconnectedCall(Config.GetUserToken(),appointment_id,isSeeker).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                AppController.dismissProgressdialog();
+                if (room != null) {
+                    room.disconnect();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                AppController.dismissProgressdialog();
+                if (room != null) {
+                    room.disconnect();
+                }
+            }
+        });
     }
 }

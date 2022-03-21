@@ -49,12 +49,12 @@ public class NotificationUtils {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void showNotificationMessage(String title, String message, String timeStamp, Intent intent) {
-        showNotificationMessage(title, message, timeStamp, intent, null);
+    public void showNotificationMessage(boolean isCancel,String title, String message, String timeStamp, Intent intent) {
+        showNotificationMessage(isCancel,title, message, timeStamp, intent, null);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void showNotificationMessage(final String title, final String message, final String timeStamp, Intent intent, String imageUrl) {
+    public void showNotificationMessage(final  boolean isCancel,final String title, final String message, final String timeStamp, Intent intent, String imageUrl) {
         // Check for empty push message
         if (TextUtils.isEmpty(message))
             return;
@@ -86,11 +86,11 @@ public class NotificationUtils {
                 if (bitmap != null) {
                     showBigNotification(bitmap, mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
                 } else {
-                    showSmallNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
+                    showSmallNotification(isCancel,mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
                 }
             }
         } else {
-            showSmallNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
+            showSmallNotification(isCancel,mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
             if(!title.equalsIgnoreCase("Welcome Message")){
                 playNotificationSound();
             }
@@ -100,7 +100,7 @@ public class NotificationUtils {
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void showSmallNotification(NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent, Uri alarmSound) {
+    private void showSmallNotification(boolean cancel,NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent, Uri alarmSound) {
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         String CHANNEL_ID = "Swipee";
@@ -108,22 +108,26 @@ public class NotificationUtils {
         NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         CharSequence name = "Swipee";// The user-visible name of the channel.
         int importance = NotificationManager.IMPORTANCE_HIGH;
-        Notification notification;
-        @SuppressLint("WrongConstant") NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-        notificationManager.createNotificationChannel(mChannel);
-        notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
-                .setAutoCancel(true)
-                .setContentTitle(title)
-                .setContentIntent(resultPendingIntent)
-                .setSound(alarmSound)
-                .setChannelId(CHANNEL_ID)
-                .setStyle(inboxStyle)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
-                .setContentText(message)
-                .build();
+        if (cancel) notificationManager.cancelAll();
+        else {
+            Notification notification;
+            @SuppressLint("WrongConstant") NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            notificationManager.createNotificationChannel(mChannel);
+            notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
+                    .setAutoCancel(true)
+                    .setContentTitle(title)
+                    .setContentIntent(resultPendingIntent)
+                    .setSound(alarmSound)
+                    .setChannelId(CHANNEL_ID)
+                    .setStyle(inboxStyle)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
+                    .setContentText(message)
+                    .build();
 
             notificationManager.notify(Config.NOTIFICATION_ID, notification);
+        }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

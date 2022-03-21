@@ -30,6 +30,11 @@ import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
 import com.webnotics.swipee.rest.SwipeeApiClient;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -81,8 +86,10 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
                             tv_nodata.setVisibility(View.GONE);
                             ll_nodata.setVisibility(View.GONE);
                             rv_appointment.setVisibility(View.VISIBLE);
+                            ArrayList<CompanyAppointmentModel.Data> appointment_data=appointmentModel.getData().getAppointment_data();
+                            appointment_data.sort(new DateComparator());
                             rv_appointment.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-                            CompanyAppointmentAdapter stateAdapter = new CompanyAppointmentAdapter(CompanyAppoimentActivity.this, appointmentModel.getData().getAppointment_data());
+                            CompanyAppointmentAdapter stateAdapter = new CompanyAppointmentAdapter(CompanyAppoimentActivity.this, appointment_data);
                             rv_appointment.setAdapter(stateAdapter);
                         } else if (appointmentModel.getCode() == 203) {
                             rest.showToast(appointmentModel.getMessage());
@@ -165,6 +172,27 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
                 AppController.dismissProgressdialog();
             }
         });
+
+    }
+
+
+    private static class DateComparator implements Comparator<CompanyAppointmentModel.Data> {
+        public int compare(CompanyAppointmentModel.Data s2, CompanyAppointmentModel.Data s1) {
+            SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date date2 = formatDate.parse(s1.getAppointment_date_time());
+                Date date3 = formatDate.parse(s2.getAppointment_date_time());
+                if (date2 != null && date3 != null) {
+                    if (date2.before(date3)) return -1;
+                    else   if (date2.after(date3)) return 1;
+                    else return 0;
+                }else return 0;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+
+        }
 
     }
 }

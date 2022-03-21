@@ -216,10 +216,7 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
                         AppController.loggedOut(mContext);
                         finish();
                     } else Toast.makeText(mContext, userRaderView.getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

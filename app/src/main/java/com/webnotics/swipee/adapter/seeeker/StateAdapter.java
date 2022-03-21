@@ -61,25 +61,20 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.MyViewHolder
             oldHolder = holder;
             mContext.stateId = stateId;
             mContext.stateName = stateName;
-        }else {
-            holder.radioButton.setChecked(false);
-        }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (oldHolder != null) oldHolder.radioButton.setChecked(false);
-                IntStream.range(0, data.size()).forEach(i -> data.get(i).setSelected(false));
-                holder.radioButton.setChecked(true);
-                oldHolder = holder;
-                mContext.stateId = stateId;
-                mContext.stateName = stateName;
-                data.get(position).setSelected(true);
-                IntStream.range(0, filterList.size()).forEach(i -> {
-                    filterList.get(i).setSelected(false);
-                    if (filterList.get(i).getState_id().equalsIgnoreCase(data.get(position).getState_id()))
-                        filterList.get(i).setSelected(true);
-                });
-            }
+        }else holder.radioButton.setChecked(false);
+        holder.itemView.setOnClickListener(v -> {
+            if (oldHolder != null) oldHolder.radioButton.setChecked(false);
+            IntStream.range(0, data.size()).forEach(i -> data.get(i).setSelected(false));
+            holder.radioButton.setChecked(true);
+            oldHolder = holder;
+            mContext.stateId = stateId;
+            mContext.stateName = stateName;
+            data.get(position).setSelected(true);
+            IntStream.range(0, filterList.size()).forEach(i -> {
+                filterList.get(i).setSelected(false);
+                if (filterList.get(i).getState_id().equalsIgnoreCase(data.get(position).getState_id()))
+                    filterList.get(i).setSelected(true);
+            });
         });
     }
 
@@ -97,9 +92,7 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.MyViewHolder
 
     @Override
     public Filter getFilter() {
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
+        if (filter == null) filter = new CustomFilter();
 
         return filter;
     }
@@ -131,8 +124,8 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.MyViewHolder
                 constraint = constraint.toString().toUpperCase();
                 ArrayList<StateModel.Data> filters = new ArrayList<StateModel.Data>();
                 //get specific items
-                for (int i = 0; i < filterList.size(); i++) {
-                    if (filterList.get(i).getState_name().toUpperCase().contains(constraint) ) {
+                for (int i = 0; i < filterList.size(); i++)
+                    if (filterList.get(i).getState_name().toUpperCase().contains(constraint)) {
                         StateModel.Data p = new StateModel.Data();
                         p.setState_id(filterList.get(i).getState_id());
                         p.setState_name(filterList.get(i).getState_name());
@@ -140,7 +133,6 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.MyViewHolder
                         p.setSelected(filterList.get(i).isSelected());
                         filters.add(p);
                     }
-                }
                 results.count = filters.size();
                 results.values = filters;
             } else {

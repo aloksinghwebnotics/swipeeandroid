@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompanyProfile extends AppCompatActivity implements View.OnClickListener {
+public class CompanyProfile extends AppCompatActivity {
     Context mContext;
     Rest rest;
     CircleImageView civ_profile;
@@ -96,15 +96,10 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
         iv_back.setOnClickListener(v -> finish());
     }
 
-    @Override
-    public void onClick(View v) {
-    }
 
     @Override
     protected void onPause() {
-        if (vv_video!=null){
-            vv_video.pausePlayer();
-        }
+        if (vv_video!=null) vv_video.pausePlayer();
         super.onPause();
     }
 
@@ -114,7 +109,6 @@ public class CompanyProfile extends AppCompatActivity implements View.OnClickLis
             public void onResponse(@NonNull Call<CompanyProfileModel> call, @NonNull Response<CompanyProfileModel> response) {
                 AppController.dismissProgressdialog();
                 parsResponse(response);
-
             }
 
             @Override

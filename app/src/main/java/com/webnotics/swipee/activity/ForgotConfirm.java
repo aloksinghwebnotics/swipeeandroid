@@ -54,12 +54,9 @@ public class ForgotConfirm extends AppCompatActivity {
         tv_emailresend.setOnClickListener(v -> {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogueWhite("", mContext);
-                if (isSeeker)
-                    seekerForgot(email);
+                if (isSeeker) seekerForgot(email);
                 else recruiterForgot(email);
-            } else {
-                rest.AlertForInternet();
-            }
+            } else rest.AlertForInternet();
         });
         iv_back.setOnClickListener(v -> finish());
         btn_submit.setOnClickListener(v -> {
@@ -82,9 +79,7 @@ public class ForgotConfirm extends AppCompatActivity {
                     JsonObject responseBody= response.body();
                     if (responseBody.has("message"))
                         rest.showToast(responseBody.get("message").getAsString());
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -103,9 +98,7 @@ public class ForgotConfirm extends AppCompatActivity {
                     JsonObject responseBody= response.body();
                     if (responseBody.has("message"))
                         rest.showToast(responseBody.get("message").getAsString());
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 

@@ -1,6 +1,7 @@
 package com.webnotics.swipee.call;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -38,11 +39,13 @@ import retrofit2.Response;
 
 public class FirstVideoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Context mContext;
+        Context mContext;
     ImageView  calldecline, callaccept;
     ImageView img_profile;
     TextView name, email;
     Rest rest;
+    @SuppressLint("StaticFieldLeak")
+    public static FirstVideoActivity instance;
 /*
     private MediaPlayer mediaPlayer;
 */
@@ -67,6 +70,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void init() {
+        instance=this;
         mContext = this;
         rest = new Rest(mContext);
        /* try {
@@ -141,10 +145,8 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.callaccept:
                 Intent intent;
+                if (ringtone!=null && ringtone.isPlaying()) ringtone.stop();
                 if (getIntent().getStringExtra("appointment_type").equalsIgnoreCase("call")) {
-                    if (ringtone!=null && ringtone.isPlaying()) {
-                        ringtone.stop();
-                    }
                     intent = new Intent(mContext, AudioActivity.class);
                     intent.putExtra("imgurl", getIntent().getStringExtra("user_profile"));
                     intent.putExtra("user_name", getIntent().getStringExtra("user_name"));
@@ -152,9 +154,6 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
                     intent.putExtra("phnno", getIntent().getStringExtra("user_phone_code") + " " + getIntent().getStringExtra("user_mobile"));
 
                 } else {
-                    if (ringtone!=null && ringtone.isPlaying()) {
-                        ringtone.stop();
-                    }
                     intent = new Intent(mContext, VideoActivity.class).putExtra("name",getIntent().getStringExtra("user_name")).putExtra("appointment_id",getIntent().getStringExtra("Aid"));
                 }
 
@@ -177,17 +176,13 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
         }
 
         if (getIntent().getStringExtra("appointment_type").equalsIgnoreCase("call")){
-            if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3")){
+            if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3"))
                 userRejectAudioCall(getIntent().getStringExtra("Aid"));
-            }else {
-                companyRejectAudioCall(getIntent().getStringExtra("Aid"));
-            }
+            else companyRejectAudioCall(getIntent().getStringExtra("Aid"));
         } else{
-            if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3")){
+            if (Config.isSeeker() && !getIntent().getStringExtra("role_id").equalsIgnoreCase("3"))
                 userRejectVideoCall(getIntent().getStringExtra("Aid"));
-            }else {
-                companyRejectVideoCall(getIntent().getStringExtra("Aid"));
-            }
+            else companyRejectVideoCall(getIntent().getStringExtra("Aid"));
         }
     }
 
@@ -210,9 +205,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
                         finish();
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -243,9 +236,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
                         finish();
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -275,9 +266,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
                         finish();
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -307,9 +296,7 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
                         finish();
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -331,10 +318,19 @@ public class FirstVideoActivity extends AppCompatActivity implements View.OnClic
         try {
             if (countDownTimer!=null)
                 countDownTimer.cancel();
-            if (ringtone!=null && ringtone.isPlaying()) {
-                ringtone.stop();
-            }
-        }catch (Exception e){}
+            if (ringtone!=null && ringtone.isPlaying()) ringtone.stop();
+        }catch (Exception ignored){}
+        instance=null;
         super.onDestroy();
+    }
+
+    public void rejectCall(String appointment_id) {
+        if (appointment_id.equalsIgnoreCase(getIntent().getStringExtra("Aid"))){
+            if (Config.isSeeker())
+                startActivity(new Intent(mContext, SeekerHomeActivity.class));
+            else
+                startActivity(new Intent(mContext,CompanyHomeActivity.class));
+           finish();
+        }
     }
 }

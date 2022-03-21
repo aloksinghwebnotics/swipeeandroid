@@ -15,7 +15,6 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -110,7 +109,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             try {
                 getLastLocation();
-            }catch (Exception e){}
+            }catch (Exception ignored){}
         }
 
         et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -244,17 +243,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
 
                 }else*/
-                if (TextUtils.isEmpty(email)) {
-                    rest.showToast("Please enter email address");
-                } else if (!Config.isEmailValid(email)) {
-                    rest.showToast("Please enter a valid email address");
-                } else if (TextUtils.isEmpty(mobile)) {
-                    rest.showToast("Please enter phone number");
-                } else if (mobile.length() < 10) {
-                    rest.showToast("Please enter 10 digit phone number");
-                } else if (TextUtils.isEmpty(password)) {
-                    rest.showToast("Please enter password");
-                } else {
+                if (TextUtils.isEmpty(email)) rest.showToast("Please enter email address");
+                else if (!Config.isEmailValid(email)) rest.showToast("Please enter a valid email address");
+                else if (TextUtils.isEmpty(mobile)) rest.showToast("Please enter phone number");
+                else if (mobile.length() < 10) rest.showToast("Please enter 10 digit phone number");
+                else if (TextUtils.isEmpty(password)) rest.showToast("Please enter password");
+                else {
                     ///hit
                     //  FirebaseApp.initializeApp(mContext);
 
@@ -292,9 +286,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             hashMap.put(ParaName.KEY_ISEMAILVERIFY, "N");
                             callSignUpCompany(hashMap);
                         }
-                    } else {
-                        rest.AlertForInternet();
-                    }
+                    } else rest.AlertForInternet();
                 }
 
 
@@ -326,7 +318,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
-                    Log.d("dbhdfhkjgd", responseBody.toString());
                     if (responseBody.get("code").getAsInt()==200 &&responseBody.get("status").getAsBoolean()) {
                         Config.SetEmail(hashMap.get(ParaName.KEY_EMAIL));
                         Config.SetPhoneCode(hashMap.get(ParaName.KEY_PHONECODE));
@@ -343,9 +334,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString().replace(". ", ".\n"));
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -380,9 +369,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString().replace(". ", ".\n"));
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

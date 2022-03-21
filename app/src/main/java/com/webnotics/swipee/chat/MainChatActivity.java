@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -13,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,16 +78,16 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
     private final QuickstartConversationsManager quickstartConversationsManager = new QuickstartConversationsManager();
     private String name = "";
-    private String msg_id = "";
     private String appointment_id = "";
     private String user_id = "";
     private String job_id = "";
      public String appointment_number = "";
+     public String apply_id = "";
 
     Context mContext;
     private LinearLayoutManager layoutManager;
-    private ArrayList<Message> mainChatListTemp = new ArrayList<>();
-    private ArrayList<Message> mainChatList = new ArrayList<>();
+    private final ArrayList<Message> mainChatListTemp = new ArrayList<>();
+    private final ArrayList<Message> mainChatList = new ArrayList<>();
 
 
     private static final int REQUEST_IMAGE_CAPTURE = 212;
@@ -148,11 +146,12 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         if (getIntent() != null) {
             String image = getIntent().getStringExtra("image");
             name = getIntent().getStringExtra("name");
-            msg_id = getIntent().getStringExtra("msg_id");
+            String msg_id = getIntent().getStringExtra("msg_id");
             appointment_id = getIntent().getStringExtra("appointment_id");
             appointment_number = getIntent().getStringExtra("appointment_number");
             user_id = getIntent().getStringExtra("user_id");
             job_id = getIntent().getStringExtra("job_id");
+            apply_id = getIntent().hasExtra("apply_id")?getIntent().getStringExtra("apply_id"):"";
 
             Glide.with(mContext).load(image).error(R.drawable.ic_profile_select)
                     .placeholder(R.drawable.ic_profile_select)
@@ -197,11 +196,6 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
             tv_newmsgcount.setVisibility(View.GONE);
         });
 
-
-        // Token Method 1 - supplied from strings.xml as the test_access_token
-        //quickstartConversationsManager.initializeWithAccessToken(this, getString(R.string.test_access_token));
-
-        // Token Method 2 - retrieve the access token from a web server or Twilio Function
         retrieveTokenFromServer();
     }
 
@@ -212,20 +206,12 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
             public void receivedTokenResponse(boolean success, @Nullable Exception exception) {
 
                 if (success) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // need to modify user interface elements on the UI thread
-                            setTitle(identity);
-                        }
+                    runOnUiThread(() -> {
+                        setTitle(identity);
                     });
                 } else {
                     AppController.dismissProgressdialog();
                     String errorMessage = getString(R.string.error_retrieving_access_token);
-                    if (exception != null) {
-                        errorMessage = errorMessage + " " + exception.getLocalizedMessage();
-                    }
-                    Log.d(MainChatActivity.TAG, "Running Fine");
                 }
             }
         });
@@ -364,11 +350,9 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                                             .load(result)
                                             .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
                                             .into(holder.img);
-                                } catch (Exception ignored) {
-                                }
+                                } catch (Exception ignored) {}
                             });
-                        } catch (Exception ignored) {
-                        }
+                        } catch (Exception ignored) {}
 
                         holder.ll_main2.setBackgroundResource(R.drawable.ic_receiver_bubble);
                         holder.mainlay.setGravity(Gravity.END);
@@ -385,11 +369,9 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                                             .load(result)
                                             .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * 8))))
                                             .into(holder.img);
-                                } catch (Exception ignored) {
-                                }
+                                } catch (Exception ignored) {}
                             });
-                        } catch (Exception ignored) {
-                        }
+                        } catch (Exception ignored) {}
 
                         holder.mainlay.setGravity(Gravity.START);
                         holder.ll_main2.setGravity(Gravity.START);
@@ -500,8 +482,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
             holder.doclay.setOnClickListener(view -> {
                 try {
                     message.getAttachedMedia().get(0).getTemporaryContentUrl(result -> AppController.callResume(mContext, result));
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) {}
 
             });
             holder.img.setOnClickListener(view -> {
@@ -510,8 +491,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                         if (MainChatActivity.instance!=null)
                         AppController.callFullImage(mContext, result);
                     });
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) {}
             });
         }
 
@@ -531,21 +511,16 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
 
-            if (dy > 0) {
-                setScrolledData();
-            } else if (dy < 0) {
-                setScrolledData();
-            }
+            if (dy > 0) setScrolledData();
+            else if (dy < 0) setScrolledData();
         }
-
-
     }
 
     void setScrolledData() {
         if (mainChatListTemp.size() > 0) {
-            if (layoutManager.findLastVisibleItemPosition() != mainChatListTemp.size() - 1) {
+            if (layoutManager.findLastVisibleItemPosition() != mainChatListTemp.size() - 1)
                 rl_scroll.setVisibility(View.VISIBLE);
-            } else {
+            else {
                 rl_scroll.setVisibility(View.GONE);
                 tv_newmsgcount.setVisibility(View.GONE);
                 recentMsg = 0;
@@ -566,9 +541,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
         recentMsg = recentMsg + (mainChatList.size() - mainChatListTemp.size());
         mainChatListTemp.clear();
         mainChatListTemp.addAll(mainChatList);
-        if (messagesAdapter != null) {
-            messagesAdapter.notifyItemInserted(size);
-        }
+        if (messagesAdapter != null) messagesAdapter.notifyItemInserted(size);
         rl_scroll.setVisibility(View.GONE);
         recyclerView.addOnScrollListener(new CustomScrollListener());
         if (mainChatListTemp.size() > 0) {
@@ -577,9 +550,8 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                 tv_newmsgcount.setVisibility(View.VISIBLE);
                 if (listTemp.size() > 0) {
                     if (layoutManager.findLastVisibleItemPosition() == listTemp.size() - 1) {
-                        if (layoutManager != null) {
+                        if (layoutManager != null)
                             layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
-                        }
                         tv_newmsgcount.setVisibility(View.GONE);
                         recentMsg = 0;
                     } else {
@@ -600,9 +572,8 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                     }
 
                 } else {
-                    if (layoutManager != null) {
+                    if (layoutManager != null)
                         layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
-                    }
                     tv_newmsgcount.setVisibility(View.GONE);
                     recentMsg = 0;
                 }
@@ -612,12 +583,11 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
 
     private void callProfile() {
-        if (Config.isSeeker()) {
+        if (Config.isSeeker())
             startActivity(new Intent(mContext, CompanyProfile.class).putExtra("company_id", user_id));
-        } else {
+        else
             mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from", MainChatActivity.class.getSimpleName()).
-                    putExtra("id", user_id).putExtra("job_id", job_id).putExtra("name", name));
-        }
+                    putExtra("apply_id", apply_id).putExtra("id", user_id).putExtra("job_id", job_id).putExtra("name", name));
 
     }
 
@@ -628,10 +598,8 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
     }
 
     public void backPressed() {
-        if (Config.isSeeker()) {
-            startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "chat"));
-        } else
-            startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "chat"));
+        if (Config.isSeeker()) startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "chat"));
+        else startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "chat"));
         finish();
     }
 
@@ -718,9 +686,8 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
                                 }
                             });
-                            if (layoutManager != null) {
+                            if (layoutManager != null)
                                 layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
-                            }
                             rl_scroll.setVisibility(View.GONE);
                             tv_newmsgcount.setVisibility(View.GONE);
                             recentMsg = 0;
@@ -730,11 +697,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
                         }
 
                     })
-                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                    .setNegativeButton("CANCEL", (dialog, id) -> dialog.cancel());
 
             // create alert dialog
             AlertDialog alertDialog = alertDialogBuilder.create();
@@ -832,9 +795,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
                 }
             });
-            if (layoutManager != null) {
-                layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
-            }
+            if (layoutManager != null) layoutManager.scrollToPosition(mainChatListTemp.size() - 1);
             rl_scroll.setVisibility(View.GONE);
             tv_newmsgcount.setVisibility(View.GONE);
             recentMsg = 0;
@@ -845,8 +806,7 @@ public class MainChatActivity extends AppCompatActivity implements QuickstartCon
 
         try {
             mDIalog.show();
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
 
     }
 

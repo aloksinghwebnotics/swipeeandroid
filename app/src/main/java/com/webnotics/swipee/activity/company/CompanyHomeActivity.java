@@ -224,7 +224,6 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
         tv_email.setText(Config.GetEmail());
         Glide.with(mContext).load(Config.GetPICKURI()).error(R.drawable.ic_profile_select).placeholder(R.drawable.ic_profile_select).into(civ_profile);
 
-
         nearlay.setOnClickListener(this);
         matchlay.setOnClickListener(this);
         planlay.setOnClickListener(this);
@@ -538,7 +537,6 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
                         JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
                         writeToFile(mArrayListData.toString());
                         Config.SetLocationRefreshDate(Calendar.getInstance().getTime().toString());
-
                     }
                 }
 

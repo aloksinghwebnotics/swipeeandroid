@@ -187,13 +187,12 @@ public class AppointmentAction extends AppCompatActivity {
             String appointment_end_at = jsonObject.has("appointment_end_at") ? jsonObject.get("appointment_end_at").getAsString() : "";
             String job_title = jsonObject.has("job_title") ? jsonObject.get("job_title").getAsString() : "";
             holder.tv_jobtitle.setText(job_title);
-            if (appointment_type.equalsIgnoreCase("online_meeting")) {
+            if (appointment_type.equalsIgnoreCase("online_meeting"))
                 holder.iv_call.setImageResource(R.drawable.ic_video_player);
-            } else if (appointment_type.equalsIgnoreCase("call")) {
+            else if (appointment_type.equalsIgnoreCase("call"))
                 holder.iv_call.setImageResource(R.drawable.ic_telephone_meeting);
-            } else if (appointment_type.equalsIgnoreCase("chat")) {
+            else if (appointment_type.equalsIgnoreCase("chat"))
                 holder.iv_call.setImageResource(R.drawable.chat_img);
-            }
             holder.tv_profile.setText(appointment_number);
             SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
             SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
@@ -208,21 +207,12 @@ public class AppointmentAction extends AppCompatActivity {
                 e.printStackTrace();
             }
             holder.tv_date.setText(appointment_date);
-            if (action.equalsIgnoreCase("Cancel")) {
-                holder.tv_action.setText("Cancel Appointment");
-            } else if (action.equalsIgnoreCase("Reschedule")) {
-                holder.tv_action.setText("Reschedule Appointment");
-            }
+            if (action.equalsIgnoreCase("Cancel")) holder.tv_action.setText("Cancel Appointment");
+            else if (action.equalsIgnoreCase("Reschedule")) holder.tv_action.setText("Reschedule Appointment");
 
-            holder.tv_action.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (action.equalsIgnoreCase("Cancel")) {
-                        callCancel(jsonObject);
-                    } else if (action.equalsIgnoreCase("Reschedule")) {
-                        callReschedule(jsonObject);
-                    }
-                }
+            holder.tv_action.setOnClickListener(v -> {
+                if (action.equalsIgnoreCase("Cancel")) callCancel(jsonObject);
+                else if (action.equalsIgnoreCase("Reschedule")) callReschedule(jsonObject);
             });
 
         }
@@ -255,8 +245,6 @@ public class AppointmentAction extends AppCompatActivity {
                 tv_jobtitle = view.findViewById(R.id.tv_jobtitle);
             }
         }
-
-
     }
 
     private void callReschedule(JsonObject jsonObject) {
@@ -319,16 +307,13 @@ public class AppointmentAction extends AppCompatActivity {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
                 cancelAppointment(jsonObject.get("appointment_id").getAsString(),jsonObject.get("appointment_number").getAsString());
-            } else {
-                rest.AlertForInternet();
-            }
+            } else rest.AlertForInternet();
 
         });
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception e) {
-        }
+        } catch (Exception ignored) {}
     }
 
     public void cancelAppointment(String id, String appointment_number) {
@@ -353,7 +338,6 @@ public class AppointmentAction extends AppCompatActivity {
                     } else if (response.body().get("code").getAsInt() == 200 && responceBody.get("status").getAsBoolean()) {
                         setBackPressed();
                     } else rest.showToast(responceBody.get("message").getAsString());
-
                 } else rest.showToast("Something went wrong");
 
             }

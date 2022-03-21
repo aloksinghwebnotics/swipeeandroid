@@ -137,17 +137,13 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
                 if (rest.isInterentAvaliable()) {
                     AppController.ShowDialogue("", mContext);
                     callLanguageList();
-                } else {
-                    rest.AlertForInternet();
-                }
+                } else rest.AlertForInternet();
             }
         } else {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
                 callLanguageList();
-            } else {
-                rest.AlertForInternet();
-            }
+            } else rest.AlertForInternet();
         }
 
     }
@@ -190,11 +186,7 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
                         AppController.loggedOut(mContext);
                         finish();
                     }
-
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -279,10 +271,7 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

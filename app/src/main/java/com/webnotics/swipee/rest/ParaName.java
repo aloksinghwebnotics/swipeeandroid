@@ -141,5 +141,6 @@ public class ParaName {
     public static final String KEY_FCMMUTE = "fcm_mute";
     public static final String KEY_ISEMAILVERIFY = "is_email_verify";
     public static final String KEY_ISEPROFILEUPDATED = "is_profile_updated";
+    public static final String KEY_ISSEEKER = "is_seeker";
 
 }

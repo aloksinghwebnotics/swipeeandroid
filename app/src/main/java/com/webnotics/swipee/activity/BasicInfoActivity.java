@@ -98,8 +98,7 @@ public class BasicInfoActivity extends AppCompatActivity {
                 MobileVerificationScreen basefragment = new MobileVerificationScreen();
                 fragmentManager.beginTransaction().replace(R.id.frame_fragment, basefragment).commit();
             }
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
     }
 
     @Override

@@ -35,8 +35,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
         this.mContext = mContext;
         this.data = data;
-
-
     }
 
 

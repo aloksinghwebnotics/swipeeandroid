@@ -182,9 +182,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                         tv_back.setVisibility(View.VISIBLE);
                         name = et_name.getText().toString();
                         tv_heycompany.setText("Hey " + name + " !");
-                    } else {
-                        rest.showToast("Enter company name");
-                    }
+                    } else rest.showToast("Enter company name");
 
                 } else if (rl_about.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(et_industry.getText().toString()) || et_industry.getText().toString().replaceAll(" ", "").length() == 0) {
@@ -230,7 +228,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                                 video = MultipartBody.Part.createFormData(ParaName.KEY_COMPANYVIDEO, file1.getName(), requestFile1);
                             }
                         }
-                        if (file != null && file.exists()) {
+                        if (file.exists()) {
                             RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                             image = MultipartBody.Part.createFormData(ParaName.KEY_COMPANYLOGO, file.getName(), requestFile);
                             if (rest.isInterentAvaliable()) {
@@ -379,8 +377,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                     tv_pickimg.setVisibility(View.GONE);
                 }
             } catch (FileNotFoundException e) {
-            } catch (IOException e) {
-            }
+            } catch (IOException e) {}
         }
 
         if (requestCode == RESULT_CROP) {
@@ -407,9 +404,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                             iv_pickimg.setVisibility(View.GONE);
                             tv_pickimg.setVisibility(View.GONE);
                         }
-                    } catch (FileNotFoundException e) {
-                    } catch (IOException e) {
-                    }
+                    } catch (IOException ignored) {}
                 } catch (Exception e) {
                     if (tempfile != null) {
                         picturePath = tempfile.getAbsolutePath();
@@ -421,7 +416,6 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                         tv_pickimg.setVisibility(View.GONE);
                     }
                 }
-
             }
         }
     }
@@ -514,13 +508,8 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                         Config.SetIsSeeker(false);
                         mContext.startActivity(new Intent(mContext, CompanyHomeActivity.class));
                         getActivity().finish();
-                    } else {
-                        rest.showToast(response.body().get("message").getAsString());
-                    }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                    } else rest.showToast(response.body().get("message").getAsString());
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -562,8 +551,7 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
 
         try {
             progressdialog.show();
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
 
 
     }
@@ -646,15 +634,12 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
                             company_size = data.isJsonNull() ? new JsonArray() : data.has("company_size") ? data.get("company_size").getAsJsonArray() : new JsonArray();
                         }
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });

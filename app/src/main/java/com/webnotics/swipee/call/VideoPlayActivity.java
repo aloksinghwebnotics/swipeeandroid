@@ -2,7 +2,6 @@ package com.webnotics.swipee.call;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.VideoView;
@@ -43,12 +42,7 @@ public class VideoPlayActivity extends AppCompatActivity {
 
         videoView.requestFocus();
 
-        backImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        backImg.setOnClickListener(v -> onBackPressed());
 
         videoView.start();
 

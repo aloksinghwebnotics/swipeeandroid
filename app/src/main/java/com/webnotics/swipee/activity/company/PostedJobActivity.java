@@ -223,26 +223,21 @@ public class PostedJobActivity extends AppCompatActivity {
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (responceBody.get("code").getAsInt() == 200 && responceBody.get("status").getAsBoolean()) {
-                        for (int i = 0; i < jobList.size(); i++) {
-                            if (jobList.get(i).getJob_post_id().equalsIgnoreCase(id)) {
-                                jobList.get(i).setJobTypeCount(status);
-                                if (status == 1) {
-                                    jobList.get(i).setHiring_status_type("Closed");
-                                } else if (status == 0) {
-                                    jobList.get(i).setHiring_status_type("Open");
-                                    jobList.get(i).setHiring_status_type("Active");
-                                } else if (status == 2) {
-                                    jobList.get(i).setHiring_status_type("Open");
-                                    jobList.get(i).setHiring_status_type("InActive");
-                                }
+                        IntStream.range(0, jobList.size()).filter(i -> jobList.get(i).getJob_post_id().equalsIgnoreCase(id)).forEach(i -> {
+                            jobList.get(i).setJobTypeCount(status);
+                            if (status == 1) {
+                                jobList.get(i).setHiring_status_type("Closed");
+                            } else if (status == 0) {
+                                jobList.get(i).setHiring_status_type("Open");
+                                jobList.get(i).setHiring_status_type("Active");
+                            } else if (status == 2) {
+                                jobList.get(i).setHiring_status_type("Open");
+                                jobList.get(i).setHiring_status_type("InActive");
                             }
-                        }
+                        });
                         rest.showToast(responceBody.get("message").getAsString());
                         sortedData(spn_posted.getSelectedItemPosition());
-                    } else {
-                        rest.showToast(responceBody.get("message").getAsString());
-                    }
-
+                    } else rest.showToast(responceBody.get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -272,23 +267,19 @@ public class PostedJobActivity extends AppCompatActivity {
                         ll_nodata.setVisibility(View.GONE);
                         rv_appointment.setVisibility(View.VISIBLE);
                         ArrayList<PostedJobModel.Data> dataArrayList = new ArrayList<>(responceBody.getData().getFilter_jobs());
-                        for (int i = 0; i < dataArrayList.size(); i++) {
+                        IntStream.range(0, dataArrayList.size()).forEach(i -> {
                             if (dataArrayList.get(i).getHiring_status_type().equalsIgnoreCase("Closed"))
                                 dataArrayList.get(i).setJobTypeCount(1);
                             else if (dataArrayList.get(i).getHiring_status_type().equalsIgnoreCase("Open")) {
                                 if (dataArrayList.get(i).getJob_status_type().equalsIgnoreCase("Active"))
                                     dataArrayList.get(i).setJobTypeCount(0);
                                 else dataArrayList.get(i).setJobTypeCount(2);
-
                             }
-
-                        }
+                        });
                         jobList.addAll(dataArrayList);
                         finalJobList.clear();
                         finalJobList.addAll(dataArrayList);
-                        if (stateAdapter != null) {
-                            stateAdapter.notifyDataSetChanged();
-                        }
+                        if (stateAdapter != null) stateAdapter.notifyDataSetChanged();
                         isActiveLoaded = true;
                         if (finalJobList.size() > 0) {
                             tv_nodata.setVisibility(View.GONE);

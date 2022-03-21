@@ -75,7 +75,17 @@ public class CompanyAppointmentModel {
         String job_title;
         String company_action;
         String apply_id="";
+        String appointment_date_time="";
         ArrayList<String> skill_name;
+
+
+        public String getAppointment_date_time() {
+            return appointment_date_time;
+        }
+
+        public void setAppointment_date_time(String appointment_date_time) {
+            this.appointment_date_time = appointment_date_time;
+        }
 
         public String getApply_id() {
             return apply_id;

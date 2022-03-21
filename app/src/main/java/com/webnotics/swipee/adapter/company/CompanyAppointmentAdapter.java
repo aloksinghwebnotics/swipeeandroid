@@ -72,9 +72,9 @@ public class CompanyAppointmentAdapter extends RecyclerView.Adapter<CompanyAppoi
             holder.tv_vedio.setText("Chat");
         }
 
-        if (data.get(position).getCompany_action().equalsIgnoreCase("Shortlist")){
+        if (data.get(position).getCompany_action().equalsIgnoreCase("Shortlist"))
             holder.tv_shortlisted.setVisibility(View.VISIBLE);
-        }else  holder.tv_shortlisted.setVisibility(View.GONE);
+        else  holder.tv_shortlisted.setVisibility(View.GONE);
         Glide.with(mContext)
                 .load(data.get(position).getProfile_image())
                 .error(R.drawable.ic_profile_select)
@@ -97,24 +97,17 @@ public class CompanyAppointmentAdapter extends RecyclerView.Adapter<CompanyAppoi
         }
 
         holder.tv_cancel.setOnClickListener(v -> mContext.callCancel(data.get(position).getAppointment_id(),data.get(position).getAppointment_number(),data.get(position).getUser_id()));
-        holder.iv_call.setOnClickListener(v -> {
-            mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id()));
-        });
-        holder.tv_vedio.setOnClickListener(v -> {
-            mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id()));
-        });
+        holder.iv_call.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id())));
+        holder.tv_vedio.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id())));
         holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_id())));
 
         holder.civ_logo.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",CompanyAppoimentActivity.class.getSimpleName()).
                 putExtra("id",data.get(position).getUser_id()).putExtra("job_id",data.get(position).getJob_id())
-                .putExtra("name",data.get(position).getFirst_name()).putExtra("apply_id",data.get(position).getApply_id())));  holder.tv_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",CompanyAppoimentActivity.class.getSimpleName()).
-                        putExtra("id",data.get(position).getUser_id()).putExtra("job_id",data.get(position).getJob_id()).putExtra("name",data.get(position).getFirst_name()));
-            }
-        }); holder.tv_location.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",CompanyAppoimentActivity.class.getSimpleName()).
+                .putExtra("name",data.get(position).getFirst_name()).putExtra("apply_id",data.get(position).getApply_id())));
+        holder.tv_name.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",CompanyAppoimentActivity.class.getSimpleName()).putExtra("apply_id",data.get(position).getApply_id()).
                 putExtra("id",data.get(position).getUser_id()).putExtra("job_id",data.get(position).getJob_id()).putExtra("name",data.get(position).getFirst_name())));
+        holder.tv_location.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, UserDetail.class).putExtra("from",CompanyAppoimentActivity.class.getSimpleName()).
+                putExtra("id",data.get(position).getUser_id()).putExtra("job_id",data.get(position).getJob_id()).putExtra("apply_id",data.get(position).getApply_id()).putExtra("name",data.get(position).getFirst_name())));
 
     }
 

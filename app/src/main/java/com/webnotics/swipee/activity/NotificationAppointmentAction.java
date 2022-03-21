@@ -190,7 +190,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                 break;
             case R.id.tv_appointment:
                 startActivity(new Intent(mContext, RescheduleAppointment.class)
-                        .putExtra("company_id", company_id)
+                        .putExtra("company_id", Config.isSeeker()?company_id:user_id)
                         .putExtra("company_logo", company_logo)
                         .putExtra("company_name", company_name)
                         .putExtra("company_city_name", city)
@@ -199,7 +199,7 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                         .putExtra("posted_by", posted_by)
                         .putExtra("is_own_job", is_own_job)
                         .putExtra("apply_id", "")
-                        .putExtra("job_id", "")
+                        .putExtra("job_id", job_id)
                         .putExtra("appointment_id", appointmentId)
                         .putExtra("appointment_number", appointment_number)
                         .putExtra("appointment_type", appointment_type)
@@ -246,22 +246,17 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responceBody = response.body();
                     if (response.body().get("code").getAsInt() == 203) {
-                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null)
-                                NotificationActivity.instance.onBackPressed();
-                        }
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()))
+                            if (NotificationActivity.instance != null) NotificationActivity.instance.onBackPressed();
                         rest.showToast(response.body().get("message").getAsString());
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (responceBody.get("status").getAsBoolean()) {
-                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null)
-                                NotificationActivity.instance.onBackPressed();
-                        }
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()))
+                            if (NotificationActivity.instance != null) NotificationActivity.instance.onBackPressed();
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CompanyAppoimentActivity.class.getSimpleName()));
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());
-
                 } else rest.showToast("Something went wrong");
 
             }
@@ -284,22 +279,17 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
                     JsonObject responceBody = response.body();
                     if (response.body().get("code").getAsInt() == 203) {
                         rest.showToast(response.body().get("message").getAsString());
-                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null)
-                                NotificationActivity.instance.onBackPressed();
-                        }
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()))
+                            if (NotificationActivity.instance != null) NotificationActivity.instance.onBackPressed();
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("code").getAsInt() == 200 &&responceBody.get("status").getAsBoolean()) {
-                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-                            if (NotificationActivity.instance!=null)
-                                NotificationActivity.instance.onBackPressed();
-                        }
+                        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()))
+                            if (NotificationActivity.instance != null) NotificationActivity.instance.onBackPressed();
                         if (Config.isSeeker())
                             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());
-
                 } else rest.showToast("Something went wrong");
 
             }
@@ -313,10 +303,8 @@ public class NotificationAppointmentAction extends AppCompatActivity implements 
     }
 
     public void setBackPressed() {
-        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())){
-            if (NotificationActivity.instance!=null) NotificationActivity.instance.onBackPressed();
-        }
+        if (!from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()))
+            if (NotificationActivity.instance != null) NotificationActivity.instance.onBackPressed();
         finish();
-
     }
 }

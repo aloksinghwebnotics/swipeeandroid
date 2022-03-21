@@ -3,7 +3,6 @@ package com.webnotics.swipee.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 
 
 /**
@@ -25,18 +24,13 @@ public abstract class Basefragment extends Fragment {
         super.onResume();
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP
-                        && keyCode == KeyEvent.KEYCODE_BACK) {
-                    backPressed();
-                    return true;
-                }
-                return false;
+        getView().setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_UP
+                    && keyCode == KeyEvent.KEYCODE_BACK) {
+                backPressed();
+                return true;
             }
-
+            return false;
         });
     }
 

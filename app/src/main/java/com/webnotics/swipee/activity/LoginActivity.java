@@ -66,7 +66,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class  LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     EditText et_email, et_password;
     TextView tv_forgot, donothaveanaccount, tv_seeker, tv_recruiter;
     CheckBox cb_remember;
@@ -197,8 +197,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             if (!TextUtils.isEmpty(socialid))
                 setSocialLogin();
-
-
         } catch (JSONException e) {
             e.printStackTrace();
 
@@ -212,15 +210,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_signin:
 
-                String email1 = et_email.getText().toString();
+                String email1 = et_email.getText().toString().trim();
                 String password = et_password.getText().toString();
-                if (TextUtils.isEmpty(email1)) {
-                    rest.showToast("Please enter email address");
-                } else if (!Config.isEmailValid(email1)) {
-                    rest.showToast("Please enter a valid email address");
-                } else if (TextUtils.isEmpty(password)) {
-                    rest.showToast("Please enter password");
-                } else {
+                if (TextUtils.isEmpty(email1)) rest.showToast("Please enter email address");
+                else if (!Config.isEmailValid(email1)) rest.showToast("Please enter a valid email address");
+                else if (TextUtils.isEmpty(password)) rest.showToast("Please enter password");
+                else {
                     ///hit
                     if (rest.isInterentAvaliable()) {
                         AppController.ShowDialogue("", mContext);
@@ -246,9 +241,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (isSeeker)
                             callSeekerLoginService(hashMap);
                         else callRecruiterLoginService(hashMap);
-                    } else {
-                        rest.AlertForInternet();
-                    }
+                    } else rest.AlertForInternet();
 
                 }
 
@@ -325,12 +318,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (opr.isDone()) {
                 GoogleSignInResult result = opr.get();
                 handleSignInResult(result);
-            } else {
-                opr.setResultCallback(this::handleSignInResult);
-            }
-        } else {
-            rest.AlertForInternet();
-        }
+            } else opr.setResultCallback(this::handleSignInResult);
+        } else rest.AlertForInternet();
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
@@ -348,13 +337,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 email = acct.getEmail();
                 socialid = acct.getId();
-
-                Log.e("loginimageurl", "Name: " + personName + ", email: " + email
-                        + ", Image: " + personPhotoUrl);
                 socialtype = "gmail_social";
                 if (!TextUtils.isEmpty(socialid))
                     setSocialLogin();
-
             }
 
         } else {
@@ -385,15 +370,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             hashMap.put(ParaName.KEY_OAUTHUID, socialid);
             hashMap.put(ParaName.KEY_TIMEZONE, time_zone);
             if (isSeeker) {
-                hashMap.put(ParaName.KEY_EMAIL, email);
+                    hashMap.put(ParaName.KEY_EMAIL, email);
                 callSeekerSocialLoginService(hashMap);
             } else {
                 hashMap.put(ParaName.KEY_COMPANYEMAIL, email);
                 callRecruiterSocialLoginService(hashMap);
             }
-        } else {
-            rest.AlertForInternet();
-        }
+        } else rest.AlertForInternet();
     }
 
 
@@ -404,7 +387,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
-                    Log.d("responce", responseBody.toString());
+                    Log.d("response", responseBody.toString());
                     if (responseBody.get("code").getAsInt() == 200 && responseBody.get("status").getAsBoolean()) {
                         JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : null;
                         if (data != null && !data.isJsonNull()) {
@@ -459,9 +442,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -566,9 +547,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -641,9 +620,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -735,9 +712,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -776,14 +751,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 likedinnn.setClickable(true);
                 //Successfully signed in and retrieved data
                 try {
-                    if (data != null) {
-                        if (data.getParcelableExtra("social_login") != null) {
-                            LinkedInUser user = data.getParcelableExtra("social_login");
-                            setUserData(user);
-                        } else {
-                            Log.d("LINKEDINID", "" + data.getExtras());
-                        }
-
+                    if (data != null) if (data.getParcelableExtra("social_login") != null) {
+                        LinkedInUser user = data.getParcelableExtra("social_login");
+                        setUserData(user);
                     }
                 } catch (Exception ignored) {
                 }
@@ -807,12 +777,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     if (!TextUtils.isEmpty(socialid))
                         setSocialLogin();
-
                 }
             }
         } catch (Exception ignored) {
         }
-
-
     }
 }

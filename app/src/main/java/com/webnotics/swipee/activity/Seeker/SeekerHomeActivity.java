@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -184,13 +183,10 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                         else callLocation();
                     } else callCollegeList();
                 } else callCollegeList();
-
-
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -209,9 +205,7 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                     Date final1 = formatout.parse(date1);
                     Date final2 = formatout.parse(date2);
                     if (final1 != null && final2 != null) {
-                        if (final1.compareTo(final2) != 0) {
-                            callLocationList();
-                        }
+                        if (final1.compareTo(final2) != 0) callLocationList();
                     } else callLocationList();
                 } else callLocationList();
 
@@ -504,18 +498,14 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
             counter11.setText(MessageFormat.format("{0}", counter));
             counter11.setVisibility(View.VISIBLE);
         } else {
-            counter11.setText(MessageFormat.format("{0}", counter));
             counter11.setVisibility(View.GONE);
         }
     }
 
     public void isDrawerOpen() {
         if (drawer != null)
-            if (drawer.isDrawerOpen(Gravity.LEFT)) {
-                drawer.closeDrawer(Gravity.LEFT);
-            } else {
-                drawer.openDrawer(Gravity.LEFT);
-            }
+            if (drawer.isDrawerOpen(Gravity.LEFT)) drawer.closeDrawer(Gravity.LEFT);
+            else drawer.openDrawer(Gravity.LEFT);
     }
 
     @Override
@@ -533,14 +523,10 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null && intent.getStringExtra("from") != null) {
-            if (intent.getStringExtra("from").equalsIgnoreCase("near")) {
-                setNearFragment();
-            } else if (intent.getStringExtra("from").equalsIgnoreCase("chat")) {
-                setChatFragment();
-            } else setMatchFragment();
-
-        } else
-            setMatchFragment();
+            if (intent.getStringExtra("from").equalsIgnoreCase("near")) setNearFragment();
+            else if (intent.getStringExtra("from").equalsIgnoreCase("chat")) setChatFragment();
+            else setMatchFragment();
+        } else setMatchFragment();
     }
 
 
@@ -570,14 +556,14 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                                 Config.SetMobileVERIFY(true);
                                 Config.SetIsUserLogin(true);
                                 Config.SetId(employeeuserdetail.getData().getUser_profile_data().getUser_id());
-                                if (employeeuserdetail.getData().getUser_profile_data().getMiddle_name().length() != 0) {
+                                if (employeeuserdetail.getData().getUser_profile_data().getMiddle_name().length() != 0)
                                     Config.SetName(employeeuserdetail.getData().getUser_profile_data().getFirst_name() + " " +
                                             employeeuserdetail.getData().getUser_profile_data().getMiddle_name() + " " +
                                             employeeuserdetail.getData().getUser_profile_data().getLast_name());
-                                } else {
+                                else
                                     Config.SetName(employeeuserdetail.getData().getUser_profile_data().getFirst_name() + " " +
                                             employeeuserdetail.getData().getUser_profile_data().getLast_name());
-                                }
+
                                 Config.SetFName(employeeuserdetail.getData().getUser_profile_data().getFirst_name());
                                 Config.SetLName(employeeuserdetail.getData().getUser_profile_data().getLast_name());
                                 Config.SetLat(employeeuserdetail.getData().getUser_profile_data().getLatitude());
@@ -587,15 +573,13 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                                         .getUser_profile_data().getDefault_radius()));
 
                             }
-                            if (employeeuserdetail.getData().getUser_resumes() != null) {
+                            if (employeeuserdetail.getData().getUser_resumes() != null)
                                 if (employeeuserdetail.getData().getUser_resumes().getCv_file() != null) {
                                     Config.SetCVID(employeeuserdetail.getData().getUser_resumes().getCv_id());
                                     Config.SetCVTITLE(employeeuserdetail.getData().getUser_resumes().getCv_title());
                                     Config.SetCVFILE(employeeuserdetail.getData().getUser_resumes().getCv_file());
                                     Config.SetCVFILELINK(employeeuserdetail.getData().getUser_resumes().getCv_file_link());
                                 }
-
-                            }
                         }
                     }
 
@@ -648,10 +632,8 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
     public void onPaymentSuccess(String s, PaymentData paymentData) {
 
         try {
-            Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show();
-            if (PlansFragments.instance != null) {
+            if (PlansFragments.instance != null)
                 PlansFragments.instance.setTransactionData(paymentData);
-            }
         } catch (Exception e) {
             Log.e("RazorPay", "Exception in onPaymentSuccess", e);
         }

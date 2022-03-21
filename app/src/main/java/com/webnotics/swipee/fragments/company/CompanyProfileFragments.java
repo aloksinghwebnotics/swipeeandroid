@@ -82,22 +82,16 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
         });
         iv_videoplay.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(videoUrl))
-             //   VideoPlayerActivity.start(getActivity(),videoUrl);
               callPlayer(videoUrl);
         });
 
         if (CompanyHomeActivity.instance != null) {
             if (CompanyHomeActivity.instance.employeeuserdetail != null) {
                 CompanyProfileModel employeeuserdetail = CompanyHomeActivity.instance.employeeuserdetail;
-                if (employeeuserdetail.isStatus()) {
-                    setDataResponse(employeeuserdetail);
-                } else {
-                    hitService();
-                }
+                if (employeeuserdetail.isStatus()) setDataResponse(employeeuserdetail);
+                else hitService();
             } else hitService();
-        } else {
-            hitService();
-        }
+        } else hitService();
         return rootView;
     }
 
@@ -153,9 +147,7 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
                 rl_video.setVisibility(View.GONE);
             }
 
-        } else {
-            rest.showToast(employeeuserdetail.getMessage());
-        }
+        } else rest.showToast(employeeuserdetail.getMessage());
     }
 
 
@@ -232,18 +224,13 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
                         if (CompanyHomeActivity.instance != null)
                             CompanyHomeActivity.instance.employeeuserdetail = response.body();
                         setDataResponse(response.body());
-                    } else {
-                        rest.showToast(response.body().getMessage());
-                    }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                    } else rest.showToast(response.body().getMessage());
+                } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<CompanyProfileModel> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });

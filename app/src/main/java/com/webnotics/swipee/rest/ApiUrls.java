@@ -129,6 +129,7 @@ public class ApiUrls {
   public static final String URL_STARTAUDIO = "appointments/company_start_audio";
   public static final String URL_SEEKERSTARTAUDIO = "appointments/user_start_audio";
   public static final String URL_FCMSETTING = "auth/fcm_settings";
+  public static final String URL_DISCONNECTEDCALL = "appointments/diconnect_call";
 
 
   public static final String PAYPALURGMENT = "https://www.paypal.com/webapps/mpp/ua/useragreement-full";

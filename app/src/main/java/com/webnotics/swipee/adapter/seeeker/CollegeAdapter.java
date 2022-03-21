@@ -59,19 +59,14 @@ public class CollegeAdapter extends BaseAdapter implements Filterable {
         nameTxt.setText(mArrayListSkills.get(pos).get("university_college_name").getAsString());
 
 
-        convertView.setOnClickListener(view -> {
-            mContext.selectedData(mArrayListSkills.get(pos).get("university_college_name").getAsString(), mArrayListSkills.get(pos).get("university_college_id").getAsString());
-        });
+        convertView.setOnClickListener(view -> mContext.selectedData(mArrayListSkills.get(pos).get("university_college_name").getAsString(), mArrayListSkills.get(pos).get("university_college_id").getAsString()));
         return convertView;
     }
 
     @Override
     public Filter getFilter() {
         // TODO Auto-generated method stub
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
-
+        if (filter == null) filter = new CustomFilter();
         return filter;
     }
 

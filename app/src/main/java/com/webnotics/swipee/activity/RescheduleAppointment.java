@@ -163,9 +163,8 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                         tv_time.setText("");
                         slotSelected = "";
                         AppController.ShowDialogue("", mContext);
-                        if (Config.isSeeker()){
-                            getAppointmentSlot(tv_date.getText().toString(), company_id);
-                        }else getAppointmentSlotCompany(tv_date.getText().toString(), company_id);
+                        if (Config.isSeeker()) getAppointmentSlot(tv_date.getText().toString(), company_id);
+                        else getAppointmentSlotCompany(tv_date.getText().toString(), company_id);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
@@ -212,18 +211,15 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                     progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v12 -> progressdialog.dismiss());
                     try {
                         progressdialog.show();
-                    } catch (Exception ignored) {
-                    }
+                    } catch (Exception ignored) {}
 
                 }
 
                 break;
             case R.id.tv_appointment:
-                if (TextUtils.isEmpty(tv_date.getText().toString())) {
-                    rest.showToast("Select appointment date");
-                } else if (TextUtils.isEmpty(tv_time.getText().toString())) {
-                    rest.showToast("Select appointment time");
-                } else {
+                if (TextUtils.isEmpty(tv_date.getText().toString())) rest.showToast("Select appointment date");
+                else if (TextUtils.isEmpty(tv_time.getText().toString())) rest.showToast("Select appointment time");
+                else {
                     if (!Config.isSeeker()) {
                         if (rest.isInterentAvaliable()) {
                             HashMap<String, String> hashMap = new HashMap<>();

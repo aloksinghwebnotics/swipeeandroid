@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +63,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import retrofit2.Call;
@@ -115,8 +115,7 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
     EditText et_search;
 
     private ArrayList<CompanyUserListing.Data.Userslisting> mArrayUserListing = new ArrayList<>();
-    private int isfilter=1;
-
+    private int isFilter =1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -401,17 +400,10 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
                     boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
-                    if (response.body().get("code").getAsInt() == 203) {
-
-                    } else if (response.body().get("code").getAsInt() == 200 && status) {
+                    if (response.body().get("code").getAsInt() == 200 && status || response.body().get("code").getAsInt() == 402)
                         Config.SetTransaction("");
-                    }else if (response.body().get("code").getAsInt() == 402) {
-                        Config.SetTransaction("");
-                    }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -433,9 +425,8 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
         if (filter_sheetBottom != null) {
             if (filter_sheetBottom.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                 filter_sheetBottom.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                if (CompanyHomeActivity.instance != null) {
+                if (CompanyHomeActivity.instance != null)
                     CompanyHomeActivity.instance.isFilterShowing = false;
-                }
 
             } else getActivity().onBackPressed();
 
@@ -586,8 +577,6 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                 break;
             case R.id.tv_apply:
                 callFilteredData();
-
-
                 break;
 
             default:
@@ -599,80 +588,32 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
 
     private void callFilteredData() {
 
-        ArrayList<String> jobtypeStrings = new ArrayList<>();
-        ArrayList<String> locationStrings = new ArrayList<>();
-        ArrayList<String> distanceStrings = new ArrayList<>();
-        ArrayList<String> designationStrings = new ArrayList<>();
-        ArrayList<String> qualificationStrings = new ArrayList<>();
-        ArrayList<String> expStrings = new ArrayList<>();
-        ArrayList<String> industryStrings = new ArrayList<>();
-        ArrayList<String> salaryStrings = new ArrayList<>();
-        for (int i = 0; i < jobTypeSelected.size(); i++) {
-            if (jobTypeSelected.get(i).isSelected()) {
-                jobtypeStrings.add(jobTypeSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < locationSelected.size(); i++) {
-            if (locationSelected.get(i).isSelected()) {
-                locationStrings.add(locationSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < distanceSelected.size(); i++) {
-            if (distanceSelected.get(i).isSelected()) {
-                distanceStrings.add(distanceSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < designationSelected.size(); i++) {
-            if (designationSelected.get(i).isSelected()) {
-                designationStrings.add(designationSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < qualificationSelected.size(); i++) {
-            if (qualificationSelected.get(i).isSelected()) {
-                qualificationStrings.add(qualificationSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < expSelected.size(); i++) {
-            if (expSelected.get(i).isSelected()) {
-                expStrings.add(expSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < industrySelected.size(); i++) {
-            if (industrySelected.get(i).isSelected()) {
-                industryStrings.add(industrySelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < salarySelected.size(); i++) {
-            if (salarySelected.get(i).isSelected()) {
-                salaryStrings.add(salarySelected.get(i).getId());
-            }
-        }
+        ArrayList<String> jobtypeStrings;
+        ArrayList<String> locationStrings;
+        ArrayList<String> distanceStrings;
+        ArrayList<String> designationStrings;
+        ArrayList<String> qualificationStrings;
+        ArrayList<String> expStrings;
+        ArrayList<String> industryStrings;
+        ArrayList<String> salaryStrings;
+        jobtypeStrings = IntStream.range(0, jobTypeSelected.size()).filter(i -> jobTypeSelected.get(i).isSelected()).mapToObj(i -> jobTypeSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        locationStrings = IntStream.range(0, locationSelected.size()).filter(i -> locationSelected.get(i).isSelected()).mapToObj(i -> locationSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        distanceStrings = IntStream.range(0, distanceSelected.size()).filter(i -> distanceSelected.get(i).isSelected()).mapToObj(i -> distanceSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        designationStrings = IntStream.range(0, designationSelected.size()).filter(i -> designationSelected.get(i).isSelected()).mapToObj(i -> designationSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        qualificationStrings = IntStream.range(0, qualificationSelected.size()).filter(i -> qualificationSelected.get(i).isSelected()).mapToObj(i -> qualificationSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        expStrings = IntStream.range(0, expSelected.size()).filter(i -> expSelected.get(i).isSelected()).mapToObj(i -> expSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        industryStrings = IntStream.range(0, industrySelected.size()).filter(i -> industrySelected.get(i).isSelected()).mapToObj(i -> industrySelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        salaryStrings = IntStream.range(0, salarySelected.size()).filter(i -> salarySelected.get(i).isSelected()).mapToObj(i -> salarySelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
 
         HashMap<String, String> hashMap = new HashMap<>();
-        if (jobtypeStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_JOBTYPEID, jobtypeStrings.toString());
-        }
-        if (locationStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_LOCATIONID, locationStrings.toString());
-        }
-        if (distanceStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_DISTANCEID, distanceStrings.toString());
-        }
-        if (designationStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_DESIGNATIONID, designationStrings.toString());
-        }
-        if (qualificationStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_DEGREEID, qualificationStrings.toString());
-        }
-        if (expStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_EXPERIENCEID, expStrings.toString());
-        }
-        if (industryStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_INDUSTRY, industryStrings.toString());
-        }
-        if (salaryStrings.size() > 0) {
-            hashMap.put(ParaName.KEY_RANGEID, salaryStrings.toString());
-        }
+        if (jobtypeStrings.size() > 0) hashMap.put(ParaName.KEY_JOBTYPEID, jobtypeStrings.toString());
+        if (locationStrings.size() > 0) hashMap.put(ParaName.KEY_LOCATIONID, locationStrings.toString());
+        if (distanceStrings.size() > 0) hashMap.put(ParaName.KEY_DISTANCEID, distanceStrings.toString());
+        if (designationStrings.size() > 0) hashMap.put(ParaName.KEY_DESIGNATIONID, designationStrings.toString());
+        if (qualificationStrings.size() > 0) hashMap.put(ParaName.KEY_DEGREEID, qualificationStrings.toString());
+        if (expStrings.size() > 0) hashMap.put(ParaName.KEY_EXPERIENCEID, expStrings.toString());
+        if (industryStrings.size() > 0) hashMap.put(ParaName.KEY_INDUSTRY, industryStrings.toString());
+        if (salaryStrings.size() > 0) hashMap.put(ParaName.KEY_RANGEID, salaryStrings.toString());
 
         if (hashMap.size()>0){
             hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
@@ -777,8 +718,8 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
             @Override
             public void onResponse(@NonNull Call<CompanyUserListing> call, @NonNull Response<CompanyUserListing> response) {
                 AppController.dismissProgressdialog();
-                 isfilter=1;
-                parseResponse(response, isfilter);
+                 isFilter =1;
+                parseResponse(response, isFilter);
             }
 
             @Override
@@ -793,8 +734,8 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
             @Override
             public void onResponse(@NonNull Call<CompanyUserListing> call, @NonNull Response<CompanyUserListing> response) {
                 AppController.dismissProgressdialog();
-                isfilter=2;
-                parseResponse(response, isfilter);
+                isFilter =2;
+                parseResponse(response, isFilter);
             }
 
             @Override
@@ -833,12 +774,10 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                     Config.SetLeftPostCount(companyuserlisting.getData().getLeft_posted_jobs());
 
                     if (companyuserlisting.getData().getLeft_package_days()>0) {
-                        if ( left_swipes > 0 || packgeID.equalsIgnoreCase("8")){
+                        if ( left_swipes > 0 || packgeID.equalsIgnoreCase("8"))
                             CompanyHomeActivity.instance.filter_icon.setVisibility(View.VISIBLE);
-                        }else   CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
-                    } else {
-                        CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
-                    }
+                        else   CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
+                    } else CompanyHomeActivity.instance.filter_icon.setVisibility(View.GONE);
                     if (companyuserlisting.getData().getLeft_package_days()>0) {
                         if (mArrayUser != null) {
                             try {
@@ -918,17 +857,13 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                     datalay.setVisibility(View.GONE);
                 }
             }
-        } else {
-            AppController.dismissProgressdialog();
-            rest.showToast("Something went wrong");
-        }
+        } else rest.showToast("Something went wrong");
     }
 
 
     public void callJobTypeSheet() {
-        if (CompanyHomeActivity.instance != null) {
+        if (CompanyHomeActivity.instance != null)
             CompanyHomeActivity.instance.isFilterShowing = true;
-        }
         filter_sheetBottom.setState(BottomSheetBehavior.STATE_EXPANDED);
         filter_sheetBottom.setDraggable(false);
         filter_sheetBottom.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -1006,9 +941,7 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                                 }
                                 mLocationArrayList = mLocationArray;
 
-                            }else {
-                                location.setVisibility(View.GONE);
-                            }
+                            }else location.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             location.setVisibility(View.GONE);
                         }
@@ -1016,147 +949,117 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                         if (mJOnTypeArrayList != null) {
                             if (mJOnTypeArrayList.size() != 0) {
                                 jobTypeSelected.clear();
-                                for (int i = 0; i < mJOnTypeArrayList.size(); i++) {
+                                IntStream.range(0, mJOnTypeArrayList.size()).forEach(i -> {
                                     String name = mJOnTypeArrayList.get(i).getJob_type_name();
                                     String id = mJOnTypeArrayList.get(i).getJob_type_id();
                                     boolean isselected = mJOnTypeArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,"", isselected,false);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, "", isselected, false);
                                     jobTypeSelected.add(jobTypeSelected.size(), modelSelected);
-                                }
+                                });
                                 jobtype.setVisibility(View.VISIBLE);
-                            } else {
-                                jobtype.setVisibility(View.GONE);
-                            }
-                        } else {
-                            jobtype.setVisibility(View.GONE);
-                        }
+                            } else jobtype.setVisibility(View.GONE);
+                        } else jobtype.setVisibility(View.GONE);
                         if (mLocationArrayList != null) {
                             if (mLocationArrayList.size() != 0) {
                                 locationSelected.clear();
-                                for (int i = 0; i < mLocationArrayList.size(); i++) {
+                                IntStream.range(0, mLocationArrayList.size()).forEach(i -> {
                                     String name = mLocationArrayList.get(i).getLocation_name();
                                     String id = mLocationArrayList.get(i).getLocation_id();
                                     String state = mLocationArrayList.get(i).getState_name();
                                     boolean isselected = mLocationArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,state, isselected,false);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, state, isselected, false);
                                     locationSelected.add(locationSelected.size(), modelSelected);
-                                }
+                                });
                                 location.setVisibility(View.VISIBLE);
                             } else location.setVisibility(View.GONE);
-                        } else {
-                            location.setVisibility(View.GONE);
-                        }
+                        } else location.setVisibility(View.GONE);
 
                         if (mDistanceArrayList != null) {
                             if (mDistanceArrayList.size() != 0) {
                                 distance.setVisibility(View.VISIBLE);
                                 distanceSelected.clear();
-                                for (int i = 0; i < mDistanceArrayList.size(); i++) {
+                                IntStream.range(0, mDistanceArrayList.size()).forEach(i -> {
                                     String name = mDistanceArrayList.get(i).getDistance_name();
                                     String id = mDistanceArrayList.get(i).getDistance_id();
                                     boolean isselected = mDistanceArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,"", isselected,true);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, "", isselected, true);
                                     distanceSelected.add(distanceSelected.size(), modelSelected);
-                                }
-                            } else {
-                                distance.setVisibility(View.GONE);
-                            }
-                        } else {
-                            distance.setVisibility(View.GONE);
-                        }
+                                });
+                            } else distance.setVisibility(View.GONE);
+                        } else distance.setVisibility(View.GONE);
 
                         if (mDesignationArrayList != null) {
                             if (mDesignationArrayList.size() != 0) {
                                 designationSelected.clear();
-                                for (int i = 0; i < mDesignationArrayList.size(); i++) {
+                                IntStream.range(0, mDesignationArrayList.size()).forEach(i -> {
                                     String name = mDesignationArrayList.get(i).getDesignation_name();
                                     String id = mDesignationArrayList.get(i).getDesignation_id();
                                     boolean isSelected = mDesignationArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,"", isSelected,false);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, "", isSelected, false);
                                     designationSelected.add(designationSelected.size(), modelSelected);
-                                }
+                                });
                                 designation.setVisibility(View.VISIBLE);
-                            } else {
-                                designation.setVisibility(View.GONE);
-                            }
-                        } else {
-                            designation.setVisibility(View.GONE);
-                        }
+                            } else designation.setVisibility(View.GONE);
+                        } else designation.setVisibility(View.GONE);
 
                         if (mQualificationArrayList != null) {
                             if (mQualificationArrayList.size() != 0) {
                                 qualificationSelected.clear();
-                                for (int i = 0; i < mQualificationArrayList.size(); i++) {
+                                IntStream.range(0, mQualificationArrayList.size()).forEach(i -> {
                                     String name = mQualificationArrayList.get(i).getDegree_name();
                                     String id = mQualificationArrayList.get(i).getDegree_id();
                                     boolean isselected = mQualificationArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,"", isselected,false);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, "", isselected, false);
                                     qualificationSelected.add(qualificationSelected.size(), modelSelected);
-                                }
+                                });
 
                                 qualifications.setVisibility(View.VISIBLE);
-                            } else {
-                                qualifications.setVisibility(View.GONE);
-                            }
-                        } else {
-                            qualifications.setVisibility(View.GONE);
-                        }
+                            } else qualifications.setVisibility(View.GONE);
+                        } else qualifications.setVisibility(View.GONE);
 
                         if (mExperience_nameArrayList != null) {
                             if (mExperience_nameArrayList.size() != 0) {
                                 expSelected.clear();
-                                for (int i = 0; i < mExperience_nameArrayList.size(); i++) {
+                                IntStream.range(0, mExperience_nameArrayList.size()).forEach(i -> {
                                     String name = mExperience_nameArrayList.get(i).getExperience_name();
                                     String id = mExperience_nameArrayList.get(i).getExperience_id();
                                     boolean isselected = mExperience_nameArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,"", isselected,false);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, "", isselected, false);
                                     expSelected.add(expSelected.size(), modelSelected);
-                                }
+                                });
                                 experience.setVisibility(View.VISIBLE);
-                            } else {
-                                experience.setVisibility(View.GONE);
-                            }
-                        } else {
-                            experience.setVisibility(View.GONE);
-                        }
+                            } else experience.setVisibility(View.GONE);
+                        } else experience.setVisibility(View.GONE);
 
                         if (mIndustryArrayList != null) {
                             if (mIndustryArrayList.size() != 0) {
                                 industrySelected.clear();
-                                for (int i = 0; i < mIndustryArrayList.size(); i++) {
+                                IntStream.range(0, mIndustryArrayList.size()).forEach(i -> {
                                     String name = mIndustryArrayList.get(i).getIndustry_name();
                                     String id = mIndustryArrayList.get(i).getIndustry_id();
                                     boolean isselected = mIndustryArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,"", isselected,false);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, "", isselected, false);
                                     industrySelected.add(industrySelected.size(), modelSelected);
-                                }
+                                });
                                 industrys.setVisibility(View.VISIBLE);
-                            } else {
-                                industrys.setVisibility(View.GONE);
-                            }
-                        } else {
-                            industrys.setVisibility(View.GONE);
-                        }
+                            } else industrys.setVisibility(View.GONE);
+                        } else industrys.setVisibility(View.GONE);
 
 
                         if (mSalaryArrayList != null) {
                             if (mSalaryArrayList.size() != 0) {
                                 salarySelected.clear();
-                                for (int i = 0; i < mSalaryArrayList.size(); i++) {
+                                IntStream.range(0, mSalaryArrayList.size()).forEach(i -> {
                                     String name = mSalaryArrayList.get(i).getSalary_range();
                                     String id = mSalaryArrayList.get(i).getRange_id();
                                     boolean isselected = mSalaryArrayList.get(i).isSelected();
-                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id,"", isselected,false);
+                                    FilterModelSelected modelSelected = new FilterModelSelected(name, id, "", isselected, false);
                                     salarySelected.add(salarySelected.size(), modelSelected);
-                                }
+                                });
 
                                 salary.setVisibility(View.VISIBLE);
-                            } else {
-                                salary.setVisibility(View.GONE);
-                            }
-                        } else {
-                            salary.setVisibility(View.GONE);
-                        }
+                            } else salary.setVisibility(View.GONE);
+                        } else salary.setVisibility(View.GONE);
 
 
                         addDataToDataArray();
@@ -1168,10 +1071,7 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
 
                     }
 
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -1200,15 +1100,12 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
 
                 inputStream.close();
                 ret = stringBuilder.toString();
-                Log.d("skskskksks",ret);
             }
         }
         catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
             return ret;
 
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
             return ret;
 
         }
@@ -1266,62 +1163,21 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
     public void setSelectedFilterPosition(String pos, boolean set) {
 
         if (adapterAttachedFor.equalsIgnoreCase("JobType")) {
-            for (int i=0;i<jobTypeSelected.size();i++){
-                if (pos.equalsIgnoreCase(jobTypeSelected.get(i).getId())){
-                    jobTypeSelected.get(i).setSelected(set);
-                    break;
-                }
-            }
-
+            IntStream.range(0, jobTypeSelected.size()).filter(i -> pos.equalsIgnoreCase(jobTypeSelected.get(i).getId())).findFirst().ifPresent(i -> jobTypeSelected.get(i).setSelected(set));
         } else if (adapterAttachedFor.equalsIgnoreCase("Location")) {
-            for (int i=0;i<locationSelected.size();i++){
-                if (pos.equalsIgnoreCase(locationSelected.get(i).getId())){
-                    locationSelected.get(i).setSelected(set);
-                    break;
-                }
-            }
+            IntStream.range(0, locationSelected.size()).filter(i -> pos.equalsIgnoreCase(locationSelected.get(i).getId())).findFirst().ifPresent(i -> locationSelected.get(i).setSelected(set));
         } else if (adapterAttachedFor.equalsIgnoreCase("Distance")) {
-            for (int i=0;i<distanceSelected.size();i++){
-                if (pos.equalsIgnoreCase(distanceSelected.get(i).getId())){
-                    distanceSelected.get(i).setSelected(set);
-                    break;
-                }
-            }
+            IntStream.range(0, distanceSelected.size()).filter(i -> pos.equalsIgnoreCase(distanceSelected.get(i).getId())).findFirst().ifPresent(i -> distanceSelected.get(i).setSelected(set));
         } else if (adapterAttachedFor.equalsIgnoreCase("Designation")) {
-            for (int i=0;i<designationSelected.size();i++){
-                if (pos.equalsIgnoreCase(designationSelected.get(i).getId())){
-                    designationSelected.get(i).setSelected(set);
-                    break;
-                }
-            }
+            IntStream.range(0, designationSelected.size()).filter(i -> pos.equalsIgnoreCase(designationSelected.get(i).getId())).findFirst().ifPresent(i -> designationSelected.get(i).setSelected(set));
         } else if (adapterAttachedFor.equalsIgnoreCase("Qualification")) {
-            for (int i=0;i<qualificationSelected.size();i++){
-                if (pos.equalsIgnoreCase(qualificationSelected.get(i).getId())){
-                    qualificationSelected.get(i).setSelected(set);
-                    break;
-                }
-            }
+            IntStream.range(0, qualificationSelected.size()).filter(i -> pos.equalsIgnoreCase(qualificationSelected.get(i).getId())).findFirst().ifPresent(i -> qualificationSelected.get(i).setSelected(set));
         } else if (adapterAttachedFor.equalsIgnoreCase("Experience")) {
-            for (int i=0;i<expSelected.size();i++){
-                if (pos.equalsIgnoreCase(expSelected.get(i).getId())){
-                    expSelected.get(i).setSelected(set);
-                    break;
-                }
-            }
+            IntStream.range(0, expSelected.size()).filter(i -> pos.equalsIgnoreCase(expSelected.get(i).getId())).findFirst().ifPresent(i -> expSelected.get(i).setSelected(set));
         } else if (adapterAttachedFor.equalsIgnoreCase("Industry")) {
-            for (int i=0;i<industrySelected.size();i++){
-                if (pos.equalsIgnoreCase(industrySelected.get(i).getId())){
-                    industrySelected.get(i).setSelected(set);
-                    break;
-                }
-            }
+            IntStream.range(0, industrySelected.size()).filter(i -> pos.equalsIgnoreCase(industrySelected.get(i).getId())).findFirst().ifPresent(i -> industrySelected.get(i).setSelected(set));
         } else if (adapterAttachedFor.equalsIgnoreCase("Salary")) {
-            for (int i=0;i<salarySelected.size();i++){
-                if (pos.equalsIgnoreCase(salarySelected.get(i).getId())){
-                    salarySelected.get(i).setSelected(set);
-                    break;
-                }
-            }
+            IntStream.range(0, salarySelected.size()).filter(i -> pos.equalsIgnoreCase(salarySelected.get(i).getId())).findFirst().ifPresent(i -> salarySelected.get(i).setSelected(set));
         }
 
         setSelectedFilterHighlight();
@@ -1366,22 +1222,22 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                               }
                           }
                     }else if (response.body().get("code").getAsInt()==401){
-                        if ( isfilter==1){
+                        if ( isFilter ==1){
                             AppController.ShowDialogue("", mContext);
                             getHomeJobList();
-                        } else if ( isfilter==2) callFilteredData();
+                        } else if ( isFilter ==2) callFilteredData();
                     }else {
-                        if ( isfilter==1){
+                        if ( isFilter ==1){
                             AppController.ShowDialogue("", mContext);
                             getHomeJobList();
-                        } else if ( isfilter==2) callFilteredData();
+                        } else if ( isFilter ==2) callFilteredData();
                     }
 
                 }else {
-                    if ( isfilter==1){
+                    if ( isFilter ==1){
                         AppController.ShowDialogue("", mContext);
                         getHomeJobList();
-                    } else if ( isfilter==2) callFilteredData();
+                    } else if ( isFilter ==2) callFilteredData();
                 }
 
             }
@@ -1389,94 +1245,54 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
-                if ( isfilter==1){
+                if ( isFilter ==1){
                     AppController.ShowDialogue("", mContext);
                     getHomeJobList();
-                } else if ( isfilter==2) callFilteredData();
+                } else if ( isFilter ==2) callFilteredData();
             }
         });
     }
 
     private void setSelectedFilterHighlight(){
-        ArrayList<String> jobtypeStrings = new ArrayList<>();
-        ArrayList<String> locationStrings = new ArrayList<>();
-        ArrayList<String> distanceStrings = new ArrayList<>();
-        ArrayList<String> designationStrings = new ArrayList<>();
-        ArrayList<String> qualificationStrings = new ArrayList<>();
-        ArrayList<String> expStrings = new ArrayList<>();
-        ArrayList<String> industryStrings = new ArrayList<>();
-        ArrayList<String> salaryStrings = new ArrayList<>();
-        for (int i = 0; i < jobTypeSelected.size(); i++) {
-            if (jobTypeSelected.get(i).isSelected()) {
-                jobtypeStrings.add(jobTypeSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < locationSelected.size(); i++) {
-            if (locationSelected.get(i).isSelected()) {
-                locationStrings.add(locationSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < distanceSelected.size(); i++) {
-            if (distanceSelected.get(i).isSelected()) {
-                distanceStrings.add(distanceSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < designationSelected.size(); i++) {
-            if (designationSelected.get(i).isSelected()) {
-                designationStrings.add(designationSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < qualificationSelected.size(); i++) {
-            if (qualificationSelected.get(i).isSelected()) {
-                qualificationStrings.add(qualificationSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < expSelected.size(); i++) {
-            if (expSelected.get(i).isSelected()) {
-                expStrings.add(expSelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < industrySelected.size(); i++) {
-            if (industrySelected.get(i).isSelected()) {
-                industryStrings.add(industrySelected.get(i).getId());
-            }
-        }
-        for (int i = 0; i < salarySelected.size(); i++) {
-            if (salarySelected.get(i).isSelected()) {
-                salaryStrings.add(salarySelected.get(i).getId());
-            }
-        }
-        if (jobtypeStrings.size()>0){
-            iv_jobtype.setVisibility(View.VISIBLE);
-        }else iv_jobtype.setVisibility(View.GONE);
+        ArrayList<String> jobtypeStrings;
+        ArrayList<String> locationStrings;
+        ArrayList<String> distanceStrings;
+        ArrayList<String> designationStrings;
+        ArrayList<String> qualificationStrings;
+        ArrayList<String> expStrings;
+        ArrayList<String> industryStrings;
+        ArrayList<String> salaryStrings;
+        jobtypeStrings = IntStream.range(0, jobTypeSelected.size()).filter(i -> jobTypeSelected.get(i).isSelected()).mapToObj(i -> jobTypeSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        locationStrings = IntStream.range(0, locationSelected.size()).filter(i -> locationSelected.get(i).isSelected()).mapToObj(i -> locationSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        distanceStrings = IntStream.range(0, distanceSelected.size()).filter(i -> distanceSelected.get(i).isSelected()).mapToObj(i -> distanceSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        designationStrings = IntStream.range(0, designationSelected.size()).filter(i -> designationSelected.get(i).isSelected()).mapToObj(i -> designationSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        qualificationStrings = IntStream.range(0, qualificationSelected.size()).filter(i -> qualificationSelected.get(i).isSelected()).mapToObj(i -> qualificationSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        expStrings = IntStream.range(0, expSelected.size()).filter(i -> expSelected.get(i).isSelected()).mapToObj(i -> expSelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        industryStrings = IntStream.range(0, industrySelected.size()).filter(i -> industrySelected.get(i).isSelected()).mapToObj(i -> industrySelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        salaryStrings = IntStream.range(0, salarySelected.size()).filter(i -> salarySelected.get(i).isSelected()).mapToObj(i -> salarySelected.get(i).getId()).collect(Collectors.toCollection(ArrayList::new));
+        if (jobtypeStrings.size()>0) iv_jobtype.setVisibility(View.VISIBLE);
+        else iv_jobtype.setVisibility(View.GONE);
 
-        if (locationStrings.size()>0){
-            iv_location.setVisibility(View.VISIBLE);
-        }else iv_location.setVisibility(View.GONE);
+        if (locationStrings.size()>0) iv_location.setVisibility(View.VISIBLE);
+        else iv_location.setVisibility(View.GONE);
 
-        if (distanceStrings.size()>0){
-            iv_distance.setVisibility(View.VISIBLE);
-        }else iv_distance.setVisibility(View.GONE);
+        if (distanceStrings.size()>0) iv_distance.setVisibility(View.VISIBLE);
+        else iv_distance.setVisibility(View.GONE);
 
-        if (designationStrings.size()>0){
-            iv_designation.setVisibility(View.VISIBLE);
-        }else iv_designation.setVisibility(View.GONE);
+        if (designationStrings.size()>0) iv_designation.setVisibility(View.VISIBLE);
+        else iv_designation.setVisibility(View.GONE);
 
-        if (qualificationStrings.size()>0){
-            iv_qualifications.setVisibility(View.VISIBLE);
-        }else iv_qualifications.setVisibility(View.GONE);
+        if (qualificationStrings.size()>0) iv_qualifications.setVisibility(View.VISIBLE);
+        else iv_qualifications.setVisibility(View.GONE);
 
-        if (expStrings.size()>0){
-            iv_experience.setVisibility(View.VISIBLE);
-        }else iv_experience.setVisibility(View.GONE);
+        if (expStrings.size()>0) iv_experience.setVisibility(View.VISIBLE);
+        else iv_experience.setVisibility(View.GONE);
 
-        if (industryStrings.size()>0){
-            iv_industrys.setVisibility(View.VISIBLE);
-        }else iv_industrys.setVisibility(View.GONE);
+        if (industryStrings.size()>0) iv_industrys.setVisibility(View.VISIBLE);
+        else iv_industrys.setVisibility(View.GONE);
 
-        if (salaryStrings.size()>0){
-            iv_salary.setVisibility(View.VISIBLE);
-        }else iv_salary.setVisibility(View.GONE);
+        if (salaryStrings.size()>0) iv_salary.setVisibility(View.VISIBLE);
+        else iv_salary.setVisibility(View.GONE);
     }
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -1492,17 +1308,9 @@ public class CompanyMatchFragments extends Basefragment implements View.OnClickL
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
                     boolean status = responseBody.has("status") && responseBody.get("status").getAsBoolean();
-                    if (response.body().get("code").getAsInt() == 203) {
-
-                    } else if (response.body().get("code").getAsInt() == 200 && status) {
+                    if (response.body().get("code").getAsInt() == 200 && status || response.body().get("code").getAsInt() == 402)
                         Config.SetTransaction("");
-                    } else if (response.body().get("code").getAsInt() == 402) {
-                        Config.SetTransaction("");
-                    }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

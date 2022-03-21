@@ -265,7 +265,7 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("status").getAsBoolean()) {
-                        ArrayList<EmployeeUserDetails.Data.User_Preferences> mArrayuseruserpreference = new ArrayList<>();
+                        ArrayList<EmployeeUserDetails.Data.User_Preferences> mArrayUserPreference = new ArrayList<>();
                         if (response.body().has("data")) {
                             JsonArray data = response.body().get("data").getAsJsonArray();
                             if (data.size() > 0) {
@@ -293,9 +293,9 @@ public class AddJobPreferences extends AppCompatActivity implements View.OnClick
                                 });
                                 EmployeeUserDetails.Data.User_Preferences user_preferences = new EmployeeUserDetails.Data.User_Preferences(preference_id, locationData, industryData, expectedSalary);
 
-                                mArrayuseruserpreference.add(user_preferences);
+                                mArrayUserPreference.add(user_preferences);
                                 if (ProfileFragments.instance != null)
-                                    ProfileFragments.instance.setPreferences(mArrayuseruserpreference);
+                                    ProfileFragments.instance.setPreferences(mArrayUserPreference);
                             }
                         }
                         rest.showToast(response.body().get("message").getAsString());

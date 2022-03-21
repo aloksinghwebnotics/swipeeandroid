@@ -85,23 +85,18 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
     public void onClick(View view) {
          switch (view.getId()){
              case R.id.tv_next:
-                   if (rl_otp.getVisibility()==View.VISIBLE){
-                      callCheckOTP();
-                   }else {
+                   if (rl_otp.getVisibility()==View.VISIBLE) callCheckOTP();
+                   else {
                          String email=et_email.getText().toString();
-                       if (TextUtils.isEmpty(email)){
-                           rest.showToast("Please enter email address");
-                       }else if (!Config.isEmailValid(email)){
-                           rest.showToast("Please enter a valid email address");
-                       }else{
+                       if (TextUtils.isEmpty(email)) rest.showToast("Please enter email address");
+                       else if (!Config.isEmailValid(email)) rest.showToast("Please enter a valid email address");
+                       else{
                            if (rest.isInterentAvaliable()) {
                                AppController.ShowDialogue("", mContext);
                                if (isSeeker)
                                callChangeEmail(email);
                                else callChangeCompanyEmail(email);
-                           } else {
-                               rest.AlertForInternet();
-                           }
+                           } else rest.AlertForInternet();
                        }
                    }
                  break;
@@ -118,9 +113,7 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                          if (isSeeker)
                          resendOtp();
                          else callChangeCompanyEmail(Config.GetEmail());
-                     } else {
-                         rest.AlertForInternet();
-                     }
+                     } else rest.AlertForInternet();
                  break;
              default:break;
          }
@@ -129,20 +122,13 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
 
     private void callCheckOTP() {
         String otp=et_otp1.getText().toString()+et_otp2.getText().toString()+et_otp3.getText().toString()+et_otp4.getText().toString();
-        if (otp.length()!=4){
-            rest.showToast("Please enter 4 digit OTP");
-        }else {
+        if (otp.length()!=4) rest.showToast("Please enter 4 digit OTP");
+        else {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
-                if (isSeeker){
-                    callOTPVerify(otp);
-                }else {
-                    callCompanyOTPVerify(otp);
-                }
-
-            } else {
-                rest.AlertForInternet();
-            }
+                if (isSeeker) callOTPVerify(otp);
+                else callCompanyOTPVerify(otp);
+            } else rest.AlertForInternet();
         }
 
     }
@@ -161,9 +147,7 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                     }else
                     if (responseBody.has("message"))
                         rest.showToast(responseBody.get("message").getAsString());
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -187,15 +171,12 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                             BasicInfoActivity.instance.sendMobile=false;
                             BasicInfoActivity.instance.attachMobileVerification();
                         }
-
                         rest.showToast(responseBody.get("message").getAsString());
                     }else {
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -224,9 +205,7 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -245,7 +224,6 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                 AppController.dismissProgressdialog();
                 if (response.code()==200 && response.body()!=null){
                     JsonObject responseBody= response.body();
-                    Log.d("dbhdfhkjgd",responseBody.toString());
                     if (responseBody.get("status").getAsBoolean()){
                         Config.SetEmail(email);
                         rest.showToast(responseBody.get("message").getAsString());
@@ -257,9 +235,7 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -289,9 +265,7 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -316,24 +290,17 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
         @Override
         public void afterTextChanged(Editable s) {
             if (getActivity().getCurrentFocus().getId() == et_otp1.getId()){
-                          if (et_otp1.getText().toString().length()>0){
-                              et_otp2.requestFocus();
-                          }
+                          if (et_otp1.getText().toString().length()>0) et_otp2.requestFocus();
             }else  if (getActivity().getCurrentFocus().getId() == et_otp2.getId()){
-                          if (et_otp2.getText().toString().length()>0){
-                              et_otp3.requestFocus();
-                          } else  et_otp1.requestFocus();
+                          if (et_otp2.getText().toString().length()>0) et_otp3.requestFocus();
+                          else  et_otp1.requestFocus();
             } else  if (getActivity().getCurrentFocus().getId() == et_otp3.getId()){
-                          if (et_otp3.getText().toString().length()>0){
-                              et_otp4.requestFocus();
-                          } else  et_otp2.requestFocus();
+                          if (et_otp3.getText().toString().length()>0) et_otp4.requestFocus();
+                          else  et_otp2.requestFocus();
             } else  if (getActivity().getCurrentFocus().getId() == et_otp4.getId()){
-                          if (et_otp4.getText().toString().length()>0){
-                              et_otp4.requestFocus();
-                          } else  et_otp3.requestFocus();
+                          if (et_otp4.getText().toString().length()>0) et_otp4.requestFocus();
+                          else  et_otp3.requestFocus();
             }
-
-
         }
     };
 }

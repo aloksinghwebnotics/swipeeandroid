@@ -46,8 +46,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (wv_url.canGoBack()){
-            wv_url.goBack();
-        }else finish();
+        if (wv_url.canGoBack()) wv_url.goBack();
+        else finish();
     }
 }

@@ -27,7 +27,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonObject;
@@ -120,7 +119,7 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
         } else {
             try {
                 getLastLocation();
-            }catch (Exception e){}
+            }catch (Exception ignored){}
         }
 
         FirebaseApp.initializeApp(mContext);
@@ -133,20 +132,16 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
     private void getLastLocation() {
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                            if (location == null) {
-                                requestNewLocationData();
-                            } else {
-                                lat = location.getLatitude() + "";
-                                longg = location.getLongitude() + "";
-                                getAddress(mContext, location.getLatitude(), location.getLongitude());
+                .addOnSuccessListener(this, location -> {
+                    // Got last known location. In some rare situations this can be null.
+                        if (location == null) {
+                            requestNewLocationData();
+                        } else {
+                            lat = location.getLatitude() + "";
+                            longg = location.getLongitude() + "";
+                            getAddress(mContext, location.getLatitude(), location.getLongitude());
+                        }
 
-                            }
-
-                    }
                 });
 
        /* try {
@@ -203,7 +198,6 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
             if (addresses != null && addresses.size() > 0) {
                 lat = LATITUDE + "";
                 longg = LONGITUDE + "";
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -219,34 +213,12 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_signup:
 
                 String mobile = et_mobile.getText().toString();
-              /*  if (lat.equalsIgnoreCase("0") ||longg.equalsIgnoreCase("0")){
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                            PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                            PackageManager.PERMISSION_GRANTED) {
-                        int REQUEST_CODE_ASK_PERMISSIONS = 111;
-                        requestPermissions(new String[]{
-                                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                                REQUEST_CODE_ASK_PERMISSIONS);
-                    } else {
-                        try {
-                            getLastLocation();
-                        }catch (Exception e){}
-                    }
-
-                }
-                else*/ if (is_email && TextUtils.isEmpty(et_email.getText().toString())){
-                    rest.showToast("Please enter email address");
-                }else   if (is_email && !Config.isEmailValid(et_email.getText().toString())){
-                    rest.showToast("Please enter a valid email address");
-                }else if (TextUtils.isEmpty(mobile)) {
-                    rest.showToast("Please enter phone number");
-                } else if (mobile.length() < 10) {
-                    rest.showToast("Please enter 10 digit phone number");
-                }  else {
-                    ///hit
-                    //
-                     if (is_email)
-                         email=et_email.getText().toString();
+            if (is_email && TextUtils.isEmpty(et_email.getText().toString())) rest.showToast("Please enter email address");
+            else if (is_email && !Config.isEmailValid(et_email.getText().toString()))  rest.showToast("Please enter a valid email address");
+            else if (TextUtils.isEmpty(mobile)) rest.showToast("Please enter phone number");
+            else if (mobile.length() < 10) rest.showToast("Please enter 10 digit phone number");
+            else {
+                     if (is_email) email=et_email.getText().toString();
                     Calendar calendar = Calendar.getInstance();
                     String time_zone = calendar.getTimeZone().getID();
                     String country = Locale.getDefault().getCountry();
@@ -284,9 +256,7 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                             hashMap.put(ParaName.KEY_ISEMAILVERIFY, is_email?"N":"Y");
                             callSignUpCompany(hashMap);
                         }
-                    } else {
-                        rest.AlertForInternet();
-                    }
+                    } else rest.AlertForInternet();
                 }
                 break;
             default:
@@ -317,14 +287,12 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                             Config.SetIsSeeker(true);
                             if (!is_email_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",true));
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }else  if (!is_mobile_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker",true));
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }else {
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",true));
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }
+                            overridePendingTransition(R.anim.enter, R.anim.exit);
                             finish();
                         }
 
@@ -332,9 +300,7 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString().replace(". ", ".\n"));
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -353,7 +319,6 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject responseBody = response.body();
-                    Log.d("dbhdfhkjgd", responseBody.toString());
                     if (responseBody.get("code").getAsInt()==200 && responseBody.get("status").getAsBoolean()) {
                         JsonObject data = responseBody.has("data") ? responseBody.get("data").getAsJsonObject() : null;
                         if (data != null && !data.isJsonNull()) {
@@ -369,14 +334,12 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                             Config.SetIsSeeker(false);
                             if (!is_email_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }else  if (!is_mobile_verify.equalsIgnoreCase("Y")){
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "mobile").putExtra("isSeeker",false));
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }else {
                                 startActivity(new Intent(mContext, BasicInfoActivity.class).putExtra("fragment", "email").putExtra("isSeeker",false));
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }
+                            overridePendingTransition(R.anim.enter, R.anim.exit);
                             finish();
                         }
 
@@ -384,9 +347,7 @@ public class SocialSignUpActivity extends AppCompatActivity implements View.OnCl
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString().replace(". ", ".\n"));
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

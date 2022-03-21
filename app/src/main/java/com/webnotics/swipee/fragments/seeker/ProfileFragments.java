@@ -68,6 +68,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -197,23 +198,16 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                 AppController.callFullImage(mContext,pickUri);
         });
         iv_videoplay.setOnClickListener(v -> {
-            if (!TextUtils.isEmpty(videoUrl))
-                callPlayer(videoUrl);
-              //  VideoPlayerActivity.start(getActivity(),videoUrl);
+            if (!TextUtils.isEmpty(videoUrl)) callPlayer(videoUrl);
         });
 
         if (SeekerHomeActivity.instance!=null){
             if (SeekerHomeActivity.instance.employeeuserdetail!=null){
                 EmployeeUserDetails employeeuserdetail=SeekerHomeActivity.instance.employeeuserdetail;
-                if (employeeuserdetail.isStatus()){
-                     setDataResponce(employeeuserdetail);
-                }else {
-                    hitService();
-                }
+                if (employeeuserdetail.isStatus()) setDataResponce(employeeuserdetail);
+                else hitService();
             }else  hitService();
-        }else {
-            hitService();
-        }
+        }else hitService();
 
         return rootView;
     }
@@ -266,11 +260,10 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
             Config.SetLongg(employeeuserdetail.getData().getUser_profile_data().getLongitude());
             Config.SetRadiuss(String.valueOf(employeeuserdetail.getData()
                     .getUser_profile_data().getDefault_radius()));
-            if (employeeuserdetail.getData().getUser_profile_data().getMiddle_name().length() != 0) {
+            if (employeeuserdetail.getData().getUser_profile_data().getMiddle_name().length() != 0)
                 tv_your_name.setText(MessageFormat.format("{0} {1} {2}", employeeuserdetail.getData().getUser_profile_data().getFirst_name(), employeeuserdetail.getData().getUser_profile_data().getMiddle_name(), employeeuserdetail.getData().getUser_profile_data().getLast_name()));
-            } else {
+            else
                 tv_your_name.setText(MessageFormat.format("{0} {1}", employeeuserdetail.getData().getUser_profile_data().getFirst_name(), employeeuserdetail.getData().getUser_profile_data().getLast_name()));
-            }
             Glide.with(mContext)
                     .load(employeeuserdetail.getData().getUser_profile_data().getUser_profile())
                     .apply(new RequestOptions().placeholder(R.drawable.ic_profile_select).error(R.drawable.ic_profile_select))
@@ -289,20 +282,12 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
             }else {
                 tv_video.setVisibility(View.GONE);
                 rl_video.setVisibility(View.GONE);
-
             }
         }
-        else {
-            rest.showToast(employeeuserdetail.getMessage());
-        }
+        else rest.showToast(employeeuserdetail.getMessage());
         mArrayListUserSkills = employeeuserdetail.getData().getUser_key_skills();
-        if (mArrayListUserSkills != null) {
-            if (mArrayListUserSkills.size() == 0) {
-
-            } else {
-                setSkillFlow(mArrayListUserSkills);
-            }
-        }
+        if (mArrayListUserSkills != null)
+            if (mArrayListUserSkills.size() != 0) setSkillFlow(mArrayListUserSkills);
 
         mArrayuserworkexperience = employeeuserdetail.getData().getUser_work_experience();
         mArrayuserusereducation = employeeuserdetail.getData().getUser_eductaion();
@@ -365,9 +350,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
 
     @Override
     public void onPause() {
-        if (vv_video!=null){
-            vv_video.pausePlayer();
-        }
+        if (vv_video!=null) vv_video.pausePlayer();
         super.onPause();
     }
 
@@ -506,9 +489,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                         AppController.ShowDialogue("", mContext);
                         callServiceJobType();
                     } else rest.AlertForInternet();
-                } else {
-                    callJobTypeSheet();
-                }
+                } else callJobTypeSheet();
 
                 break;
 
@@ -558,13 +539,11 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
             case R.id.donetype:
                 ArrayList<String> ids1 = new ArrayList<>();
                 ArrayList<EmployeeUserDetails.Data.User_Job_Type> mArrayUserJobTypetemp= new ArrayList<>();
-                for (int i = 0; i < mArrayListjbtype.size(); i++) {
-                    if (mArrayListjbtype.get(i).isSelected()) {
-                        ids1.add(mArrayListjbtype.get(i).getId());
-                        EmployeeUserDetails.Data.User_Job_Type modil= new EmployeeUserDetails.Data.User_Job_Type(mArrayListjbtype.get(i).getId(),mArrayListjbtype.get(i).getName());
-                        mArrayUserJobTypetemp.add(mArrayUserJobTypetemp.size(),modil);
-                    }
-                }
+                IntStream.range(0, mArrayListjbtype.size()).filter(i -> mArrayListjbtype.get(i).isSelected()).forEach(i -> {
+                    ids1.add(mArrayListjbtype.get(i).getId());
+                    EmployeeUserDetails.Data.User_Job_Type modil = new EmployeeUserDetails.Data.User_Job_Type(mArrayListjbtype.get(i).getId(), mArrayListjbtype.get(i).getName());
+                    mArrayUserJobTypetemp.add(mArrayUserJobTypetemp.size(), modil);
+                });
                 if (mArrayUserJobTypetemp.size()>0){
                     mArrayUserJobType.clear();
                     mArrayUserJobType=mArrayUserJobTypetemp;
@@ -597,7 +576,6 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                             mArrayListjbtype.clear();
                             mArrayListJobType = langModel.getData();
                             callJobTypeSheet();
-
                         }else if (langModel.getCode()==203){
                             rest.showToast(langModel.getMessage());
                             AppController.loggedOut(mContext);
@@ -636,17 +614,12 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                         if (SeekerHomeActivity.instance!=null)
                             SeekerHomeActivity.instance.employeeuserdetail=response.body();
                        setDataResponce(response.body());
-                    }else {
-                        rest.showToast(response.body().getMessage());
-                    }
+                    }else rest.showToast(response.body().getMessage());
                     }else if (response.body().getCode()==203){
                         rest.showToast(response.body().getMessage());
                         AppController.loggedOut(mContext);
                     }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -702,17 +675,17 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
             skillIdList.clear();
             skillIdList.addAll(skillId);
             flow_keyskill.removeAllViews();
-            for (int i = 0; i < mArrayListUserSkills.size(); i++) {
+            IntStream.range(0, mArrayListUserSkills.size()).forEach(i -> {
                 LinearLayout linearLayout = new LinearLayout(mContext);
                 LinearLayout linearLayoutF = new LinearLayout(mContext);
                 FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
                         FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density*32));
-                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density*5), 0, (int) (mContext.getResources().getDisplayMetrics().density*5), (int) (mContext.getResources().getDisplayMetrics().density*8));
+                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
+                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
                 linearLayoutF.setLayoutParams(layoutParams);
                 linearLayout.setLayoutParams(layoutParamsF);
-                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density*8), 0, (int) (mContext.getResources().getDisplayMetrics().density*8), 0);
+                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 linearLayout.setGravity(Gravity.CENTER);
                 linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
@@ -728,13 +701,11 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams1.setMargins(0, 0, 0, 0);
                 bt.setLayoutParams(layoutParams1);
-
                 linearLayout.addView(bt);
                 linearLayoutF.addView(linearLayout);
                 linearLayoutF.setTag(mArrayListUserSkills.get(i));
                 flow_keyskill.addView(linearLayoutF);
-
-            }
+            });
         }
 
     }
@@ -744,12 +715,13 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
         flow_languages.removeAllViews();
         stringLangIds.clear();
         if (mArrayUserListLang!=null){
-            for (int i = 0; i < mArrayUserListLang.size(); i++) {
+            IntStream.range(0, mArrayUserListLang.size()).forEach(i -> {
                 LinearLayout linearLayout = new LinearLayout(mContext);
                 FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
-                        FlowLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density*32));
-                layoutParams.setMargins((int) (mContext.getResources().getDisplayMetrics().density*5), 0, (int) (mContext.getResources().getDisplayMetrics().density*5), (int) (mContext.getResources().getDisplayMetrics().density*8));                                        linearLayout.setPadding(16, 0, 16, 0);
-                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density*8), 0, (int) (mContext.getResources().getDisplayMetrics().density*8), 0);
+                        FlowLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
+                layoutParams.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
+                linearLayout.setPadding(16, 0, 16, 0);
+                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
                 linearLayout.setLayoutParams(layoutParams);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 linearLayout.setGravity(Gravity.CENTER);
@@ -766,15 +738,11 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams1.setMargins(0, 0, 0, 0);
                 bt.setLayoutParams(layoutParams1);
-
                 linearLayout.addView(bt);
-
                 linearLayout.setTag(mArrayUserListLang.get(i).getLanguage_name());
-                stringLangIds.add(stringLangIds.size(),mArrayUserListLang.get(i).getLanguage_id());
-
+                stringLangIds.add(stringLangIds.size(), mArrayUserListLang.get(i).getLanguage_id());
                 flow_languages.addView(linearLayout);
-
-            }
+            });
         }
     }
     public void setLangFlowfromAddLang(ArrayList<String> mArrayListUserSkills,ArrayList<String> skillId) {
@@ -782,17 +750,17 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
             stringLangIds.clear();
             stringLangIds.addAll(skillId);
             flow_languages.removeAllViews();
-            for (int i = 0; i < mArrayListUserSkills.size(); i++) {
+            IntStream.range(0, mArrayListUserSkills.size()).forEach(i -> {
                 LinearLayout linearLayout = new LinearLayout(mContext);
                 LinearLayout linearLayoutF = new LinearLayout(mContext);
                 FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
                         FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density*32));
-                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density*5), 0, (int) (mContext.getResources().getDisplayMetrics().density*5), (int) (mContext.getResources().getDisplayMetrics().density*8));
+                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
+                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
                 linearLayoutF.setLayoutParams(layoutParams);
                 linearLayout.setLayoutParams(layoutParamsF);
-                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density*8), 0, (int) (mContext.getResources().getDisplayMetrics().density*8), 0);
+                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 linearLayout.setGravity(Gravity.CENTER);
                 linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
@@ -808,30 +776,28 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams1.setMargins(0, 0, 0, 0);
                 bt.setLayoutParams(layoutParams1);
-
                 linearLayout.addView(bt);
                 linearLayoutF.addView(linearLayout);
                 linearLayoutF.setTag(mArrayListUserSkills.get(i));
                 flow_languages.addView(linearLayoutF);
-
-            }
+            });
         }
 
     }
     private void setJobtypeFlow(ArrayList<EmployeeUserDetails.Data.User_Job_Type> mArrayUserJobType) {
         flow_jobtype.removeAllViews();
         if (mArrayUserJobType!=null){
-            for (int i = 0; i < mArrayUserJobType.size(); i++) {
+            IntStream.range(0, mArrayUserJobType.size()).forEach(i -> {
                 LinearLayout linearLayout = new LinearLayout(mContext);
                 LinearLayout linearLayoutF = new LinearLayout(mContext);
                 FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
                         FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density*32));
-                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density*5), 0, (int) (mContext.getResources().getDisplayMetrics().density*5), (int) (mContext.getResources().getDisplayMetrics().density*8));
+                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
+                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
                 linearLayoutF.setLayoutParams(layoutParams);
                 linearLayout.setLayoutParams(layoutParamsF);
-                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density*8), 0, (int) (mContext.getResources().getDisplayMetrics().density*8), 0);
+                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 linearLayout.setGravity(Gravity.CENTER);
                 linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
@@ -851,8 +817,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                 linearLayoutF.addView(linearLayout);
                 linearLayoutF.setTag(mArrayUserJobType.get(i).getJob_type_name());
                 flow_jobtype.addView(linearLayoutF);
-
-            }
+            });
         }
     }
 
@@ -865,9 +830,8 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
         bottomsheetemployeetype.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING)
                     bottomsheetemployeetype.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
             }
 
             @Override
@@ -915,8 +879,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                         rest.showToast(response.body().get("message").getAsString());
                         AppController.loggedOut(mContext);
                         getActivity().finish();
-                    }else
-                        onResume();
+                    }else onResume();
                 }else onResume();
 
             }
@@ -941,20 +904,18 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                 if (jsonElements.size()>0){
                 JsonObject object=    jsonElements.get(0).getAsJsonObject();
                 if (object.has("user_experience_id")){
-                    for (int i=0;i<mArrayuserworkexperience.size();i++){
-                        if (object.get("user_experience_id").getAsString().equalsIgnoreCase(mArrayuserworkexperience.get(i).getUser_experience_id())){
-                            mArrayuserworkexperience.get(i).setUser_experience_id(object.get("user_experience_id").getAsString());
-                            mArrayuserworkexperience.get(i).setCompany_name(object.get("company_name").getAsString());
-                            mArrayuserworkexperience.get(i).setExperience_title(object.get("experience_title").getAsString());
-                            mArrayuserworkexperience.get(i).setCurrently_working(object.get("currently_working").getAsString());
-                            mArrayuserworkexperience.get(i).setFunctional_id(object.get("functional_id").getAsString());
-                            mArrayuserworkexperience.get(i).setWork_from(object.get("work_from").getAsString());
-                            mArrayuserworkexperience.get(i).setWork_to(object.get("work_to").getAsString());
-                            mArrayuserworkexperience.get(i).setDescription(object.get("description").getAsString());
-                            mArrayuserworkexperience.get(i).setStart_date(object.get("start_date").getAsString());
-                            mArrayuserworkexperience.get(i).setEnd_date(object.get("end_date").getAsString());
-                        }
-                    }
+                    IntStream.range(0, mArrayuserworkexperience.size()).filter(i -> object.get("user_experience_id").getAsString().equalsIgnoreCase(mArrayuserworkexperience.get(i).getUser_experience_id())).forEach(i -> {
+                        mArrayuserworkexperience.get(i).setUser_experience_id(object.get("user_experience_id").getAsString());
+                        mArrayuserworkexperience.get(i).setCompany_name(object.get("company_name").getAsString());
+                        mArrayuserworkexperience.get(i).setExperience_title(object.get("experience_title").getAsString());
+                        mArrayuserworkexperience.get(i).setCurrently_working(object.get("currently_working").getAsString());
+                        mArrayuserworkexperience.get(i).setFunctional_id(object.get("functional_id").getAsString());
+                        mArrayuserworkexperience.get(i).setWork_from(object.get("work_from").getAsString());
+                        mArrayuserworkexperience.get(i).setWork_to(object.get("work_to").getAsString());
+                        mArrayuserworkexperience.get(i).setDescription(object.get("description").getAsString());
+                        mArrayuserworkexperience.get(i).setStart_date(object.get("start_date").getAsString());
+                        mArrayuserworkexperience.get(i).setEnd_date(object.get("end_date").getAsString());
+                    });
                     if (mArrayuserworkexperience.size() != 0) {
                         ExperienceAdapter adapter = new ExperienceAdapter(mContext, mArrayuserworkexperience);
                         list_experience.setAdapter(adapter);
@@ -963,11 +924,9 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                 }
             }
         }else {
-            if (mArrayuserworkexperience == null) {
-                mArrayuserworkexperience=new ArrayList<>();
-            }
+            if (mArrayuserworkexperience == null) mArrayuserworkexperience = new ArrayList<>();
             if (jsonElements.size()>0){
-                JsonObject object=    jsonElements.get(0).getAsJsonObject();
+                JsonObject object=  jsonElements.get(0).getAsJsonObject();
                 if (object.has("user_experience_id")){
                     EmployeeUserDetails.Data.UserWorkExperience model=new EmployeeUserDetails.Data.UserWorkExperience(
                             object.get("user_experience_id").getAsString(),object.get("company_name").getAsString(),object.get("experience_title").getAsString()
@@ -990,35 +949,30 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
             if (mArrayuserusereducation != null) {
                 if (jsonElements.size()>0){
                     if (jsonElements.has("user_education_id")){
-                        for (int i=0;i<mArrayuserusereducation.size();i++){
-                            if (jsonElements.get("user_education_id").getAsString().equalsIgnoreCase(mArrayuserusereducation.get(i).getUser_education_id())){
-                                mArrayuserusereducation.get(i).setUser_education_id(jsonElements.get("user_education_id").getAsString());
-                                mArrayuserusereducation.get(i).setCollege_university_id(jsonElements.get("college_university_id").getAsString());
-                                mArrayuserusereducation.get(i).setCollege_university_name(jsonElements.get("college_university_name").getAsString());
-                                mArrayuserusereducation.get(i).setDegree_level_id(jsonElements.get("degree_level_id").getAsString());
-                                mArrayuserusereducation.get(i).setDegree_level(jsonElements.get("degree_level").getAsString());
-                                mArrayuserusereducation.get(i).setDegree_type_id(jsonElements.get("degree_type_id").getAsString());
-                                mArrayuserusereducation.get(i).setDegree_name(jsonElements.get("degree_name").getAsString());
-                                mArrayuserusereducation.get(i).setFrom(jsonElements.get("from").getAsString());
-                                mArrayuserusereducation.get(i).setStart_date(jsonElements.get("start_date").getAsString());
-                                mArrayuserusereducation.get(i).setEnd_date(jsonElements.get("end_date").getAsString());
-                                mArrayuserusereducation.get(i).setTo(jsonElements.get("to").getAsString());
-                                mArrayuserusereducation.get(i).setCurrently_pursuing(jsonElements.get("currently_pursuing").getAsString());
-                            }
-                        }
+                        IntStream.range(0, mArrayuserusereducation.size()).filter(i -> jsonElements.get("user_education_id").getAsString().equalsIgnoreCase(mArrayuserusereducation.get(i).getUser_education_id())).forEach(i -> {
+                            mArrayuserusereducation.get(i).setUser_education_id(jsonElements.get("user_education_id").getAsString());
+                            mArrayuserusereducation.get(i).setCollege_university_id(jsonElements.get("college_university_id").getAsString());
+                            mArrayuserusereducation.get(i).setCollege_university_name(jsonElements.get("college_university_name").getAsString());
+                            mArrayuserusereducation.get(i).setDegree_level_id(jsonElements.get("degree_level_id").getAsString());
+                            mArrayuserusereducation.get(i).setDegree_level(jsonElements.get("degree_level").getAsString());
+                            mArrayuserusereducation.get(i).setDegree_type_id(jsonElements.get("degree_type_id").getAsString());
+                            mArrayuserusereducation.get(i).setDegree_name(jsonElements.get("degree_name").getAsString());
+                            mArrayuserusereducation.get(i).setFrom(jsonElements.get("from").getAsString());
+                            mArrayuserusereducation.get(i).setStart_date(jsonElements.get("start_date").getAsString());
+                            mArrayuserusereducation.get(i).setEnd_date(jsonElements.get("end_date").getAsString());
+                            mArrayuserusereducation.get(i).setTo(jsonElements.get("to").getAsString());
+                            mArrayuserusereducation.get(i).setCurrently_pursuing(jsonElements.get("currently_pursuing").getAsString());
+                        });
 
                             if (mArrayuserusereducation.size() != 0) {
                                 UserEducationAdapter adapter = new UserEducationAdapter(mContext, mArrayuserusereducation);
                                 list_education.setAdapter(adapter);
                             }
-
                     }
                 }
             }
         }else {
-            if (mArrayuserusereducation == null) {
-                mArrayuserusereducation=new ArrayList<>();
-            }
+            if (mArrayuserusereducation == null) mArrayuserusereducation = new ArrayList<>();
             if (jsonElements.size()>0){
                 JsonObject object=    jsonElements;
                 if (object.has("user_experience_id")){
@@ -1140,9 +1094,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
                     InputStream is = new BufferedInputStream(connection.getInputStream());
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String inputLine;
-                    while ((inputLine = br.readLine()) != null) {
-                        s_buffer.append(inputLine);
-                    }
+                    while ((inputLine = br.readLine()) != null) s_buffer.append(inputLine);
                     result = s_buffer.toString();
                 }
                 inputStream.close();
@@ -1182,12 +1134,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
 
     public void deleteEducation(String id) {
 
-            for (int i=0;i<mArrayuserusereducation.size();i++){
-                if (mArrayuserusereducation.get(i).getUser_education_id().equalsIgnoreCase(id)){
-                    mArrayuserusereducation.remove(i);
-                    break;
-                }
-            }
+        IntStream.range(0, mArrayuserusereducation.size()).filter(i -> mArrayuserusereducation.get(i).getUser_education_id().equalsIgnoreCase(id)).findFirst().ifPresent(i -> mArrayuserusereducation.remove(i));
         UserEducationAdapter adapter = new UserEducationAdapter(mContext, mArrayuserusereducation);
         list_education.setAdapter(adapter);
         SwipeeApiClient.swipeeServiceInstance().deleteEducation(Config.GetUserToken(),id).enqueue(new Callback<JsonObject>() {
@@ -1204,12 +1151,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
     }
     public void deleteExperience(String id) {
 
-        for (int i=0;i<mArrayuserworkexperience.size();i++){
-            if (mArrayuserworkexperience.get(i).getUser_experience_id().equalsIgnoreCase(id)){
-                mArrayuserworkexperience.remove(i);
-                break;
-            }
-        }
+        IntStream.range(0, mArrayuserworkexperience.size()).filter(i -> mArrayuserworkexperience.get(i).getUser_experience_id().equalsIgnoreCase(id)).findFirst().ifPresent(i -> mArrayuserworkexperience.remove(i));
         ExperienceAdapter adapter = new ExperienceAdapter(mContext, mArrayuserworkexperience);
         list_experience.setAdapter(adapter);
         SwipeeApiClient.swipeeServiceInstance().deleteExperience(Config.GetUserToken(),id).enqueue(new Callback<JsonObject>() {

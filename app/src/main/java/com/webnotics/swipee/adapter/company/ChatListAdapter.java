@@ -38,8 +38,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
 
         this.mContext = mContext;
         this.data = data;
-
-
     }
 
 
@@ -81,23 +79,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
         holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, MainChatActivity.class)
             .putExtra("image",data.get(position).getUser_profile())
             .putExtra("msg_id",data.get(position).getMsg_id())
-            .putExtra("action",data.get(position).getCompany_action())
+            .putExtra("apply_id",data.get(position).getApply_id())
             .putExtra("appointment_id",data.get(position).getAppointment_id())
             .putExtra("appointment_number",data.get(position).getAppointment_number())
             .putExtra("user_id",Config.isSeeker()?data.get(position).getCompany_id():data.get(position).getUser_id())
             .putExtra("sender_id",data.get(position).getMsg_sender_id())
             .putExtra("receiver_id",data.get(position).getMsg_receiver_id())
             .putExtra("name",Config.isSeeker()? data.get(position).getCompany_name():data.get(position).getFirst_name())
-        ));/* holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, ChatActivity.class)
-            .putExtra("image",data.get(position).getUser_profile())
-            .putExtra("msg_id",data.get(position).getMsg_id())
-            .putExtra("action",data.get(position).getCompany_action())
-            .putExtra("appointment_id",data.get(position).getAppointment_id())
-            .putExtra("user_id",data.get(position).getUser_id())
-            .putExtra("sender_id",data.get(position).getMsg_sender_id())
-            .putExtra("receiver_id",data.get(position).getMsg_receiver_id())
-            .putExtra("name",Config.isSeeker()? data.get(position).getCompany_name():data.get(position).getFirst_name())
-        ));*/
+        ));
 
     }
 

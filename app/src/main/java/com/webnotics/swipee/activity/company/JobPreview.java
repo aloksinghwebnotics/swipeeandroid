@@ -247,10 +247,7 @@ public class JobPreview extends AppCompatActivity {
                         startActivity(new Intent(mContext, JobPostRule.class).putExtra("job_post_id", job_post_id));
                         finish();
 
-                    } else {
-                        rest.showToast(responceBody.get("message").getAsString());
-                    }
-
+                    } else rest.showToast(responceBody.get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -258,7 +255,6 @@ public class JobPreview extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
-
             }
         });
     }

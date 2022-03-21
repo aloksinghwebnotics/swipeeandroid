@@ -69,10 +69,7 @@ public class DegreeAdapter extends BaseAdapter implements Filterable {
     @Override
     public Filter getFilter() {
         // TODO Auto-generated method stub
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
-
+        if (filter == null) filter = new CustomFilter();
         return filter;
     }
 

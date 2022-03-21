@@ -125,8 +125,7 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                 try {
                     JSONArray jsonData = new JSONArray(job_skills);
                     setFlowData(jsonData);
-                } catch (JSONException ignored) {
-                }
+                } catch (JSONException ignored) {}
             }
             iv_profile.setOnClickListener(v -> {
                 if (!TextUtils.isEmpty(user_profile))
@@ -314,11 +313,9 @@ public class CreateAppointment extends AppCompatActivity implements View.OnClick
                         finish();
                     } else if (responceBody.get("status").getAsBoolean()) {
                         if (UserDetail.instance != null) UserDetail.instance.setBackPressed();
-                        rest.showToast(responceBody.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", CreateAppointment.class.getSimpleName()));
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());
-
                 } else rest.showToast("Something went wrong");
 
             }

@@ -115,10 +115,7 @@ public class MatchedCompanyActivity extends AppCompatActivity {
                         ll_nodata.setVisibility(View.VISIBLE);
                         rv_Likejob.setVisibility(View.GONE);
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

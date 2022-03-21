@@ -59,19 +59,14 @@ public class SearchIndustryAdapter extends BaseAdapter implements Filterable {
         nameTxt.setText(mArrayListSkills.get(pos).get("industry_name").getAsString());
 
 
-        convertView.setOnClickListener(view -> {
-            mContext.selectedData(mArrayListSkills.get(pos).get("industry_name").getAsString(), mArrayListSkills.get(pos).get("industry_id").getAsString());
-        });
+        convertView.setOnClickListener(view -> mContext.selectedData(mArrayListSkills.get(pos).get("industry_name").getAsString(), mArrayListSkills.get(pos).get("industry_id").getAsString()));
         return convertView;
     }
 
     @Override
     public Filter getFilter() {
         // TODO Auto-generated method stub
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
-
+        if (filter == null) filter = new CustomFilter();
         return filter;
     }
 
@@ -89,14 +84,13 @@ public class SearchIndustryAdapter extends BaseAdapter implements Filterable {
                 constraint = constraint.toString().toUpperCase();
                 ArrayList<JsonObject> filters = new ArrayList<JsonObject>();
                 //get specific items
-                for (int i = 0; i < filterList.size(); i++) {
+                for (int i = 0; i < filterList.size(); i++)
                     if (filterList.get(i).get("industry_name").getAsString().toUpperCase().contains(constraint)) {
                         JsonObject p = new JsonObject();
                         p.add("industry_id", filterList.get(i).get("industry_id"));
                         p.add("industry_name", filterList.get(i).get("industry_name"));
                         filters.add(p);
                     }
-                }
                 results.count = filters.size();
                 results.values = filters;
             } else {

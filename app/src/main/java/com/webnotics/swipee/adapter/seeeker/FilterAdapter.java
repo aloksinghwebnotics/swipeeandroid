@@ -19,6 +19,7 @@ import com.webnotics.swipee.model.seeker.FilterModelSelected;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHolder> implements Filterable {
@@ -69,70 +70,47 @@ public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             holder.chkimg.setVisibility(View.VISIBLE);
             holder.tv_item.setText(data.get(position).getName());
         }
-        if (TextUtils.isEmpty(data.get(position).getState())){
-            holder.tv_state.setVisibility(View.GONE);
-        }else holder.tv_state.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(data.get(position).getState())) holder.tv_state.setVisibility(View.GONE);
+        else holder.tv_state.setVisibility(View.VISIBLE);
 
 
         holder.itemView.setOnClickListener(v -> {
 
                  if (data.get(position).isDistance()){
-                             if (oldHolder!=null){
-                                 oldHolder.rb_radio.setChecked(false);
-                             }
+                             if (oldHolder!=null) oldHolder.rb_radio.setChecked(false);
                              oldHolder=holder;
                      if (data.get(position).isSelected()){
-                         for (int i=0;i<data.size();i++){
-                             mContext.setSelectedFilterPosition(data.get(i).getId(),false);
+                         IntStream.range(0, data.size()).forEach(i -> {
+                             mContext.setSelectedFilterPosition(data.get(i).getId(), false);
                              data.get(i).setSelected(false);
                              data1.get(i).setSelected(false);
-                         }
+                         });
                          holder.rb_radio.setChecked(false);
                          data.get(position).setSelected(false);
                          mContext.setSelectedFilterPosition(data.get(position).getId(),false);
-                         for (int i=0;i<data1.size();i++){
-                             if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())){
-                                 data1.get(i).setSelected(false);
-                                 break;
-                             }
-                         }
+                         IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(false));
                      }else {
-                         for (int i=0;i<data.size();i++){
-                             mContext.setSelectedFilterPosition(data.get(i).getId(),false);
+                         IntStream.range(0, data.size()).forEach(i -> {
+                             mContext.setSelectedFilterPosition(data.get(i).getId(), false);
                              data.get(i).setSelected(false);
                              data1.get(i).setSelected(false);
-                         }
+                         });
                          holder.rb_radio.setChecked(true);
                          data.get(position).setSelected(true);
                          mContext.setSelectedFilterPosition(data.get(position).getId(),true);
-                         for (int i=0;i<data1.size();i++){
-                             if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())){
-                                 data1.get(i).setSelected(true);
-                                 break;
-                             }
-                         }
+                         IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(true));
                      }
                  }else {
                      if (data.get(position).isSelected()){
                          holder.chkimg.setChecked(false);
                          data.get(position).setSelected(false);
                          mContext.setSelectedFilterPosition(data.get(position).getId(),false);
-                         for (int i=0;i<data1.size();i++){
-                             if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())){
-                                 data1.get(i).setSelected(false);
-                                 break;
-                             }
-                         }
+                         IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(false));
                      }else {
                          holder.chkimg.setChecked(true);
                          data.get(position).setSelected(true);
                          mContext.setSelectedFilterPosition(data.get(position).getId(),true);
-                         for (int i=0;i<data1.size();i++){
-                             if (data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())){
-                                 data1.get(i).setSelected(true);
-                                 break;
-                             }
-                         }
+                         IntStream.range(0, data1.size()).filter(i -> data.get(position).getId().equalsIgnoreCase(data1.get(i).getId())).findFirst().ifPresent(i -> data1.get(i).setSelected(true));
                      }
                  }
         });

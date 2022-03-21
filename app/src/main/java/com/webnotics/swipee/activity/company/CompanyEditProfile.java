@@ -248,11 +248,8 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
                             JsonObject data = responseBody.get("data").getAsJsonObject();
                             company_size = data.isJsonNull() ? new JsonArray() : data.has("company_size") ? data.get("company_size").getAsJsonArray() : new JsonArray();
                         }
-
                     }
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -377,11 +374,8 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
                     } else if (response.body().get("code").getAsInt() == 203) {
                         AppController.loggedOut(mContext);
                         finish();
-                    } else AppController.dismissProgressdialog();
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                    }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

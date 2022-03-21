@@ -137,9 +137,7 @@ public class FeaturedPlan extends AppCompatActivity implements PaymentResultWith
                         }
                     }
 
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

@@ -119,9 +119,8 @@ public class AddCityActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.tv_next:
-                if (TextUtils.isEmpty(cityId)) {
-                    rest.showToast("Select City");
-                } else {
+                if (TextUtils.isEmpty(cityId)) rest.showToast("Select City");
+                else {
                     if (getIntent() != null)
                         if (getIntent().getStringExtra("from").equalsIgnoreCase(EditProfileActivity.class.getSimpleName()))
                             startActivity(new Intent(mContext, EditProfileActivity.class).putExtra("from", "City").putExtra("id", cityId).putExtra("name", cityName));

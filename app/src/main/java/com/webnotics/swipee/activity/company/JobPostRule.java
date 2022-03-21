@@ -179,7 +179,6 @@ public class JobPostRule extends AppCompatActivity {
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject respo = response.body();
                     if (respo.get("code").getAsInt() == 200 && respo.get("status").getAsBoolean()) {
-                        rest.showToast(respo.get("message").getAsString());
                         callDialogFinish();
                     } else if (respo.get("code").getAsInt() == 203) {
                         rest.showToast(respo.get("message").getAsString());
@@ -207,7 +206,6 @@ public class JobPostRule extends AppCompatActivity {
                 if (response.code() == 200 && response.body() != null) {
                     JsonObject respo = response.body();
                     if (respo.get("code").getAsInt() == 200 && respo.get("status").getAsBoolean()) {
-                        rest.showToast(respo.get("message").getAsString());
                         startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobPostRule.class.getSimpleName()));
                         finish();
                     } else if (respo.get("code").getAsInt() == 203) {

@@ -9,8 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -31,9 +29,9 @@ import com.webnotics.swipee.UrlManager.Config;
 import com.webnotics.swipee.adapter.seeeker.JobTitleAdapter;
 import com.webnotics.swipee.fragments.seeker.ProfileFragments;
 import com.webnotics.swipee.model.seeker.JobTitleModel;
-import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.ParaName;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -103,14 +101,9 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
         tv_job.setOnClickListener(this);
         doneeeee.setOnClickListener(this);
 
-        cb_pursuing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    rl_enddate.setVisibility(View.INVISIBLE);
-                } else rl_enddate.setVisibility(View.VISIBLE);
+        cb_pursuing.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            rl_enddate.setVisibility(isChecked ? View.INVISIBLE : View.VISIBLE);
 
-            }
         });
 
         if (getIntent() != null) {
@@ -168,15 +161,15 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.tv_save:
 
-                if (TextUtils.isEmpty(tv_job.getText().toString())) {
+                if (TextUtils.isEmpty(tv_job.getText().toString()))
                     rest.showToast("Select Job Type");
-                } else if (TextUtils.isEmpty(et_company.getText().toString())) {
+                else if (TextUtils.isEmpty(et_company.getText().toString()))
                     rest.showToast("Enter Company Name");
-                } else if (TextUtils.isEmpty(tv_startdate.getText().toString())) {
+                else if (TextUtils.isEmpty(tv_startdate.getText().toString()))
                     rest.showToast("Select Start Date");
-                } else if (TextUtils.isEmpty(tv_enddate.getText().toString()) && !cb_pursuing.isChecked()) {
+                else if (TextUtils.isEmpty(tv_enddate.getText().toString()) && !cb_pursuing.isChecked())
                     rest.showToast("Select End Date");
-                } else {
+                else {
                     if (rest.isInterentAvaliable()) {
                         HashMap<String, String> hashMap = new HashMap<>();
                         hashMap.put(ParaName.KEYTOKEN, Config.GetUserToken());
@@ -196,9 +189,9 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.rl_enddate:
             case R.id.tv_enddate:
-                if (TextUtils.isEmpty(tv_startdate.getText().toString())) {
+                if (TextUtils.isEmpty(tv_startdate.getText().toString()))
                     rest.showToast("Select Start Date First");
-                } else setEndDate();
+                else setEndDate();
                 break;
             case R.id.rl_startdate:
             case R.id.tv_startdate:
@@ -217,15 +210,10 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(mContext,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        int mothfinal = monthOfYear + 1;
-                        tv_startdate.setText(year + "-" + mothfinal + "-" + dayOfMonth);
-                        tv_enddate.setText("");
-                    }
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    int mothfinal = monthOfYear + 1;
+                    tv_startdate.setText(year + "-" + mothfinal + "-" + dayOfMonth);
+                    tv_enddate.setText("");
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
@@ -237,15 +225,10 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(mContext,
-                new DatePickerDialog.OnDateSetListener() {
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    int mothfinal = monthOfYear + 1;
+                    tv_enddate.setText(year + "-" + mothfinal + "-" + dayOfMonth);
 
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        int mothfinal = monthOfYear + 1;
-                        tv_enddate.setText(year + "-" + mothfinal + "-" + dayOfMonth);
-
-                    }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         String dtStart = tv_startdate.getText().toString();
@@ -277,16 +260,12 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
                         AppController.loggedOut(mContext);
                         finish();
                     } else if (response.body().get("status").getAsBoolean()) {
-                        if (ProfileFragments.instance != null) {
+                        if (ProfileFragments.instance != null)
                             ProfileFragments.instance.setExperienceData(isEdit, response.body().has("data") ? response.body().get("data").isJsonArray() ? response.body().get("data").getAsJsonArray() : new JsonArray() : new JsonArray());
-                        }
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -304,9 +283,8 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
         jobtype_sheetBottom.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING)
                     jobtype_sheetBottom.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
             }
 
             @Override
@@ -333,9 +311,7 @@ public class WorkExperience extends AppCompatActivity implements View.OnClickLis
                     JsonArray mArrayListData = responseBody.get("data").getAsJsonArray();
                     jsonObjectArrayList.clear();
                     IntStream.range(0, mArrayListData.size()).mapToObj(i -> mArrayListData.get(i).getAsJsonObject()).map(jsonObject -> new JobTitleModel(jsonObject.get("functional_id").getAsString(), jsonObject.get("functional_name").getAsString(), jsonObject.get("functional_id").getAsString().equalsIgnoreCase(functional_id))).forEach(jobTitleModel -> jsonObjectArrayList.add(jsonObjectArrayList.size(), jobTitleModel));
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

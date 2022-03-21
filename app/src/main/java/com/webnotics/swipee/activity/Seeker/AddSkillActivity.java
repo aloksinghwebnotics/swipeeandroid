@@ -149,14 +149,12 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
                     skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                     mListView.setAdapter(skilladapter);
                     IntStream.range(0, mArrayListSkills.size()).filter(i -> mArrayListSkills.get(i).isSelected()).forEach(i -> setSkillSelected(mArrayListSkills.get(i).getSkill_name(), mArrayListSkills.get(i).getSkill_id()));
-
                 } else rest.showToast("Something went wrong");
 
             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });
@@ -223,10 +221,7 @@ public class AddSkillActivity extends AppCompatActivity implements View.OnClickL
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

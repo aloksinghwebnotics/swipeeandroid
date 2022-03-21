@@ -133,17 +133,16 @@ public class AddDesiredIndustryActivity extends AppCompatActivity implements Vie
                         finish();
                     } else if (response.body().get("code").getAsInt() == 200) {
                         JsonArray mArrayListData = responseBody.has("data") ? responseBody.get("data").getAsJsonArray() : new JsonArray();
-                        for (int i = 0; i < mArrayListData.size(); i++) {
+                        IntStream.range(0, mArrayListData.size()).forEach(i -> {
                             model = new AddSkillsModel();
                             model.setSkill_id(mArrayListData.get(i).getAsJsonObject().get("industry_id").getAsString());
                             model.setSkill_name(mArrayListData.get(i).getAsJsonObject().get("industry_name").getAsString());
                             model.setSelected(false);
                             mArrayListSkills.add(model);
-                        }
+                        });
                         skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                         mListView.setAdapter(skilladapter);
                     } else rest.showToast("Something went wrong");
-
                 } else rest.showToast("Something went wrong");
 
             }

@@ -101,28 +101,20 @@ public class ExperienceAdapter extends BaseAdapter {
             }
 
            }
-        iv_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ProfileFragments.instance!=null)
-                    ProfileFragments.instance.deleteExperience(mUserWOrkArrayList.get(pos).getUser_experience_id());
-            }
+        iv_delete.setOnClickListener(v -> {
+            if (ProfileFragments.instance!=null)
+                ProfileFragments.instance.deleteExperience(mUserWOrkArrayList.get(pos).getUser_experience_id());
         });
-            iv_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, WorkExperience.class).putExtra("user_experience_id",mUserWOrkArrayList.get(pos).getUser_experience_id())
-                .putExtra("experience_title",mUserWOrkArrayList.get(pos).getExperience_title())
-                        .putExtra("functional_id",mUserWOrkArrayList.get(pos).getFunctional_id())
-                        .putExtra("company_name",mUserWOrkArrayList.get(pos).getCompany_name())
-                        .putExtra("start_date",mUserWOrkArrayList.get(pos).getStart_date())
-                        .putExtra("end_date",mUserWOrkArrayList.get(pos).getEnd_date())
-                        .putExtra("currently_working",mUserWOrkArrayList.get(pos).getCurrently_working())
-                        .putExtra("description",mUserWOrkArrayList.get(pos).getDescription())
-                        .putExtra("edit",true)
-                );
-            }
-        });
+            iv_edit.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, WorkExperience.class).putExtra("user_experience_id",mUserWOrkArrayList.get(pos).getUser_experience_id())
+            .putExtra("experience_title",mUserWOrkArrayList.get(pos).getExperience_title())
+                    .putExtra("functional_id",mUserWOrkArrayList.get(pos).getFunctional_id())
+                    .putExtra("company_name",mUserWOrkArrayList.get(pos).getCompany_name())
+                    .putExtra("start_date",mUserWOrkArrayList.get(pos).getStart_date())
+                    .putExtra("end_date",mUserWOrkArrayList.get(pos).getEnd_date())
+                    .putExtra("currently_working",mUserWOrkArrayList.get(pos).getCurrently_working())
+                    .putExtra("description",mUserWOrkArrayList.get(pos).getDescription())
+                    .putExtra("edit",true)
+            ));
 
         return convertView;
     }

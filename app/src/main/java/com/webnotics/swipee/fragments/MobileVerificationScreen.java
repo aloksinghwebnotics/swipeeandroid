@@ -77,9 +77,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                 if (isSeeker)
                     resendOtp();
                 else  callChangeCompanyMobile(Config.GetMobileNo());;
-            } else {
-                rest.AlertForInternet();
-            }
+            } else rest.AlertForInternet();
 
         return rootView;
     }
@@ -101,19 +99,15 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                     callCheckOTP();
                 }else {
                         String mobile=et_mobile.getText().toString();
-                    if (TextUtils.isEmpty(mobile)){
-                        rest.showToast("Please enter phone number");
-                    }else if (mobile.length()<10){
-                        rest.showToast("Please enter 10 digit phone number");
-                    }else {
+                    if (TextUtils.isEmpty(mobile)) rest.showToast("Please enter phone number");
+                    else if (mobile.length()<10) rest.showToast("Please enter 10 digit phone number");
+                    else {
                         if (rest.isInterentAvaliable()) {
                             AppController.ShowDialogue("", mContext);
                             if (isSeeker)
                             callChangeMobile(mobile);
                             else  callChangeCompanyMobile(mobile);
-                        } else {
-                            rest.AlertForInternet();
-                        }
+                        } else rest.AlertForInternet();
                     }
                 }
                 break;
@@ -129,26 +123,21 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                        if (isSeeker)
                         resendOtp();
                        else  callChangeCompanyMobile(Config.GetMobileNo());;
-                    } else {
-                        rest.AlertForInternet();
-                    }
+                    } else rest.AlertForInternet();
                 break;
             default:break;
         }
     }
     private void callCheckOTP() {
         String otp=et_otp1.getText().toString()+et_otp2.getText().toString()+et_otp3.getText().toString()+et_otp4.getText().toString();
-        if (otp.length()!=4){
-            rest.showToast("Please enter 4 digit OTP");
-        }else {
+        if (otp.length()!=4) rest.showToast("Please enter 4 digit OTP");
+        else {
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
                 if (isSeeker)
                 callOTPVerify(otp);
                 else  callCompanyOTPVerify(otp);
-            } else {
-                rest.AlertForInternet();
-            }
+            } else rest.AlertForInternet();
         }
 
     }
@@ -170,9 +159,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -199,9 +186,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -230,9 +215,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -263,9 +246,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 
@@ -291,24 +272,17 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
         @Override
         public void afterTextChanged(Editable s) {
             if (getActivity().getCurrentFocus().getId() == et_otp1.getId()){
-                if (et_otp1.getText().toString().length()>0){
-                    et_otp2.requestFocus();
-                }
+                if (et_otp1.getText().toString().length()>0) et_otp2.requestFocus();
             }else  if (getActivity().getCurrentFocus().getId() == et_otp2.getId()){
-                if (et_otp2.getText().toString().length()>0){
-                    et_otp3.requestFocus();
-                } else  et_otp1.requestFocus();
+                if (et_otp2.getText().toString().length()>0) et_otp3.requestFocus();
+                else  et_otp1.requestFocus();
             } else  if (getActivity().getCurrentFocus().getId() == et_otp3.getId()){
-                if (et_otp3.getText().toString().length()>0){
-                    et_otp4.requestFocus();
-                } else  et_otp2.requestFocus();
+                if (et_otp3.getText().toString().length()>0) et_otp4.requestFocus();
+                else  et_otp2.requestFocus();
             } else  if (getActivity().getCurrentFocus().getId() == et_otp4.getId()){
-                if (et_otp4.getText().toString().length()>0){
-                    et_otp4.requestFocus();
-                } else  et_otp3.requestFocus();
+                if (et_otp4.getText().toString().length()>0) et_otp4.requestFocus();
+                else  et_otp3.requestFocus();
             }
-
-
         }
     };
 
@@ -327,10 +301,7 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                         if (responseBody.has("message"))
                             rest.showToast(responseBody.get("message").getAsString());
                     }
-
-                }else {
-                    rest.showToast("Something went wrong");
-                }
+                }else rest.showToast("Something went wrong");
 
             }
 

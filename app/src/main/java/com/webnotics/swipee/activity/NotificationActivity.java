@@ -65,17 +65,14 @@ public class NotificationActivity extends AppCompatActivity {
         tv_mute=findViewById(R.id.tv_mute);
         iv_more=findViewById(R.id.iv_more);
         iv_back.setOnClickListener(v -> finish());
-        if (Config.isMute()){
-            tv_mute.setText("Unmute");
-        }else tv_mute.setText("Mute");
+        if (Config.isMute()) tv_mute.setText("Unmute");
+        else tv_mute.setText("Mute");
 
         tv_mute.setOnClickListener(v -> {
             setNotificationSetting(Config.isMute() ? "N" : "Y");
             ll_mute.setVisibility(View.GONE);
         });
-        iv_more.setOnClickListener(v -> {
-            ll_mute.setVisibility(ll_mute.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-        });
+        iv_more.setOnClickListener(v -> ll_mute.setVisibility(ll_mute.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE));
     }
 
     public void callService(){

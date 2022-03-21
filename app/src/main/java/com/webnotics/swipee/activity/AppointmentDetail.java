@@ -70,6 +70,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
     private String from="";
     private String name="";
     private String name1="";
+    private String apply_id="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,21 +103,15 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
             if (!TextUtils.isEmpty(appointment_id)){
                 if (rest.isInterentAvaliable()){
                     AppController.ShowDialogue("",mContext);
-                    if (Config.isSeeker())
-                        callSeekerAppointmentDetail(appointment_id);
-                    else
-                    callAppointmentDetail(appointment_id);
+                    if (Config.isSeeker()) callSeekerAppointmentDetail(appointment_id);
+                    else callAppointmentDetail(appointment_id);
                 }else rest.AlertForInternet();
             }
         }
 
-        iv_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(user_profile)){
-                    AppController.callFullImage(mContext,user_profile);
-                }
-            }
+        iv_profile.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(user_profile))
+                AppController.callFullImage(mContext, user_profile);
         });
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
@@ -234,6 +229,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                          startAt=responseBody.getData().getAppointment_start_at();
                          endAt=responseBody.getData().getAppointment_end_at();
                         appointment_id=responseBody.getData().getAppointment_id();
+                        apply_id=responseBody.getData().getApply_id();
                         appointment_type=responseBody.getData().getAppointment_type();
                         appointment_number=responseBody.getData().getAppointment_number();
                         user_id=responseBody.getData().getUser_id();
@@ -289,7 +285,6 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
         });
 
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -317,6 +312,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                         .putExtra("user_id",user_id)
                                         .putExtra("sender_id",Config.GetId())
                                         .putExtra("receiver_id",user_id)
+                                        .putExtra("apply_id",apply_id)
                                         .putExtra("name",name));
                                             finish();
                             } else if (appointment_type.equalsIgnoreCase("online_meeting")) {
@@ -326,10 +322,8 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                                else callVideoDetail();
                             } else if (appointment_type.equalsIgnoreCase("call")) {
                                 AppController.ShowDialogue("",mContext);
-                                if (Config.isSeeker())
-                                    callSeekerAudioDetail();
-                                else
-                                    callAudioDetail();
+                                if (Config.isSeeker()) callSeekerAudioDetail();
+                                else callAudioDetail();
                             }
                         }
                     }
@@ -382,10 +376,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         }
                         finish();
                     }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

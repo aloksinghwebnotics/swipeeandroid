@@ -116,10 +116,7 @@ public class AppliedJobsActivity extends AppCompatActivity {
                         rv_appliedJobs.setVisibility(View.GONE);
                     }
 
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

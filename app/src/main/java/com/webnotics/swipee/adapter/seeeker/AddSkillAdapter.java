@@ -83,7 +83,7 @@ public class AddSkillAdapter extends BaseAdapter implements Filterable {
                 mArrayListSkills.set(pos, model);
 
                 notifyDataSetChanged();
-                for (int j = 0; j < filterList.size(); j++) {
+                for (int j = 0; j < filterList.size(); j++)
                     if (filterList.get(j).getSkill_name().equalsIgnoreCase(mArrayListSkills.get(pos).getSkill_name())) {
                         model = new AddSkillsModel();
                         model.setSkill_name(filterList.get(j).getSkill_name());
@@ -94,7 +94,6 @@ public class AddSkillAdapter extends BaseAdapter implements Filterable {
                         filterList.set(j, model);
                         notifyDataSetChanged();
                     }
-                }
                 addSkillsInterface.skill(mArrayListSkills.get(pos).getSkill_name(), mArrayListSkills.get(pos).getSkill_id());
             }
 
@@ -106,9 +105,7 @@ public class AddSkillAdapter extends BaseAdapter implements Filterable {
     @Override
     public Filter getFilter() {
         // TODO Auto-generated method stub
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
+        if (filter == null) filter = new CustomFilter();
 
         return filter;
     }

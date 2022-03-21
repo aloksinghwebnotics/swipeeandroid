@@ -508,11 +508,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     } else if (response.body().get("status").getAsBoolean()) {
                         rest.showToast(response.body().get("message").getAsString());
                         finish();
-                    } else AppController.dismissProgressdialog();
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                    }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override

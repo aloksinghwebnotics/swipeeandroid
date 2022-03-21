@@ -90,16 +90,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        holder.iv_call.setOnClickListener(v -> {
-            mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id()));
-        });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", AppointmentActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_id()));
-
-            }
-        });
+        holder.iv_call.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AppointmentDetail.class).putExtra(ParaName.KEY_APPOINTMENTID,data.get(position).getAppointment_id())));
+        holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, JobDetail.class).putExtra("from", AppointmentActivity.class.getSimpleName()).putExtra("id",data.get(position).getJob_id())));
 
     }
 

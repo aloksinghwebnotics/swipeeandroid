@@ -169,8 +169,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception e) {
-        }
+        } catch (Exception ignored) {}
 
     }
     public void setTransactionData(PaymentData paymentData) {
@@ -212,10 +211,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
                         Config.SetTransaction("");
                         rest.showToast(response.body().get("message").getAsString());
                     }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -248,10 +244,7 @@ public class CompanyPlansFragments extends Basefragment implements View.OnClickL
                             rv_plan.setAdapter(planAdapter);
                         }
                     }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

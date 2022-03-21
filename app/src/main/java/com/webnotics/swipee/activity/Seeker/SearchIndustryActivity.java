@@ -124,7 +124,6 @@ public class SearchIndustryActivity extends AppCompatActivity implements View.On
                         collegeAdapter = new SearchIndustryAdapter(SearchIndustryActivity.this, arrayList);
                         mListView.setAdapter(collegeAdapter);
                     } else rest.showToast("Something went wrong");
-
                 } else rest.showToast("Something went wrong");
 
             }

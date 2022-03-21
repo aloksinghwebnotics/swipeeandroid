@@ -54,12 +54,7 @@ public class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.
         Glide.with(mContext).load(data.get(position).getCompany_logo()).
                 error(R.drawable.ic_profile_select).placeholder(R.drawable.ic_profile_select).into(holder.civ_logo);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, JobListActivity.class).putExtra("id", data.get(position).getCompany_id()));
-            }
-        });
+        holder.itemView.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, JobListActivity.class).putExtra("id", data.get(position).getCompany_id())));
     }
 
     @Override

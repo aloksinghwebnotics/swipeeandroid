@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,12 +30,14 @@ import com.webnotics.swipee.radarview.LatLongCs;
 import com.webnotics.swipee.radarview.ObjectModel;
 import com.webnotics.swipee.radarview.Radar;
 import com.webnotics.swipee.radarview.RadarViewC;
-import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.webnotics.swipee.rest.Rest;
+import com.webnotics.swipee.rest.SwipeeApiClient;
 import com.xw.repo.BubbleSeekBar;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -104,27 +105,16 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
             public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
                 radiessprogress = progress;
                 if (fromUser) {
-                    if (progress <= 15) {
-                        bubbleSeekBar.setProgress(10);
-                    } else if (progress <= 25) {
-                        bubbleSeekBar.setProgress(20);
-                    } else if (progress <= 35) {
-                        bubbleSeekBar.setProgress(30);
-                    } else if (progress <= 45) {
-                        bubbleSeekBar.setProgress(40);
-                    } else if (progress <= 55) {
-                        bubbleSeekBar.setProgress(50);
-                    } else if (progress <= 65) {
-                        bubbleSeekBar.setProgress(60);
-                    } else if (progress <= 75) {
-                        bubbleSeekBar.setProgress(70);
-                    } else if (progress <= 85) {
-                        bubbleSeekBar.setProgress(80);
-                    } else if (progress <= 95) {
-                        bubbleSeekBar.setProgress(90);
-                    } else if (progress <= 100) {
-                        bubbleSeekBar.setProgress(100);
-                    }
+                    if (progress <= 15) bubbleSeekBar.setProgress(10);
+                    else if (progress <= 25) bubbleSeekBar.setProgress(20);
+                    else if (progress <= 35) bubbleSeekBar.setProgress(30);
+                    else if (progress <= 45) bubbleSeekBar.setProgress(40);
+                    else if (progress <= 55) bubbleSeekBar.setProgress(50);
+                    else if (progress <= 65) bubbleSeekBar.setProgress(60);
+                    else if (progress <= 75) bubbleSeekBar.setProgress(70);
+                    else if (progress <= 85) bubbleSeekBar.setProgress(80);
+                    else if (progress <= 95) bubbleSeekBar.setProgress(90);
+                    else if (progress <= 100) bubbleSeekBar.setProgress(100);
                 }
             }
 
@@ -202,17 +192,12 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                             if ( SeekerHomeActivity.instance!=null)
                             SeekerHomeActivity.instance.tv_viewAll.setVisibility(View.GONE);
                         }
-                    } else  if (userRaderView.getCode()==203){
+                    } else if (userRaderView.getCode()==203){
                         rest.showToast(userRaderView.getMessage());
                         AppController.loggedOut(mContext);
                         getActivity().finish();
-                    }else {
-                        Toast.makeText(mContext, userRaderView.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                    }else rest.showToast(userRaderView.getMessage());
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -250,8 +235,7 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                 Intent intent = new Intent(mContext, SearchIndustryActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_viewAll:
-                break;
+
         }
     }
 
@@ -277,8 +261,8 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                 Double.parseDouble(Config.GetLat()),
                 Double.parseDouble(Config.GetLongg()));
         if (mArrayLisCompaniesListing.size() > 10) {
-            for (int i = 0; i < 10; i++) {
-                de.hdodenhof.circleimageview.CircleImageView t1 = new de.hdodenhof.circleimageview.CircleImageView(mContext);
+            IntStream.range(0, 10).forEach(i -> {
+                CircleImageView t1 = new CircleImageView(mContext);
                 t1.setLayoutParams(new ViewGroup.LayoutParams(52, 52));
                 if (!getActivity().isFinishing()) {
                     Glide.with(mContext)
@@ -304,11 +288,10 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                             Double.parseDouble("10"), t1, mArrayLisCompaniesListing.get(i).getCompany_id()));
 
                 }
-
-            }
+            });
         } else {
-            for (int i = 0; i < mArrayLisCompaniesListing.size(); i++) {
-                de.hdodenhof.circleimageview.CircleImageView t1 = new de.hdodenhof.circleimageview.CircleImageView(mContext);
+            IntStream.range(0, mArrayLisCompaniesListing.size()).forEach(i -> {
+                CircleImageView t1 = new CircleImageView(mContext);
                 t1.setLayoutParams(new ViewGroup.LayoutParams(52, 52));
                 if (!getActivity().isFinishing()) {
                     Glide.with(mContext)
@@ -316,7 +299,6 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                             .apply(new RequestOptions().placeholder(R.drawable.ic_profile_select).error(R.drawable.ic_profile_select).override(80, 80))
                             .into(t1);
                 }
-
                 if (mArrayLisCompaniesListing.get(i).getCompany_radius() != null) {
                     if (mArrayLisCompaniesListing.get(i).getCompany_radius().equalsIgnoreCase("")) {
                         mDataSet.add(new ObjectModel(Double.parseDouble(mArrayLisCompaniesListing.get(i).getCompany_latitude()),
@@ -335,7 +317,7 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
                             Double.parseDouble("10"), t1, mArrayLisCompaniesListing.get(i).getCompany_id()));
 
                 }
-            }
+            });
         }
 
         mRadarCustom.setupData(Double.parseDouble("" + radiessprogress * 1000), mDataSet, latLongCs, mCenterView);

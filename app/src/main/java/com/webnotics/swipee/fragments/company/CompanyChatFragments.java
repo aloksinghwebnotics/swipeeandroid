@@ -1,5 +1,6 @@
 package com.webnotics.swipee.fragments.company;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,11 +40,14 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
    TextView tv_nodata;
    Rest rest;
    Context mContext;
+   @SuppressLint("StaticFieldLeak")
+   public static CompanyChatFragments instance;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.chat_screen, container, false);
         mContext=getActivity();
         rest=new Rest(mContext);
+        instance=CompanyChatFragments.this;
         rv_chatList=rootView.findViewById(R.id.rv_chatList);
         tv_nodata=rootView.findViewById(R.id.tv_nodata);
         ll_nodata=rootView.findViewById(R.id.ll_nodata);
@@ -71,7 +75,13 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
 
     }
 
-    private void getRecentChat() {
+    @Override
+    public void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
+    public void getRecentChat() {
         SwipeeApiClient.swipeeServiceInstance().getRecentChat(Config.GetUserToken()).enqueue(new Callback<RecentChatModel>() {
             @Override
             public void onResponse(@NonNull Call<RecentChatModel> call, @NonNull Response<RecentChatModel> response) {
@@ -88,7 +98,7 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
                             ArrayList<RecentChatModel.Data> chatArray = recentChatModel.getData();
                             chatArray.sort(new ChatComparator());
                             rv_chatList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-                            ChatListAdapter chatListAdapter = new ChatListAdapter(mContext, recentChatModel.getData());
+                            ChatListAdapter chatListAdapter = new ChatListAdapter(mContext, chatArray);
                             rv_chatList.setAdapter(chatListAdapter);
                             tv_nodata.setVisibility(View.GONE);
                             ll_nodata.setVisibility(View.GONE);
@@ -101,7 +111,6 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
 
                         }
                     }else rest.showToast("Something went wrong");
-
                 }else rest.showToast("Something went wrong");
 
             }
@@ -115,20 +124,16 @@ public class CompanyChatFragments extends Basefragment implements View.OnClickLi
     }
 
 
-    private class ChatComparator implements Comparator<RecentChatModel.Data> {
+    private static class ChatComparator implements Comparator<RecentChatModel.Data> {
         public int compare(RecentChatModel.Data s2, RecentChatModel.Data s1) {
             SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             try {
                 Date date2 = formatDate.parse(s1.getMsg_created_at());
                 Date date3 = formatDate.parse(s2.getMsg_created_at());
                 if (date2 != null && date3 != null) {
-                    if (date2.before(date3)) {
-                        return -1;
-                    }else   if (date2.after(date3)) {
-                        return 1;
-                    }else {
-                        return 0;
-                    }
+                    if (date2.before(date3)) return -1;
+                    else   if (date2.after(date3)) return 1;
+                    else return 0;
 
                 }else return 0;
             } catch (ParseException e) {

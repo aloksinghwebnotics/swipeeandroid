@@ -485,5 +485,9 @@ public interface RestService {
     @FormUrlEncoded
     @POST(ApiUrls.URL_APPOINTMENT_ACCESS_TOKEN_CHAT)
     Call<JsonObject> createAccessToken(@Field(ParaName.KEYTOKEN) String user_token,@Field(ParaName.KEY_UID) String user_id,@Field(ParaName.KEY_APPOINTMENTID) String appoi_id,@Field(ParaName.KEY_APPOINTMENTNUMBER) String appoi_number);
+
+    @FormUrlEncoded
+    @POST(ApiUrls.URL_DISCONNECTEDCALL)
+    Call<JsonObject> disconnectedCall(@Field(ParaName.KEYTOKEN) String user_token,@Field(ParaName.KEY_APPOINTMENTID) String appoi_id,@Field(ParaName.KEY_ISSEEKER) String isSeeker);
 }
 

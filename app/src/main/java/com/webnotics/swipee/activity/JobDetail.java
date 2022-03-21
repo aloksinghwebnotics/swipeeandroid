@@ -77,7 +77,7 @@ public class JobDetail extends AppCompatActivity {
     private String company_id = "";
     private String resumeId = "";
     private String company_logo = "";
-    TextView tv_industry,tv_workdays,tv_opening,tv_workshift, tv_appointment, tv_appointmenttime, tv_report, tv_block, tv_reschedule, tv_cancel_application, tv_closed, tv_active, tv_inactive;
+    TextView tv_industry, tv_workdays, tv_opening, tv_workshift, tv_appointment, tv_appointmenttime, tv_report, tv_block, tv_reschedule, tv_cancel_application, tv_closed, tv_active, tv_inactive;
     RelativeLayout rl_companyinfo;
     private String apply_id = "";
     private String company_name = "";
@@ -91,8 +91,8 @@ public class JobDetail extends AppCompatActivity {
     private String job_status_type = "";
     private String hiring_status_type = "";
     public JsonArray appointments = new JsonArray();
-    private String match_id="";
-    private String company_match_status="";
+    private String match_id = "";
+    private String company_match_status = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +172,7 @@ public class JobDetail extends AppCompatActivity {
             hashMap.put(ParaName.KEY_USERSTATUS, "A");
             hashMap.put(ParaName.KEY_COMPANYID, company_id);
             hashMap.put(ParaName.KEY_MATCHID, match_id);
-            hashMap.put(ParaName.KEY_COMPANYSTATUS,company_match_status);
+            hashMap.put(ParaName.KEY_COMPANYSTATUS, company_match_status);
 
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
@@ -186,7 +186,7 @@ public class JobDetail extends AppCompatActivity {
             hashMap.put(ParaName.KEY_USERSTATUS, "R");
             hashMap.put(ParaName.KEY_COMPANYID, company_id);
             hashMap.put(ParaName.KEY_MATCHID, match_id);
-            hashMap.put(ParaName.KEY_COMPANYSTATUS,company_match_status);
+            hashMap.put(ParaName.KEY_COMPANYSTATUS, company_match_status);
             if (rest.isInterentAvaliable()) {
                 AppController.ShowDialogue("", mContext);
                 postLikeDislike(hashMap);
@@ -194,7 +194,7 @@ public class JobDetail extends AppCompatActivity {
         });
 
         tv_apply.setOnClickListener(v -> {
-            if (Config.GetPACKAGEEXP().equalsIgnoreCase("N")){
+            if (Config.GetPACKAGEEXP().equalsIgnoreCase("N")) {
                 if (Config.GetLeftApplyCount() > 0 || Config.GetPackageId().equalsIgnoreCase("3")) {
                     if (!TextUtils.isEmpty(resumeId)) {
                         HashMap<String, String> hashMap = new HashMap<>();
@@ -206,9 +206,8 @@ public class JobDetail extends AppCompatActivity {
                             postApplyJob(hashMap);
                         } else rest.AlertForInternet();
                     } else rest.showToast("Upload resume first.");
-
                 } else rest.showToast("Your daily apply limit exceeded");
-            }  else rest.showToast(getString(R.string.packageexpseekr));
+            } else rest.showToast(getString(R.string.packageexpseekr));
 
         });
 
@@ -220,18 +219,13 @@ public class JobDetail extends AppCompatActivity {
         rl_companyinfo.setOnClickListener(v -> startActivity(new Intent(mContext, CompanyProfile.class).putExtra("company_id", company_id)));
 
         iv_more.setOnClickListener(v -> {
-            if (ll_job_action.getVisibility() == View.VISIBLE) {
+            if (ll_job_action.getVisibility() == View.VISIBLE)
                 ll_job_action.setVisibility(View.GONE);
-            } else {
-                ll_job_action.setVisibility(View.VISIBLE);
-
-            }
+            else ll_job_action.setVisibility(View.VISIBLE);
         });
         tv_block.setOnClickListener(v -> {
             blockJobPopup();
             ll_job_action.setVisibility(View.GONE);
-
-
         });
         tv_report.setOnClickListener(v -> {
             ll_job_action.setVisibility(View.GONE);
@@ -247,13 +241,11 @@ public class JobDetail extends AppCompatActivity {
             TextView cancel = progressdialog.findViewById(R.id.tv_cancel);
             TextView submit = progressdialog.findViewById(R.id.tv_submit);
             EditText reason = progressdialog.findViewById(R.id.et_reason);
-
             cancel.setOnClickListener(v14 -> progressdialog.dismiss());
             submit.setOnClickListener(v15 -> {
                 if (!TextUtils.isEmpty(reason.getText().toString().replaceAll(" ", ""))) {
                     AppController.ShowDialogue("", mContext);
-                    if (Config.isSeeker())
-                        reportJob(job_id, apply_id, reason.getText().toString());
+                    if (Config.isSeeker()) reportJob(job_id, apply_id, reason.getText().toString());
                     progressdialog.dismiss();
                 } else rest.showToast("Enter report reason");
 
@@ -261,13 +253,11 @@ public class JobDetail extends AppCompatActivity {
 
             try {
                 progressdialog.show();
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         });
         tv_cancel_application.setOnClickListener(v -> {
             ll_job_action.setVisibility(View.GONE);
             cancelApplicationPopup();
-
         });
         tv_reschedule.setOnClickListener(v -> {
             ll_job_action.setVisibility(View.GONE);
@@ -330,17 +320,11 @@ public class JobDetail extends AppCompatActivity {
 
                 progressdialog.findViewById(R.id.tv_close).setOnClickListener(v13 -> {
                     String reason = "";
-                    if (radioButton1.isChecked()) {
-                        reason = radioButton1.getText().toString();
-                    } else if (radioButton2.isChecked()) {
-                        reason = radioButton2.getText().toString();
-                    } else if (radioButton3.isChecked()) {
-                        reason = radioButton3.getText().toString();
-                    } else if (radioButton4.isChecked()) {
-                        reason = radioButton4.getText().toString();
-                    } else if (radioButton5.isChecked()) {
-                        reason = radioButton5.getText().toString();
-                    }
+                    if (radioButton1.isChecked()) reason = radioButton1.getText().toString();
+                    else if (radioButton2.isChecked()) reason = radioButton2.getText().toString();
+                    else if (radioButton3.isChecked()) reason = radioButton3.getText().toString();
+                    else if (radioButton4.isChecked()) reason = radioButton4.getText().toString();
+                    else if (radioButton5.isChecked()) reason = radioButton5.getText().toString();
                     HashMap<String, String> hashMap = new HashMap<>();
                     hashMap.put(ParaName.KEY_JOBPOSTID, job_id);
                     hashMap.put(ParaName.KEY_ISHIRINGCLOSED, "Y");
@@ -354,8 +338,7 @@ public class JobDetail extends AppCompatActivity {
                 progressdialog.findViewById(R.id.iv_close).setOnClickListener(v12 -> progressdialog.dismiss());
                 try {
                     progressdialog.show();
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) {}
             }
         });
 
@@ -364,9 +347,8 @@ public class JobDetail extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (from.equalsIgnoreCase("Notification")) {
+        if (from.equalsIgnoreCase("Notification"))
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-        }
         finish();
     }
 
@@ -455,7 +437,7 @@ public class JobDetail extends AppCompatActivity {
                             String job_benefits = job_data.has("job_benefits") ? job_data.get("job_benefits").isJsonNull() ? "" : job_data.get("job_benefits").getAsString() : "";
                             String job_degree = job_data.has("job_degree") ? job_data.get("job_degree").isJsonNull() ? "" : job_data.get("job_degree").getAsString() : "";
                             String job_max_salary = job_data.has("job_max_salary") ? job_data.get("job_max_salary").isJsonNull() ? "" : job_data.get("job_max_salary").getAsString() : "";
-                             company_match_status = job_data.has("company_match_status") ? job_data.get("company_match_status").isJsonNull() ? "" : job_data.get("company_match_status").getAsString() : "";
+                            company_match_status = job_data.has("company_match_status") ? job_data.get("company_match_status").isJsonNull() ? "" : job_data.get("company_match_status").getAsString() : "";
                             String user_match_status = job_data.has("user_match_status") ? job_data.get("user_match_status").isJsonNull() ? "" : job_data.get("user_match_status").getAsString() : "";
                             match_id = job_data.has("match_id") ? job_data.get("match_id").isJsonNull() ? "" : job_data.get("match_id").getAsString() : "";
                             String job_opening_numbers = job_data.has("job_opening_numbers") ? job_data.get("job_opening_numbers").isJsonNull() ? "" : job_data.get("job_opening_numbers").getAsString() : "";
@@ -529,11 +511,9 @@ public class JobDetail extends AppCompatActivity {
                             tv_salary.setText(MessageFormat.format("{0} {1}", job_max_salary, getString(R.string.salarypermonth)));
                             tv_about.setText(job_description);
                             ll_main.setVisibility(View.VISIBLE);
-                            if (Config.isSeeker()) {
-                                iv_more.setVisibility(View.VISIBLE);
-                            } else iv_more.setVisibility(View.GONE);
+                            iv_more.setVisibility(Config.isSeeker() ? View.VISIBLE : View.GONE);
 
-                            if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
+                            if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())) {
                                 ll_button.setVisibility(View.GONE);
                                 iv_reject.setVisibility(View.GONE);
                                 iv_accept.setVisibility(View.GONE);
@@ -541,8 +521,7 @@ public class JobDetail extends AppCompatActivity {
                                 ll_appointment.setVisibility(View.GONE);
                                 iv_more.setVisibility(View.GONE);
                                 ll_action.setVisibility(View.GONE);
-                            }else
-                            if (from.equalsIgnoreCase(CompanyAppoimentActivity.class.getSimpleName()) || from.equalsIgnoreCase(PostedJobActivity.class.getSimpleName())) {
+                            } else if (from.equalsIgnoreCase(CompanyAppoimentActivity.class.getSimpleName()) || from.equalsIgnoreCase(PostedJobActivity.class.getSimpleName())) {
                                 ll_button.setVisibility(View.GONE);
                                 iv_reject.setVisibility(View.GONE);
                                 iv_accept.setVisibility(View.GONE);
@@ -585,13 +564,12 @@ public class JobDetail extends AppCompatActivity {
                                         if (date2 != null && date3 != null) {
                                             if (date2.before(calendarDate) && date3.after(calendarDate)) {
                                                 join.setVisibility(View.VISIBLE);
-                                                if (appointment_type.equalsIgnoreCase("chat")) {
+                                                if (appointment_type.equalsIgnoreCase("chat"))
                                                     iv_meetingType.setImageResource(R.drawable.ic_icon_material_chat_bubble);
-                                                } else if (appointment_type.equalsIgnoreCase("online_meeting")) {
+                                                else if (appointment_type.equalsIgnoreCase("online_meeting"))
                                                     iv_meetingType.setImageResource(R.drawable.ic_icon_awesome_video_fill);
-                                                } else if (appointment_type.equalsIgnoreCase("call")) {
+                                                else if (appointment_type.equalsIgnoreCase("call"))
                                                     iv_meetingType.setImageResource(R.drawable.ic_telephonefill);
-                                                }
 
                                                 ll_appointment.setOnClickListener(v -> {
                                                     Intent resultIntent = new Intent(mContext, AppointmentDetail.class);
@@ -619,7 +597,7 @@ public class JobDetail extends AppCompatActivity {
                                 ll_applied.setVisibility(View.VISIBLE);
                                 ll_appointment.setVisibility(View.GONE);
                                 tv_cancel_application.setVisibility(View.VISIBLE);
-                            } else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()) ||from.equalsIgnoreCase("Notification") ||from.equalsIgnoreCase(SavedJobsActivity.class.getSimpleName()) || from.equalsIgnoreCase(LikedJobsActivity.class.getSimpleName())
+                            } else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName()) || from.equalsIgnoreCase("Notification") || from.equalsIgnoreCase(SavedJobsActivity.class.getSimpleName()) || from.equalsIgnoreCase(LikedJobsActivity.class.getSimpleName())
                                     || from.equalsIgnoreCase(JobListActivity.class.getSimpleName()) || from.equalsIgnoreCase(MatchFragments.class.getSimpleName())
                                     || from.equalsIgnoreCase(MatchedCompanyActivity.class.getSimpleName()) || from.equalsIgnoreCase(FeaturedJobsActivity.class.getSimpleName())) {
                                 if (company_match_status.equalsIgnoreCase("A") && user_match_status.equalsIgnoreCase("A")) {
@@ -637,7 +615,7 @@ public class JobDetail extends AppCompatActivity {
                                     ll_applied.setVisibility(View.GONE);
                                     tv_reschedule.setVisibility(View.GONE);
                                     tv_cancel_application.setVisibility(View.GONE);
-                                } else if (company_match_status.equalsIgnoreCase("A") ) {
+                                } else if (company_match_status.equalsIgnoreCase("A")) {
                                     if (job_status_type.equalsIgnoreCase("Active") && hiring_status_type.equalsIgnoreCase("Open")) {
                                         ll_button.setVisibility(View.VISIBLE);
                                         tv_apply.setVisibility(View.VISIBLE);
@@ -726,10 +704,7 @@ public class JobDetail extends AppCompatActivity {
                         setBackPressed();
                         AppController.loggedOut(mContext);
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -746,7 +721,6 @@ public class JobDetail extends AppCompatActivity {
                 AppController.dismissProgressdialog();
                 if (response.code() == 200 && response.body() != null) {
                     if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
-                        rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
                     } else if (response.body().get("code").getAsInt() == 203) {
                         rest.showToast(response.body().get("message").getAsString());
@@ -771,19 +745,15 @@ public class JobDetail extends AppCompatActivity {
                 if (response.code() == 200 && response.body() != null) {
                     if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
                         Config.SetLeftApplyCount(Config.GetLeftApplyCount() - 1);
-                        rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
-                    } else if (response.body().get("code").getAsInt() == 203) {
-                        rest.showToast(response.body().get("message").getAsString());
-                        setBackPressed();
-                        AppController.loggedOut(mContext);
                     } else {
                         rest.showToast(response.body().get("message").getAsString());
+                        if (response.body().get("code").getAsInt() == 203) {
+                            setBackPressed();
+                            AppController.loggedOut(mContext);
+                        }
                     }
-                } else {
-                    AppController.dismissProgressdialog();
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
             }
 
             @Override
@@ -805,7 +775,6 @@ public class JobDetail extends AppCompatActivity {
                         setBackPressed();
                         AppController.loggedOut(mContext);
                     } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
-                        rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
                     } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
@@ -830,11 +799,8 @@ public class JobDetail extends AppCompatActivity {
                         setBackPressed();
                         AppController.loggedOut(mContext);
                     } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
-                        rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
-                    } else {
-                        rest.showToast(response.body().get("message").getAsString());
-                    }
+                    } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -857,11 +823,8 @@ public class JobDetail extends AppCompatActivity {
                         setBackPressed();
                         AppController.loggedOut(mContext);
                     } else if (response.body().get("code").getAsInt() == 200 && response.body().get("status").getAsBoolean()) {
-                        rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
-                    } else {
-                        rest.showToast(response.body().get("message").getAsString());
-                    }
+                    } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -875,69 +838,53 @@ public class JobDetail extends AppCompatActivity {
 
 
     public void setBackPressed() {
-        if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())){
-            finish();
-        }else
-        if (from.equalsIgnoreCase("Notification")) {
-            if (Config.isSeeker())
-            startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            else  startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
-            finish();
-        }else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())) {
-            if (NotificationActivity.instance!=null)
-                NotificationActivity.instance.finish();
-            if (Config.isSeeker())
-                startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            else  startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
-            finish();
+        if (from.equalsIgnoreCase(NotificationAppointmentAction.class.getSimpleName())) {
+
+        } else if (from.equalsIgnoreCase("Notification")) {
+            if (Config.isSeeker()) startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            else startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
+        } else if (from.equalsIgnoreCase(NotificationActivity.class.getSimpleName())) {
+            if (NotificationActivity.instance != null) NotificationActivity.instance.finish();
+            if (Config.isSeeker()) startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
+            else startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", "match"));
         } else if (from.equalsIgnoreCase(AppliedJobsActivity.class.getSimpleName())) {
             if (AppliedJobsActivity.instance != null)
                 AppliedJobsActivity.instance.onBackPressed();
-            finish();
         } else if (from.equalsIgnoreCase(SavedJobsActivity.class.getSimpleName())) {
             if (SavedJobsActivity.instance != null)
                 SavedJobsActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            finish();
         } else if (from.equalsIgnoreCase(FeaturedJobsActivity.class.getSimpleName())) {
             if (FeaturedJobsActivity.instance != null)
                 FeaturedJobsActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            finish();
         } else if (from.equalsIgnoreCase(LikedJobsActivity.class.getSimpleName())) {
             if (LikedJobsActivity.instance != null)
                 LikedJobsActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            finish();
         } else if (from.equalsIgnoreCase(MatchFragments.class.getSimpleName())) {
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            finish();
         } else if (from.equalsIgnoreCase(MatchedCompanyActivity.class.getSimpleName())) {
             if (MatchedCompanyActivity.instance != null)
                 MatchedCompanyActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            finish();
         } else if (from.equalsIgnoreCase(JobListActivity.class.getSimpleName())) {
             if (JobListActivity.instance != null)
                 JobListActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "near"));
-            finish();
         } else if (from.equalsIgnoreCase(AppointmentActivity.class.getSimpleName())) {
             if (AppointmentActivity.instance != null)
                 AppointmentActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "match"));
-            finish();
         } else if (from.equalsIgnoreCase(CompanyAppoimentActivity.class.getSimpleName())) {
             if (CompanyAppoimentActivity.instance != null)
                 CompanyAppoimentActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobDetail.class.getSimpleName()));
-            finish();
         } else if (from.equalsIgnoreCase(PostedJobActivity.class.getSimpleName())) {
             if (PostedJobActivity.instance != null)
                 PostedJobActivity.instance.onBackPressed();
             startActivity(new Intent(mContext, CompanyHomeActivity.class).putExtra("from", JobDetail.class.getSimpleName()));
-            finish();
-        } else finish();
+        }  finish();
 
     }
 
@@ -959,13 +906,9 @@ public class JobDetail extends AppCompatActivity {
                         rest.showToast(response.body().get("message").getAsString());
                         setBackPressed();
                         AppController.loggedOut(mContext);
-                    } else if (responceBody.get("code").getAsInt() == 200 && responceBody.get("status").getAsBoolean()) {
-                        rest.showToast(responceBody.get("message").getAsString());
+                    } else if (responceBody.get("code").getAsInt() == 200 && responceBody.get("status").getAsBoolean())
                         setBackPressed();
-                    } else {
-                        rest.showToast(responceBody.get("message").getAsString());
-                    }
-
+                    else rest.showToast(responceBody.get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -973,7 +916,6 @@ public class JobDetail extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
-
             }
         });
     }

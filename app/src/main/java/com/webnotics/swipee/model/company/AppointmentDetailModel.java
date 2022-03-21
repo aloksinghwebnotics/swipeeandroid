@@ -59,6 +59,17 @@ public class AppointmentDetailModel {
         String appointment_date;
         String appointment_start_at;
         String appointment_end_at;
+        String apply_id;
+
+
+        public String getApply_id() {
+            return apply_id;
+        }
+
+        public void setApply_id(String apply_id) {
+            this.apply_id = apply_id;
+        }
+
         int is_live;
 
         public String getUser_id() {

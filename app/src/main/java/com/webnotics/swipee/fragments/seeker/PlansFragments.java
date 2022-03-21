@@ -259,10 +259,7 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
                             rv_plan.setAdapter(planAdapter);
                         }
                     }
-
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 

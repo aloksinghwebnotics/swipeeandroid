@@ -54,20 +54,13 @@ public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.MyView
             oldHolder = holder;
             mContext.jobId = id;
             mContext.jobName = name;
-        }else {
-            holder.radioButton.setChecked(false);
-        }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (oldHolder != null) {
-                    oldHolder.radioButton.setChecked(false);
-                }
-                holder.radioButton.setChecked(true);
-                oldHolder = holder;
-                mContext.jobId = id;
-                mContext.jobName = name;
-            }
+        }else holder.radioButton.setChecked(false);
+        holder.itemView.setOnClickListener(v -> {
+            if (oldHolder != null) oldHolder.radioButton.setChecked(false);
+            holder.radioButton.setChecked(true);
+            oldHolder = holder;
+            mContext.jobId = id;
+            mContext.jobName = name;
         });
     }
 

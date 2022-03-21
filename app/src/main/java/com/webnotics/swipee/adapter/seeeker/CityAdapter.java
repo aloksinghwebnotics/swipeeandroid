@@ -60,31 +60,24 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
             oldHolder = holder;
             mContext.cityId = cityId;
             mContext.cityName = cityName;
-        }else {
-            holder.radioButton.setChecked(false);
-        }
+        }else holder.radioButton.setChecked(false);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (oldHolder != null) {
-                    oldHolder.radioButton.setChecked(false);
-                }
-                IntStream.range(0, data.size()).forEach(i -> data.get(i).setSelected(false));
+        holder.itemView.setOnClickListener(v -> {
+            if (oldHolder != null) oldHolder.radioButton.setChecked(false);
+            IntStream.range(0, data.size()).forEach(i -> data.get(i).setSelected(false));
 
-                holder.radioButton.setChecked(true);
-                oldHolder = holder;
-                mContext.cityId = cityId;
-                mContext.cityName = cityName;
+            holder.radioButton.setChecked(true);
+            oldHolder = holder;
+            mContext.cityId = cityId;
+            mContext.cityName = cityName;
 
-                data.get(position).setSelected(true);
-                IntStream.range(0, filterList.size()).forEach(i -> {
-                    filterList.get(i).setSelected(false);
-                    if (filterList.get(i).getCity_id().equalsIgnoreCase(data.get(position).getCity_id()))
-                        filterList.get(i).setSelected(true);
-                });
+            data.get(position).setSelected(true);
+            IntStream.range(0, filterList.size()).forEach(i -> {
+                filterList.get(i).setSelected(false);
+                if (filterList.get(i).getCity_id().equalsIgnoreCase(data.get(position).getCity_id()))
+                    filterList.get(i).setSelected(true);
+            });
 
-            }
         });
     }
 
@@ -102,9 +95,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
 
     @Override
     public Filter getFilter() {
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
+        if (filter == null) filter = new CustomFilter();
 
         return filter;
     }

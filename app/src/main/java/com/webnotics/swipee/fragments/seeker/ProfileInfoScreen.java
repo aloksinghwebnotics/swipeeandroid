@@ -77,6 +77,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -192,9 +193,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
         if (rest.isInterentAvaliable()) {
             AppController.ShowDialogue("", mContext);
             callSkillList();
-        } else {
-            rest.AlertForInternet();
-        }
+        } else rest.AlertForInternet();
         et_search.addTextChangedListener(this);
         mArrayListdesiredindustries = new ArrayList<>();
         mArrayListid = new ArrayList<>();
@@ -204,72 +203,26 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
             // TODO Auto-generated method stub
             FlowLayout ll = (FlowLayout) v.getParent();
 
-            for (int j = 0; j < mArrayListSkills.size(); j++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())) {
-                    AddSkillsModel model1 = new AddSkillsModel();
-                    model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
-                    model1.setSelected(false);
-                    model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
-                    mArrayListSkills.set(j, model1);
-                    if (skilladapter != null)
-                        skilladapter.notifyDataSetChanged();
-                }
-            }
-            for (int z = 0; z < mArrayListdesiredindustries.size(); z++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))) {
-                    mArrayListdesiredindustries.remove(z);
-                    mArrayListid.remove(z);
-                    if (skilladapter != null)
-                        skilladapter.getFilter().filter("");
-                    et_search.setText("");
-                }
-            }
+            IntStream.range(0, mArrayListSkills.size()).filter(j -> v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())).forEach(j -> {
+                AddSkillsModel model1 = new AddSkillsModel();
+                model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
+                model1.setSelected(false);
+                model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
+                mArrayListSkills.set(j, model1);
+                if (skilladapter != null)
+                    skilladapter.notifyDataSetChanged();
+            });
+            IntStream.range(0, mArrayListdesiredindustries.size()).filter(z -> v.getTag().toString().equalsIgnoreCase(mArrayListdesiredindustries.get(z))).forEach(z -> {
+                mArrayListdesiredindustries.remove(z);
+                mArrayListid.remove(z);
+                if (skilladapter != null)
+                    skilladapter.getFilter().filter("");
+                et_search.setText("");
+            });
             ll.removeView(v);
-            if (flowlay.getMeasuredHeight() > 400) {
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-            } else
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            kdkdkdkd.setLayoutParams(flowlay.getMeasuredHeight() > 400 ? new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424) :
+                    new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         };
-     /*   iv_userpickimg.setImageURI(Uri.parse(Config.GetPICKURI()));
-        if (!TextUtils.isEmpty(Config.GetPICKURI())){
-            Glide.with(mContext)
-                    .load(Config.GetPICKURI())
-                    .apply(RequestOptions.bitmapTransform(new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density * (24)))))
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            return false;
-                        }
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                           iv_userpickimg.destroyDrawingCache();
-                            iv_userpickimg.setDrawingCacheEnabled(true);
-                            BitmapDrawable draw = (BitmapDrawable) iv_userpickimg.getDrawable();
-                            Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
-                            File cachePath = null;
-                            try {
-                                cachePath = createImageFile();
-                                try {
-                                    FileOutputStream ostream = new FileOutputStream(cachePath);
-                                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, ostream);
-                                    ostream.close();
-                                    picturePath=cachePath.getAbsolutePath();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            return false;
-                        }
-                    })
-                    .into(iv_userpickimg);
-            iv_pickimg.setVisibility(View.GONE);
-            tv_pickimg.setVisibility(View.GONE);
-
-        }*/
-
 
         return rootView;
     }
@@ -291,12 +244,11 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.tv_next:
                 if (rl_name.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(et_name.getText().toString()) || et_name.getText().toString().replaceAll(" ", "").length() <= 0) {
+                    if (TextUtils.isEmpty(et_name.getText().toString()) || et_name.getText().toString().replaceAll(" ", "").length() <= 0)
                         rest.showToast("Please enter your first name.");
-                    } else if (TextUtils.isEmpty(et_lname.getText().toString()) || et_lname.getText().toString().replaceAll(" ", "").length() <= 0) {
+                    else if (TextUtils.isEmpty(et_lname.getText().toString()) || et_lname.getText().toString().replaceAll(" ", "").length() <= 0)
                         rest.showToast("Please enter your last name.");
-
-                    } else {
+                    else {
                         rl_name.setVisibility(View.GONE);
                         rl_location.setVisibility(View.VISIBLE);
                         iv_shaddowleft.setVisibility(View.GONE);
@@ -305,11 +257,11 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                         tv_back.setVisibility(View.VISIBLE);
                     }
                 }else if (rl_location.getVisibility() == View.VISIBLE) {
-                if (TextUtils.isEmpty(tv_state.getText().toString()) ||TextUtils.isEmpty(stateId)|| stateId.equalsIgnoreCase("0") || tv_state.getText().toString().replaceAll(" ", "").length() <= 0) {
+                if (TextUtils.isEmpty(tv_state.getText().toString()) ||TextUtils.isEmpty(stateId)|| stateId.equalsIgnoreCase("0") || tv_state.getText().toString().replaceAll(" ", "").length() <= 0)
                     rest.showToast("Please select state.");
-                } else if (TextUtils.isEmpty(tv_city.getText().toString())||TextUtils.isEmpty(cityId)|| cityId.equalsIgnoreCase("0") || tv_city.getText().toString().replaceAll(" ", "").length() <= 0) {
+                else if (TextUtils.isEmpty(tv_city.getText().toString())||TextUtils.isEmpty(cityId)|| cityId.equalsIgnoreCase("0") || tv_city.getText().toString().replaceAll(" ", "").length() <= 0)
                     rest.showToast("Please select city.");
-                } else {
+                else {
                     rl_location.setVisibility(View.GONE);
                     rl_birthday.setVisibility(View.VISIBLE);
                     iv_shaddowleft.setVisibility(View.GONE);
@@ -326,9 +278,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
 
                         tv_back.setVisibility(View.VISIBLE);
                         dob = tv_year.getText().toString() + "/" + tv_month.getText().toString() + "/" + tv_date.getText().toString();
-                    } else {
-                        rest.showToast("Please select your date of birth");
-                    }
+                    } else rest.showToast("Please select your date of birth");
 
 
                 } else if (rl_pick.getVisibility() == View.VISIBLE) {
@@ -363,9 +313,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                         iv_shaddowleft.setVisibility(View.VISIBLE);
                         iv_shaddowright.setVisibility(View.VISIBLE);
                         tv_back.setVisibility(View.VISIBLE);
-                    } else {
-                        rest.showToast("Please select at least 1 skill");
-                    }
+                    } else rest.showToast("Please select at least 1 skill");
 
                 } else if (rl_resume.getVisibility() == View.VISIBLE) {
                     if (selectedFileUri != null) {
@@ -457,34 +405,23 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
         TextView tv_camera=intent_sheet.findViewById(R.id.tv_camera);
         TextView tv_gallery=intent_sheet.findViewById(R.id.tv_gallery);
         TextView tv_cancel=intent_sheet.findViewById(R.id.tv_cancel);
-        tv_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                try {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                } catch (ActivityNotFoundException e) {
-                    // display error state to the user
-                }
-                bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        tv_camera.setOnClickListener(v -> {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            try {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            } catch (ActivityNotFoundException e) {
+                // display error state to the user
             }
+            bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
-        tv_gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        tv_gallery.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                startActivityForResult(intent, IMG_RESULT);
-                bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
+            startActivityForResult(intent, IMG_RESULT);
+            bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
-        tv_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+        tv_cancel.setOnClickListener(v -> bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED));
 
     }
     private void callVideoPick() {
@@ -561,10 +498,8 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
             datePickerDialog.getDatePicker().setMaxDate(calendar.getTime().getTime());
 
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             e.printStackTrace();
-
         }
         datePickerDialog.show();
     }
@@ -589,7 +524,6 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
 
         } else if (resultCode == RESULT_OK && requestCode == DOCUMENT_FILE_REQUEST) {
             if (data == null) {
-
                 return;
             }
             selectedFileUri = data.getData();
@@ -792,18 +726,16 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                 if (response.code() == 200 && response.body() != null) {
                     responseBody = response.body();
                     JsonArray mArrayListData = responseBody.has("data")?responseBody.get("data").getAsJsonArray():new JsonArray();
-                    for (int i = 0; i < mArrayListData.size(); i++) {
+                    IntStream.range(0, mArrayListData.size()).forEach(i -> {
                         model = new AddSkillsModel();
                         model.setSkill_id(mArrayListData.get(i).getAsJsonObject().get("skill_id").getAsString());
                         model.setSkill_name(mArrayListData.get(i).getAsJsonObject().get("skill_name").getAsString());
                         model.setSelected(false);
                         mArrayListSkills.add(model);
-                    }
+                    });
                     skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                     mListView.setAdapter(skilladapter);
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -828,11 +760,7 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (s.toString().length() == 0) {
-            //  close.setVisibility(View.GONE);
-        } else {
-            //  close.setVisibility(View.VISIBLE);
-        }
+
     }
 
     @Override
@@ -843,7 +771,8 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
                 FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density*32));
-        layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density*4), (int) (mContext.getResources().getDisplayMetrics().density*5),(int) (mContext.getResources().getDisplayMetrics().density*4), (int) (mContext.getResources().getDisplayMetrics().density*5));
+        layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density*4),
+                (int) (mContext.getResources().getDisplayMetrics().density*5),(int) (mContext.getResources().getDisplayMetrics().density*4), (int) (mContext.getResources().getDisplayMetrics().density*5));
         linearLayoutF.setLayoutParams(layoutParams);
         linearLayout.setLayoutParams(layoutParamsF);
         linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density*4), 0, (int) (mContext.getResources().getDisplayMetrics().density*4), 0);
@@ -881,9 +810,9 @@ public class ProfileInfoScreen extends Basefragment implements View.OnClickListe
         flowlay.addView(linearLayoutF);
         mArrayListdesiredindustries.add(data);
         mArrayListid.add(id);
-        if (flowlay.getMeasuredHeight() > 400) {
+        if (flowlay.getMeasuredHeight() > 400)
             kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-        } else
+        else
             kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 

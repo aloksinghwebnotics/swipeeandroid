@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +61,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,7 +91,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
     private JsonArray degree_type = new JsonArray();
     private JsonArray experience = new JsonArray();
     private JsonArray salary_offer = new JsonArray();
-    private JsonArray salary_type = new JsonArray();
+    private JsonArray                                                                               salary_type = new JsonArray();
     private JsonArray job_industry = new JsonArray();
     private JsonArray employment_type = new JsonArray();
     RelativeLayout jobtypebottom_sheet, qualification_sheet, perk_sheet;
@@ -215,26 +215,22 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
             // TODO Auto-generated method stub
             FlowLayout ll = (FlowLayout) v.getParent();
 
-            for (int j = 0; j < mArrayListSkills.size(); j++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())) {
-                    AddSkillsModel model1 = new AddSkillsModel();
-                    model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
-                    model1.setSelected(false);
-                    model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
-                    mArrayListSkills.set(j, model1);
-                    if (skilladapter != null)
-                        skilladapter.notifyDataSetChanged();
-                }
-            }
-            for (int z = 0; z < mArrayListSkillSelected.size(); z++) {
-                if (v.getTag().toString().equalsIgnoreCase(mArrayListSkillSelected.get(z))) {
-                    mArrayListSkillSelected.remove(z);
-                    mArrayListSkillSelectedid.remove(z);
-                    if (skilladapter != null)
-                        skilladapter.getFilter().filter("");
-                    et_search.setText("");
-                }
-            }
+            IntStream.range(0, mArrayListSkills.size()).filter(j -> v.getTag().toString().equalsIgnoreCase(mArrayListSkills.get(j).getSkill_name())).forEach(j -> {
+                AddSkillsModel model1 = new AddSkillsModel();
+                model1.setSkill_name(mArrayListSkills.get(j).getSkill_name());
+                model1.setSelected(false);
+                model1.setSkill_id(mArrayListSkills.get(j).getSkill_id());
+                mArrayListSkills.set(j, model1);
+                if (skilladapter != null)
+                    skilladapter.notifyDataSetChanged();
+            });
+            IntStream.range(0, mArrayListSkillSelected.size()).filter(z -> v.getTag().toString().equalsIgnoreCase(mArrayListSkillSelected.get(z))).forEach(z -> {
+                mArrayListSkillSelected.remove(z);
+                mArrayListSkillSelectedid.remove(z);
+                if (skilladapter != null)
+                    skilladapter.getFilter().filter("");
+                et_search.setText("");
+            });
             ll.removeView(v);
             if (flowlayout.getMeasuredHeight() > 272) {
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 272));
@@ -253,9 +249,8 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         spn_workdays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    spn_workdays.setAlpha(0.4f);
-                } else spn_workdays.setAlpha(1f);
+                if (position == 0) spn_workdays.setAlpha(0.4f);
+                else spn_workdays.setAlpha(1f);
             }
 
             @Override
@@ -266,9 +261,8 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         spn_workshift.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    spn_workshift.setAlpha(0.4f);
-                } else spn_workshift.setAlpha(1f);
+                if (position == 0) spn_workshift.setAlpha(0.4f);
+                else spn_workshift.setAlpha(1f);
             }
 
             @Override
@@ -324,11 +318,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                         if (Integer.parseInt(spn_minsalary.getSelectedItem().toString())>Integer.parseInt(spn_maxsalary.getSelectedItem().toString())){
                            ArrayList<String> maxTemp=new ArrayList<>();
                            maxTemp.add(0,"Max Salary");
-                            for (int i=1;i<salarymaxArray.size();i++){
-                                if (Integer.parseInt(spn_minsalary.getSelectedItem().toString())<Integer.parseInt(salarymaxArray.get(i))) {
-                                    maxTemp.add(maxTemp.size(),salarymaxArray.get(i));
-                                }
-                                }
+                            IntStream.range(1, salarymaxArray.size()).filter(i -> Integer.parseInt(spn_minsalary.getSelectedItem().toString()) < Integer.parseInt(salarymaxArray.get(i))).forEach(i -> maxTemp.add(maxTemp.size(), salarymaxArray.get(i)));
                             ArrayAdapter<String> maxAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, maxTemp);
                             maxAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                             spn_maxsalary.setAdapter(maxAdapter);
@@ -337,11 +327,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                             ArrayList<String> maxTemp=new ArrayList<>();
                             String maxval=spn_maxsalary.getSelectedItem().toString();
                             maxTemp.add(0,"Max Salary");
-                            for (int i=1;i<salarymaxArray.size();i++){
-                                if (Integer.parseInt(spn_minsalary.getSelectedItem().toString())<Integer.parseInt(salarymaxArray.get(i))) {
-                                    maxTemp.add(maxTemp.size(),salarymaxArray.get(i));
-                                }
-                            }
+                            IntStream.range(1, salarymaxArray.size()).filter(i -> Integer.parseInt(spn_minsalary.getSelectedItem().toString()) < Integer.parseInt(salarymaxArray.get(i))).forEach(i -> maxTemp.add(maxTemp.size(), salarymaxArray.get(i)));
                             ArrayAdapter<String> maxAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, maxTemp);
                             maxAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                             spn_maxsalary.setAdapter(maxAdapter);
@@ -350,11 +336,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                     }else {
                         ArrayList<String> maxTemp=new ArrayList<>();
                         maxTemp.add(0,"Max Salary");
-                        for (int i=1;i<salarymaxArray.size();i++){
-                            if (Integer.parseInt(spn_minsalary.getSelectedItem().toString())<Integer.parseInt(salarymaxArray.get(i))) {
-                                maxTemp.add(maxTemp.size(),salarymaxArray.get(i));
-                            }
-                        }
+                        IntStream.range(1, salarymaxArray.size()).filter(i -> Integer.parseInt(spn_minsalary.getSelectedItem().toString()) < Integer.parseInt(salarymaxArray.get(i))).forEach(i -> maxTemp.add(maxTemp.size(), salarymaxArray.get(i)));
                         ArrayAdapter<String> maxAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, maxTemp);
                         maxAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                         spn_maxsalary.setAdapter(maxAdapter);
@@ -373,10 +355,8 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         spn_experience.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    spn_experience.setAlpha(0.4f);
-
-                } else spn_experience.setAlpha(1f);
+                if (position == 0) spn_experience.setAlpha(0.4f);
+                else spn_experience.setAlpha(1f);
 
             }
 
@@ -388,9 +368,8 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         spn_openning.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    spn_openning.setAlpha(0.4f);
-                } else spn_openning.setAlpha(1f);
+                if (position == 0) spn_openning.setAlpha(0.4f);
+                else spn_openning.setAlpha(1f);
             }
 
             @Override
@@ -417,11 +396,6 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (s.toString().length() == 0) {
-            //  close.setVisibility(View.GONE);
-        } else {
-            //  close.setVisibility(View.VISIBLE);
-        }
     }
 
 
@@ -505,17 +479,17 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                 else companyName = et_company.getText().toString();
 
                 if (rl_first.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(tv_industry.getText().toString()) || TextUtils.isEmpty(industryId)) {
+                    if (TextUtils.isEmpty(tv_industry.getText().toString()) || TextUtils.isEmpty(industryId))
                         rest.showToast("Select job industry");
-                    } else if (TextUtils.isEmpty(companyName.replaceAll(" ", ""))) {
+                    else if (TextUtils.isEmpty(companyName.replaceAll(" ", "")))
                         rest.showToast("Enter company name");
-                    } else if (TextUtils.isEmpty(et_jobtitle.getText().toString().replaceAll(" ", ""))) {
+                    else if (TextUtils.isEmpty(et_jobtitle.getText().toString().replaceAll(" ", "")))
                         rest.showToast("Enter job title");
-                    } else if (TextUtils.isEmpty(tv_employmenttype.getText().toString()) || TextUtils.isEmpty(employmentId)) {
+                    else if (TextUtils.isEmpty(tv_employmenttype.getText().toString()) || TextUtils.isEmpty(employmentId))
                         rest.showToast("Select employment type");
-                    } else if (TextUtils.isEmpty(tv_location.getText().toString()) || TextUtils.isEmpty(locationId)) {
+                    else if (TextUtils.isEmpty(tv_location.getText().toString()) || TextUtils.isEmpty(locationId))
                         rest.showToast("Select job location");
-                    } else {
+                    else {
                         rl_first.setVisibility(View.GONE);
                         rl_second.setVisibility(View.VISIBLE);
                         tv_back.setVisibility(View.VISIBLE);
@@ -529,21 +503,21 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                     }
 
                 } else if (rl_second.getVisibility() == View.VISIBLE) {
-                    if (spn_openning == null || spn_openning.getSelectedItemPosition() == 0) {
+                    if (spn_openning == null || spn_openning.getSelectedItemPosition() == 0)
                         rest.showToast("Select number of opening");
-                    } else if (TextUtils.isEmpty(tv_qualification.getText().toString())) {
+                    else if (TextUtils.isEmpty(tv_qualification.getText().toString()))
                         rest.showToast("Select qualification");
-                    } else if (spn_experience == null || spn_experience.getSelectedItemPosition() == 0) {
+                    else if (spn_experience == null || spn_experience.getSelectedItemPosition() == 0)
                         rest.showToast("Select work experience");
-                    } else if (spn_minsalary == null || spn_minsalary.getSelectedItemPosition() == 0) {
+                    else if (spn_minsalary == null || spn_minsalary.getSelectedItemPosition() == 0)
                         rest.showToast("Select min salary");
-                    } else if (spn_maxsalary == null || spn_maxsalary.getSelectedItemPosition() == 0) {
+                    else if (spn_maxsalary == null || spn_maxsalary.getSelectedItemPosition() == 0)
                         rest.showToast("Select mMax salary");
-                    } else if (Integer.parseInt(spn_maxsalary.getSelectedItem().toString()) < Integer.parseInt(spn_minsalary.getSelectedItem().toString())) {
-                        rest.showToast("Max salary must be greater than min salary");
-                    } /*else if (spn_salarytype == null || spn_salarytype.getSelectedItemPosition() == 0) {
+                    else /*else if (spn_salarytype == null || spn_salarytype.getSelectedItemPosition() == 0) {
                         rest.showToast("Select Salary Type");
-                    }*/ else {
+                    }*/ if (Integer.parseInt(spn_maxsalary.getSelectedItem().toString()) < Integer.parseInt(spn_minsalary.getSelectedItem().toString()))
+                            rest.showToast("Max salary must be greater than min salary");
+                        else {
                         if (mArrayListSkills.size() > 0) {
                         } else {
                             if (rest.isInterentAvaliable()) {
@@ -557,18 +531,18 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                     }
 
                 } else if (rl_third.getVisibility() == View.VISIBLE) {
-                    if (mArrayListSkillSelectedid.size() < 3) {
+                    if (mArrayListSkillSelectedid.size() < 3)
                         rest.showToast("Select minimum 3 skills");
-                    } else {
+                    else {
                         tv_back.setVisibility(View.VISIBLE);
                         rl_third.setVisibility(View.GONE);
                         rl_fourth.setVisibility(View.VISIBLE);
                     }
 
                 } else if (rl_fourth.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(et_description.getText().toString().replaceAll(" ", ""))) {
+                    if (TextUtils.isEmpty(et_description.getText().toString().replaceAll(" ", "")))
                         rest.showToast("Enter job description");
-                    } else {
+                    else {
                         tv_back.setVisibility(View.VISIBLE);
                         rl_fourth.setVisibility(View.GONE);
                         rl_fifth.setVisibility(View.VISIBLE);
@@ -584,13 +558,12 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                 } else if (rl_fifth.getVisibility() == View.VISIBLE) {
                    /* if (perks.size() == 0) {
                         rest.showToast("Select perks and benefits");
-                    } else*/ if (spn_workshift.getSelectedItemPosition() == 0) {
+                    } else*/ if (spn_workshift.getSelectedItemPosition() == 0)
                         rest.showToast("Select working shift");
-                    } else if (spn_workdays.getSelectedItemPosition() == 0) {
+                    else if (spn_workdays.getSelectedItemPosition() == 0)
                         rest.showToast("Select working days");
-                    } else if (languageIds.size() == 0) {
-                        rest.showToast("Select languages");
-                    } else {
+                    else if (languageIds.size() == 0) rest.showToast("Select languages");
+                    else {
                         String industryName = tv_industry.getText().toString();
                         String company = companyName;
                         String jobTitle = et_jobtitle.getText().toString();
@@ -636,17 +609,16 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                         ArrayList<String> degreeIds = new ArrayList<>();
                         ArrayList<String> degreeLevels = new ArrayList<>();
-                        for (int a = 0; a < qualification.size(); a++) {
+                        IntStream.range(0, qualification.size()).forEach(a -> {
                             degreeLevels.add(degreeLevels.size(), qualification.get(a).getLevel());
                             degreeIds.add(degreeIds.size(), qualification.get(a).getId());
-                        }
+                        });
                         String experienceId = "";
-                        for (int i = 0; i < experienceList.size(); i++) {
+                        for (int i = 0; i < experienceList.size(); i++)
                             if (spn_experience.getSelectedItem().toString().equalsIgnoreCase(experienceList.get(i).getAsJsonObject().get("experience_name").getAsString())) {
                                 experienceId = experienceList.get(i).getAsJsonObject().get("experience_id").getAsString();
                                 break;
                             }
-                        }
                         String salaryTypeId = "2";
                        /* for (int i = 0; i < salarytypeList.size(); i++) {
                             if (spn_salarytype.getSelectedItem().toString().equalsIgnoreCase(salarytypeList.get(i).getAsJsonObject().get("job_period_name").getAsString())) {
@@ -663,9 +635,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                         }
 
                         ArrayList<String> perkIds = new ArrayList<>();
-                        for (int a = 0; a < perks.size(); a++) {
-                            perkIds.add(perkIds.size(), perks.get(a).getId());
-                        }
+                        IntStream.range(0, perks.size()).forEach(a -> perkIds.add(perkIds.size(), perks.get(a).getId()));
 
 
                         String workDayId = "";
@@ -699,23 +669,17 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                 break;
 
             case R.id.tv_employmenttype:
-                if (employment_type.size() > 0) {
-                    callJobTypeSheet();
-                }
+                if (employment_type.size() > 0) callJobTypeSheet();
                 break;
             case R.id.tv_location:
                 mContext.startActivity(new Intent(mContext, AddIndustryActivity.class).putExtra("from","location"));
                 break;
 
             case R.id.tv_qualification:
-                if (degree_type.size() > 0) {
-                    callQualificationSheet();
-                }
+                if (degree_type.size() > 0) callQualificationSheet();
                 break;
             case R.id.tv_perk:
-                if (perk_benefits.size() > 0) {
-                    callPerkSheet();
-                }
+                if (perk_benefits.size() > 0) callPerkSheet();
                 break;
             case R.id.tv_language:
                 mContext.startActivity(new Intent(mContext, AddLanguageActivity.class).putStringArrayListExtra("StringArrayList", new ArrayList<>()).putExtra("from","post"));
@@ -795,11 +759,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                         if (job_industry.size() > 0) {
                             commonModels = new ArrayList<>();
-                            for (int i = 0; i < job_industry.size(); i++) {
-                                JsonObject jsonObject = job_industry.get(i).getAsJsonObject();
-                                CommonModel commonModel = new CommonModel(jsonObject.get("industry_id").getAsString(), jsonObject.get("industry_name").getAsString(), false);
-                                commonModels.add(commonModels.size(), commonModel);
-                            }
+                            IntStream.range(0, job_industry.size()).mapToObj(i -> job_industry.get(i).getAsJsonObject()).map(jsonObject -> new CommonModel(jsonObject.get("industry_id").getAsString(), jsonObject.get("industry_name").getAsString(), false)).forEach(commonModel -> commonModels.add(commonModels.size(), commonModel));
                             tv_industry.setOnClickListener(PostJobFragments.this);
                         }
 
@@ -817,9 +777,8 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                                 }
                                 tv_location.setOnClickListener(PostJobFragments.this);
 
-                            }else {
                             }
-                        } catch (JSONException e) {
+                        } catch (JSONException ignored) {
                         }
 
                         /*if (job_location.size() > 0) {
@@ -833,11 +792,8 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                         }*/
                         if (employment_type.size() > 0) {
                             ArrayList<CommonModel> commonModels = new ArrayList<>();
-                            for (int i = 0; i < employment_type.size(); i++) {
-                                JsonObject jsonObject = employment_type.get(i).getAsJsonObject();
-                                CommonModel commonModel = new CommonModel(jsonObject.get("job_type_id").getAsString(), jsonObject.get("job_type_name").getAsString(), false);
-                                commonModels.add(commonModels.size(), commonModel);
-                            }
+                            IntStream.range(0, employment_type.size()).mapToObj(i -> employment_type.get(i).getAsJsonObject()).map(jsonObject ->
+                                    new CommonModel(jsonObject.get("job_type_id").getAsString(), jsonObject.get("job_type_name").getAsString(), false)).forEach(commonModel -> commonModels.add(commonModels.size(), commonModel));
                             rv_jobtype.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             jobTypeAdapter = new JobPostJobTypeAdapter(mContext, commonModels);
                             rv_jobtype.setAdapter(jobTypeAdapter);
@@ -845,10 +801,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                             tv_employmenttype.setOnClickListener(PostJobFragments.this);
                         }
 
-                    } else {
-                        rest.showToast(responceBody.get("message").getAsString());
-                    }
-
+                    } else rest.showToast(responceBody.get("message").getAsString());
                 } else rest.showToast("Something went wrong");
 
             }
@@ -873,19 +826,16 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ( (receiveString = bufferedReader.readLine()) != null )
                     stringBuilder.append(receiveString);
-                }
 
                 inputStream.close();
                 ret = stringBuilder.toString();
             }
         }
         catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e);
             return ret;
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e);
             return ret;
         }
 
@@ -913,9 +863,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                         if (job_opening_numbers.size() > 0) {
                             ArrayList<String> openningArray = new ArrayList<>();
-                            for (int i = 0; i < job_opening_numbers.size(); i++) {
-                                openningArray.add(openningArray.size(), job_opening_numbers.get(i).getAsString());
-                            }
+                            IntStream.range(0, job_opening_numbers.size()).forEach(i -> openningArray.add(openningArray.size(), job_opening_numbers.get(i).getAsString()));
                             openningArray.add(0, "Number of openings");
                             ArrayAdapter<String> openingAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, openningArray);
                             openingAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -924,11 +872,10 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                         if (experience.size() > 0) {
                             ArrayList<String> experienceArray = new ArrayList<>();
                             experienceList.clear();
-                            for (int i = 0; i < experience.size(); i++) {
-                                JsonObject openings = experience.get(i).getAsJsonObject();
+                            IntStream.range(0, experience.size()).mapToObj(i -> experience.get(i).getAsJsonObject()).forEach(openings -> {
                                 experienceArray.add(experienceArray.size(), openings.get("experience_name").getAsString());
                                 experienceList.add(experienceList.size(), openings);
-                            }
+                            });
                             experienceArray.add(0, "Work Experience");
                             ArrayAdapter<String> openingAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, experienceArray);
                             openingAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -951,12 +898,11 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                            salaryminArray = new ArrayList<>();
                             salarymaxArray = new ArrayList<>();
                             salaryofferList.clear();
-                            for (int i = 0; i < salary_offer.size(); i++) {
-                                JsonObject openings = salary_offer.get(i).getAsJsonObject();
+                            IntStream.range(0, salary_offer.size()).mapToObj(i -> salary_offer.get(i).getAsJsonObject()).forEach(openings -> {
                                 salaryminArray.add(salaryminArray.size(), String.valueOf(openings.get("min_salary").getAsInt()));
                                 salaryminArray.add(salaryminArray.size(), String.valueOf(openings.get("max_salary").getAsInt()));
                                 salaryofferList.add(salaryofferList.size(), openings);
-                            }
+                            });
                             salarymaxArray.addAll(salaryminArray);
                             salarymaxArray.remove(0);
                             salaryminArray.remove(salaryminArray.size()-1);
@@ -972,11 +918,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                         if (degree_type.size() > 0) {
                             ArrayList<CommonModel> commonModels = new ArrayList<>();
-                            for (int i = 0; i < degree_type.size(); i++) {
-                                JsonObject jsonObject = degree_type.get(i).getAsJsonObject();
-                                CommonModel commonModel = new CommonModel(jsonObject.get("degree_id").getAsString(), jsonObject.get("degree_name").getAsString(), jsonObject.get("degree_level_id").getAsString(), false);
-                                commonModels.add(commonModels.size(), commonModel);
-                            }
+                            IntStream.range(0, degree_type.size()).mapToObj(i -> degree_type.get(i).getAsJsonObject()).map(jsonObject -> new CommonModel(jsonObject.get("degree_id").getAsString(), jsonObject.get("degree_name").getAsString(), jsonObject.get("degree_level_id").getAsString(), false)).forEach(commonModel -> commonModels.add(commonModels.size(), commonModel));
                             qualificationAdapter = new QualificationAdapter(mContext, commonModels);
                             list_qualification.setAdapter(qualificationAdapter);
                             qualificationAdapter.notifyDataSetChanged();
@@ -984,9 +926,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                         }
 
 
-                    } else {
-                        rest.showToast(responceBody.get("message").getAsString());
-                    }
+                    } else rest.showToast(responceBody.get("message").getAsString());
 
                 } else rest.showToast("Something went wrong");
 
@@ -1021,11 +961,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                         featured_package = data.has("featured_package") ? data.get("featured_package").getAsJsonObject() : new JsonObject();
                         if (perk_benefits.size() > 0) {
                             ArrayList<CommonModel> commonModels = new ArrayList<>();
-                            for (int i = 0; i < perk_benefits.size(); i++) {
-                                JsonObject jsonObject = perk_benefits.get(i).getAsJsonObject();
-                                CommonModel commonModel = new CommonModel(jsonObject.get("benefit_id").getAsString(), jsonObject.get("benefit_name").getAsString(), false);
-                                commonModels.add(commonModels.size(), commonModel);
-                            }
+                            IntStream.range(0, perk_benefits.size()).mapToObj(i -> perk_benefits.get(i).getAsJsonObject()).map(jsonObject -> new CommonModel(jsonObject.get("benefit_id").getAsString(), jsonObject.get("benefit_name").getAsString(), false)).forEach(commonModel -> commonModels.add(commonModels.size(), commonModel));
                             perkAdapter = new PerkAdapter(mContext, commonModels);
                             list_perk.setAdapter(perkAdapter);
                             perkAdapter.notifyDataSetChanged();
@@ -1034,20 +970,13 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                         if (languagesArray.size() > 0) {
                             commonModelsLanguage = new ArrayList<>();
-                            for (int i = 0; i < languagesArray.size(); i++) {
-                                JsonObject jsonObject = languagesArray.get(i).getAsJsonObject();
-                                CommonModel commonModel = new CommonModel(jsonObject.get("language_id").getAsString(), jsonObject.get("language_name").getAsString(), false);
-                                commonModelsLanguage.add(commonModelsLanguage.size(), commonModel);
-                            }
+                            IntStream.range(0, languagesArray.size()).mapToObj(i -> languagesArray.get(i).getAsJsonObject()).map(jsonObject -> new CommonModel(jsonObject.get("language_id").getAsString(), jsonObject.get("language_name").getAsString(), false)).forEach(commonModel -> commonModelsLanguage.add(commonModelsLanguage.size(), commonModel));
                             tv_language.setOnClickListener(PostJobFragments.this);
                         }
 
                         if (working_days.size() > 0) {
                             ArrayList<String> workdayArray = new ArrayList<>();
-                            for (int i = 0; i < working_days.size(); i++) {
-                                JsonObject openings = working_days.get(i).getAsJsonObject();
-                                workdayArray.add(workdayArray.size(), openings.get("day_name").getAsString());
-                            }
+                            IntStream.range(0, working_days.size()).mapToObj(i -> working_days.get(i).getAsJsonObject()).forEach(openings -> workdayArray.add(workdayArray.size(), openings.get("day_name").getAsString()));
                             workdayArray.add(0, "Working Days");
                             ArrayAdapter<String> openingAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, workdayArray);
                             openingAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -1056,19 +985,14 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                         if (working_shifts.size() > 0) {
                             ArrayList<String> workshiftArray = new ArrayList<>();
-                            for (int i = 0; i < working_shifts.size(); i++) {
-                                JsonObject openings = working_shifts.get(i).getAsJsonObject();
-                                workshiftArray.add(workshiftArray.size(), openings.get("shift_name").getAsString());
-                            }
+                            IntStream.range(0, working_shifts.size()).mapToObj(i -> working_shifts.get(i).getAsJsonObject()).forEach(openings -> workshiftArray.add(workshiftArray.size(), openings.get("shift_name").getAsString()));
                             workshiftArray.add(0, "Working Shift");
                             ArrayAdapter<String> openingAdapter = new ArrayAdapter<String>(mContext, R.layout.simple_spinner_item, workshiftArray);
                             openingAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                             spn_workshift.setAdapter(openingAdapter);
                         }
 
-                    } else {
-                        rest.showToast(responceBody.get("message").getAsString());
-                    }
+                    } else rest.showToast(responceBody.get("message").getAsString());
 
                 } else rest.showToast("Something went wrong");
 
@@ -1131,9 +1055,8 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
         bottomsheet_perk.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING)
                     bottomsheet_perk.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
             }
 
             @Override
@@ -1156,18 +1079,16 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
                     JsonArray mArrayListData = responseBody.has("data")?responseBody.get("data").getAsJsonArray():new JsonArray();
                     mArrayListSkills.clear();
-                    for (int i = 0; i < mArrayListData.size(); i++) {
+                    IntStream.range(0, mArrayListData.size()).forEach(i -> {
                         AddSkillsModel model = new AddSkillsModel();
                         model.setSkill_id(mArrayListData.get(i).getAsJsonObject().get("skill_id").getAsString());
                         model.setSkill_name(mArrayListData.get(i).getAsJsonObject().get("skill_name").getAsString());
                         model.setSelected(false);
                         mArrayListSkills.add(model);
-                    }
+                    });
                     skilladapter = new AddSkillAdapter(mContext, mArrayListSkills, addSkillsInterface);
                     mlistview.setAdapter(skilladapter);
-                } else {
-                    rest.showToast("Something went wrong");
-                }
+                } else rest.showToast("Something went wrong");
 
             }
 
@@ -1181,80 +1102,72 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
 
     @Override
     public void skill(String data, String id) {
-        {
-            LinearLayout linearLayout = new LinearLayout(mContext);
-            LinearLayout linearLayoutF = new LinearLayout(mContext);
-            FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
-                    FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
-            LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density*32));
-            layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density*4), (int) (mContext.getResources().getDisplayMetrics().density*5), (int) (mContext.getResources().getDisplayMetrics().density*4), (int) (mContext.getResources().getDisplayMetrics().density*5));
-            linearLayoutF.setLayoutParams(layoutParams);
-            linearLayout.setLayoutParams(layoutParamsF);
-            linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density*4), 0, (int) (mContext.getResources().getDisplayMetrics().density*4), 0);
-            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-            linearLayoutF.setOnClickListener(btnClickListener);
-            linearLayout.setGravity(Gravity.CENTER);
-            linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
-            PopinsRegularTextView bt = new PopinsRegularTextView(mContext);
-            bt.setText(data);
-            bt.setAllCaps(false);
-            bt.setTag(data);
-            bt.setMaxLines(1);
-            bt.setEllipsize(TextUtils.TruncateAt.END);
-            bt.setTextSize(12f);
-            bt.setTextColor(getResources().getColor(R.color.white));
-            LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams1.setMargins((int) (mContext.getResources().getDisplayMetrics().density*6), 0, (int) (mContext.getResources().getDisplayMetrics().density*32), 0);
-            bt.setLayoutParams(layoutParams1);
-            ImageView imageView = new ImageView(mContext);
-            imageView.setImageResource(R.drawable.ic_group_99);
-            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams2.setMargins(-(int) (mContext.getResources().getDisplayMetrics().density*26), 0, 0, 0);
-            imageView.setLayoutParams(layoutParams2);
-            imageView.getLayoutParams().height = (int) (mContext.getResources().getDisplayMetrics().density*22);
-            imageView.getLayoutParams().width = (int) (mContext.getResources().getDisplayMetrics().density*22);
+        LinearLayout linearLayout = new LinearLayout(mContext);
+        LinearLayout linearLayoutF = new LinearLayout(mContext);
+        FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
+                FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density*32));
+        layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density*4), (int) (mContext.getResources().getDisplayMetrics().density*5),
+                (int) (mContext.getResources().getDisplayMetrics().density*4), (int) (mContext.getResources().getDisplayMetrics().density*5));
+        linearLayoutF.setLayoutParams(layoutParams);
+        linearLayout.setLayoutParams(layoutParamsF);
+        linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density*4), 0, (int) (mContext.getResources().getDisplayMetrics().density*4), 0);
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayoutF.setOnClickListener(btnClickListener);
+        linearLayout.setGravity(Gravity.CENTER);
+        linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
+        PopinsRegularTextView bt = new PopinsRegularTextView(mContext);
+        bt.setText(data);
+        bt.setAllCaps(false);
+        bt.setTag(data);
+        bt.setMaxLines(1);
+        bt.setEllipsize(TextUtils.TruncateAt.END);
+        bt.setTextSize(12f);
+        bt.setTextColor(getResources().getColor(R.color.white));
+        LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams1.setMargins((int) (mContext.getResources().getDisplayMetrics().density*6), 0, (int) (mContext.getResources().getDisplayMetrics().density*32), 0);
+        bt.setLayoutParams(layoutParams1);
+        ImageView imageView = new ImageView(mContext);
+        imageView.setImageResource(R.drawable.ic_group_99);
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams2.setMargins(-(int) (mContext.getResources().getDisplayMetrics().density*26), 0, 0, 0);
+        imageView.setLayoutParams(layoutParams2);
+        imageView.getLayoutParams().height = (int) (mContext.getResources().getDisplayMetrics().density*22);
+        imageView.getLayoutParams().width = (int) (mContext.getResources().getDisplayMetrics().density*22);
 
 
-            linearLayout.addView(bt);
-            linearLayout.addView(imageView);
-            linearLayoutF.addView(linearLayout);
-            linearLayoutF.setOnClickListener(btnClickListener);
-            linearLayoutF.setTag(data);
-            flowlayout.addView(linearLayoutF);
-            mArrayListSkillSelected.add(data);
-            mArrayListSkillSelectedid.add(id);
-            if (flowlayout.getMeasuredHeight() > 272) {
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 272));
-            } else
-                kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        }
+        linearLayout.addView(bt);
+        linearLayout.addView(imageView);
+        linearLayoutF.addView(linearLayout);
+        linearLayoutF.setOnClickListener(btnClickListener);
+        linearLayoutF.setTag(data);
+        flowlayout.addView(linearLayoutF);
+        mArrayListSkillSelected.add(data);
+        mArrayListSkillSelectedid.add(id);
+        if (flowlayout.getMeasuredHeight() > 272)
+            kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 272));
+        else kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     public void setIndustry(String name, String id) {
         tv_industry.setText(name);
         industryId = id;
-        for (int i=0;i<commonModels.size();i++){
-            commonModels.get(i).setSelected(id.equalsIgnoreCase(commonModels.get(i).getId()));
-        }
+        IntStream.range(0, commonModels.size()).forEach(i -> commonModels.get(i).setSelected(id.equalsIgnoreCase(commonModels.get(i).getId())));
     }
 
     public void setLocation(String name, String id) {
         tv_location.setText(name);
         locationId = id;
-        for (int i=0;i<commonModelsLocation.size();i++){
-            commonModelsLocation.get(i).setSelected(id.equalsIgnoreCase(commonModelsLocation.get(i).getId()));
-        }
+        IntStream.range(0, commonModelsLocation.size()).forEach(i -> commonModelsLocation.get(i).setSelected(id.equalsIgnoreCase(commonModelsLocation.get(i).getId())));
     }
 
     public void setLanguage(ArrayList<String> langid, ArrayList<String> langname) {
         String name2 = "";
         for (int i = 0; i < langname.size(); i++) {
-
                 name2 = name2 + (name2.equalsIgnoreCase("") ? "" : ", ") +langname.get(i);
-
         }
         languageIds=langid;
         tv_language.setText(name2);
@@ -1298,20 +1211,17 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
             holder.radioButton.setClickable(false);
             holder.radioButton.setChecked(data.get(position).isSelected());
             holder.tv_item.setText(name);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (oldHolder != null) {
-                        oldHolder.radioButton.setChecked(false);
-                        data.get(oldPos).setSelected(false);
-                    }
-                    holder.radioButton.setChecked(true);
-                    oldHolder = holder;
-                    oldPos = position;
-                    tempjobTypeId = id;
-                    tempjobTypeName = name;
-                    data.get(position).setSelected(true);
+            holder.itemView.setOnClickListener(v -> {
+                if (oldHolder != null) {
+                    oldHolder.radioButton.setChecked(false);
+                    data.get(oldPos).setSelected(false);
                 }
+                holder.radioButton.setChecked(true);
+                oldHolder = holder;
+                oldPos = position;
+                tempjobTypeId = id;
+                tempjobTypeName = name;
+                data.get(position).setSelected(true);
             });
         }
 
@@ -1460,7 +1370,5 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
             return convertView;
         }
     }
-
-
 
 }

@@ -66,9 +66,7 @@ public class AddIndustryAdapter extends RecyclerView.Adapter<AddIndustryAdapter.
             mContext.name = name;
         }
         holder.itemView.setOnClickListener(v -> {
-            if (oldHolder != null) {
-                oldHolder.radioButton.setChecked(false);
-            }
+            if (oldHolder != null) oldHolder.radioButton.setChecked(false);
             holder.radioButton.setChecked(true);
             oldHolder = holder;
             mContext.id = id;
@@ -90,10 +88,7 @@ public class AddIndustryAdapter extends RecyclerView.Adapter<AddIndustryAdapter.
 
     @Override
     public Filter getFilter() {
-        if (filter == null) {
-            filter = new CustomFilter();
-        }
-
+        if (filter == null) filter = new CustomFilter();
         return filter;
     }
 

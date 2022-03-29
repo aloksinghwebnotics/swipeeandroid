@@ -207,6 +207,13 @@ public class CompanyEditProfile extends AppCompatActivity implements View.OnClic
 
     }
 
+
+    @Override
+    protected void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
     private void industryBottomSheet() {
         RelativeLayout intent_sheet = findViewById(R.id.intent_sheet);
         bottomsheet_intent = BottomSheetBehavior.from(intent_sheet);

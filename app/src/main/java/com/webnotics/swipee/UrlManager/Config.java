@@ -455,23 +455,7 @@ public class Config {
     }
 
 
-    public static void SetEmailVERIFY(boolean email_verify) {
-        editor.putBoolean(EMAIL_VERIFY, email_verify);
-        editor.commit();
-    }
 
-    public static boolean isEmailVERIFY() {
-        return preference.getBoolean(EMAIL_VERIFY, false);
-    }
-
-    public static void SetMobileVERIFY(boolean mobile_verify) {
-        editor.putBoolean(MOBILE_VERIFY, mobile_verify);
-        editor.commit();
-    }
-
-    public static boolean GetMobileVERIFY() {
-        return preference.getBoolean(MOBILE_VERIFY, false);
-    }
 
     public static void SetUserToken(String utoken) {
         editor.putString(USER_TOKEN, utoken);

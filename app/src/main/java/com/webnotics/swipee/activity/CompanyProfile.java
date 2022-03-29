@@ -1,6 +1,8 @@
 package com.webnotics.swipee.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -94,6 +96,16 @@ public class CompanyProfile extends AppCompatActivity {
 
         });
         iv_back.setOnClickListener(v -> finish());
+        tv_website.setOnClickListener(v->{
+            String url = tv_website.getText().toString();
+            if (!TextUtils.isEmpty(url)){
+                if (!url.startsWith("http://") && !url.startsWith("https://"))
+                    url = "http://" + url;
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+
+        });
     }
 
 
@@ -151,7 +163,7 @@ public class CompanyProfile extends AppCompatActivity {
                     civ_url=employeeuserdetail.getData().getCompany_logo();
                     Glide.with(mContext)
                             .load(employeeuserdetail.getData().getCompany_logo())
-                            .apply(new RequestOptions().placeholder(R.drawable.ic_pick).error(R.drawable.ic_pick))
+                            .apply(new RequestOptions().placeholder(R.drawable.ic_profile_select).error(R.drawable.ic_profile_select))
                             .into(civ_profile);
                     tv_companyname.setText(employeeuserdetail.getData().getCompany_name());
                     tv_industry.setText(employeeuserdetail.getData().getIndustry_name());

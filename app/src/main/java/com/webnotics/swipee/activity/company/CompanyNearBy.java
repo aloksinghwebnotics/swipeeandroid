@@ -195,6 +195,13 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
         }
     }
 
+
+    @Override
+    protected void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
     private void getCompanySearchRadarView(String radius, String industys) {
         SwipeeApiClient.swipeeServiceInstance().getCompanyRadar(Config.GetUserToken(), industys, radius).enqueue(new Callback<CompanyRaderViewModel>() {
             @Override
@@ -229,6 +236,7 @@ public class CompanyNearBy extends AppCompatActivity implements View.OnClickList
 
     public void setIndustryData(String name, String id) {
         if (tv_search != null) {
+            tv_search.setHint("");
             tv_search.setText(name);
             industys = id;
             AppController.ShowDialogue("", mContext);

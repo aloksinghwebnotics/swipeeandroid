@@ -139,6 +139,13 @@ public class CompanyAppoimentActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    protected void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
     public void cancelAppointment(String id, String appointment_number, String user_id) {
         AppController.ShowDialogue("", mContext);
         HashMap<String, String> hashMap = new HashMap<>();

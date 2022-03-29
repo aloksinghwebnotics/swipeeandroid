@@ -164,7 +164,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("image", payload.getString("user_profile"));
                 resultIntent.putExtra("apply_id", payload.getString("apply_id"));
                 resultIntent.putExtra("msg_id", payload.getString("msg_sender_id"));
-                resultIntent.putExtra("name",  Config.isSeeker()?payload.getString("first_name"):payload.getString("company_name"));
+                resultIntent.putExtra("name",  !Config.isSeeker()?payload.getString("first_name"):payload.getString("company_name"));
                 resultIntent.putExtra("appointment_id",  payload.getString("appointment_id"));
                 resultIntent.putExtra("appointment_number", payload.getString("appointment_number"));
                 resultIntent.putExtra("user_id", Config.isSeeker()?payload.getString("company_id"):payload.getString("user_id"));

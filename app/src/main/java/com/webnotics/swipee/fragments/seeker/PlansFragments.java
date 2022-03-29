@@ -214,7 +214,10 @@ public class PlansFragments extends Basefragment implements View.OnClickListener
                     if (response.body().get("code").getAsInt() == 203) {
                         rest.showToast(response.body().get("message").getAsString());
                         AppController.loggedOut(mContext);
-                        getActivity().finish();
+                        try {
+                            getActivity().finish();
+                        }catch (Exception ignored){}
+
                     } else if (response.body().get("code").getAsInt() == 200 && status) {
                         Config.SetTransaction("");
                         startActivity(new Intent(mContext, SeekerHomeActivity.class));

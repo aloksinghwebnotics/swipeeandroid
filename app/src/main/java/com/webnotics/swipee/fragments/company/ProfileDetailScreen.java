@@ -168,6 +168,12 @@ public class ProfileDetailScreen extends Basefragment implements View.OnClickLis
     }
 
     @Override
+    public void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
+    @Override
     public void onClick(View view) {
 
         switch (view.getId()) {

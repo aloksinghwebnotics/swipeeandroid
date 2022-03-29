@@ -156,7 +156,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         user_profile=responseBody.getData().getCompany_logo();
                         user_phone=responseBody.getData().getPhone_code()+" "+ responseBody.getData().getMobile();
                         isLive=responseBody.getData().getIs_live();
-                        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+                        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                         SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
                         Date date, dateend;
                         try {
@@ -236,7 +236,7 @@ public class AppointmentDetail extends AppCompatActivity implements View.OnClick
                         user_profile=responseBody.getData().getUser_profile();
                         user_phone=responseBody.getData().getPhone_code()+" "+ responseBody.getData().getMobile_no();
                         isLive=responseBody.getData().getIs_live();
-                        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+                        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                         SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
                         Date date, dateend;
                         try {

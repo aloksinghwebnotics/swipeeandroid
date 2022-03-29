@@ -296,7 +296,6 @@ public class RescheduleAppointment extends AppCompatActivity implements View.OnC
                         }
                         finish();
                     } else rest.showToast(responceBody.get("message").getAsString());
-
                 } else rest.showToast("Something went wrong");
 
             }

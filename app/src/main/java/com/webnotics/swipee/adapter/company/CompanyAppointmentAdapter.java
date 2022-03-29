@@ -73,7 +73,7 @@ public class CompanyAppointmentAdapter extends RecyclerView.Adapter<CompanyAppoi
         }
 
         if (data.get(position).getCompany_action().equalsIgnoreCase("Shortlist"))
-            holder.tv_shortlisted.setVisibility(View.VISIBLE);
+            holder.tv_shortlisted.setVisibility(View.GONE);
         else  holder.tv_shortlisted.setVisibility(View.GONE);
         Glide.with(mContext)
                 .load(data.get(position).getProfile_image())
@@ -83,7 +83,7 @@ public class CompanyAppointmentAdapter extends RecyclerView.Adapter<CompanyAppoi
                 .into(holder.civ_logo);
         String dtStart = data.get(position).getAppointment_start_at();
         String end = data.get(position).getAppointment_end_at();
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
         Date date,dateend;
         try {

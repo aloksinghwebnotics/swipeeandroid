@@ -166,7 +166,6 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                     JsonObject responseBody= response.body();
                     Log.d("dbhdfhkjgd",responseBody.toString());
                     if (responseBody.get("status").getAsBoolean()){
-                        Config.SetEmailVERIFY(true);
                         if (BasicInfoActivity.instance!=null){
                             BasicInfoActivity.instance.sendMobile=false;
                             BasicInfoActivity.instance.attachMobileVerification();
@@ -195,7 +194,6 @@ public class EmailVerificationScreen extends Basefragment  implements View.OnCli
                     JsonObject responseBody= response.body();
                     Log.d("dbhdfhkjgd",responseBody.toString());
                     if (responseBody.get("status").getAsBoolean()){
-                        Config.SetEmailVERIFY(true);
                         if (BasicInfoActivity.instance!=null){
                             BasicInfoActivity.instance.sendMobile=false;
                             BasicInfoActivity.instance.attachMobileVerification();

@@ -546,7 +546,7 @@ public class JobDetail extends AppCompatActivity {
                                     tv_reschedule.setVisibility(isShow ? View.VISIBLE : View.GONE);
                                     tv_cancel_application.setVisibility(View.VISIBLE);
                                     ll_applied.setVisibility(View.GONE);
-                                    SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+                                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                                     SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
                                     Date date;
                                     try {

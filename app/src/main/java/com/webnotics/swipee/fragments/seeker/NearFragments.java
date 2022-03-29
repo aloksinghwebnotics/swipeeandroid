@@ -172,6 +172,12 @@ public class NearFragments extends Basefragment implements View.OnClickListener 
         return rootView;
     }
 
+    @Override
+    public void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
     private void getUserSearchRadarView(String radius, String industys) {
         SwipeeApiClient.swipeeServiceInstance().getUserRadar(Config.GetUserToken(), industys, radius).enqueue(new Callback<UserRaderViewModel>() {
             @Override

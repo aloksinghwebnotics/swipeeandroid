@@ -56,6 +56,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,7 +73,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
     TextView tv_name, tv_location, tv_shortlisted, tv_hire, tv_reject, tv_about, tv_education, tv_experience, tv_download, tv_appointment;
     FlowLayout flowlayout, flow_language, flow_jobtype;
     LinearLayout ll_action, ll_job_action, ll_appointment, join;
-    RelativeLayout rl_main, rl_video;
+    RelativeLayout rl_main, rl_video,rl_bottom;
     TextView tv_video, tv_title_language, appoint_job_title, tv_appointmenttime, tv_title_about, tv_title_experience, tv_title_education, tv_username, tv_report, tv_block, tv_reschedule, tv_cancel_application;
     private String cv_file_link = "";
     private String apply_id = "";
@@ -114,6 +115,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
         instance = this;
         iv_back = findViewById(R.id.iv_back);
         rl_main = findViewById(R.id.rl_main);
+        rl_bottom = findViewById(R.id.rl_bottom);
         ll_action = findViewById(R.id.ll_action);
         flowlayout = findViewById(R.id.flowlayout);
         tv_name = findViewById(R.id.tv_name);
@@ -523,7 +525,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                     String appointment_end_at = appointmentObj.has("appointment_end_at") ? appointmentObj.get("appointment_end_at").getAsString() : "";
                                     String job_title = appointmentObj.has("job_title") ? appointmentObj.get("job_title").getAsString() : "";
                                     appoint_job_title.setText(job_title);
-                                    SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+                                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                                     SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
                                     Date date;
                                     try {
@@ -658,7 +660,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                             }
 
                             if (job_skills.size() > 0) {
-                                for (int k = 0; k < job_skills.size(); k++) {
+                                IntStream.range(0, job_skills.size()).forEach(k -> {
                                     LinearLayout linearLayout = new LinearLayout(mContext);
                                     LinearLayout linearLayoutF = new LinearLayout(mContext);
                                     FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
@@ -689,47 +691,41 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                     linearLayout.setTag(job_skills.get(k).getAsString());
                                     linearLayoutF.setTag(job_skills.get(k).getAsString());
                                     flowlayout.addView(linearLayoutF);
-                                }
+                                });
                             }
 
                             if (user_languages.size() > 0) {
-                                for (int l = 0; l < user_languages.size(); l++) {
-                                    JsonObject jangObj = user_languages.get(l).getAsJsonObject();
-                                    String langis = jangObj.has("language_name") ? jangObj.get("language_name").getAsString() : "";
-                                    if (!TextUtils.isEmpty(langis)) {
-
-                                        LinearLayout linearLayout = new LinearLayout(mContext);
-                                        LinearLayout linearLayoutF = new LinearLayout(mContext);
-                                        FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
-                                                FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
-                                        LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
-                                                LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
-                                        layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
-                                        linearLayoutF.setLayoutParams(layoutParams);
-                                        linearLayout.setLayoutParams(layoutParamsF);
-                                        linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
-                                        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                                        linearLayout.setGravity(Gravity.CENTER);
-                                        linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
-                                        PopinsRegularTextView bt = new PopinsRegularTextView(mContext);
-                                        bt.setText(langis);
-                                        bt.setAllCaps(false);
-                                        bt.setMaxLines(1);
-                                        bt.setEllipsize(TextUtils.TruncateAt.END);
-                                        bt.setTextSize(12f);
-                                        bt.setTag(langis);
-                                        bt.setTextColor(mContext.getResources().getColor(R.color.white));
-                                        LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
-                                                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                                        layoutParams1.setMargins(0, 0, 0, 0);
-                                        bt.setLayoutParams(layoutParams1);
-                                        linearLayout.addView(bt);
-                                        linearLayoutF.addView(linearLayout);
-                                        linearLayoutF.setTag(langis);
-                                        flow_language.addView(linearLayoutF);
-                                    }
-
-                                }
+                                IntStream.range(0, user_languages.size()).mapToObj(l -> user_languages.get(l).getAsJsonObject()).map(jangObj -> jangObj.has("language_name") ? jangObj.get("language_name").getAsString() : "").filter(langis -> !TextUtils.isEmpty(langis)).forEach(langis -> {
+                                    LinearLayout linearLayout = new LinearLayout(mContext);
+                                    LinearLayout linearLayoutF = new LinearLayout(mContext);
+                                    FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
+                                            FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+                                    LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
+                                    layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
+                                    linearLayoutF.setLayoutParams(layoutParams);
+                                    linearLayout.setLayoutParams(layoutParamsF);
+                                    linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
+                                    linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                                    linearLayout.setGravity(Gravity.CENTER);
+                                    linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
+                                    PopinsRegularTextView bt = new PopinsRegularTextView(mContext);
+                                    bt.setText(langis);
+                                    bt.setAllCaps(false);
+                                    bt.setMaxLines(1);
+                                    bt.setEllipsize(TextUtils.TruncateAt.END);
+                                    bt.setTextSize(12f);
+                                    bt.setTag(langis);
+                                    bt.setTextColor(mContext.getResources().getColor(R.color.white));
+                                    LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                    layoutParams1.setMargins(0, 0, 0, 0);
+                                    bt.setLayoutParams(layoutParams1);
+                                    linearLayout.addView(bt);
+                                    linearLayoutF.addView(linearLayout);
+                                    linearLayoutF.setTag(langis);
+                                    flow_language.addView(linearLayoutF);
+                                });
                                 flow_language.setVisibility(View.VISIBLE);
                                 tv_title_language.setVisibility(View.VISIBLE);
                             } else {
@@ -737,6 +733,7 @@ public class UserDetail extends AppCompatActivity implements View.OnClickListene
                                 tv_title_language.setVisibility(View.GONE);
                             }
                             rl_main.setVisibility(View.VISIBLE);
+                            rl_bottom.setVisibility(View.VISIBLE);
                         }
                     }
                 } else rest.showToast("Something went wrong");

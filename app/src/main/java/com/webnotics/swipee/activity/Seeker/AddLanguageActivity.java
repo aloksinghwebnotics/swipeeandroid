@@ -328,9 +328,9 @@ public class AddLanguageActivity extends AppCompatActivity implements View.OnCli
         flowlay.addView(linearLayoutF);
         mArrayListdesiredindustries.add(data);
         mArrayListid.add(id);
-        if (flowlay.getMeasuredHeight() > 400) {
+        if (flowlay.getMeasuredHeight() > 400)
             kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 424));
-        } else
+        else
             kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 }

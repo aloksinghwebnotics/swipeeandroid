@@ -78,7 +78,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
                 .into(holder.civ_logo);
         String dtStart = data.get(position).getAppointment_start_at();
         String end = data.get(position).getAppointment_end_at();
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat formatout = new SimpleDateFormat("hh:mm a");
         Date date,dateend;
         try {

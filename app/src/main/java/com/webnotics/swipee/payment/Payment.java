@@ -22,7 +22,7 @@ public class Payment  {
             options.put("send_sms_hash", true);
             options.put("allow_rotation", false);
             //You can omit the image option to fetch the image from dashboard
-            options.put("image", "https://swipee.in/public/images/applogo.png");
+            options.put("image", "https://swipee.in/app_data/public/images/applogo.png");
          //   options.put("currency", "INR");
            // options.put("amount", (package_price * 400));
             options.put("order_id", order_id);

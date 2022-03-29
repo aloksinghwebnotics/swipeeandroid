@@ -6,9 +6,10 @@ package com.webnotics.swipee.rest;
 
 public class ApiUrls {
 
-  public static final String BASE_URL = "https://swipee.in/app_api/";
-  public static final String POLICY_URL = "https://swipee.in/pages/privacyPolicy";
-  public static final String TERMS_URL = "https://swipee.in/pages/terms";
+  //public static final String BASE_URL = "https://swipee.in/app_data/app_api/";
+  public static final String BASE_URL = "https://swipee.in/app_stage/app_api/";
+  public static final String POLICY_URL = "https://swipee.in/app_data/pages/privacyPolicy";
+  public static final String TERMS_URL = "https://swipee.in/app_data/pages/terms";
 
   //User Apis
   public static final String URL_LOGIN = "auth/user_login";

@@ -151,7 +151,6 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                 if (response.code()==200 && response.body()!=null){
                     JsonObject responseBody= response.body();
                     if (responseBody.get("status").getAsBoolean()){
-                        Config.SetMobileVERIFY(true);
                         if (BasicInfoActivity.instance!=null)
                             BasicInfoActivity.instance.attachProfileInfo();
                             rest.showToast(responseBody.get("message").getAsString());
@@ -178,7 +177,6 @@ public class MobileVerificationScreen extends Basefragment  implements View.OnCl
                 if (response.code()==200 && response.body()!=null){
                     JsonObject responseBody= response.body();
                     if (responseBody.get("status").getAsBoolean()){
-                        Config.SetMobileVERIFY(true);
                         if (BasicInfoActivity.instance!=null)
                             BasicInfoActivity.instance.attachProfileInfo();
                         rest.showToast(responseBody.get("message").getAsString());

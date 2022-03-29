@@ -417,8 +417,6 @@ public class CompanyHomeActivity extends AppCompatActivity implements View.OnCli
                             Config.SetStateId(employeeuserdetail.getData().getState_id());
                             Config.SetCityId(employeeuserdetail.getData().getCity_id());
                             Config.SetCountryId(employeeuserdetail.getData().getCountry_id());
-                            Config.SetEmailVERIFY(true);
-                            Config.SetMobileVERIFY(true);
                             Config.SetIsUserLogin(true);
                             Config.SetId(employeeuserdetail.getData().getCompany_id());
                             Config.SetIndustryId(employeeuserdetail.getData().getIndustry_id());

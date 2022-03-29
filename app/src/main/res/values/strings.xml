@@ -191,10 +191,9 @@
     <string name="linkdin_secret">pyhHqEUbyNUmOdrT</string>
     <string name="linkdin_clientid">868amcmypovjvo</string>
 
-
     <string name="error_retrieving_access_token">Error retrieving access token from the server.</string>
     <string name="send">Send</string>
-    <string name="chat_token_url">https://swipee.in/app_api/</string>
+    <string name="chat_token_url">https://swipee.in/app_data/app_api/</string>
     <!-- <string name="chat_token_url">https://swipee.in.twil.io/chat-token/</string>-->
     <string name="write_message">Write Message</string>
     <string name="test_access_token">..nzdJn5ZEE1VcpNO72i1BeojX9UIX2I0PboCb8bwljTc</string>

@@ -238,6 +238,12 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
     private void writeCollege(String data) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("college.txt", Context.MODE_PRIVATE));
@@ -552,8 +558,6 @@ public class SeekerHomeActivity extends AppCompatActivity implements View.OnClic
                                 Config.SetStateId(employeeuserdetail.getData().getUser_profile_data().getState_id());
                                 Config.SetCityId(employeeuserdetail.getData().getUser_profile_data().getCity_id());
                                 Config.SetGender(employeeuserdetail.getData().getUser_profile_data().getGender());
-                                Config.SetEmailVERIFY(true);
-                                Config.SetMobileVERIFY(true);
                                 Config.SetIsUserLogin(true);
                                 Config.SetId(employeeuserdetail.getData().getUser_profile_data().getUser_id());
                                 if (employeeuserdetail.getData().getUser_profile_data().getMiddle_name().length() != 0)

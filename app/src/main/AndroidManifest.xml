@@ -379,7 +379,8 @@
             android:theme="@style/basictheme" /> <!-- Api key RazorPay -->
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_54rFvRw59NIrOK" />
+            android:value="rzp_live_Tv02F1S0yyAzOx"/>
+            <!--android:value="rzp_test_54rFvRw59NIrOK"/>-->
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />

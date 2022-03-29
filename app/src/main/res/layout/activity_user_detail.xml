@@ -65,7 +65,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ll_appointment"
+        android:layout_above="@+id/rl_bottom"
         android:layout_below="@+id/rl_toollbar">
 
         <RelativeLayout
@@ -384,17 +384,7 @@
                         android:visibility="gone" />
                 </RelativeLayout>
 
-                <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
-                    android:id="@+id/tv_appointment"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen48dp"
-                    android:layout_gravity="end"
-                    android:layout_marginBottom="@dimen/dimen12dp"
-                    android:background="@drawable/primary_semiround_bg"
-                    android:gravity="center"
-                    android:text="Make Appointment"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dimen16sp" />
+
 
             </LinearLayout>
 
@@ -403,78 +393,101 @@
 
 
     </androidx.core.widget.NestedScrollView>
-    <LinearLayout
-        android:layout_alignParentBottom="true"
-        android:id="@+id/ll_appointment"
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dimen4dp"
-        android:background="@color/colorPrimary"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/dimen54dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:visibility="gone">
-        <LinearLayout
-            android:id="@+id/appointment"
-            android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+            android:id="@+id/tv_appointment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen48dp"
+            android:layout_marginStart="@dimen/dimen18dp"
+            android:layout_marginEnd="@dimen/dimen18dp"
+            android:layout_gravity="end"
+
+            android:layout_marginBottom="@dimen/dimen12dp"
+            android:background="@drawable/primary_semiround_bg"
             android:gravity="center"
+            android:text="Make Appointment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen16sp" />
+        <LinearLayout
+
+            android:id="@+id/ll_appointment"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dimen4dp"
+            android:background="@color/colorPrimary"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dimen54dp"
             android:orientation="vertical"
-            android:layout_height="match_parent">
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
-                android:id="@+id/appoint_job_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Appointment scheduled"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimen14sp"
-                android:visibility="visible" />
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
-                android:id="@+id/tv_appointmenttime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimen12sp"
-                android:visibility="visible" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/join"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/dimen2dp"
-            android:layout_marginBottom="@dimen/dimen4dp"
-            android:orientation="horizontal"
-            android:layout_height="match_parent">
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+            android:visibility="gone">
+            <LinearLayout
+                android:id="@+id/appointment"
+                android:layout_width="wrap_content"
                 android:gravity="center"
-                android:text="Join now"
-                android:layout_gravity="center_vertical"
-                android:maxLines="1"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimen14sp"
-                android:visibility="visible" />
-            <ImageView
-                android:id="@+id/iv_meetingType"
-                android:layout_marginStart="@dimen/dimen4dp"
-                android:padding="@dimen/dimen4dp"
-                android:layout_width="@dimen/dimen24dp"
-                android:layout_height="@dimen/dimen24dp"
-                android:src="@drawable/ic_telephone1"
-                app:tint="@color/white" />
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    android:id="@+id/appoint_job_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Appointment scheduled"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen14sp"
+                    android:visibility="visible" />
+                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    android:id="@+id/tv_appointmenttime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen12sp"
+                    android:visibility="visible" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/join"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/dimen2dp"
+                android:layout_marginBottom="@dimen/dimen4dp"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Join now"
+                    android:layout_gravity="center_vertical"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen14sp"
+                    android:visibility="visible" />
+                <ImageView
+                    android:id="@+id/iv_meetingType"
+                    android:layout_marginStart="@dimen/dimen4dp"
+                    android:padding="@dimen/dimen4dp"
+                    android:layout_width="@dimen/dimen24dp"
+                    android:layout_height="@dimen/dimen24dp"
+                    android:src="@drawable/ic_telephone1"
+                    app:tint="@color/white" />
+            </LinearLayout>
+
+
         </LinearLayout>
+    </RelativeLayout>
 
 
-    </LinearLayout>
     <ImageView
         android:id="@+id/iv_shaddowleft"
         android:layout_width="@dimen/dimen72dp"

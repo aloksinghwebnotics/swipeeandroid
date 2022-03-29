@@ -91,7 +91,7 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
     private JsonArray degree_type = new JsonArray();
     private JsonArray experience = new JsonArray();
     private JsonArray salary_offer = new JsonArray();
-    private JsonArray                                                                               salary_type = new JsonArray();
+    private JsonArray salary_type = new JsonArray();
     private JsonArray job_industry = new JsonArray();
     private JsonArray employment_type = new JsonArray();
     RelativeLayout jobtypebottom_sheet, qualification_sheet, perk_sheet;
@@ -232,9 +232,9 @@ public class PostJobFragments extends Basefragment implements View.OnClickListen
                 et_search.setText("");
             });
             ll.removeView(v);
-            if (flowlayout.getMeasuredHeight() > 272) {
+            if (flowlayout.getMeasuredHeight() > 272)
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 272));
-            } else
+            else
                 kdkdkdkd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         };
 

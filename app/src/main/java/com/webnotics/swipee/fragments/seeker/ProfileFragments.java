@@ -240,8 +240,7 @@ public class ProfileFragments extends Basefragment implements View.OnClickListen
             Config.SetStateId(employeeuserdetail.getData().getUser_profile_data().getState_id());
             Config.SetCityId(employeeuserdetail.getData().getUser_profile_data().getCity_id());
             Config.SetGender(employeeuserdetail.getData().getUser_profile_data().getGender());
-            Config.SetEmailVERIFY(true);
-            Config.SetMobileVERIFY(true);
+
             Config.SetIsUserLogin(true);
             pickUri=employeeuserdetail.getData().getUser_profile_data().getUser_profile();
             Config.SetId(employeeuserdetail.getData().getUser_profile_data().getUser_id());

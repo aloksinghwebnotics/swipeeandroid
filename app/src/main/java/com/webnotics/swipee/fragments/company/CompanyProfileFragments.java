@@ -111,8 +111,7 @@ public class CompanyProfileFragments extends Basefragment implements View.OnClic
             Config.SetCountryId(employeeuserdetail.getData().getCountry_id());
             pincode = employeeuserdetail.getData().getCompany_pincode();
             address = employeeuserdetail.getData().getCompany_address();
-            Config.SetEmailVERIFY(true);
-            Config.SetMobileVERIFY(true);
+
             Config.SetIsUserLogin(true);
             Config.SetId(employeeuserdetail.getData().getCompany_id());
             Config.SetIndustryId(employeeuserdetail.getData().getIndustry_id());

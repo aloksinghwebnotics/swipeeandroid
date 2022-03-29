@@ -314,18 +314,15 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         TextView tv_camera = intent_sheet.findViewById(R.id.tv_camera);
         TextView tv_gallery = intent_sheet.findViewById(R.id.tv_gallery);
         TextView tv_cancel = intent_sheet.findViewById(R.id.tv_cancel);
-        tv_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                try {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                } catch (ActivityNotFoundException e) {
-                    // display error state to the user
-                }
-
-                bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        tv_camera.setOnClickListener(v -> {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            try {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            } catch (ActivityNotFoundException e) {
+                // display error state to the user
             }
+
+            bottomsheet_intent.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
         tv_gallery.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK,
@@ -404,9 +401,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         FileOutputStream fos = new FileOutputStream(pictureFile);
                         selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                         fos.close();
-                        if (pictureFile != null) {
-                            picturePath = pictureFile.getAbsolutePath();
-                        }
+                        if (pictureFile != null) picturePath = pictureFile.getAbsolutePath();
                     } catch (FileNotFoundException e) {
                     } catch (IOException e) {
                     }

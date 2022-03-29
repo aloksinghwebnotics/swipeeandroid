@@ -194,7 +194,7 @@ public class AppointmentAction extends AppCompatActivity {
             else if (appointment_type.equalsIgnoreCase("chat"))
                 holder.iv_call.setImageResource(R.drawable.chat_img);
             holder.tv_profile.setText(appointment_number);
-            SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
             SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
             Date date, dateend;
             try {
@@ -257,7 +257,7 @@ public class AppointmentAction extends AppCompatActivity {
         String job_title = jsonObject.has("job_title") ? jsonObject.get("job_title").getAsString() : "";
         String job_id = jsonObject.has("job_id") ? jsonObject.get("job_id").getAsString() : "";
         String apply_id = jsonObject.has("apply_id") ? jsonObject.get("apply_id").getAsString() : "";
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat formatout = new SimpleDateFormat("hh:mm aa");
         Date date,dateend;
         String datefinal="";

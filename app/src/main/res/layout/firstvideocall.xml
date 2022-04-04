@@ -15,7 +15,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimen156dp" />
 
-        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+        <com.swipee.in.CustomUi.PopinsSemiboldTextView
             android:layout_marginTop="@dimen/dimen10dp"
             android:id="@+id/name"
             android:layout_below="@+id/img_profile"
@@ -26,7 +26,7 @@
             android:layout_marginBottom="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+        <com.swipee.in.CustomUi.PopinsSemiboldTextView
             android:id="@+id/email"
             android:layout_below="@+id/name"
             android:textColor="@color/white"

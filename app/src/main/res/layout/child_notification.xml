@@ -21,7 +21,7 @@
         android:layout_toEndOf="@+id/civ_logo"
         android:orientation="vertical">
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/dimen14sp" />
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/dimen12sp" />
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_createdat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

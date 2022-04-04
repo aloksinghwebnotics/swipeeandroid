@@ -31,7 +31,7 @@
             android:paddingEnd="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -79,7 +79,7 @@
                  android:layout_toEndOf="@+id/iv_profile"
                  android:layout_centerVertical="true"
                  android:orientation="vertical">
-                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                 <com.swipee.in.CustomUi.PopinsRegularTextView
                      android:id="@+id/tv_name"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                      android:textColor="@color/black"
                      android:textSize="@dimen/dimen14sp" />
 
-                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                 <com.swipee.in.CustomUi.PopinsRegularTextView
                      android:id="@+id/tv_location"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                      android:gravity="center_vertical"
                      android:textColor="@color/nav_gray"
                      android:textSize="@dimen/dimen12sp" />
-                 <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                 <com.swipee.in.CustomUi.PopinsRegularTextView
                      android:id="@+id/tv_postedfor"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                 android:orientation="vertical"
                 android:layout_height="wrap_content"
                 >
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_datetime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                     android:layout_marginTop="@dimen/dimen6dp"
                     android:layout_marginBottom="@dimen/dimen4dp"
                     android:background="@color/graylight"/>
-                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                <com.swipee.in.CustomUi.PopinsMediumTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/dimen8dp"
@@ -140,7 +140,7 @@
                     android:text ="Communication Mode"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
         android:src="@drawable/ic_intersection_2"
         android:visibility="visible" />
 
-    <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+    <com.swipee.in.CustomUi.PopinsSemiboldTextView
         android:id="@+id/tv_appointment"
         android:layout_above="@+id/ll_btn"
         android:layout_width="match_parent"
@@ -192,7 +192,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+        <com.swipee.in.CustomUi.PopinsSemiboldTextView
             android:id="@+id/tv_cancel"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
@@ -203,7 +203,7 @@
             android:text="Cancel"
             android:textColor="@color/white"
             android:textSize="@dimen/dimen14sp" />
-        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+        <com.swipee.in.CustomUi.PopinsSemiboldTextView
             android:id="@+id/tv_accept"
             android:layout_weight="0.5"
             android:layout_width="match_parent"

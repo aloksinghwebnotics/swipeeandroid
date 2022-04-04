@@ -17,7 +17,7 @@
        android:paddingTop="@dimen/dimen8dp"
        android:orientation="vertical"
        android:layout_height="wrap_content">
-       <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+       <com.swipee.in.CustomUi.PopinsMediumTextView
            android:layout_above="@+id/rl_company"
            android:layout_marginBottom="@dimen/dimen4dp"
            android:id="@+id/tv_name"
@@ -44,7 +44,7 @@
                android:src="@drawable/ic_portfolio"
                app:tint="@color/white_light" />
 
-           <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+           <com.swipee.in.CustomUi.PopinsMediumTextView
                android:id="@+id/tv_companyname"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                android:src="@drawable/ic_location"
                app:tint="@color/white_light" />
 
-           <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+           <com.swipee.in.CustomUi.PopinsMediumTextView
                android:id="@+id/tv_loaction"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"

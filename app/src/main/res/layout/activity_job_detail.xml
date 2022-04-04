@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/dimen16dp"
-    tools:context=".activity.JobDetail">
+   >
     <ImageView
         android:visibility="visible"
         android:id="@+id/iv_shaddowright"
@@ -33,7 +33,7 @@
             android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -89,21 +89,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen14sp" />
 
-                    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_location1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_title1"
                         android:textColor="@color/nav_gray"
                         android:textSize="@dimen/dimen14sp" />
-                    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_postedfor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -122,21 +122,21 @@
                 android:paddingEnd="@dimen/dimen16dp"
                 android:paddingBottom="@dimen/dimen12dp">
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen15sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_industry"
                     android:textColor="@color/nav_gray"
                     android:textSize="@dimen/dimen14sp" />
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_industry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                             android:layout_height="@dimen/dimen16dp"
                             android:src="@drawable/ic_time_left" />
 
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
                             android:id="@+id/tv_experience"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -192,7 +192,7 @@
                             android:layout_height="@dimen/dimen16dp"
                             android:src="@drawable/ic_full_time_job" />
 
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
                             android:id="@+id/tv_jobtype"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -226,7 +226,7 @@
                             android:layout_height="@dimen/dimen16dp"
                             android:src="@drawable/ic_graduation_cap" />
 
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
                             android:id="@+id/tv_degree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                             android:layout_height="@dimen/dimen16dp"
                             android:src="@drawable/ic_dollar" />
 
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
                             android:id="@+id/tv_salary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -275,7 +275,7 @@
                 android:orientation="horizontal"
                 android:visibility="gone">
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_active"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen40dp"
@@ -288,7 +288,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/dimen12sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_inactive"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen40dp"
@@ -301,7 +301,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen12sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_closed"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen40dp"
@@ -318,7 +318,7 @@
             </LinearLayout>
 
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen20dp"
@@ -326,7 +326,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dimen15sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -337,14 +337,14 @@
                 android:layout_marginTop="@dimen/dimen20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                <com.swipee.in.CustomUi.PopinsMediumTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Working Days"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen15sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_workdays"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -357,13 +357,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                <com.swipee.in.CustomUi.PopinsMediumTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Working Shifts"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen15sp" />
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_width="wrap_content"
                     android:id="@+id/tv_workshift"
                     android:layout_alignParentEnd="true"
@@ -377,13 +377,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                <com.swipee.in.CustomUi.PopinsMediumTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No of openings"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen15sp" />
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_height="wrap_content"
@@ -391,7 +391,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen14sp" />
             </RelativeLayout>
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen20dp"
@@ -399,13 +399,13 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dimen15sp" />
 
-            <com.webnotics.swipee.CustomUi.FlowLayout
+            <com.swipee.in.CustomUi.FlowLayout
                 android:id="@+id/flow_skill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen12dp"></com.webnotics.swipee.CustomUi.FlowLayout>
+                android:layout_marginTop="@dimen/dimen12dp"></com.swipee.in.CustomUi.FlowLayout>
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen20dp"
@@ -413,7 +413,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dimen15sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_perk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -468,7 +468,7 @@
            android:orientation="horizontal"
            android:visibility="gone">
 
-           <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+           <com.swipee.in.CustomUi.PopinsMediumTextView
                android:id="@+id/tv_apply"
                android:layout_width="match_parent"
                android:layout_height="@dimen/dimen48dp"
@@ -486,7 +486,7 @@
            android:orientation="horizontal"
            android:visibility="gone">
 
-           <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+           <com.swipee.in.CustomUi.PopinsMediumTextView
                android:id="@+id/tv_applied"
                android:layout_width="match_parent"
                android:layout_height="@dimen/dimen48dp"
@@ -512,7 +512,7 @@
                android:gravity="center"
                android:orientation="vertical"
                android:layout_height="match_parent">
-               <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+               <com.swipee.in.CustomUi.PopinsMediumTextView
                    android:id="@+id/tv_appointment"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -522,7 +522,7 @@
                    android:textColor="@color/white"
                    android:textSize="@dimen/dimen14sp"
                    android:visibility="visible" />
-               <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+               <com.swipee.in.CustomUi.PopinsMediumTextView
                    android:id="@+id/tv_appointmenttime"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -541,7 +541,7 @@
                android:layout_marginBottom="@dimen/dimen4dp"
                android:orientation="horizontal"
                android:layout_height="match_parent">
-               <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+               <com.swipee.in.CustomUi.PopinsMediumTextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:background="@color/colorPrimary"
@@ -583,7 +583,7 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_block"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -592,7 +592,7 @@
             android:paddingTop="@dimen/dimen6dp"
             android:paddingBottom="@dimen/dimen6dp"
             android:textSize="@dimen/dimen16sp"/>
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_report"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -601,7 +601,7 @@
             android:paddingTop="@dimen/dimen6dp"
             android:paddingBottom="@dimen/dimen6dp"
             android:textSize="@dimen/dimen16sp"/>
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_cancel_application"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -611,7 +611,7 @@
             android:paddingTop="@dimen/dimen6dp"
             android:paddingBottom="@dimen/dimen6dp"
             android:textSize="@dimen/dimen16sp"/>
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_reschedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

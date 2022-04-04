@@ -37,7 +37,7 @@
                android:layout_toEndOf="@+id/civ_profile"
                android:orientation="horizontal">
 
-               <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+               <com.swipee.in.CustomUi.PopinsMediumTextView
                    android:id="@+id/tv_your_name"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                    android:src="@drawable/ic_check" />
            </LinearLayout>
 
-           <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+           <com.swipee.in.CustomUi.PopinsRegularTextView
                android:id="@+id/tv_your_email"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                android:textColor="@color/black"
                android:textSize="@dimen/dimen12sp" />
 
-           <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+           <com.swipee.in.CustomUi.PopinsRegularTextView
                android:id="@+id/tv_your_mobile"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                android:textColor="@color/black"
                android:textSize="@dimen/dimen12sp" />
 
-           <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+           <com.swipee.in.CustomUi.PopinsSemiboldTextView
                android:id="@+id/tv_edit"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen20dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentStart="true"
@@ -160,7 +160,7 @@
                    android:layout_margin="@dimen/dimen4dp"
                    android:padding="@dimen/dimen12dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:id="@+id/tv_objective_value"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen10dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentStart="true"
@@ -219,11 +219,11 @@
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/dimen8dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.FlowLayout
+                   <com.swipee.in.CustomUi.FlowLayout
                        android:id="@+id/flow_jobtype"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       ></com.webnotics.swipee.CustomUi.FlowLayout>
+                       ></com.swipee.in.CustomUi.FlowLayout>
                </RelativeLayout>
 
                <View
@@ -238,7 +238,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen10dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentStart="true"
@@ -275,11 +275,11 @@
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/dimen8dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.FlowLayout
+                   <com.swipee.in.CustomUi.FlowLayout
                        android:id="@+id/flow_keyskill"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       ></com.webnotics.swipee.CustomUi.FlowLayout>
+                       ></com.swipee.in.CustomUi.FlowLayout>
                </RelativeLayout>
 
                <View
@@ -294,7 +294,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen10dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentStart="true"
@@ -331,7 +331,7 @@
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/dimen8dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.NestedListView
+                   <com.swipee.in.CustomUi.NestedListView
                        android:id="@+id/list_experience"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"/>
@@ -349,7 +349,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen10dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
 
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -387,7 +387,7 @@
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/dimen8dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.NestedListView
+                   <com.swipee.in.CustomUi.NestedListView
                        android:id="@+id/list_education"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"/>
@@ -405,7 +405,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen10dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentStart="true"
@@ -442,7 +442,7 @@
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/dimen8dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.NestedListView
+                   <com.swipee.in.CustomUi.NestedListView
                        android:id="@+id/list_preferences"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"/>
@@ -461,7 +461,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen10dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentStart="true"
@@ -498,11 +498,11 @@
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/dimen8dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.FlowLayout
+                   <com.swipee.in.CustomUi.FlowLayout
                        android:id="@+id/flow_languages"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       ></com.webnotics.swipee.CustomUi.FlowLayout>
+                       ></com.swipee.in.CustomUi.FlowLayout>
                </RelativeLayout>
 
                <View
@@ -517,7 +517,7 @@
                    android:layout_height="match_parent"
                    android:layout_marginTop="@dimen/dimen10dp">
 
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentStart="true"
@@ -554,7 +554,7 @@
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/dimen8dp"
                    android:visibility="gone">
-                   <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                   <com.swipee.in.CustomUi.PopinsRegularTextView
                        android:id="@+id/tv_resume"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
@@ -569,7 +569,7 @@
                    android:layout_height="@dimen/dimen2dp"
                    android:layout_marginTop="@dimen/dimen10dp"
                    android:background="@color/white_light" />
-               <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+               <com.swipee.in.CustomUi.PopinsRegularTextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:id="@+id/tv_video"

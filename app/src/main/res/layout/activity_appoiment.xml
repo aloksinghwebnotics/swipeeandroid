@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/dimen16dp"
-    android:paddingBottom="@dimen/dimen4dp"
-    tools:context=".activity.Seeker.LikedJobsActivity">
+    android:paddingBottom="@dimen/dimen4dp">
     <RelativeLayout
         android:paddingStart="@dimen/dimen10dp"
         android:paddingEnd="@dimen/dimen18dp"
@@ -23,7 +22,7 @@
             android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -51,7 +50,7 @@
             android:layout_width="@dimen/dimen96dp"
             android:layout_height="@dimen/dimen96dp"
             android:src="@drawable/no_appointment"/>
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:visibility="visible"
             android:layout_marginTop="@dimen/dimen8dp"
             android:id="@+id/tv_nodata"

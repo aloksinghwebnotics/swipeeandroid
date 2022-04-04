@@ -28,7 +28,7 @@
             android:layout_toEndOf="@+id/rb_plan"
             android:orientation="horizontal">
 
-            <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+            <com.swipee.in.CustomUi.PopinsSemiboldTextView
 
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen14sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:id="@+id/tv_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:textSize="@dimen/dimen10sp" />
         </LinearLayout>
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_plandetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 
     </RelativeLayout>
 
-    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+    <com.swipee.in.CustomUi.PopinsMediumTextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen26dp"

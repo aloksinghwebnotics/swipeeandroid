@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_height="@dimen/dimen405dp">
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen12dp"

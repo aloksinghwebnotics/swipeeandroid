@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.webnotics.swipee.CustomUi.PopinsRegularTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.swipee.in.CustomUi.PopinsRegularTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
 
     android:singleLine="true"

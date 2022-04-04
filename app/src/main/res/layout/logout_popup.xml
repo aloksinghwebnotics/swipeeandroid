@@ -14,14 +14,14 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content">
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen12dp"
             android:text="Logout"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen15sp"/>
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen12dp"
@@ -41,7 +41,7 @@
                android:orientation="horizontal"
                android:gravity="center"
                android:layout_height="wrap_content">
-               <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+               <com.swipee.in.CustomUi.PopinsMediumTextView
                    android:layout_width="match_parent"
                    android:layout_weight="0.5"
                    android:id="@+id/tv_cancel"
@@ -58,7 +58,7 @@
                    android:background="#C8E3E3E3"
                    android:layout_marginStart="@dimen/dimen4dp"
                    android:layout_marginEnd="@dimen/dimen4dp"/>
-               <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+               <com.swipee.in.CustomUi.PopinsRegularTextView
                    android:id="@+id/tv_yes"
                    android:layout_width="match_parent"
                    android:layout_weight="0.5"

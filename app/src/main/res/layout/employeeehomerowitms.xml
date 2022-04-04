@@ -54,7 +54,7 @@
                 android:layout_marginEnd="@dimen/dimen58dp"
                 android:gravity="center_vertical">
 
-                <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                <com.swipee.in.CustomUi.PopinsMediumTextView
                     android:id="@+id/designationnm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                     android:src="@drawable/ic_location"
                     card_view:tint="@color/white_light" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/locationtxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     android:src="@drawable/ic_suitcase_nav"
                     card_view:tint="@color/white_light" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/skillls"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
 
         </RelativeLayout>
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
 
             android:id="@+id/yess"
             android:layout_width="match_parent"
@@ -159,7 +159,7 @@
             android:visibility="visible"
             android:textStyle="bold" />
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/nopee"
             android:layout_width="match_parent"
             android:visibility="visible"

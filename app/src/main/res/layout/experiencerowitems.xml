@@ -31,7 +31,7 @@
 
     </LinearLayout>
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:layout_below="@+id/rl_icons"
         android:id="@+id/cmpnyname"
         android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         android:textColor="@color/gray"
 
         android:textSize="@dimen/dimen14sp" />
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:layout_below="@+id/rl_icons"
         android:id="@+id/year"
         android:layout_alignParentRight="true"
@@ -53,7 +53,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/desn"
         android:layout_marginTop="@dimen/dimen10dp"
         android:layout_below="@+id/cmpnyname"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
 
         android:id="@+id/descer"
         android:layout_marginTop="@dimen/dimen10dp"

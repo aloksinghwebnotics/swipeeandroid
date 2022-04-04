@@ -6,7 +6,7 @@
     android:gravity="center"
     >
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_countryname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

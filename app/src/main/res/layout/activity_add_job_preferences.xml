@@ -29,7 +29,7 @@
                 android:paddingStart="@dimen/dimen12dp"
                 android:src="@drawable/ic_back" />
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen12dp"
@@ -66,10 +66,10 @@
                     android:layout_marginTop="@dimen/dimen4dp"
                     android:minHeight="@dimen/dimen36dp">
 
-                    <com.webnotics.swipee.CustomUi.FlowLayout
+                    <com.swipee.in.CustomUi.FlowLayout
                         android:id="@+id/flow_location"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></com.webnotics.swipee.CustomUi.FlowLayout>
+                        android:layout_height="wrap_content"></com.swipee.in.CustomUi.FlowLayout>
                 </RelativeLayout>
 
                 <View
@@ -78,7 +78,7 @@
                     android:layout_marginTop="@dimen/dimen4dp"
                     android:background="@color/nav_gray" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen12dp"
@@ -94,10 +94,10 @@
                     android:layout_marginTop="@dimen/dimen4dp"
                     android:minHeight="@dimen/dimen36dp">
 
-                    <com.webnotics.swipee.CustomUi.FlowLayout
+                    <com.swipee.in.CustomUi.FlowLayout
                         android:id="@+id/flow_desired"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></com.webnotics.swipee.CustomUi.FlowLayout>
+                        android:layout_height="wrap_content"></com.swipee.in.CustomUi.FlowLayout>
                 </RelativeLayout>
 
                 <View
@@ -107,7 +107,7 @@
                     android:background="@color/nav_gray" />
 
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen12dp"
@@ -186,7 +186,7 @@
             </LinearLayout>
         </ScrollView>
 
-        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+        <com.swipee.in.CustomUi.PopinsSemiboldTextView
             android:id="@+id/tv_save"
             android:layout_width="@dimen/dimen142dp"
             android:layout_height="@dimen/dimen48dp"

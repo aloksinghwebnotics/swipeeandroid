@@ -4,23 +4,23 @@
     android:paddingTop="@dimen/dimen6dp" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Locations"
         android:textSize="@dimen/dimen12sp"
         android:textColor="@color/gray"/>
-    <com.webnotics.swipee.CustomUi.FlowLayout
+    <com.swipee.in.CustomUi.FlowLayout
         android:layout_marginTop="@dimen/dimen6dp"
         android:layout_below="@+id/tv_location"
         android:id="@+id/flowlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </com.webnotics.swipee.CustomUi.FlowLayout>
+    </com.swipee.in.CustomUi.FlowLayout>
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_industry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:text="Industry"
         android:textColor="@color/gray"
         android:textSize="@dimen/dimen12sp" />
-    <com.webnotics.swipee.CustomUi.FlowLayout
+    <com.swipee.in.CustomUi.FlowLayout
 
         android:layout_marginTop="@dimen/dimen6dp"
         android:layout_below="@+id/tv_industry"
@@ -39,10 +39,10 @@
 
 
 
-    </com.webnotics.swipee.CustomUi.FlowLayout>
+    </com.swipee.in.CustomUi.FlowLayout>
 
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:layout_marginTop="@dimen/dimen10dp"
         android:layout_below="@+id/flowlayout1"
         android:id="@+id/slalryss"

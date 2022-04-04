@@ -30,7 +30,7 @@
             android:layout_toEndOf="@+id/civ_logo"
             android:orientation="vertical">
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 android:textSize="@dimen/dimen14sp" />
 
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:textSize="@dimen/dimen12sp" />
         </LinearLayout>
     </RelativeLayout>
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:layout_marginTop="@dimen/dimen6dp"
         android:id="@+id/tv_profile"
         android:layout_below="@+id/rl_detail"
@@ -72,7 +72,7 @@
         android:layout_marginTop="@dimen/dimen10dp"
         android:src="@drawable/ic_time_left" />
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/dimen12sp" />
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
         android:layout_alignParentEnd="true"
          />
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_vedio"
         android:layout_width="wrap_content"
         android:visibility="gone"

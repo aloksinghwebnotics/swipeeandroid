@@ -22,7 +22,7 @@
             android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,14 +47,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen14sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_datavalue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
 
     </ScrollView>
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_gotit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen42dp"

@@ -4,7 +4,7 @@
     android:minHeight="@dimen/dimen36dp"
     android:layout_height="wrap_content">
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:gravity="left"
         android:textColor="@color/black"
         android:textSize="@dimen/dimen12sp" />
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_state"
         android:layout_width="match_parent"
         android:visibility="gone"
@@ -28,7 +28,7 @@
         android:textColor="@color/nav_gray"
         android:textSize="@dimen/dimen12sp" />
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularCheckBox
+    <com.swipee.in.CustomUi.PopinsRegularCheckBox
         android:id="@+id/chkimg"
         android:layout_width="@dimen/dimen26dp"
         android:visibility="visible"

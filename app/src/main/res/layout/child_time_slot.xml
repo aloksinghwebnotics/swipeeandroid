@@ -5,7 +5,7 @@
     android:background="@drawable/primary_stroke_semiround"
     android:layout_height="wrap_content">
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_item"
         android:layout_width="match_parent"
         android:gravity="center"

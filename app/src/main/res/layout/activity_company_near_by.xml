@@ -32,7 +32,7 @@
                 android:paddingEnd="@dimen/dimen12dp"
                 android:paddingStart="@dimen/dimen12dp"
                 android:src="@drawable/ic_back" />
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -40,7 +40,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen16sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:id="@+id/tv_viewAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dimen14sp" />
         </RelativeLayout>
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
 
             android:id="@+id/tv_search"
             android:layout_width="match_parent"
@@ -85,12 +85,12 @@
             android:gravity="center">
 
 
-            <com.webnotics.swipee.radarview.RadarViewC
+            <com.swipee.in.radarview.RadarViewC
                 android:id="@+id/mRadarCustom"
                 android:layout_width="312dp"
                 android:layout_height="312dp" />
 
-            <com.webnotics.swipee.radarview.Radar
+            <com.swipee.in.radarview.Radar
                 android:id="@+id/radar"
                 android:layout_width="312dp"
                 android:layout_height="312dp"
@@ -138,7 +138,7 @@
                 app:bsb_touch_to_seek="false"
                 app:bsb_track_color="@color/white" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/iv_km"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                 android:layout_width="@dimen/dimen96dp"
                 android:layout_height="@dimen/dimen96dp"
                 android:src="@drawable/ic_plan_exp"/>
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:id="@+id/nodatatxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                 android:paddingEnd="@dimen/dimen12dp"
                 android:src="@drawable/ic_back" />
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context=".activity.ForgotPassword">
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +48,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:id="@+id/tv_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +62,7 @@
 
 
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_emailsent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +74,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen14sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:id="@+id/tv_emailresend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +86,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen13sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumButton
+            <com.swipee.in.CustomUi.PopinsMediumButton
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen48dp"

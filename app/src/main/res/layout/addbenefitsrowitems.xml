@@ -26,13 +26,13 @@
                 android:paddingTop="@dimen/dimen4dp"
                 android:layout_marginRight="@dimen/dimen10dp">
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularCheckBox
+                <com.swipee.in.CustomUi.PopinsRegularCheckBox
                     android:id="@+id/chkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/checkbox_theme" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_countryname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

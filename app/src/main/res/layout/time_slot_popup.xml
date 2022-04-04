@@ -40,7 +40,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_height="wrap_content">
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:layout_width="match_parent"
                 android:layout_weight="0.5"
                 android:id="@+id/tv_cancel"
@@ -57,7 +57,7 @@
                 android:background="@color/colorPrimary"
                 android:layout_marginStart="@dimen/dimen4dp"
                 android:layout_marginEnd="@dimen/dimen4dp"/>
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_yes"
                 android:layout_width="match_parent"
                 android:layout_weight="0.5"

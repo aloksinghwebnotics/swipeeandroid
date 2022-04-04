@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    <com.swipee.in.CustomUi.PopinsMediumTextView
                         android:id="@+id/tv_jobtypetitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 </RelativeLayout>
 
 
-                <com.webnotics.swipee.CustomUi.NestedListView
+                <com.swipee.in.CustomUi.NestedListView
                     android:id="@+id/listviewemptype"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -97,7 +97,7 @@
             </RelativeLayout>
 
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumButton
+            <com.swipee.in.CustomUi.PopinsMediumButton
                 android:id="@+id/donetype"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen52dp"

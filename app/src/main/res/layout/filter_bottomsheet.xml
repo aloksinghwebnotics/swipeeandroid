@@ -68,7 +68,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/jobtype"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -93,7 +93,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/location"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -118,7 +118,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/distance"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -143,7 +143,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/designation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -168,7 +168,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/qualifications"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -193,7 +193,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/experience"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -218,7 +218,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/industrys"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -243,7 +243,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
                                     android:id="@+id/salary"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen36dp"
@@ -280,7 +280,7 @@
                     android:layout_weight="6"
                     android:orientation="vertical">
 
-                    <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                    <com.swipee.in.CustomUi.PopinsRegularEditText
 
                         android:id="@+id/et_search"
                         android:layout_width="match_parent"
@@ -338,7 +338,7 @@
                         android:background="@color/colorPrimary" />
 
 
-                    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    <com.swipee.in.CustomUi.PopinsMediumTextView
                         android:id="@+id/tv_clear"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
@@ -365,7 +365,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    <com.swipee.in.CustomUi.PopinsMediumTextView
                         android:id="@+id/tv_apply"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

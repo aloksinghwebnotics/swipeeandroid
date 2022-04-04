@@ -37,7 +37,7 @@
                 app:civ_border_color="@color/white_light"
                 app:civ_border_width="@dimen/dimen1dp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen14sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                 android:src="@drawable/ic_baseline_keyboard_double_arrow_down_24"
                 android:visibility="visible" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_newmsgcount"
                 android:layout_width="@dimen/dimen26dp"
                 android:layout_height="@dimen/dimen26dp"
@@ -178,7 +178,7 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_camera"
                 tools:ignore="MissingConstraints">
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                <com.swipee.in.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_msg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

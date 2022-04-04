@@ -11,7 +11,7 @@
     android:gravity="center"
     tools:ignore="RtlSymmetry">
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_countryname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:textSize="@dimen/dimen14sp"
         tools:ignore="RtlSymmetry" />
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         android:visibility="gone" />
 
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularCheckBox
+    <com.swipee.in.CustomUi.PopinsRegularCheckBox
         android:id="@+id/chkimg"
         android:layout_width="@dimen/dimen26dp"
         android:layout_height="@dimen/dimen20dp"

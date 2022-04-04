@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="@dimen/dimen16dp"
     android:paddingBottom="@dimen/dimen4dp"
-    tools:context=".activity.company.CompanyAppoimentActivity">
+    >
     <RelativeLayout
         android:paddingStart="@dimen/dimen10dp"
         android:paddingEnd="@dimen/dimen18dp"
@@ -24,7 +24,7 @@
             android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -93,7 +93,7 @@
             android:layout_width="@dimen/dimen96dp"
             android:layout_height="@dimen/dimen96dp"
             android:src="@drawable/ic_no_data"/>
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:visibility="visible"
             android:id="@+id/tv_nodata"
             android:layout_width="wrap_content"

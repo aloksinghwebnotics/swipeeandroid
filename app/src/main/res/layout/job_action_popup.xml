@@ -15,7 +15,7 @@
         android:layout_margin="@dimen/dimen12dp"
         android:layout_height="wrap_content">
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+        <com.swipee.in.CustomUi.PopinsRegularEditText
             android:id="@+id/et_reason"
             android:layout_width="match_parent"
             android:gravity="start"
@@ -34,7 +34,7 @@
          android:orientation="horizontal"
          android:layout_marginTop="@dimen/dimen8dp"
          android:layout_height="@dimen/dimen40dp">
-         <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+         <com.swipee.in.CustomUi.PopinsRegularTextView
              android:id="@+id/tv_cancel"
              android:layout_weight=".5"
              android:layout_width="match_parent"
@@ -46,7 +46,7 @@
              android:background="@drawable/primary_semiround_bg"
              android:textColor="@color/white"
              android:text="Cancel"/>
-         <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+         <com.swipee.in.CustomUi.PopinsRegularTextView
              android:id="@+id/tv_submit"
              android:layout_weight=".5"
              android:layout_width="match_parent"

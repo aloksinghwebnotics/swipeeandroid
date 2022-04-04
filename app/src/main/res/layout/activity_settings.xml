@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingTop="@dimen/dimen16dp"
     android:paddingBottom="@dimen/dimen8dp"
-    tools:context=".activity.SettingsActivity">
+   >
     <RelativeLayout
         android:id="@+id/rl_toollbar"
         android:paddingStart="@dimen/dimen10dp"
@@ -25,7 +25,7 @@
             android:paddingStart="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -50,7 +50,7 @@
            android:layout_height="@dimen/dimen156dp"
            android:src="@drawable/ic_swipee_white"/>
 
-       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+       <com.swipee.in.CustomUi.PopinsRegularTextView
            android:id="@+id/tv_contactus"
            android:layout_marginStart="@dimen/dimen18dp"
            android:layout_marginEnd="@dimen/dimen18dp"
@@ -65,7 +65,7 @@
            android:text="@string/contactus"
            android:textColor="@color/black"
            android:textSize="@dimen/dimen16sp" />
-       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+       <com.swipee.in.CustomUi.PopinsRegularTextView
            android:layout_marginStart="@dimen/dimen18dp"
            android:layout_marginEnd="@dimen/dimen18dp"
            android:id="@+id/tv_privacy"
@@ -80,7 +80,7 @@
            android:text="@string/privacypolicy"
            android:textColor="@color/black"
            android:textSize="@dimen/dimen16sp" />
-       <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+       <com.swipee.in.CustomUi.PopinsRegularTextView
            android:layout_marginStart="@dimen/dimen18dp"
            android:layout_marginEnd="@dimen/dimen18dp"
            android:id="@+id/tv_imprint"
@@ -99,7 +99,7 @@
    </LinearLayout>
 
 
-    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+    <com.swipee.in.CustomUi.PopinsMediumTextView
         android:id="@+id/tv_logout"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen48dp"
@@ -117,7 +117,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/dimen16sp" />
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/appversion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

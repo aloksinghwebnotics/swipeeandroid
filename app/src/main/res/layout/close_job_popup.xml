@@ -23,7 +23,7 @@
             android:layout_gravity="end"
             android:padding="@dimen/dimen4dp"
             app:tint="@color/gray" />
-        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+        <com.swipee.in.CustomUi.PopinsSemiboldTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen4dp"
@@ -104,7 +104,7 @@
                 android:background="@color/gray"
                 />
         </RadioGroup>
-       <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+       <com.swipee.in.CustomUi.PopinsMediumTextView
            android:id="@+id/tv_close"
            android:layout_marginTop="@dimen/dimen16dp"
            android:layout_width="match_parent"
@@ -116,7 +116,7 @@
            android:textColor="@color/white"
            android:gravity="center"
            android:background="@drawable/primary_semiround_bg"/>
-        <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/tv_later"
             android:layout_marginTop="@dimen/dimen8dp"
             android:layout_width="wrap_content"

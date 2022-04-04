@@ -75,7 +75,7 @@
 
     </RelativeLayout>
 
-    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+    <com.swipee.in.CustomUi.PopinsMediumTextView
         android:id="@+id/tv_participant_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/dimen14sp" />
 
-    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+    <com.swipee.in.CustomUi.PopinsMediumTextView
         android:id="@+id/time"
         android:layout_width="@dimen/dimen132dp"
         android:layout_height="@dimen/dimen40dp"

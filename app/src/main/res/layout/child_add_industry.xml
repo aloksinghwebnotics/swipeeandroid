@@ -6,7 +6,7 @@
     android:layout_marginTop="@dimen/dimen4dp"
     android:layout_height="wrap_content">
 
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:id="@+id/tv_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:layout_toStartOf="@+id/radioButton"
         android:textColor="@color/black"
         android:textSize="@dimen/dimen14sp" />
-    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+    <com.swipee.in.CustomUi.PopinsRegularTextView
         android:paddingStart="@dimen/dimen8dp"
         android:paddingEnd="@dimen/dimen8dp"
         android:visibility="gone"

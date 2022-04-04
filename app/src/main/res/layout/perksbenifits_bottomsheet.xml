@@ -54,7 +54,7 @@
                     android:layout_marginRight="@dimen/dimen10dp">
 
 
-                    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    <com.swipee.in.CustomUi.PopinsMediumTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -93,7 +93,7 @@
 
             </RelativeLayout>
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumButton
+            <com.swipee.in.CustomUi.PopinsMediumButton
                 android:id="@+id/btn_done_perk"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen52dp"

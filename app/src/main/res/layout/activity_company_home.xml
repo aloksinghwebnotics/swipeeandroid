@@ -48,7 +48,7 @@
                             android:layout_height="@dimen/dimen32dp"
                             android:padding="@dimen/dimen4dp"
                             android:src="@drawable/ic_match_selected"/>
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
 
                             android:layout_width="@dimen/dimen186dp"
                             android:layout_height="match_parent"
@@ -73,7 +73,7 @@
                             android:layout_height="@dimen/dimen32dp"
                             android:padding="@dimen/dimen4dp"
                             android:src="@drawable/ic_near_unselect"/>
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
 
                             android:layout_width="@dimen/dimen186dp"
                             android:layout_height="match_parent"
@@ -99,7 +99,7 @@
                             android:layout_height="@dimen/dimen32dp"
                             android:padding="@dimen/dimen4dp"
                             android:src="@drawable/ic_like_nav"/>
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
 
                             android:layout_width="@dimen/dimen186dp"
                             android:layout_height="match_parent"
@@ -125,7 +125,7 @@
                             android:layout_height="@dimen/dimen32dp"
                             android:padding="@dimen/dimen4dp"
                             android:src="@drawable/ic_match_nav"/>
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
 
                             android:layout_width="@dimen/dimen186dp"
                             android:layout_height="match_parent"
@@ -151,7 +151,7 @@
                             android:layout_height="@dimen/dimen32dp"
                             android:padding="@dimen/dimen4dp"
                             android:src="@drawable/ic_suitcase_nav"/>
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
 
                             android:layout_width="@dimen/dimen186dp"
                             android:layout_height="match_parent"
@@ -178,7 +178,7 @@
                             android:layout_height="@dimen/dimen32dp"
                             android:padding="@dimen/dimen4dp"
                             android:src="@drawable/ic_calendar_nav"/>
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
 
                             android:layout_width="@dimen/dimen186dp"
                             android:layout_height="match_parent"
@@ -203,7 +203,7 @@
                             android:layout_height="@dimen/dimen32dp"
                             android:padding="@dimen/dimen4dp"
                             android:src="@drawable/ic_settings_nav"/>
-                        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
                             android:layout_width="@dimen/dimen186dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/dimen24dp"

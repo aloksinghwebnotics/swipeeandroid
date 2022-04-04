@@ -8,8 +8,7 @@
     android:paddingEnd="@dimen/dimen18dp"
     android:paddingTop="@dimen/dimen16dp"
     android:background="@color/white"
-    android:paddingBottom="@dimen/dimen16dp"
-    tools:context=".activity.Seeker.AddSkillActivity">
+    android:paddingBottom="@dimen/dimen16dp">
     <RelativeLayout
         android:id="@+id/rl_skill"
         android:layout_width="match_parent"
@@ -32,7 +31,7 @@
                 android:paddingEnd="@dimen/dimen12dp"
                 android:paddingStart="@dimen/dimen12dp"
                 android:src="@drawable/ic_back" />
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +41,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen16sp" />
 
-            <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_save"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -56,7 +55,7 @@
         </RelativeLayout>
 
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+        <com.swipee.in.CustomUi.PopinsRegularEditText
 
             android:id="@+id/et_search"
             android:layout_width="match_parent"
@@ -98,12 +97,12 @@
                      android:layout_width="match_parent"
                      android:paddingBottom="@dimen/dimen8dp"
                      android:layout_height="wrap_content">
-                     <com.webnotics.swipee.CustomUi.FlowLayout
+                     <com.swipee.in.CustomUi.FlowLayout
                          android:id="@+id/flowlayout"
                          android:layout_width="match_parent"
                          android:layout_height="wrap_content"
                          android:layout_marginTop="@dimen/dimen10dp"
-                         ></com.webnotics.swipee.CustomUi.FlowLayout>
+                         ></com.swipee.in.CustomUi.FlowLayout>
                  </androidx.core.widget.NestedScrollView>
 
                 <ListView

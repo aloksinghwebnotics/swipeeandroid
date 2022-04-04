@@ -50,7 +50,7 @@
                         android:layout_width="@dimen/dimen60dp"
                         android:layout_height="match_parent">
 
-                        <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+                        <com.swipee.in.CustomUi.PopinsSemiboldTextView
                             android:id="@+id/counter11"
                             android:layout_width="@dimen/dimen24dp"
                             android:layout_height="@dimen/dimen24dp"
@@ -147,7 +147,7 @@
                     android:layout_width="@dimen/dimen20dp"
                     android:layout_height="@dimen/dimen20dp"
                     android:src="@drawable/ic_post_job_unselected"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:paddingTop="@dimen/dimen1dp"
 
                     android:id="@+id/tv_near"
@@ -170,7 +170,7 @@
                     android:layout_width="@dimen/dimen20dp"
                     android:layout_height="@dimen/dimen20dp"
                     android:src="@drawable/ic_match_selected"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:paddingTop="@dimen/dimen1dp"
                     android:id="@+id/tv_match"
                     android:layout_width="wrap_content"
@@ -193,7 +193,7 @@
                     android:layout_width="@dimen/dimen20dp"
                     android:layout_height="@dimen/dimen20dp"
                     android:src="@drawable/ic_plan_unselect"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:paddingTop="@dimen/dimen1dp"
 
                     android:id="@+id/tv_plans"
@@ -216,7 +216,7 @@
                     android:layout_width="@dimen/dimen20dp"
                     android:layout_height="@dimen/dimen20dp"
                     android:src="@drawable/ic_chat_unselect"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:paddingTop="@dimen/dimen1dp"
 
                     android:id="@+id/tv_chat"
@@ -239,7 +239,7 @@
                     android:layout_width="@dimen/dimen20dp"
                     android:layout_height="@dimen/dimen20dp"
                     android:src="@drawable/ic_profile_dashboard"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:paddingTop="@dimen/dimen1dp"
                     android:id="@+id/tv_profile"
                     android:layout_width="wrap_content"

@@ -14,13 +14,13 @@
         android:background="@drawable/top_round_lightwhite_bg"
         android:padding="@dimen/dimen8dp"
         android:orientation="vertical">
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen14sp" />
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:layout_below="@+id/tv_title"
             android:id="@+id/tv_companyname"
             android:paddingTop="@dimen/dimen2dp"
@@ -49,7 +49,7 @@
             android:src="@drawable/ic_portfolio"
             app:tint="@color/colorPrimary" />
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_experience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:src="@drawable/ic_location"
             app:tint="@color/colorPrimary" />
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_loaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             android:src="@drawable/iv_desc"
             app:tint="@color/colorPrimary" />
 
-        <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_jobdesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:textSize="@dimen/dimen12sp" />
 
     </RelativeLayout>
-    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+    <com.swipee.in.CustomUi.PopinsMediumTextView
         android:id="@+id/tv_applystatus"
         android:visibility="gone"
         android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
         android:textSize="@dimen/dimen14sp"
         app:drawableTint="@color/green"/>
 
-    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+    <com.swipee.in.CustomUi.PopinsMediumTextView
         android:id="@+id/tv_view"
         android:visibility="gone"
         android:layout_width="wrap_content"

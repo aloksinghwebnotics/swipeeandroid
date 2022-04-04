@@ -47,7 +47,7 @@
                 android:paddingStart="@dimen/dimen12dp"
                 android:src="@drawable/ic_back" />
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -95,7 +95,7 @@
                         android:src="@drawable/pencil" />
                 </RelativeLayout>
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                <com.swipee.in.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_companyname"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -126,7 +126,7 @@
 
 
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -154,7 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
 
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_email"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -184,7 +184,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_industry"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -210,7 +210,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_companysize"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -236,7 +236,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -245,7 +245,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                <com.swipee.in.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_website"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -267,7 +267,7 @@
                     android:background="@color/nav_gray"/>
 
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -280,7 +280,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp">
 
-                    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_country"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -298,7 +298,7 @@
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
 
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
@@ -311,7 +311,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp">
-                    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_state"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -328,7 +328,7 @@
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp">
-                    <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_city"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -356,7 +356,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -365,7 +365,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                <com.swipee.in.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_address"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -385,7 +385,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -394,7 +394,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                <com.swipee.in.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_pincode"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -414,7 +414,7 @@
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -423,7 +423,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsRegularEditText
+                <com.swipee.in.CustomUi.PopinsRegularEditText
                     android:id="@+id/et_founded"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
@@ -442,7 +442,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
                     android:background="@color/nav_gray"/>
-                <com.webnotics.swipee.CustomUi.PopinsRegularTextView
+                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_upload"
                     android:layout_marginTop="@dimen/dimen18dp"
                     android:layout_marginBottom="@dimen/dimen18dp"
@@ -461,7 +461,7 @@
                     android:background="@drawable/white_round_8dp_bg"
                     android:layout_margin="@dimen/dimen4dp" />
 
-                <com.webnotics.swipee.CustomUi.PopinsSemiboldTextView
+                <com.swipee.in.CustomUi.PopinsSemiboldTextView
                     android:id="@+id/tv_save"
                     android:layout_gravity="end"
                     android:layout_width="@dimen/dimen142dp"

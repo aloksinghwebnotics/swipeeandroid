@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <com.webnotics.swipee.CustomUi.PopinsMediumTextView
+                    <com.swipee.in.CustomUi.PopinsMediumTextView
                         android:id="@+id/tv_jobtypetitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
             </RelativeLayout>
 
 
-            <com.webnotics.swipee.CustomUi.PopinsMediumButton
+            <com.swipee.in.CustomUi.PopinsMediumButton
                 android:id="@+id/done_jobtype"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen52dp"

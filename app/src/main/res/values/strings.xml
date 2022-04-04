@@ -170,7 +170,8 @@
     <string name="planexpire">You have used your daily job post limit</string>
     <string name="salaryoffered">Salary Offered (₹/month)</string>
     <string name="plantxt">"\"Economical plans that provide extra than ever before"\"\nFind the plan that is best suited to your hiring needs. You can upgrade your subscription whenever you like!!</string>
-    <string name="app_id">308982814513406</string>
+    <!--<string name="app_id">308982814513406</string>-->
+    <string name="app_id">1161764171253046</string>
     <string name="errorloginfb">Error to login facebook</string>
 
     <string name="multiplusercall">Multiple participants are not currently support in this UI</string>
@@ -188,8 +189,8 @@
     <string name="max_video_bitrate">Max Video Bitrate (bits per second)</string>
     <string name="vp8_simulcast">VP8 Simulcast</string>
     <string name="audio_device">Audio Device</string>
-    <string name="linkdin_secret">pyhHqEUbyNUmOdrT</string>
-    <string name="linkdin_clientid">868amcmypovjvo</string>
+    <string name="linkdin_secret">KuTwBDOrQO7JuAEl</string>
+    <string name="linkdin_clientid">8628vq2vjq366y</string>
 
     <string name="error_retrieving_access_token">Error retrieving access token from the server.</string>
     <string name="send">Send</string>

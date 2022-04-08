@@ -200,4 +200,5 @@
     <string name="test_access_token">..nzdJn5ZEE1VcpNO72i1BeojX9UIX2I0PboCb8bwljTc</string>
     <string name="planmsg">You have already an active plan, do you want to switch from existing plan to new plan.</string>
     <string name="com.google.firebase.crashlytics.mapping_file_id">none</string>
+    <string name="addinfo">Add some more information.</string>
 </resources>

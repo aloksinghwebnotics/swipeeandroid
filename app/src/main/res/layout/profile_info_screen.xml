@@ -34,32 +34,33 @@
             android:paddingBottom="@dimen/dimen16dp">
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/rl_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_above="@+id/tv_next"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:visibility="visible">
+
                 <LinearLayout
-                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen30dp"
                     android:layout_marginEnd="@dimen/dimen30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="@dimen/dimen20dp"
                         android:layout_height="@dimen/dimen20dp"
-                        android:src="@drawable/ic_icon_material_check"
+                        android:background="@drawable/primary_circle_bg"
                         android:padding="@dimen/dimen4dp"
-                        android:background="@drawable/primary_circle_bg" />
+                        android:src="@drawable/ic_icon_material_check" />
 
                     <View
-                        android:layout_weight="0.5"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen20dp"
                         android:layout_marginStart="@dimen/dimen1dp"
                         android:layout_marginEnd="@dimen/dimen1dp"
+                        android:layout_weight="0.5"
                         android:background="@drawable/vertical_dash_line"
                         android:layerType="software" />
 
@@ -72,25 +73,26 @@
                         app:tint="@color/white" />
 
                     <View
-                        android:layout_weight="0.5"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen20dp"
                         android:layout_marginStart="@dimen/dimen1dp"
                         android:layout_marginEnd="@dimen/dimen1dp"
+                        android:layout_weight="0.5"
                         android:background="@drawable/vertical_dash_line"
                         android:layerType="software" />
 
                     <ImageView
                         android:layout_width="@dimen/dimen20dp"
                         android:layout_height="@dimen/dimen20dp"
-                        android:padding="@dimen/dimen4dp"
-                        android:background="@drawable/ic_round_stroke_gray" />
+                        android:background="@drawable/ic_round_stroke_gray"
+                        android:padding="@dimen/dimen4dp" />
                 </LinearLayout>
+
                 <RelativeLayout
-                    android:layout_marginTop="@dimen/dimen4dp"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen4dp"
+                    android:orientation="horizontal">
 
                     <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:layout_width="wrap_content"
@@ -102,22 +104,24 @@
 
                     <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:layout_width="80dp"
-                        android:gravity="center"
-                        android:layout_centerHorizontal="true"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/dimen10sp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
                         android:text="Profile"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen10sp" />
+
                     <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:layout_width="80dp"
-                        android:gravity="center"
-                        android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/dimen10sp"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
                         android:text="Resume"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen10sp" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1001,6 +1005,7 @@
                         android:background="@drawable/white_light_semiround_bg"
                         android:orientation="vertical">
 
+
                         <ImageView
                             android:id="@+id/iv_uservideoimg"
                             android:layout_width="match_parent"
@@ -1017,8 +1022,8 @@
                             android:layout_width="@dimen/dimen48dp"
                             android:layout_height="@dimen/dimen48dp"
                             android:layout_centerInParent="true"
-                            android:scaleType="fitCenter"
                             android:padding="@dimen/dimen8dp"
+                            android:scaleType="fitCenter"
                             android:src="@drawable/ic_icon_feather_upload"
                             app:tint="@color/colorPrimary" />
 
@@ -1247,7 +1252,7 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/tv_next"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1364,10 +1369,10 @@
                         android:background="@drawable/white_light_semiround_bg"
                         android:drawableStart="@drawable/ic_businessman"
                         android:drawablePadding="@dimen/dimen10dp"
-                        android:gravity="center_vertical"
-                        android:hint="Add your job types"
-                        android:maxLines="1"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:hint="Please provide your preferred job types"
+                        android:maxLines="1"
                         android:paddingStart="@dimen/dimen12dp"
                         android:paddingTop="@dimen/dimen4dp"
                         android:paddingEnd="@dimen/dimen12dp"
@@ -1383,11 +1388,10 @@
                         android:layout_below="@+id/tv_job_type"
                         android:layout_marginTop="@dimen/dimen24dp"
                         android:background="@drawable/white_light_semiround_bg"
-                        android:capitalize="words"
                         android:drawableStart="@drawable/ic_experience"
                         android:drawablePadding="@dimen/dimen10dp"
                         android:gravity="center_vertical"
-                        android:hint="Add your work experience (If any)"
+                        android:hint="Please provide your work experience (If any)"
                         android:maxLines="1"
                         android:ellipsize="end"
                         android:paddingStart="@dimen/dimen12dp"
@@ -1405,11 +1409,10 @@
                         android:layout_below="@+id/tv_work_exp"
                         android:layout_marginTop="@dimen/dimen24dp"
                         android:background="@drawable/white_light_semiround_bg"
-                        android:capitalize="words"
                         android:drawableStart="@drawable/ic_mortarboard"
                         android:drawablePadding="@dimen/dimen10dp"
                         android:gravity="center_vertical"
-                        android:hint="Add your education"
+                        android:hint="Please provide your educational details"
                         android:maxLines="1"
                         android:ellipsize="end"
                         android:paddingStart="@dimen/dimen12dp"
@@ -1427,13 +1430,12 @@
                         android:layout_below="@+id/tv_education"
                         android:layout_marginTop="@dimen/dimen24dp"
                         android:background="@drawable/white_light_semiround_bg"
-                        android:capitalize="words"
                         android:drawableStart="@drawable/ic_suitcase_nav"
                         android:drawablePadding="@dimen/dimen10dp"
-                        android:gravity="center_vertical"
-                        android:hint="Add your job preferences"
-                        android:maxLines="1"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:hint="Please provide your job preferences"
+                        android:maxLines="1"
                         android:paddingStart="@dimen/dimen12dp"
                         android:paddingTop="@dimen/dimen4dp"
                         android:paddingEnd="@dimen/dimen12dp"
@@ -1449,13 +1451,12 @@
                         android:layout_below="@+id/tv_preferences"
                         android:layout_marginTop="@dimen/dimen24dp"
                         android:background="@drawable/white_light_semiround_bg"
-                        android:capitalize="words"
                         android:drawableStart="@drawable/ic_languages"
                         android:drawablePadding="@dimen/dimen10dp"
-                        android:gravity="center_vertical"
-                        android:hint="Add your languages"
-                        android:maxLines="1"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:hint="Please provide your communication languages"
+                        android:maxLines="1"
                         android:paddingStart="@dimen/dimen12dp"
                         android:paddingTop="@dimen/dimen4dp"
                         android:paddingEnd="@dimen/dimen12dp"
@@ -1496,4 +1497,4 @@
     </RelativeLayout>
     <include layout="@layout/intent_bottomsheet"/>
     <include layout="@layout/jobstype_bottonsheet"></include>
-  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

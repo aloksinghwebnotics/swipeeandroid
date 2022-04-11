@@ -14,7 +14,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_profile_select"
+        android:src="@drawable/ic_profile_large"
         app:civ_border_width="0.1dp"
         tools:ignore="MissingConstraints" />
 

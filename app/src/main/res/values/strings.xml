@@ -26,11 +26,11 @@
     <string name="heythere">Hey there!</string>
     <string name="enteremailaddress">Please Enter Your Email Address.</string>
     <string name="plzverify">Please Verify</string>
-    <string name="plzenterotp">Please enter the OTP. Which we have sent on your email address.</string>
+    <string name="plzenterotp">We have sent you an OTP via email, please enter it.</string>
     <string name="resendotp">Resend OTP</string>
     <string name="next">Next</string>
     <string name="plzenterphone">Please enter your phone no.</string>
-    <string name="plzenterotponphone">Please enter the OTP. Which we have sent on your phone number.</string>
+    <string name="plzenterotponphone">We have sent you an OTP via SMS, please enter it.</string>
     <string name="whatsyourname">What\'s your name?</string>
     <string name="whatsyourlocation">What\'s your address?</string>
     <string name="enteryourname">Enter your name</string>
@@ -191,14 +191,17 @@
     <string name="audio_device">Audio Device</string>
     <string name="linkdin_secret">KuTwBDOrQO7JuAEl</string>
     <string name="linkdin_clientid">8628vq2vjq366y</string>
-
     <string name="error_retrieving_access_token">Error retrieving access token from the server.</string>
     <string name="send">Send</string>
     <string name="chat_token_url">https://swipee.in/app_data/app_api/</string>
     <!-- <string name="chat_token_url">https://swipee.in.twil.io/chat-token/</string>-->
     <string name="write_message">Write Message</string>
     <string name="test_access_token">..nzdJn5ZEE1VcpNO72i1BeojX9UIX2I0PboCb8bwljTc</string>
-    <string name="planmsg">You have already an active plan, do you want to switch from existing plan to new plan.</string>
+    <string name="planmsg">There is an active plan already in place, do you want to switch plan?</string>
     <string name="com.google.firebase.crashlytics.mapping_file_id">none</string>
-    <string name="addinfo">Add some more information.</string>
+    <string name="addinfo">Please provide some more information about yourself.</string>
+    <string name="freeplanseeker">Take advantage of unlimited swipes, countless jobs applications, and a lot more with our 3-months Gold Subscription plan credited free with love for you!</string>
+    <string name="freeplanseeker1">Take a sneak peek now and swipe unlimited!</string>
+    <string name="freeplancompany">Take advantage of infinite swipes, endless CVs, and a lot more with our 6-months Gold Subscription plan credited free with love for you!</string>
+    <string name="freeplancompany1">Catch a glimpse now and swipe limitless!</string>
 </resources>

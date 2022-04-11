@@ -98,7 +98,7 @@
                            android:layout_width="@dimen/dimen30dp"
                            android:layout_height="@dimen/dimen32dp"
                            android:padding="@dimen/dimen4dp"
-                           android:src="@drawable/ic_match_nav"/>
+                           android:src="@drawable/ic_matched_job"/>
                        <com.swipee.in.CustomUi.PopinsRegularTextView
 
                            android:layout_width="@dimen/dimen186dp"

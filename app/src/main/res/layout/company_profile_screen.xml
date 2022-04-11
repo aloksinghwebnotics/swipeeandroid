@@ -44,7 +44,7 @@
                 android:layout_width="@dimen/dimen136dp"
                 android:layout_height="@dimen/dimen136dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_profile_select"
+                android:src="@drawable/ic_profile_large"
                 app:civ_border_color="@color/graylight"
                 app:civ_border_width="@dimen/dimen1dp" />
 

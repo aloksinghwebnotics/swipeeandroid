@@ -110,6 +110,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
             </RelativeLayout>
+
             <ImageView
 
                 android:id="@+id/menu"

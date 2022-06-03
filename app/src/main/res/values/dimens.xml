@@ -97,6 +97,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="default_item_spacing">5dp</dimen>
     <dimen name="dimen92dp">92dp</dimen>
+    <dimen name="dimen34dp">34dp</dimen>
+    <dimen name="dimen8sp">8sp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
 

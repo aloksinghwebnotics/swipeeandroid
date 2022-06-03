@@ -135,12 +135,12 @@
                        android:id="@+id/iv_add_objective"
                        android:layout_width="@dimen/dimen30dp"
                        android:layout_height="@dimen/dimen30dp"
-                       android:padding="@dimen/dimen6dp"
                        android:layout_alignParentEnd="true"
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_plus" />
+                       android:padding="@dimen/dimen6dp"
+                       android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView
                        android:id="@+id/iv_show_objective"
@@ -200,7 +200,7 @@
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_plus" />
+                       android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView
                        android:id="@+id/iv_show_jobtype"
@@ -256,7 +256,7 @@
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_plus" />
+                       android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView
                        android:id="@+id/iv_show_keyskill"
@@ -307,11 +307,11 @@
                        android:id="@+id/iv_add_experience"
                        android:layout_width="@dimen/dimen30dp"
                        android:layout_height="@dimen/dimen30dp"
-                       android:padding="@dimen/dimen6dp"
                        android:layout_alignParentEnd="true"
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
+                       android:padding="@dimen/dimen6dp"
                        android:src="@drawable/ic_plus" />
 
                    <ImageView
@@ -368,7 +368,7 @@
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_plus" />
+                       android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView
                        android:id="@+id/iv_show_education"
@@ -423,7 +423,7 @@
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_plus" />
+                       android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView
                        android:id="@+id/iv_show_preferences"
@@ -479,7 +479,7 @@
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_plus" />
+                       android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView
                        android:id="@+id/iv_show_languages"
@@ -535,7 +535,7 @@
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_plus" />
+                       android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView
                        android:id="@+id/iv_show_resume"

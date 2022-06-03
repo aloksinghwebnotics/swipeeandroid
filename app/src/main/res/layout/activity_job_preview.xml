@@ -292,6 +292,7 @@
 
             <RelativeLayout
                 android:layout_marginTop="@dimen/dimen20dp"
+                android:layout_marginBottom="@dimen/dimen4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -311,7 +312,8 @@
                     android:textSize="@dimen/dimen12sp" />
             </RelativeLayout>
             <RelativeLayout
-                android:layout_marginTop="@dimen/dimen2dp"
+                android:layout_marginTop="@dimen/dimen4dp"
+                android:layout_marginBottom="@dimen/dimen4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -332,7 +334,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="@dimen/dimen2dp"
+                android:layout_marginTop="@dimen/dimen4dp"
+                android:layout_marginBottom="@dimen/dimen4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -348,6 +351,46 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen12sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="@dimen/dimen4dp"
+                android:layout_marginBottom="@dimen/dimen4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.swipee.in.CustomUi.PopinsMediumTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No of Interview Round"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dimen13sp" />
+                <com.swipee.in.CustomUi.PopinsRegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_interviewRound"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen12sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="@dimen/dimen4dp"
+                android:layout_marginTop="@dimen/dimen4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.swipee.in.CustomUi.PopinsMediumTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Interview Mode"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dimen13sp" />
+                <com.swipee.in.CustomUi.PopinsRegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_interviewMode"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen12sp" />
             </RelativeLayout>

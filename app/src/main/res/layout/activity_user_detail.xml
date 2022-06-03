@@ -32,8 +32,8 @@
             android:layout_width="@dimen/dimen42dp"
             android:layout_height="@dimen/dimen42dp"
             android:layout_centerVertical="true"
-            android:paddingEnd="@dimen/dimen12dp"
             android:paddingStart="@dimen/dimen12dp"
+            android:paddingEnd="@dimen/dimen12dp"
             android:src="@drawable/ic_back"
             app:tint="@color/white" />
 
@@ -343,8 +343,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen136dp"
                     android:layout_marginTop="@dimen/dimen36dp"
-                    android:layout_marginBottom="@dimen/dimen12dp">
+                    android:layout_marginBottom="@dimen/dimen34dp">
 
                     <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_download"
@@ -352,7 +353,6 @@
                         android:layout_height="@dimen/dimen42dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="end"
-                        android:layout_toStartOf="@+id/iv_reject"
                         android:background="@drawable/primarystroke_dash_bg"
                         android:drawableEnd="@drawable/ic_download"
                         android:drawablePadding="@dimen/dimen8dp"
@@ -363,24 +363,7 @@
                         android:textColor="@color/nav_gray"
                         android:textSize="@dimen/dimen14sp" />
 
-                    <ImageView
-                        android:id="@+id/iv_accept"
-                        android:layout_width="@dimen/dimen48dp"
-                        android:layout_height="@dimen/dimen48dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:src="@drawable/iv_accept"
-                        android:visibility="gone" />
 
-                    <ImageView
-                        android:id="@+id/iv_reject"
-                        android:layout_width="@dimen/dimen48dp"
-                        android:layout_height="@dimen/dimen48dp"
-                        android:layout_marginStart="@dimen/dimen16dp"
-                        android:layout_marginEnd="@dimen/dimen8dp"
-                        android:layout_toStartOf="@+id/iv_accept"
-                        android:src="@drawable/ic_reject"
-                        android:visibility="gone" />
                 </RelativeLayout>
 
 
@@ -392,6 +375,29 @@
 
 
     </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/iv_accept"
+        android:layout_width="@dimen/dimen48dp"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/dimen18dp"
+        android:layout_marginBottom="@dimen/dimen32dp"
+        android:src="@drawable/iv_accept"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_reject"
+        android:layout_width="@dimen/dimen48dp"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/dimen16dp"
+        android:layout_marginEnd="@dimen/dimen12dp"
+        android:layout_marginBottom="@dimen/dimen32dp"
+        android:layout_toStartOf="@+id/iv_accept"
+        android:src="@drawable/ic_reject"
+        android:visibility="gone" />
     <RelativeLayout
         android:id="@+id/rl_bottom"
         android:visibility="gone"
@@ -409,7 +415,7 @@
             android:layout_marginBottom="@dimen/dimen12dp"
             android:background="@drawable/primary_semiround_bg"
             android:gravity="center"
-            android:text="Make Appointment"
+            android:text="Schedule Interview"
             android:textColor="@color/white"
             android:textSize="@dimen/dimen16sp" />
         <LinearLayout

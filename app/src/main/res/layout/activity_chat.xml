@@ -7,6 +7,7 @@
     android:background="@color/white">
 
     <RelativeLayout
+        android:id="@+id/rl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="@dimen/dimen8dp"
@@ -36,27 +37,54 @@
                 android:layout_toEndOf="@+id/iv_back"
                 app:civ_border_color="@color/white_light"
                 app:civ_border_width="@dimen/dimen1dp" />
-
-            <com.swipee.in.CustomUi.PopinsRegularTextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dimen8dp"
-                android:layout_marginEnd="@dimen/dimen96dp"
+            <ImageView
+                android:id="@+id/iv_online_offline"
                 android:layout_toEndOf="@+id/iv_profile"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimen14sp" />
+                android:layout_width="@dimen/dimen12dp"
+                android:layout_height="@dimen/dimen12dp"
+                android:layout_marginStart="-12dp"
+                android:layout_marginTop="@dimen/dimen36dp"
+                android:background="@drawable/gray_semiround_bg"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/iv_profile"
+                android:layout_height="wrap_content">
+                <com.swipee.in.CustomUi.PopinsRegularTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen8dp"
+                    android:layout_marginEnd="@dimen/dimen96dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen14sp" />
+
+                <com.swipee.in.CustomUi.PopinsMediumTextView
+                    android:id="@+id/tv_typing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dimen8dp"
+                    android:layout_marginEnd="@dimen/dimen96dp"
+                    android:ellipsize="end"
+                    android:letterSpacing=".06"
+                    android:maxLines="1"
+                    android:text="typing..."
+                    android:textColor="@color/greendark"
+                    android:textSize="11sp"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
             <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="-84dp"
-                android:layout_toEndOf="@+id/tv_name"
                 android:background="@drawable/primary_stroke_semiround"
                 android:paddingStart="@dimen/dimen6dp"
                 android:paddingTop="@dimen/dimen2dp"
@@ -69,12 +97,12 @@
             <ImageView
                 android:id="@+id/iv_refresh"
                 android:layout_width="@dimen/dimen36dp"
-                android:visibility="gone"
                 android:layout_height="@dimen/dimen36dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimen4dp"
-                android:src="@drawable/reload" />
+                android:src="@drawable/reload"
+                android:visibility="gone" />
 
         </RelativeLayout>
 

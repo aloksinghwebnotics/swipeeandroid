@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Create Appointment"
+            android:text="Schedule Interview"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen16sp" />
     </RelativeLayout>
@@ -305,7 +305,7 @@
         android:layout_marginBottom="@dimen/dimen16dp"
         android:background="@drawable/primary_semiround_bg"
         android:gravity="center"
-        android:text="Book"
+        android:text="Schedule"
         android:textColor="@color/white"
         android:textSize="@dimen/dimen16sp" />
 

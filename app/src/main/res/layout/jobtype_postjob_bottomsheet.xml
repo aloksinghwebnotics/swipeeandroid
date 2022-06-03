@@ -41,6 +41,7 @@
             android:background="@color/white"
             >
             <RelativeLayout
+                android:layout_above="@+id/done_jobtype"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -82,14 +83,14 @@
 
                 <androidx.recyclerview.widget.RecyclerView
 
+                    android:id="@+id/rv_jobtype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/headerlay"
                     android:layout_marginStart="@dimen/dimen10dp"
                     android:layout_marginTop="@dimen/dimen10dp"
                     android:layout_marginEnd="@dimen/dimen10dp"
-                    android:layout_marginBottom="@dimen/dimen10dp"
-                    android:id="@+id/rv_jobtype"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginBottom="@dimen/dimen10dp" />
 
 
 

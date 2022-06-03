@@ -7,8 +7,8 @@ android {
         applicationId "com.swipee.in"
         minSdk 24
         targetSdk 32
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,6 +53,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:20.0.2'
     implementation 'com.google.firebase:firebase-crashlytics:18.2.7'
     implementation 'com.google.firebase:firebase-config:21.0.1'
+/*
+    implementation 'com.google.firebase:firebase-dynamic-links:21.0.1'
+*/
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
@@ -74,6 +77,9 @@ dependencies {
     implementation 'com.shantanudeshmukh:linkedinsdk:1.0.0'
     implementation project(path: ':linkedin-sdk')
 
+
+    ///In app purchase
+    implementation 'com.android.billingclient:billing:4.1.0'
 
   //  implementation "com.airbnb.android:lottie:4.2.2"
 

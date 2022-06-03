@@ -4,11 +4,52 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/rl_date"
+        android:visibility="gone"
+        android:layout_margin="@dimen/dimen8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+        <View
+            android:visibility="gone"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/dimen16dp"
+            android:layout_marginEnd="@dimen/dimen8dp"
+            android:layout_toStartOf="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="@color/graylight"/>
 
+        <com.swipee.in.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_date"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/white_light_semiround_bg"
+            android:layout_width="wrap_content"
+            android:paddingTop="@dimen/dimen4dp"
+            android:paddingBottom="@dimen/dimen4dp"
+            android:paddingStart="@dimen/dimen12dp"
+            android:paddingEnd="@dimen/dimen12dp"
+            android:text="11-April-2022"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen14sp" />
+        <View
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/dimen8dp"
+            android:layout_marginEnd="@dimen/dimen16dp"
+            android:layout_toEndOf="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="@color/graylight"/>
+
+    </RelativeLayout>
     <LinearLayout
-        android:layout_marginBottom="@dimen/dimen8dp"
-        android:layout_marginRight="@dimen/dimen5dp"
-        android:layout_marginLeft="@dimen/dimen5dp"
+        android:layout_below="@+id/rl_date"
+        android:layout_marginBottom="@dimen/dimen10dp"
         android:id="@+id/mainlay"
         android:gravity="end"
         android:orientation="vertical"
@@ -19,63 +60,74 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="end"
-          android:background="@drawable/ic_receiver_bubble"
+          android:background="@drawable/primary_round_chat_bg"
           android:orientation="vertical">
           <LinearLayout
               android:id="@+id/textlay"
               android:padding="@dimen/dimen4dp"
-              android:visibility="visible"
+              android:visibility="gone"
               android:layout_width="wrap_content"
               android:gravity="start"
-              android:orientation="vertical"
+              android:orientation="horizontal"
               android:layout_height="wrap_content">
               <com.swipee.in.CustomUi.PopinsRegularTextView
                   android:textColor="@color/white"
                   android:id="@+id/textView3"
-                  android:paddingStart="@dimen/dimen4dp"
-                  android:paddingEnd="@dimen/dimen4dp"
-                  android:gravity="start"
-                  android:minWidth="@dimen/dimen96dp"
-                  android:minHeight="@dimen/dimen24dp"
+                  android:layout_marginBottom="@dimen/dimen8dp"
+                  android:layout_marginStart="@dimen/dimen8dp"
+                  android:layout_marginTop="@dimen/dimen8dp"
+                  android:padding="@dimen/dimen4dp"
+                  android:gravity="center_vertical"
+                  android:minWidth="@dimen/dimen32dp"
                   android:maxWidth="@dimen/dimen250dp"
                   android:layout_width="wrap_content"
                   android:linksClickable="true"
                   android:autoLink="all"
-                  android:layout_height="wrap_content"
-                  />
+                  android:textSize="@dimen/dimen12sp"
+                  android:layout_height="wrap_content" />
               <com.swipee.in.CustomUi.PopinsRegularTextView
                   android:id="@+id/dateago"
                   android:visibility="visible"
                   android:gravity="end"
+                  android:layout_gravity="bottom"
                   android:paddingBottom="@dimen/dimen2dp"
+                  android:paddingStart="@dimen/dimen4dp"
+                  android:paddingEnd="@dimen/dimen4dp"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:text="12;00 PM"
                   android:textColor="@color/graylight"
-                  android:textSize="@dimen/dimen10sp" />
+                  android:textSize="@dimen/dimen8sp" />
           </LinearLayout>
           <RelativeLayout
               android:id="@+id/rl_image"
               android:padding="@dimen/dimen4dp"
               android:gravity="center"
               android:visibility="gone"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+              android:layout_width="@dimen/dimen250dp"
+              android:layout_height="@dimen/dimen204dp">
 
               <ImageView
                   android:id="@+id/img"
-                  android:layout_width="@dimen/dimen204dp"
-                  android:layout_height="@dimen/dimen196dp"
+                  android:padding="@dimen/dimen2dp"
+                  android:layout_marginBottom="@dimen/dimen1dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_above="@+id/dateagoImg"
                   android:visibility="visible" />
               <com.swipee.in.CustomUi.PopinsRegularTextView
-                  android:layout_below="@+id/img"
+                  android:layout_alignParentBottom="true"
                   android:id="@+id/dateagoImg"
                   android:text="@string/state"
-                  android:visibility="gone"
+                  android:visibility="visible"
                   android:gravity="end"
-                  android:layout_width="@dimen/dimen204dp"
+                  android:paddingStart="@dimen/dimen4dp"
+                  android:paddingEnd="@dimen/dimen4dp"
+                  android:paddingBottom="@dimen/dimen2dp"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:textColor="@color/graylight"
-                  android:textSize="@dimen/dimen10sp" />
+                  android:textSize="@dimen/dimen8sp" />
           </RelativeLayout>
 
           <RelativeLayout
@@ -105,7 +157,7 @@
               android:padding="@dimen/dimen4dp"
               android:visibility="gone"
               android:id="@+id/doclay"
-              android:layout_width="wrap_content"
+              android:layout_width="@dimen/dimen250dp"
               android:layout_height="wrap_content">
               <ImageView
                   android:id="@+id/pdfdoc"
@@ -116,10 +168,12 @@
 
               <com.swipee.in.CustomUi.PopinsRegularTextView
                   android:id="@+id/docfilename"
-                  android:layout_width="@dimen/dimen132dp"
+                  android:layout_width="wrap_content"
+                  android:layout_toStartOf="@+id/dateagoDoc"
                   android:layout_height="wrap_content"
-                  android:layout_marginTop="@dimen/dimen2dp"
+                  android:layout_centerVertical="true"
                   android:layout_marginStart="@dimen/dimen10dp"
+                  android:layout_marginTop="@dimen/dimen2dp"
                   android:layout_toEndOf="@+id/pdfdoc"
                   android:ellipsize="end"
                   android:maxWidth="@dimen/dimen132dp"
@@ -128,14 +182,19 @@
                   android:textSize="@dimen/dimen12sp" />
               <com.swipee.in.CustomUi.PopinsRegularTextView
                   android:layout_below="@+id/pdfdoc"
+                  android:layout_alignParentEnd="true"
                   android:id="@+id/dateagoDoc"
                   android:visibility="visible"
                   android:gravity="end"
+                  android:text="12:33 PM"
                   android:maxLines="1"
-                  android:layout_width="@dimen/dimen182dp"
+                  android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:paddingEnd="@dimen/dimen4dp"
+                  android:paddingStart="@dimen/dimen4dp"
+                  android:paddingBottom="@dimen/dimen2dp"
                   android:textColor="@color/graylight"
-                  android:textSize="@dimen/dimen10sp" />
+                  android:textSize="@dimen/dimen8sp" />
           </RelativeLayout>
 
 

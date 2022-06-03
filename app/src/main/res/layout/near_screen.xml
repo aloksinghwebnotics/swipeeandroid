@@ -75,25 +75,26 @@
        <RelativeLayout
            android:id="@+id/bottomlay"
            android:layout_width="match_parent"
-           android:layout_marginBottom="@dimen/dimen16dp"
            android:layout_height="@dimen/dimen52dp"
-           android:background="@drawable/primary_semiround_bg"
            android:layout_alignParentBottom="true"
+           android:layout_marginLeft="@dimen/dimen18dp"
+           android:layout_marginRight="@dimen/dimen18dp"
+           android:layout_marginBottom="@dimen/dimen16dp"
+           android:background="@drawable/primary_semiround_bg"
            android:paddingStart="@dimen/dimen12dp"
            android:paddingEnd="@dimen/dimen12dp"
-           android:layout_marginLeft="@dimen/dimen18dp"
-           android:paddingBottom="@dimen/dimen4dp"
-           android:layout_marginRight="@dimen/dimen18dp">
+           android:paddingBottom="1dp">
 
            <com.xw.repo.BubbleSeekBar
                android:id="@+id/seekbar"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_alignParentBottom="true"
-               android:layout_marginEnd="@dimen/dimen22dp"
+               android:layout_marginEnd="@dimen/dimen25dp"
                app:bsb_always_show_bubble="false"
                app:bsb_hide_bubble="true"
                app:bsb_second_track_color="@color/white_light"
+               app:bsb_section_text_size="@dimen/dimen13sp"
                app:bsb_show_section_mark="true"
                app:bsb_show_section_text="true"
                app:bsb_show_thumb_text="true"
@@ -102,16 +103,16 @@
                app:bsb_thumb_text_size="14sp"
                app:bsb_touch_to_seek="false"
                app:bsb_track_color="@color/white" />
+
            <com.swipee.in.CustomUi.PopinsRegularTextView
                android:id="@+id/iv_km"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="KM"
-               android:layout_marginTop="@dimen/dimen15dp"
-               android:textSize="@dimen/dimen12sp"
-               android:textColor="@color/white"
                android:layout_alignParentEnd="true"
-              />
+               android:layout_marginTop="16.5dp"
+               android:text="KM"
+               android:textColor="@color/white"
+               android:textSize="@dimen/dimen13sp" />
        </RelativeLayout>
 
        <RelativeLayout

@@ -4,13 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:gravity="center"
+
     android:orientation="vertical"
     android:background="#33000000"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="@dimen/dimen250dp"
+        android:layout_width="@dimen/dimen296dp"
         android:layout_gravity="center"
         android:elevation="@dimen/dimen4dp"
+        android:paddingBottom="@dimen/dimen12dp"
         android:background="@drawable/white_round_8dp_bg"
         android:orientation="vertical"
         android:gravity="center_horizontal"
@@ -26,7 +28,6 @@
         <com.swipee.in.CustomUi.PopinsSemiboldTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimen4dp"
             android:text="Why Closing Job"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen16sp"/>
@@ -34,14 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/dimen4dp"
+            android:layout_marginTop="@dimen/dimen8dp"
             android:layout_marginStart="@dimen/dimen12dp"
             android:layout_marginEnd="@dimen/dimen12dp"
             >
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen38dp"
-                android:text="Hired Someone"
+                android:text="Hired someone outside"
                 android:id="@+id/radioButton1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen14sp"
@@ -49,67 +50,56 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen1dp"
+                android:layout_marginStart="@dimen/dimen4dp"
+                android:layout_marginEnd="@dimen/dimen4dp"
                 android:background="@color/gray"
                />
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen38dp"
-                android:text="Haven't Found Anyone"
+                android:text="No longer needed"
                 android:id="@+id/radioButton2"
                 android:textColor="@color/black"
                 android:theme="@style/customRadioButton"
                 android:textSize="@dimen/dimen14sp"/>
             <View
                 android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/dimen4dp"
+                android:layout_marginEnd="@dimen/dimen4dp"
                 android:layout_height="@dimen/dimen1dp"
                 android:background="@color/gray"
                 />
+
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen38dp"
-                android:text="Requirement Change"
+                android:text="Mention reason"
                 android:textColor="@color/black"
                 android:theme="@style/customRadioButton"
                 android:textSize="@dimen/dimen14sp"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen1dp"
-                android:background="@color/gray"
-                />
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen38dp"
-                android:text="Edit Job Post"
-                android:textColor="@color/black"
-                android:theme="@style/customRadioButton"
-                android:textSize="@dimen/dimen14sp"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen1dp"
-                android:background="@color/gray"
-                />
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen38dp"
-                android:text="Other"
-                android:textColor="@color/black"
-                android:theme="@style/customRadioButton"
-                android:textSize="@dimen/dimen14sp"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen1dp"
-                android:background="@color/gray"
-                />
         </RadioGroup>
+        <com.swipee.in.CustomUi.PopinsRegularEditText
+            android:id="@+id/et_reason"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen64dp"
+            android:layout_marginTop="@dimen/dimen4dp"
+            android:layout_marginStart="@dimen/dimen16dp"
+            android:background="@drawable/gray_stroke_round_bk"
+            android:layout_marginEnd="@dimen/dimen16dp"
+            android:textColor="@color/black"
+            android:gravity="start"
+            android:padding="@dimen/dimen6dp"
+            android:textSize="@dimen/dimen12sp"
+            android:textColorHint="@color/gray"
+            android:hint="Please write reason."/>
        <com.swipee.in.CustomUi.PopinsMediumTextView
            android:id="@+id/tv_close"
            android:layout_marginTop="@dimen/dimen16dp"
            android:layout_width="match_parent"
-           android:layout_marginStart="@dimen/dimen12dp"
-           android:layout_marginEnd="@dimen/dimen12dp"
+           android:layout_marginStart="@dimen/dimen16dp"
+           android:layout_marginEnd="@dimen/dimen16dp"
            android:layout_height="@dimen/dimen36dp"
            android:text="Close Job"
            android:textSize="@dimen/dimen16sp"
@@ -117,13 +107,25 @@
            android:gravity="center"
            android:background="@drawable/primary_semiround_bg"/>
         <com.swipee.in.CustomUi.PopinsMediumTextView
+            android:id="@+id/tv_editJob"
+            android:layout_marginTop="@dimen/dimen8dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/dimen16dp"
+            android:layout_marginEnd="@dimen/dimen16dp"
+            android:layout_height="@dimen/dimen36dp"
+            android:text="Edit Job"
+            android:textSize="@dimen/dimen16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="@drawable/primary_semiround_bg"/>
+        <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/tv_later"
             android:layout_marginTop="@dimen/dimen8dp"
             android:layout_width="wrap_content"
             android:paddingStart="@dimen/dimen12dp"
             android:paddingEnd="@dimen/dimen12dp"
-            android:layout_height="@dimen/dimen36dp"
-            android:text="Later"
+            android:layout_height="@dimen/dimen42dp"
+            android:text="Cancel"
             android:textSize="@dimen/dimen16sp"
             android:textColor="@color/colorPrimary"
             android:layout_marginStart="@dimen/dimen12dp"

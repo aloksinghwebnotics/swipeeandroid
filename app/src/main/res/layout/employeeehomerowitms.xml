@@ -39,12 +39,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen156dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/semi_gradient_bg"
             android:layout_marginTop="@dimen/dimen52dp"
             android:paddingBottom="@dimen/dimen8dp"
-            android:gravity="bottom">
+            android:gravity="center_vertical">
 
             <RelativeLayout
                 android:id="@+id/desnmlay"
@@ -102,7 +102,6 @@
                     android:layout_centerInParent="true"
                     android:layout_marginStart="@dimen/dimen4dp"
                     android:layout_toEndOf="@+id/location"
-                    android:text="Berlin"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:layout_marginEnd="@dimen/dimen16dp"
@@ -137,7 +136,6 @@
                     android:layout_toEndOf="@+id/prognm"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:text="Php, Html, Css, JQuery, Java Script, Bootstrap"
                     android:textColor="@color/white"
                     android:textSize="@dimen/dimen12sp" />
             </RelativeLayout>
@@ -156,13 +154,13 @@
             android:textColor="@color/white"
             android:text="Yes"
             android:textSize="@dimen/dimen21sp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:textStyle="bold" />
 
         <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/nopee"
             android:layout_width="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:background="@color/red"

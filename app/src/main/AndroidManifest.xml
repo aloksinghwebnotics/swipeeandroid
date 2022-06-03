@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".UrlManager.AppController"
@@ -33,10 +34,34 @@
         android:usesCleartextTraffic="true"
         tools:replace="allowBackup">
         <activity
+            android:name=".activity.VideoPlayer"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".activity.company.Edit_Job_Activity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme" />
+        <activity
+            android:name=".activity.company.ViewResume"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme" />
+        <activity
+            android:name=".activity.company.ResumesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme" />
+        <activity
+            android:name=".activity.Seeker.Initial_Profile"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme" />
+        <activity
             android:name=".activity.WebViewActivity"
             android:exported="false"
-            android:theme="@style/basictheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme" />
         <activity
             android:name=".activity.ForgotConfirm"
             android:exported="false" />
@@ -80,6 +105,12 @@
         <activity
             android:name=".activity.company.JobPostRule"
             android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme" />
+        <activity
+            android:name=".activity.ChatActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
             android:theme="@style/basictheme" />
 
@@ -350,12 +381,24 @@
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service> <!-- Razor Pay Activity -->
+        </service>
+        <service
+            android:name=".services.ChatService"
+            android:permission="Manifest.permission.FOREGROUND_SERVICE" />
+        <service android:name=".services.WebService"
+            android:exported="false"/> <!-- Razor Pay Activity -->
         <receiver
             android:name="com.razorpay.RzpTokenReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="rzp.device_token.share" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".services.MyReciever"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.tutorialspoint.CUSTOM_INTENT" />
             </intent-filter>
         </receiver>
 
@@ -374,13 +417,12 @@
         <activity
             android:name=".chat.MainChatActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/basictheme" /> <!-- Api key RazorPay -->
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_live_Tv02F1S0yyAzOx"/>
-            <!--android:value="rzp_test_54rFvRw59NIrOK"/>-->
+            android:value="rzp_live_Tv02F1S0yyAzOx" /> <!-- android:value="rzp_test_54rFvRw59NIrOK"/> -->
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />

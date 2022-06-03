@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dimen16dp"
+    >
+    <RelativeLayout
+        android:paddingStart="@dimen/dimen10dp"
+        android:paddingEnd="@dimen/dimen18dp"
+        android:id="@+id/rl_toollbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen42dp">
+
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen42dp"
+            android:layout_height="@dimen/dimen42dp"
+            android:layout_centerVertical="true"
+            android:paddingEnd="@dimen/dimen12dp"
+            android:paddingStart="@dimen/dimen12dp"
+            android:src="@drawable/ic_back" />
+
+        <com.swipee.in.CustomUi.PopinsMediumTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="User's Profile"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen16sp" />
+    </RelativeLayout>
+    <WebView
+        android:id="@+id/wv_url"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_toollbar"
+        android:layout_above="@+id/tv_view_detail"/>
+    <ImageView
+        android:id="@+id/iv_accept"
+        android:layout_width="@dimen/dimen48dp"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/dimen18dp"
+        android:layout_marginBottom="@dimen/dimen32dp"
+        android:src="@drawable/iv_accept"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_reject"
+        android:layout_width="@dimen/dimen48dp"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/dimen16dp"
+        android:layout_marginEnd="@dimen/dimen12dp"
+        android:layout_marginBottom="@dimen/dimen32dp"
+        android:layout_toStartOf="@+id/iv_accept"
+        android:src="@drawable/ic_reject"
+        android:visibility="gone" />
+
+    <com.swipee.in.CustomUi.PopinsSemiboldTextView
+        android:id="@+id/tv_view_detail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/dimen18dp"
+        android:layout_marginTop="@dimen/dimen10dp"
+        android:layout_marginEnd="@dimen/dimen18dp"
+        android:layout_marginBottom="@dimen/dimen18dp"
+        android:background="@drawable/primary_semiround_bg"
+        android:gravity="center"
+        android:text="View Details"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen16sp" />
+
+</RelativeLayout>

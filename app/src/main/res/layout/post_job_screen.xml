@@ -561,6 +561,7 @@
                            <RelativeLayout
                                android:id="@+id/rl_enddate"
                                android:layout_width="0dp"
+                               android:visibility="invisible"
                                android:layout_height="wrap_content"
                                android:layout_marginLeft="@dimen/dimen20dp"
                                android:layout_weight="1">
@@ -1164,6 +1165,62 @@
                            android:layout_marginTop="@dimen/dimen4dp"
                            android:background="@color/graylight" />
 
+                       <RelativeLayout
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/dimen16dp">
+
+                           <Spinner
+                               android:id="@+id/spn_interviewrounds"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/dimen38dp"
+                               android:background="@color/white"
+                               android:gravity="center_vertical"
+                               android:maxLines="1"
+                               android:paddingStart="@dimen/dimen2dp"
+                               android:paddingEnd="@dimen/dimen32dp"
+                               android:textColor="@color/black"
+                               android:textColorHint="@color/black"
+                               android:textSize="@dimen/dimen14sp" />
+
+                           <ImageView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_alignParentEnd="true"
+                               android:layout_centerVertical="true"
+                               android:src="@drawable/ic_arrow_dropdown" />
+
+                       </RelativeLayout>
+
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/dimen1dp"
+                           android:layout_marginTop="@dimen/dimen4dp"
+                           android:background="@color/graylight" />
+
+
+                       <com.swipee.in.CustomUi.PopinsRegularTextView
+                           android:id="@+id/tv_interviewmodes"
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/dimen38dp"
+                           android:layout_marginTop="@dimen/dimen16dp"
+                           android:background="#00000000"
+                           android:drawableEnd="@drawable/ic_arrow_dropdown"
+                           android:drawablePadding="@dimen/dimen6dp"
+                           android:ellipsize="end"
+                           android:gravity="center_vertical"
+                           android:hint="Interview Modes"
+                           android:maxLines="1"
+                           android:paddingStart="@dimen/dimen2dp"
+                           android:paddingEnd="@dimen/dimen2dp"
+                           android:textColor="@color/black"
+                           android:textSize="@dimen/dimen14sp" />
+
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/dimen1dp"
+                           android:layout_marginTop="@dimen/dimen4dp"
+                           android:background="@color/graylight" />
 
                    </LinearLayout>
                </ScrollView>
@@ -1200,6 +1257,7 @@
     <include layout="@layout/qualification_bottomsheet"/>
     <include layout="@layout/perksbenifits_bottomsheet"/>
     <include layout="@layout/jobpost_language_bottomsheet"/>
+    <include layout="@layout/interviewmode_bottomsheet"/>
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/rl_nodata"
@@ -1213,18 +1271,32 @@
             android:layout_width="@dimen/dimen96dp"
             android:layout_height="@dimen/dimen96dp"
             android:src="@drawable/ic_plan_exp"/>
-        <com.swipee.in.CustomUi.PopinsMediumTextView
+
+        <com.swipee.in.CustomUi.PopinsRegularTextView
             android:id="@+id/tv_nodata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen12dp"
-            android:layout_marginStart="@dimen/dimen24dp"
-            android:layout_marginEnd="@dimen/dimen24dp"
-            android:textColor="@color/colorPrimary"
-            android:gravity="center"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/dimen14sp"
-            android:text="@string/packageexprectr"/>
+            android:layout_marginStart="@dimen/dimen24dp"
+            android:layout_marginTop="@dimen/dimen12dp"
+            android:layout_marginEnd="@dimen/dimen24dp"
+            android:gravity="center"
+            android:text="@string/packageexprectr"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen13sp" />
+        <com.swipee.in.CustomUi.PopinsMediumTextView
+            android:id="@+id/tv_buynow"
+            android:layout_below="@+id/tv_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/dimen24dp"
+            android:layout_marginTop="@dimen/dimen2dp"
+            android:layout_marginEnd="@dimen/dimen24dp"
+            android:gravity="center"
+            android:text="Buy Now"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen15sp" />
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

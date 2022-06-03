@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/ll_main"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dimen4dp"
+        android:paddingBottom="@dimen/dimen2dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_toollbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen58dp"
+            android:paddingStart="@dimen/dimen10dp"
+            android:paddingTop="@dimen/dimen16dp"
+            android:paddingEnd="@dimen/dimen18dp">
+
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dimen42dp"
+                android:layout_height="@dimen/dimen42dp"
+                android:layout_centerVertical="true"
+                android:paddingStart="@dimen/dimen12dp"
+                android:paddingEnd="@dimen/dimen12dp"
+                android:src="@drawable/ic_back" />
+
+            <com.swipee.in.CustomUi.PopinsMediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Edit Post"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen16sp" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/datalay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tv_next"
+            android:layout_below="@+id/rl_toollbar"
+            android:layout_marginStart="@dimen/dimen16dp"
+            android:layout_marginEnd="@dimen/dimen16dp"
+            android:layout_marginBottom="@dimen/dimen3dp"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen10dp">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:text="Job Description"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_desc"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen32dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:src="@drawable/ic_icon_feather_edit" />
+
+                    <ImageView
+                        android:id="@+id/iv_show_desc"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_right_arrow" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen8dp"
+                    android:visibility="gone">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/tv_job_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:maxHeight="@dimen/dimen156dp"
+                        android:text="@string/tellabout"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/dimen13sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen2dp"
+                    android:layout_marginTop="@dimen/dimen10dp"
+                    android:background="@color/white_light" />
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen10dp">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:text="No.of opening"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_opening"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen32dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:src="@drawable/ic_icon_feather_edit" />
+
+                    <ImageView
+                        android:id="@+id/iv_show_opening"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_right_arrow" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_opening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen8dp"
+                    android:visibility="gone">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/tv_job_opening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:maxHeight="@dimen/dimen156dp"
+                        android:text="@string/tellabout"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/dimen13sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen2dp"
+                    android:layout_marginTop="@dimen/dimen10dp"
+                    android:background="@color/white_light" />
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen10dp">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:text="Skills"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_skill"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen32dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:src="@drawable/ic_icon_feather_edit" />
+
+                    <ImageView
+                        android:id="@+id/iv_show_skill"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_right_arrow" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimen4dp"
+                    android:layout_margin="@dimen/dimen4dp"
+                    android:visibility="gone">
+
+                    <com.swipee.in.CustomUi.FlowLayout
+                        android:id="@+id/flow_skills"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></com.swipee.in.CustomUi.FlowLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen2dp"
+                    android:layout_marginTop="@dimen/dimen10dp"
+                    android:background="@color/white_light" />
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen10dp">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:text="Min salary"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_minsalary"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen32dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:src="@drawable/ic_icon_feather_edit" />
+
+                    <ImageView
+                        android:id="@+id/iv_show_minsalary"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_right_arrow" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_minsalary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen8dp"
+                    android:visibility="gone">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/tv_job_minsalary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:maxHeight="@dimen/dimen156dp"
+                        android:text="@string/tellabout"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/dimen13sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen2dp"
+                    android:layout_marginTop="@dimen/dimen10dp"
+                    android:background="@color/white_light" />
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen10dp">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:text="Max salary"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_maxsalary"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen32dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:src="@drawable/ic_icon_feather_edit" />
+
+                    <ImageView
+                        android:id="@+id/iv_show_maxsalary"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_right_arrow" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_maxsalary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen8dp"
+                    android:visibility="gone">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/tv_maxsalary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:maxHeight="@dimen/dimen156dp"
+                        android:text="@string/tellabout"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/dimen13sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen2dp"
+                    android:layout_marginTop="@dimen/dimen10dp"
+                    android:background="@color/white_light" />
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen10dp">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:text="Perks &amp; Benefits"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_perks"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen32dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:src="@drawable/ic_icon_feather_edit" />
+
+                    <ImageView
+                        android:id="@+id/iv_show_perks"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_right_arrow" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_perks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimen4dp"
+                    android:layout_margin="@dimen/dimen4dp"
+                    android:visibility="gone">
+
+                    <com.swipee.in.CustomUi.FlowLayout
+                        android:id="@+id/flow_perks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></com.swipee.in.CustomUi.FlowLayout>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen2dp"
+                    android:layout_marginTop="@dimen/dimen10dp"
+                    android:background="@color/white_light" />
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen10dp">
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:text="Required Languages"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_languages"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:layout_marginEnd="@dimen/dimen32dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:src="@drawable/ic_icon_feather_edit" />
+
+                    <ImageView
+                        android:id="@+id/iv_show_languages"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/dimen10dp"
+                        android:padding="@dimen/dimen6dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_right_arrow" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_languages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimen4dp"
+                    android:layout_margin="@dimen/dimen4dp"
+                    android:visibility="gone">
+
+                    <com.swipee.in.CustomUi.FlowLayout
+                        android:id="@+id/flow_languages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></com.swipee.in.CustomUi.FlowLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.swipee.in.CustomUi.PopinsSemiboldTextView
+            android:id="@+id/tv_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dimen12dp"
+            android:layout_marginEnd="@dimen/dimen12dp"
+            android:layout_marginBottom="@dimen/dimen16dp"
+            android:background="@drawable/primary_semiround_bg"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen16sp" />
+    </RelativeLayout>
+
+    <include layout="@layout/perksbenifits_bottomsheet"/>
+    <include layout="@layout/no_opening_bottomsheet"/>
+    <include layout="@layout/min_salary_bottomsheet"/>
+    <include layout="@layout/max_salary_bottomsheet"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

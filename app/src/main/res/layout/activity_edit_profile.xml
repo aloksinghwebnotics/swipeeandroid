@@ -14,42 +14,47 @@
         android:paddingEnd="@dimen/dimen18dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ScrollView
-            android:layout_above="@+id/tv_save"
             android:layout_width="match_parent"
-            android:scrollbars="none"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tv_save"
+            android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:paddingBottom="@dimen/dimen8dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimen8dp">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_marginStart="-8dp"
-                    android:layout_height="@dimen/dimen42dp">
+                    android:layout_height="@dimen/dimen42dp"
+                    android:layout_marginStart="-8dp">
 
                     <ImageView
                         android:id="@+id/iv_back"
                         android:layout_width="@dimen/dimen42dp"
                         android:layout_height="@dimen/dimen42dp"
                         android:layout_centerVertical="true"
-                        android:paddingEnd="@dimen/dimen12dp"
                         android:paddingStart="@dimen/dimen12dp"
+                        android:paddingEnd="@dimen/dimen12dp"
                         android:src="@drawable/ic_back" />
+
                     <com.swipee.in.CustomUi.PopinsMediumTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/dimen16sp"
+                        android:layout_centerInParent="true"
                         android:text="Edit Profile"
                         android:textColor="@color/black"
 
-                        android:layout_centerInParent="true"/>
+                        android:textSize="@dimen/dimen16sp" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dimen6dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen6dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civ_profile"
@@ -57,59 +62,132 @@
                         android:layout_height="@dimen/dimen98dp"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_pick" />
+
                     <ImageView
                         android:id="@+id/iv_edit"
-                        android:layout_marginTop="@dimen/dimen6dp"
-                        android:layout_marginStart="-26dp"
-                        android:layout_toEndOf="@+id/civ_profile"
                         android:layout_width="@dimen/dimen32dp"
                         android:layout_height="@dimen/dimen32dp"
-                        android:src="@drawable/pencil"
+                        android:layout_marginStart="-26dp"
+                        android:layout_marginTop="@dimen/dimen6dp"
+                        android:layout_toEndOf="@+id/civ_profile"
                         android:background="@drawable/primary_semiround_bg"
-                        android:padding="@dimen/dimen10dp"/>
+                        android:padding="@dimen/dimen10dp"
+                        android:src="@drawable/pencil" />
 
                     <com.swipee.in.CustomUi.PopinsRegularTextView
-                        android:id="@+id/tv_fname"
+                        android:id="@+id/tv_emailt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dimen16dp"
                         android:layout_marginTop="@dimen/dimen16dp"
                         android:layout_toEndOf="@+id/civ_profile"
                         android:gravity="center_vertical"
-                        android:text="@string/firstname"
+                        android:text="@string/email"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/dimen14sp" />
 
-                    <com.swipee.in.CustomUi.PopinsRegularEditText
-                        android:id="@+id/et_fname"
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/et_email"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen36dp"
-                        android:layout_below="@+id/tv_fname"
+                        android:layout_height="@dimen/dimen26dp"
+                        android:layout_below="@+id/tv_emailt"
                         android:layout_marginStart="@dimen/dimen16dp"
                         android:layout_toEndOf="@+id/civ_profile"
                         android:background="#00000000"
+                        android:drawableEnd="@drawable/ic_check"
+                        android:drawablePadding="@dimen/dimen6dp"
                         android:gravity="center_vertical"
-                        android:capitalize="words"
-                        android:inputType="text|textCapWords"
-                        android:maxLength="24"
+                        android:maxLength="52"
                         android:maxLines="1"
                         android:paddingStart="@dimen/dimen2dp"
                         android:paddingEnd="@dimen/dimen2dp"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen12sp" />
+
                     <View
-                        android:layout_marginTop="@dimen/dimen4dp"
-                        android:layout_below="@+id/et_fname"
-                        android:layout_marginStart="@dimen/dimen16dp"
-                        android:layout_toEndOf="@+id/civ_profile"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen1dp"
-                        android:background="@color/nav_gray"/>
+                        android:layout_below="@+id/et_email"
+                        android:layout_marginStart="@dimen/dimen16dp"
+                        android:layout_marginTop="@dimen/dimen4dp"
+                        android:layout_toEndOf="@+id/civ_profile"
+                        android:background="@color/nav_gray" />
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/tv_phoneTil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/et_email"
+                        android:layout_marginStart="@dimen/dimen16dp"
+                        android:layout_marginTop="@dimen/dimen12dp"
+                        android:layout_toEndOf="@+id/civ_profile"
+                        android:gravity="center_vertical"
+                        android:text="@string/phonenumber"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/dimen14sp" />
+
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen26dp"
+                        android:layout_below="@+id/tv_phoneTil"
+                        android:layout_marginStart="@dimen/dimen16dp"
+                        android:layout_toEndOf="@+id/civ_profile"
+                        android:background="#00000000"
+                        android:drawableEnd="@drawable/ic_check"
+                        android:drawablePadding="@dimen/dimen6dp"
+                        android:gravity="center_vertical"
+                        android:maxLength="12"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/dimen2dp"
+                        android:paddingEnd="@dimen/dimen2dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen1dp"
+                        android:layout_below="@+id/et_phone"
+                        android:layout_marginStart="@dimen/dimen16dp"
+                        android:layout_marginTop="@dimen/dimen4dp"
+                        android:layout_toEndOf="@+id/civ_profile"
+                        android:background="@color/nav_gray" />
                 </RelativeLayout>
+
                 <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:layout_marginTop="@dimen/dimen12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen12dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/firstname"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dimen14sp" />
+
+                <com.swipee.in.CustomUi.PopinsRegularEditText
+                    android:id="@+id/et_fname"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen36dp"
+                    android:background="#00000000"
+                    android:capitalize="words"
+                    android:gravity="center_vertical"
+                    android:inputType="text|textCapWords"
+                    android:maxLength="24"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/dimen2dp"
+                    android:paddingEnd="@dimen/dimen2dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen1dp"
+                    android:layout_marginTop="@dimen/dimen4dp"
+                    android:background="@color/nav_gray" />
+
+                <com.swipee.in.CustomUi.PopinsRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen12dp"
                     android:gravity="center_vertical"
                     android:text="@string/lstname"
                     android:textColor="@color/colorPrimary"
@@ -120,8 +198,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp"
                     android:background="#00000000"
-                    android:gravity="center_vertical"
                     android:capitalize="words"
+                    android:gravity="center_vertical"
                     android:inputType="text|textCapWords"
                     android:maxLength="24"
                     android:maxLines="1"
@@ -129,71 +207,17 @@
                     android:paddingEnd="@dimen/dimen2dp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen12sp" />
+
                 <View
-                    android:layout_marginTop="@dimen/dimen4dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
-                <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:layout_marginTop="@dimen/dimen12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="@string/email"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/dimen14sp" />
+                    android:layout_marginTop="@dimen/dimen4dp"
+                    android:background="@color/nav_gray" />
 
                 <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:id="@+id/et_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen36dp"
-                    android:background="#00000000"
-                    android:gravity="center_vertical"
-                    android:maxLength="52"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/dimen2dp"
-                    android:paddingEnd="@dimen/dimen2dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimen12sp"
-                    android:drawablePadding="@dimen/dimen6dp"
-                    android:drawableEnd="@drawable/ic_check"/>
-                <View
-                    android:layout_marginTop="@dimen/dimen4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
-                <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:layout_marginTop="@dimen/dimen12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="@string/phonenumber"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/dimen14sp" />
-
-                <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:id="@+id/et_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen38dp"
-                    android:background="#00000000"
-                    android:gravity="center_vertical"
-                    android:maxLength="12"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/dimen2dp"
-                    android:paddingEnd="@dimen/dimen2dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimen12sp"
-                    android:drawableEnd="@drawable/ic_check"
-                    android:drawablePadding="@dimen/dimen6dp"/>
-                <View
-                    android:layout_marginTop="@dimen/dimen4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
-                <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:layout_marginTop="@dimen/dimen12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/gender"
                     android:textColor="@color/colorPrimary"
@@ -225,15 +249,17 @@
                         android:rotation="90"
                         android:src="@drawable/ic_right_arrow" />
                 </RelativeLayout>
+
                 <View
-                    android:layout_marginTop="@dimen/dimen6dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
+                    android:layout_marginTop="@dimen/dimen6dp"
+                    android:background="@color/nav_gray" />
+
                 <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:layout_marginTop="@dimen/dimen12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen12dp"
                     android:gravity="center_vertical"
                     android:text="@string/dateofbirth"
                     android:textColor="@color/colorPrimary"
@@ -254,17 +280,18 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen12sp" />
                 </RelativeLayout>
+
                 <View
-                    android:layout_marginTop="@dimen/dimen6dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
+                    android:layout_marginTop="@dimen/dimen6dp"
+                    android:background="@color/nav_gray" />
 
 
                 <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:layout_marginTop="@dimen/dimen12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen12dp"
                     android:gravity="center_vertical"
                     android:text="@string/countrystar"
                     android:textColor="@color/colorPrimary"
@@ -285,17 +312,18 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen12sp" />
                 </RelativeLayout>
+
                 <View
-                    android:layout_marginTop="@dimen/dimen6dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
+                    android:layout_marginTop="@dimen/dimen6dp"
+                    android:background="@color/nav_gray" />
 
                 <com.swipee.in.CustomUi.PopinsRegularTextView
 
-                    android:layout_marginTop="@dimen/dimen12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen12dp"
                     android:gravity="center_vertical"
                     android:text="@string/statemend"
                     android:textColor="@color/colorPrimary"
@@ -304,6 +332,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen36dp">
+
                     <com.swipee.in.CustomUi.PopinsRegularTextView
                         android:id="@+id/tv_state"
                         android:layout_width="match_parent"
@@ -315,16 +344,17 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen12sp" />
                 </RelativeLayout>
+
                 <View
-                    android:layout_marginTop="@dimen/dimen6dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
+                    android:layout_marginTop="@dimen/dimen6dp"
+                    android:background="@color/nav_gray" />
 
                 <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:layout_marginTop="@dimen/dimen12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen12dp"
                     android:gravity="center_vertical"
                     android:text="@string/citymend"
                     android:textColor="@color/colorPrimary"
@@ -345,30 +375,53 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen12sp" />
                 </RelativeLayout>
+
                 <View
-                    android:layout_marginTop="@dimen/dimen6dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen1dp"
-                    android:background="@color/nav_gray"/>
+                    android:layout_marginTop="@dimen/dimen6dp"
+                    android:background="@color/nav_gray" />
 
                 <com.swipee.in.CustomUi.PopinsRegularTextView
                     android:id="@+id/tv_upload"
-                    android:layout_marginTop="@dimen/dimen18dp"
-                    android:layout_marginBottom="@dimen/dimen18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Upload Video"
-                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="@dimen/dimen18dp"
+                    android:layout_marginBottom="@dimen/dimen18dp"
                     android:drawableEnd="@drawable/ic_plus"
+                    android:gravity="center_vertical"
+                    android:text="Upload Video (Max size 15 MB)"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/dimen14sp" />
-                <ImageView
-                    android:id="@+id/iv_userpickvideo"
+
+                <RelativeLayout
+                    android:id="@+id/rl_video"
                     android:layout_width="match_parent"
-                    android:background="@drawable/white_round_8dp_bg"
                     android:layout_height="@dimen/dimen182dp"
+                    android:layout_margin="@dimen/dimen4dp"
                     android:visibility="gone"
-                    android:layout_margin="@dimen/dimen4dp" />
+                    android:background="@drawable/white_round_8dp_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" >
+
+                    <ImageView
+                        android:id="@+id/iv_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <ImageView
+                        android:id="@+id/iv_videoplay"
+                        android:layout_width="@dimen/dimen40dp"
+                        android:layout_height="@dimen/dimen40dp"
+                        android:background="@drawable/white_round_bg"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_baseline_play_arrow_24"/>
+                </RelativeLayout>
+                <com.potyvideo.library.AndExoPlayerView
+                    android:id="@+id/vv_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen182dp"
+                    android:layout_margin="@dimen/dimen4dp"
+                    android:visibility="gone" />
 
 
             </LinearLayout>

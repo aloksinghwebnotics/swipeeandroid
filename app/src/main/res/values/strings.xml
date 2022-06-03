@@ -97,8 +97,8 @@
     <string name="startdate">Start date</string>
     <string name="enddate">End date</string>
     <string name="jobpreferences">Job Preferences</string>
-    <string name="desiredjoblocation">Desired job location (Max 3)</string>
-    <string name="desiredindustry">Desired industry (Max 3)</string>
+    <string name="desiredjoblocation">Desired job location (Max 10)</string>
+    <string name="desiredindustry">Desired industry (Max 10)</string>
     <string name="desiredsalary">Desired salary (\u20B9/month)</string>
     <string name="addskill">Add Skill</string>
     <string name="statelist">Select State</string>
@@ -143,7 +143,7 @@
 
     <string name="noleftswipe">You have crossed your daily swipe limit. Book a plan</string>
     <string name="dailylimitexceed">You have reached your daily job apply limit</string>
-    <string name="nodatatxt">Oops!!! Seems you have no other match. Kindly broad your match criteria. Alternatively please go to Liked User section.</string>
+    <string name="nodatatxt">You don\'t have any active job posting yet. Post one to get matching candidates.</string>
 
     <string name="nodatatxt1">Oops!!! Seems you have no other match. Kindly broad your match criteria. Alternatively please go to Liked Job section.</string>
     <string name="nodatatxt1First">Oops!!! Seems you have no other match. Kindly broad your match criteria.</string>
@@ -167,7 +167,7 @@
     <string name="atleastonepickofcompany">at least 1 photo of your company</string>
     <string name="givesomemoreinfo">Give us some more information</string>
     <string name="packageexprectr">You don’t have any active package. Please purchase a plan to continue.</string>
-    <string name="planexpire">You have used your daily job post limit</string>
+    <string name="planexpire">You have reached your daily job post limit. Please purchase a package to continue posting.</string>
     <string name="salaryoffered">Salary Offered (₹/month)</string>
     <string name="plantxt">"\"Economical plans that provide extra than ever before"\"\nFind the plan that is best suited to your hiring needs. You can upgrade your subscription whenever you like!!</string>
     <!--<string name="app_id">308982814513406</string>-->
@@ -197,11 +197,32 @@
     <!-- <string name="chat_token_url">https://swipee.in.twil.io/chat-token/</string>-->
     <string name="write_message">Write Message</string>
     <string name="test_access_token">..nzdJn5ZEE1VcpNO72i1BeojX9UIX2I0PboCb8bwljTc</string>
-    <string name="planmsg">There is an active plan already in place, do you want to switch plan?</string>
+    <string name="planmsg">There is an active plan already in place; do you want to switch plan?</string>
     <string name="com.google.firebase.crashlytics.mapping_file_id">none</string>
     <string name="addinfo">Please provide some more information about yourself.</string>
     <string name="freeplanseeker">Take advantage of unlimited swipes, countless jobs applications, and a lot more with our 3-months Gold Subscription plan credited free with love for you!</string>
     <string name="freeplanseeker1">Take a sneak peek now and swipe unlimited!</string>
     <string name="freeplancompany">Take advantage of infinite swipes, endless CVs, and a lot more with our 6-months Gold Subscription plan credited free with love for you!</string>
     <string name="freeplancompany1">Catch a glimpse now and swipe limitless!</string>
+    <string name="locationRadar">Accessing your current location requires location permission. Candidates/companies are displayed based on your location. Please grant location permission from the settings.</string>
+    <string name="locationFeature">Accessing your current location requires location permission. Featured jobs are displayed based on your location. Please grant location permission from the settings.</string>
+    <string name="storagegallery_profilepick">We require storage permission to select your profile picture. Please grant Storage permission from the settings.</string>
+    <string name="storagecamera_profilepick">We require storage permission to click profile picture. Please grant Storage permission from the settings.</string>
+    <string name="camera_profilepick">We require camera permission to click the profile picture. Please grant Camera permission from the settings.</string>
+    <string name="allcamera_profilepick"><![CDATA[ We require storage & camera permission to click the profile picture. Please grant permissions from the settings.]]></string>
+    <string name="storage_profilevideo">We require storage permission to select your profile video. Please grant Storage permission from the settings.</string>
+    <string name="storage_resume">Accessing a document requires storage permission. Please grant storage permission from the settings.</string>
+    <string name="allvideocallpermission"><![CDATA[Interview calls require recording, & storage permission. Please grant the permissions from the settings.]]></string>
+    <string name="camera_record_videocallpermission"><![CDATA[Video interviews require Camera & Record audio permission. Please grant the permissions from the settings.]]></string>
+    <string name="camera_storage_videocallpermission"><![CDATA[Video interviews require Camera & Storage permission. Please grant the permissions from the settings.]]></string>
+    <string name="record_storage_videocallpermission"><![CDATA[Video interviews require Record audio & Storage permission. Please grant the permissions from the settings.]]></string>
+    <string name="camera_videocallpermission">" Video interviews require camera permission. Please grant permission from the settings. "</string>
+    <string name="recordaudio_videocallpermission">To join the interview requires recording permission. Please grant permission from the settings.</string>
+    <string name="storage_videocallpermission">To join the interview requires storage permission. Please grant permission from the settings.</string>
+    <string name="allaudiocallpermission"><![CDATA[" Interview calls require recording, & storage permission. Please grant the permissions from the settings."]]></string>
+    <string name="storage_doc_chat">Uploading documents requires storage permission. Please grant storage permission from the settings.</string>
+    <string name="storage_image_chat">Accessing an image requires storage permission. Please grant storage permission from the settings.</string>
+    <string name="all_for_camera_chat"><![CDATA[Clicking an image requires storage & camera permission. Please grant permissions from the settings.]]></string>
+    <string name="storage_for_camera_chat">Clicking an image requires storage permission. Please grant storage permission from the settings.</string>
+    <string name="camera_for_camera_chat">Clicking an image requires camera permission. Please grant the camera permission from the settings.</string>
 </resources>

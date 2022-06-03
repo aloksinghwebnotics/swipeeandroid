@@ -306,8 +306,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:maxLines="1"
                                 android:hint="Select industry"
+                                android:maxLines="1"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -336,8 +336,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:maxLines="1"
                                 android:hint="Select company size"
+                                android:maxLines="1"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -365,9 +365,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen42dp"
                                 android:gravity="center_vertical"
+                                android:hint="Enter company website"
                                 android:inputType="text"
                                 android:maxLines="1"
-                                android:hint="Enter company website"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen12dp"
@@ -375,7 +375,6 @@
                                 android:textColor="@color/black_Light"
                                 android:textColorHint="@color/black_op50"
                                 android:textSize="@dimen/dimen12sp" />
-
 
 
                             <com.swipee.in.CustomUi.PopinsRegularTextView
@@ -391,10 +390,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen42dp"
                                 android:gravity="center_vertical"
-                                android:inputType="number"
-                                android:maxLines="1"
                                 android:hint="Enter company established year"
+                                android:inputType="number"
                                 android:maxLength="4"
+                                android:maxLines="1"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen12dp"
@@ -417,8 +416,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:maxLines="1"
                                 android:hint="Enter country"
+                                android:maxLines="1"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -447,8 +446,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
-                                android:maxLines="1"
                                 android:hint="Select state"
+                                android:maxLines="1"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
@@ -477,12 +476,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen36dp"
                                 android:gravity="center_vertical"
+                                android:hint="Select city"
                                 android:maxLines="1"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen4dp"
                                 android:paddingBottom="@dimen/dimen4dp"
-                                android:hint="Select city"
                                 android:textColor="@color/black_Light"
                                 android:textColorHint="@color/black_op50"
                                 android:textSize="@dimen/dimen12sp" />
@@ -492,6 +491,7 @@
                                 android:layout_height="@dimen/dimen1dp"
                                 android:layout_marginBottom="@dimen/dimen6dp"
                                 android:background="@color/nav_gray" />
+
                             <com.swipee.in.CustomUi.PopinsRegularTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -504,11 +504,11 @@
                                 android:id="@+id/et_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen42dp"
-                                android:gravity="center_vertical"
                                 android:capitalize="sentences"
+                                android:gravity="center_vertical"
+                                android:hint="Enter company address"
                                 android:inputType="textCapSentences"
                                 android:maxLines="1"
-                                android:hint="Enter company address"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen12dp"
@@ -530,10 +530,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen42dp"
                                 android:gravity="center_vertical"
+                                android:hint="Enter area pincode"
                                 android:inputType="number"
                                 android:maxLength="6"
                                 android:maxLines="1"
-                                android:hint="Enter area pincode"
                                 android:paddingStart="@dimen/dimen4dp"
                                 android:paddingTop="@dimen/dimen4dp"
                                 android:paddingEnd="@dimen/dimen12dp"
@@ -541,16 +541,32 @@
                                 android:textColor="@color/black_Light"
                                 android:textColorHint="@color/black_op50"
                                 android:textSize="@dimen/dimen12sp" />
-                            <com.swipee.in.CustomUi.PopinsRegularTextView
-                                android:id="@+id/tv_uploadvedio"
+
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen8dp"
-                                android:layout_marginBottom="@dimen/dimen8dp"
-                                android:drawableEnd="@drawable/ic_plus"
-                                android:text="Upload Video"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/dimen14sp" />
+                                android:paddingTop="@dimen/dimen8dp"
+                                android:paddingBottom="@dimen/dimen8dp">
+
+                                <com.swipee.in.CustomUi.PopinsRegularTextView
+                                    android:id="@+id/tv_uploadvedio"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dimen24dp"
+                                    android:layout_toStartOf="@+id/iv_deleteVideo"
+                                    android:drawableEnd="@drawable/ic_plus"
+                                    android:text="Upload Video"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/dimen14sp" />
+
+                                <ImageView
+                                    android:id="@+id/iv_deleteVideo"
+                                    android:layout_width="@dimen/dimen24dp"
+                                    android:layout_height="@dimen/dimen24dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginStart="@dimen/dimen8dp"
+                                    android:src="@drawable/ic_baseline_delete_24"
+                                    android:visibility="gone" />
+                            </RelativeLayout>
 
                             <ImageView
                                 android:id="@+id/iv_userpickvideo"

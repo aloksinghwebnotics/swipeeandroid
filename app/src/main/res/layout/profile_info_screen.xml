@@ -1027,6 +1027,29 @@
                             android:src="@drawable/ic_icon_feather_upload"
                             app:tint="@color/colorPrimary" />
 
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/iv_editVideo"
+                            android:layout_width="@dimen/dimen36dp"
+                            android:layout_toStartOf="@+id/iv_deleteVideo"
+                            android:layout_height="@dimen/dimen36dp"
+                            android:padding="@dimen/dimen8dp"
+                            android:layout_margin="@dimen/dimen4dp"
+                            android:scaleType="fitCenter"
+                            android:background="@drawable/white_round_bg"
+                            android:src="@drawable/ic_icon_feather_edit" />
+                        <ImageView
+                            android:visibility="gone"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="@dimen/dimen4dp"
+                            android:id="@+id/iv_deleteVideo"
+                            android:layout_width="@dimen/dimen36dp"
+                            android:layout_height="@dimen/dimen36dp"
+                            android:background="@drawable/white_round_bg"
+                            android:padding="@dimen/dimen6dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_delete_24" />
+
                     </RelativeLayout>
 
 

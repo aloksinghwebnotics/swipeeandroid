@@ -33,10 +33,11 @@
             android:textColor="@color/black"
             android:textSize="@dimen/dimen16sp" />
     </RelativeLayout>
+
     <WebView
-        android:layout_below="@+id/rl_toollbar"
         android:id="@+id/wv_url"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_toollbar" />
 
 </RelativeLayout>

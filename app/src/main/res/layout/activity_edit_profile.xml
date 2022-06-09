@@ -74,84 +74,49 @@
                         android:padding="@dimen/dimen10dp"
                         android:src="@drawable/pencil" />
 
-                    <com.swipee.in.CustomUi.PopinsRegularTextView
-                        android:id="@+id/tv_emailt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimen16dp"
-                        android:layout_marginTop="@dimen/dimen16dp"
-                        android:layout_toEndOf="@+id/civ_profile"
-                        android:gravity="center_vertical"
-                        android:text="@string/email"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/dimen14sp" />
 
-                    <com.swipee.in.CustomUi.PopinsRegularTextView
-                        android:id="@+id/et_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen26dp"
-                        android:layout_below="@+id/tv_emailt"
-                        android:layout_marginStart="@dimen/dimen16dp"
+                    <RelativeLayout
                         android:layout_toEndOf="@+id/civ_profile"
-                        android:background="#00000000"
-                        android:drawableEnd="@drawable/ic_check"
-                        android:drawablePadding="@dimen/dimen6dp"
-                        android:gravity="center_vertical"
-                        android:maxLength="52"
-                        android:maxLines="1"
-                        android:paddingStart="@dimen/dimen2dp"
-                        android:paddingEnd="@dimen/dimen2dp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimen12sp" />
+                        android:layout_width="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen1dp"
-                        android:layout_below="@+id/et_email"
-                        android:layout_marginStart="@dimen/dimen16dp"
-                        android:layout_marginTop="@dimen/dimen4dp"
-                        android:layout_toEndOf="@+id/civ_profile"
-                        android:background="@color/nav_gray" />
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
+                            android:id="@+id/et_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dimen26dp"
+                            android:layout_marginStart="@dimen/dimen16dp"
+                            android:background="#00000000"
+                            android:drawableEnd="@drawable/ic_check"
+                            android:drawablePadding="@dimen/dimen6dp"
+                            android:gravity="center_vertical"
+                            android:maxLength="52"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/dimen2dp"
+                            android:paddingEnd="@dimen/dimen2dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen12sp" />
 
-                    <com.swipee.in.CustomUi.PopinsRegularTextView
-                        android:id="@+id/tv_phoneTil"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/et_email"
-                        android:layout_marginStart="@dimen/dimen16dp"
-                        android:layout_marginTop="@dimen/dimen12dp"
-                        android:layout_toEndOf="@+id/civ_profile"
-                        android:gravity="center_vertical"
-                        android:text="@string/phonenumber"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/dimen14sp" />
 
-                    <com.swipee.in.CustomUi.PopinsRegularTextView
-                        android:id="@+id/et_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen26dp"
-                        android:layout_below="@+id/tv_phoneTil"
-                        android:layout_marginStart="@dimen/dimen16dp"
-                        android:layout_toEndOf="@+id/civ_profile"
-                        android:background="#00000000"
-                        android:drawableEnd="@drawable/ic_check"
-                        android:drawablePadding="@dimen/dimen6dp"
-                        android:gravity="center_vertical"
-                        android:maxLength="12"
-                        android:maxLines="1"
-                        android:paddingStart="@dimen/dimen2dp"
-                        android:paddingEnd="@dimen/dimen2dp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimen12sp" />
+                        <com.swipee.in.CustomUi.PopinsRegularTextView
+                            android:id="@+id/et_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dimen26dp"
+                            android:layout_below="@+id/et_email"
+                            android:layout_marginStart="@dimen/dimen16dp"
+                            android:background="#00000000"
+                            android:drawableEnd="@drawable/ic_check"
+                            android:drawablePadding="@dimen/dimen6dp"
+                            android:gravity="center_vertical"
+                            android:maxLength="12"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/dimen2dp"
+                            android:paddingEnd="@dimen/dimen2dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen12sp" />
+                    </RelativeLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen1dp"
-                        android:layout_below="@+id/et_phone"
-                        android:layout_marginStart="@dimen/dimen16dp"
-                        android:layout_marginTop="@dimen/dimen4dp"
-                        android:layout_toEndOf="@+id/civ_profile"
-                        android:background="@color/nav_gray" />
+
                 </RelativeLayout>
 
                 <com.swipee.in.CustomUi.PopinsRegularTextView

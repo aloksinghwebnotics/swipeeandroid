@@ -84,12 +84,10 @@ public class ResumesActivity extends AppCompatActivity {
                             ll_nodata.setVisibility(View.VISIBLE);
                             rv_Likejob.setVisibility(View.GONE);
                         }
-
                     }else{
                         rest.showToast(responseBody.getMessage());
                         finish();
                     }
-
                 } else{
                     rest.showToast("Something went wrong");
                     finish();

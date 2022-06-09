@@ -73,7 +73,7 @@
         android:layout_marginStart="@dimen/dimen8dp"
         android:layout_marginEnd="@dimen/dimen8dp"
         android:layout_marginBottom="@dimen/dimen8dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/primary_semiround_bg"
         android:gravity="center"
         android:text="okay, got it"
         android:textColor="@color/white"

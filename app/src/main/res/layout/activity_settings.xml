@@ -95,6 +95,21 @@
            android:text="@string/imprint"
            android:textColor="@color/black"
            android:textSize="@dimen/dimen16sp" />
+  <com.swipee.in.CustomUi.PopinsRegularTextView
+           android:layout_marginStart="@dimen/dimen18dp"
+           android:layout_marginEnd="@dimen/dimen18dp"
+           android:id="@+id/tv_blocked_users"
+           android:layout_width="wrap_content"
+           android:layout_height="@dimen/dimen48dp"
+           android:layout_marginTop="@dimen/dimen16dp"
+           android:drawableStart="@drawable/ic_icon_metro_blocked"
+           android:drawablePadding="@dimen/dimen13dp"
+           android:gravity="center_vertical"
+           android:paddingStart="@dimen/dimen30dp"
+           android:paddingEnd="@dimen/dimen30dp"
+           android:text="Blocked Users"
+           android:textColor="@color/black"
+           android:textSize="@dimen/dimen16sp" />
 
    </LinearLayout>
 

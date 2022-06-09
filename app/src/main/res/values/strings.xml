@@ -143,8 +143,9 @@
 
     <string name="noleftswipe">You have crossed your daily swipe limit. Book a plan</string>
     <string name="dailylimitexceed">You have reached your daily job apply limit</string>
-    <string name="nodatatxt">You don\'t have any active job posting yet. Post one to get matching candidates.</string>
+    <string name="nodatatxt_noactivejob">You don\'t have any active job posting yet. Post one to get matching candidates.</string>
 
+    <string name="nodatatxt">Oops!!! Seems you have no other match. Kindly broad your match criteria. Alternatively please go to Liked Users section.</string>
     <string name="nodatatxt1">Oops!!! Seems you have no other match. Kindly broad your match criteria. Alternatively please go to Liked Job section.</string>
     <string name="nodatatxt1First">Oops!!! Seems you have no other match. Kindly broad your match criteria.</string>
     <string name="packageexpseekr">You don’t have any active package. Please purchase a plan to continue.</string>

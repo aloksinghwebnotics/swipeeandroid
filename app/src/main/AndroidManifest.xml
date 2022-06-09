@@ -34,9 +34,14 @@
         android:usesCleartextTraffic="true"
         tools:replace="allowBackup">
         <activity
-            android:name=".activity.VideoPlayer"
+            android:name=".activity.company.BlockedUsers"
             android:exported="false"
-            android:configChanges="orientation|screenSize"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/basictheme"/>
+        <activity
+            android:name=".activity.VideoPlayer"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
         <activity
             android:name=".activity.company.Edit_Job_Activity"
             android:exported="false"
@@ -110,9 +115,9 @@
         <activity
             android:name=".activity.ChatActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/basictheme" />
+            android:theme="@style/basictheme"
+            android:windowSoftInputMode="adjustResize" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -385,8 +390,9 @@
         <service
             android:name=".services.ChatService"
             android:permission="Manifest.permission.FOREGROUND_SERVICE" />
-        <service android:name=".services.WebService"
-            android:exported="false"/> <!-- Razor Pay Activity -->
+        <service
+            android:name=".services.WebService"
+            android:exported="false" /> <!-- Razor Pay Activity -->
         <receiver
             android:name="com.razorpay.RzpTokenReceiver"
             android:exported="false">

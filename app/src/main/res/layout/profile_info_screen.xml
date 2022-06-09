@@ -1051,7 +1051,14 @@
                             android:src="@drawable/ic_baseline_delete_24" />
 
                     </RelativeLayout>
-
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_choose_video"
+                        android:layout_marginTop="@dimen/dimen12dp"
+                        android:text="Max size 15 MB"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen12sp" />
 
 
                 </RelativeLayout>

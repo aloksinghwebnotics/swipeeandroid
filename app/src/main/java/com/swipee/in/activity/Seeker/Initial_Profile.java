@@ -765,6 +765,7 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                         Config.SetIsUserLogin(true);
                         Config.SetIsSeeker(true);
                         mContext.startActivity(new Intent(mContext, SeekerHomeActivity.class).putExtra("from", "new"));
+                        finish();
                     } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong.");
 

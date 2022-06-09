@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen250dp"
+    android:layout_margin="@dimen/dimen6dp"
+    android:elevation="@dimen/dimen3dp">
+
+    <ImageView
+        android:id="@+id/iv_backimg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@drawable/semi_gradient_bg"
+        android:paddingTop="@dimen/dimen8dp"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <com.swipee.in.CustomUi.PopinsMediumTextView
+            android:layout_marginBottom="@dimen/dimen4dp"
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dimen8dp"
+            android:paddingEnd="@dimen/dimen8dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen12sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_company"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/dimen4dp"
+            android:layout_width="match_parent"
+            android:paddingStart="@dimen/dimen8dp"
+            android:paddingEnd="@dimen/dimen8dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/suitcase"
+                android:layout_width="@dimen/dimen15dp"
+                android:layout_height="@dimen/dimen15dp"
+                android:src="@drawable/ic_portfolio"
+                app:tint="@color/white_light" />
+
+            <com.swipee.in.CustomUi.PopinsMediumTextView
+                android:id="@+id/tv_companyname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/suitcase"
+                android:paddingStart="@dimen/dimen6dp"
+                android:paddingEnd="@dimen/dimen6dp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen12sp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_location"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/dimen8dp"
+            android:paddingStart="@dimen/dimen8dp"
+            android:paddingEnd="@dimen/dimen8dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/loaction"
+                android:layout_width="@dimen/dimen15dp"
+                android:layout_height="@dimen/dimen15dp"
+                android:src="@drawable/ic_location"
+                app:tint="@color/white_light" />
+
+            <com.swipee.in.CustomUi.PopinsMediumTextView
+                android:id="@+id/tv_loaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/loaction"
+                android:paddingStart="@dimen/dimen6dp"
+                android:paddingEnd="@dimen/dimen6dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen12sp" />
+
+        </RelativeLayout>
+        <com.swipee.in.CustomUi.PopinsMediumTextView
+            android:id="@+id/tv_unblock"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:background="@drawable/primary_bottom_round"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dimen36dp"
+            android:padding="@dimen/dimen8dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen12sp"
+            android:text="Unblock"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

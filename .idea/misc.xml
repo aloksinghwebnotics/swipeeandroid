@@ -304,6 +304,9 @@
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_feather_mail.xml" value="0.1555" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_icon_feather_edit.xml" value="0.1555" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_icon_feather_upload.xml" value="0.1555" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_icon_material_check.xml" value="0.2015" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_icon_metro_blocked.xml" value="0.2015" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_imprint.xml" value="0.2015" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_languages.xml" value="0.1555" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1555" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/ic_location1.xml" value="0.1555" />
@@ -317,6 +320,7 @@
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/primary_round_bg.xml" value="0.1555" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/primary_round_chat_bg.xml" value="0.1555" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/white_light_round_chat_bg.xml" value="0.1555" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/drawable/white_top_round_bg.xml" value="0.2015" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_add_carrier_objective.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_add_city.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_add_college.xml" value="0.20599409033347404" />
@@ -333,6 +337,7 @@
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_appointment_detail.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_audio.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_basicinfo.xml" value="0.20863616930312098" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_blocked_users.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_chat.xml" value="0.2" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_company_appoiment.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_company_edit_profile.xml" value="0.20863616930312098" />
@@ -349,6 +354,7 @@
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_mached_company.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_reschedule_appointment.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_resumes.xml" value="0.20863616930312098" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_settings.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_user_detail.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_video_player.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/activity_view_resume.xml" value="0.20863616930312098" />
@@ -356,9 +362,12 @@
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/add_college_child.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/cancel_appointment_popup.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/chatmessagerowitems.xml" value="0.2" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/child_blockedusers.xml" value="0.20863616930312098" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/child_likedjobs.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/child_state.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/close_job_popup.xml" value="0.2" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/company_profile_screen.xml" value="0.20863616930312098" />
+        <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/companymaindashboard.xml" value="0.14621633176571183" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/dashboardemployee.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/emailverification_screen.xml" value="0.20863616930312098" />
         <entry key="..\:/androidProjects/InstaCarriers_VC1/InstaCarriers/app/src/main/res/layout/employeeehomerowitms.xml" value="0.20863616930312098" />

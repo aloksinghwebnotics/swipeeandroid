@@ -74,7 +74,7 @@
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen38dp"
-                android:text="Mention reason"
+                android:text="Other (Mention reason)"
                 android:textColor="@color/black"
                 android:theme="@style/customRadioButton"
                 android:textSize="@dimen/dimen14sp"/>

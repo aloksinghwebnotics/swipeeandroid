@@ -87,6 +87,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
@@ -381,15 +382,12 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
 
-            ////
             if (!isPause && !isScroll){
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put(ParaName.KEY_MSGID, ids.toString());
                 hashMap.put(ParaName.KEY_RECEIVERID, receiver_id);
                 setMsgSeen(hashMap, ids);
             }
-
-            //
         }
         super.onResume();
 
@@ -412,7 +410,6 @@ public class ChatActivity extends AppCompatActivity {
                         finish();
                     } else if (responceBody.getCode() == 200 && responceBody.isStatus()) {
                        setDataTolist(responceBody.getData(),msgId);
-
                     }
 
                 } else rest.showToast("Something went wrong");
@@ -443,9 +440,7 @@ public class ChatActivity extends AppCompatActivity {
                     temp.add(temp.size(),data.get(i));
             }
             mainChatList.addAll(mainChatList.size(), temp);
-        }else {
-            mainChatList.addAll(mainChatList.size(),data);
-        }
+        }else { mainChatList.addAll(mainChatList.size(),data); }
         Collections.sort(mainChatList, new SortByMsgId());
         ArrayList<ChatModel.Data> listTemp = new ArrayList<>(mainChatListTemp);
         recentMsg = recentMsg + (mainChatList.size() - mainChatListTemp.size());
@@ -545,8 +540,6 @@ public class ChatActivity extends AppCompatActivity {
                 hashMap.put(ParaName.KEY_RECEIVERID, receiver_id);
                 setMsgSeen(hashMap, ids);
             }
-
-            //
         }
     }
 
@@ -564,12 +557,10 @@ public class ChatActivity extends AppCompatActivity {
                             ArrayList<ChatModel.Data> arrayList=new ArrayList<>();
                             arrayList.addAll(tempListForSeen);
                             int size=arrayList.size();
-                            for (int i = 0; i < size; i++) {
-                                if (ids.contains(arrayList.get(i).getMsg_id())) arrayList.remove(i);
-                            }
+                            IntStream.range(0, size).filter(i -> ids.contains(arrayList.get(i).getMsg_id())).forEach(arrayList::remove);
                             tempListForSeen.clear();
                             tempListForSeen.addAll(arrayList);
-                        }catch (Exception e){}
+                        }catch (Exception ignored){}
 
                     }
                 }
@@ -767,7 +758,6 @@ public class ChatActivity extends AppCompatActivity {
                 if (filePath != null) {
                     File file = new File(filePath);
                      docName = file.getName();
-
                 }
             } catch (Exception e) {
                 try {
@@ -935,6 +925,14 @@ public class ChatActivity extends AppCompatActivity {
         runOnUiThread(() -> {
             if (appointment_number.equalsIgnoreCase(appointment))
                 tv_typing.setVisibility(typing_status.equalsIgnoreCase("Y") ? View.VISIBLE : View.INVISIBLE);
+        });
+    }
+
+    public void setOnline(String online_status, String user_id) {
+        runOnUiThread(() -> {
+            if (user_id.equalsIgnoreCase(receiver)){
+                iv_online_offline.setImageResource(online_status.equalsIgnoreCase("Online")?R.drawable.circle_green_bg:R.drawable.gray_semiround_bg);
+            }
         });
     }
 

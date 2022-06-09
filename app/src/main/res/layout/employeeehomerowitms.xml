@@ -154,13 +154,13 @@
             android:textColor="@color/white"
             android:text="Yes"
             android:textSize="@dimen/dimen21sp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textStyle="bold" />
 
         <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/nopee"
             android:layout_width="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:background="@color/red"

@@ -556,6 +556,15 @@
             android:visibility="gone"
             android:paddingBottom="@dimen/dimen6dp"
             android:textSize="@dimen/dimen16sp"/>
-
+        <com.swipee.in.CustomUi.PopinsRegularTextView
+            android:id="@+id/tv_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Profile"
+            android:textColor="@color/black"
+            android:paddingTop="@dimen/dimen6dp"
+            android:visibility="gone"
+            android:paddingBottom="@dimen/dimen6dp"
+            android:textSize="@dimen/dimen16sp"/>
     </LinearLayout>
 </RelativeLayout>

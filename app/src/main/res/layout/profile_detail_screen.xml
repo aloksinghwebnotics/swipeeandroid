@@ -554,7 +554,7 @@
                                     android:layout_height="@dimen/dimen24dp"
                                     android:layout_toStartOf="@+id/iv_deleteVideo"
                                     android:drawableEnd="@drawable/ic_plus"
-                                    android:text="Upload Video"
+                                    android:text="Upload Video (Max size 15 MB)"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="@dimen/dimen14sp" />
 

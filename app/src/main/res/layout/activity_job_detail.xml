@@ -689,7 +689,7 @@
             android:id="@+id/tv_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share Profile"
+            android:text="Share Job"
             android:textColor="@color/black"
             android:paddingTop="@dimen/dimen6dp"
             android:visibility="gone"

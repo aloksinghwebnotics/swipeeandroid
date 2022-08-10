@@ -19,6 +19,8 @@
         android:layout_above="@+id/rl_pay">
 
         <LinearLayout
+            android:id="@+id/ll_main"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -26,31 +28,50 @@
             android:paddingStart="@dimen/dimen20dp"
             android:paddingEnd="@dimen/dimen20dp">
 
-            <ImageView
-                android:layout_width="@dimen/dimen72dp"
-                android:layout_height="@dimen/dimen72dp"
-                android:src="@drawable/ic_group_6847" />
-
-            <com.swipee.in.CustomUi.PopinsSemiboldTextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_current_plan"
+                android:visibility="gone"
+                android:elevation="@dimen/dimen4dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen16dp"
-                android:gravity="center"
-                android:text="Get premium access!"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimen16sp" />
-
-            <com.swipee.in.CustomUi.PopinsRegularTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen24dp"
+                android:minHeight="@dimen/dimen120dp"
+                android:layout_marginStart="@dimen/dimen2dp"
+                android:layout_marginEnd="@dimen/dimen2dp"
+                android:padding="@dimen/dimen16dp"
+                android:orientation="vertical"
                 android:layout_marginTop="@dimen/dimen8dp"
-                android:layout_marginEnd="@dimen/dimen24dp"
-                android:gravity="center"
-                android:text="@string/plantxt"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimen12sp" />
+                android:background="@drawable/white_light_8dp_round_bg">
 
+                <com.swipee.in.CustomUi.PopinsSemiboldTextView
+                    android:id="@+id/tv_active_planname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen14sp"/>
+                <com.swipee.in.CustomUi.PopinsRegularTextView
+                    android:id="@+id/tv_active_plandetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_Light"
+                    android:textSize="@dimen/dimen13sp"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/colorPrimaryPartial"
+                android:layout_marginTop="@dimen/dimen18dp"
+                android:layout_marginBottom="@dimen/dimen18dp"
+                android:layout_marginStart="@dimen/dimen36dp"
+                android:layout_marginEnd="@dimen/dimen36dp"/>
+            <com.swipee.in.CustomUi.PopinsSemiboldTextView
+                android:id="@+id/tv_switch_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Switch Plan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen15sp"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_plan"
                 android:layout_width="match_parent"
@@ -65,10 +86,12 @@
         android:id="@+id/rl_pay"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
         android:paddingStart="@dimen/dimen25dp"
         android:paddingEnd="@dimen/dimen25dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary">
+        android:visibility="gone">
+
 
         <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/tv_title"
@@ -77,30 +100,31 @@
             android:layout_marginTop="@dimen/dimen12dp"
             android:textColor="@color/white"
             android:textSize="@dimen/dimen14sp" />
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_below="@+id/tv_title"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      >
-      <com.swipee.in.CustomUi.PopinsSemiboldTextView
 
-          android:id="@+id/tv_amount"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/dimen14sp"/>
-      <com.swipee.in.CustomUi.PopinsMediumTextView
-          android:id="@+id/tv_period"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/dimen10sp"/>
-  </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:orientation="horizontal">
+
+            <com.swipee.in.CustomUi.PopinsSemiboldTextView
+
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen14sp" />
+
+            <com.swipee.in.CustomUi.PopinsMediumTextView
+                android:id="@+id/tv_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen10sp" />
+        </LinearLayout>
 
         <com.swipee.in.CustomUi.PopinsMediumTextView
             android:id="@+id/tv_pay"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -112,7 +136,8 @@
             android:paddingBottom="@dimen/dimen6dp"
             android:text="Pay"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/dimen14sp" />
+            android:textSize="@dimen/dimen14sp"
+            android:visibility="gone" />
 
 
     </RelativeLayout>

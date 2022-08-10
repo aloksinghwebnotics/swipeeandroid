@@ -24,20 +24,21 @@
         android:layout_alignParentEnd="true"
         android:rotation="180"
         android:src="@drawable/ic_intersection_2" />
+
     <RelativeLayout
-        android:paddingStart="@dimen/dimen10dp"
-        android:paddingEnd="@dimen/dimen18dp"
         android:id="@+id/rl_toollbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen42dp">
+        android:layout_height="@dimen/dimen42dp"
+        android:paddingStart="@dimen/dimen10dp"
+        android:paddingEnd="@dimen/dimen18dp">
 
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="@dimen/dimen42dp"
             android:layout_height="@dimen/dimen42dp"
             android:layout_centerVertical="true"
-            android:paddingEnd="@dimen/dimen12dp"
             android:paddingStart="@dimen/dimen12dp"
+            android:paddingEnd="@dimen/dimen12dp"
             android:src="@drawable/ic_back" />
 
         <com.swipee.in.CustomUi.PopinsMediumTextView
@@ -47,6 +48,16 @@
             android:text="Company Profile"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen16sp" />
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="@dimen/dimen32dp"
+            android:layout_height="@dimen/dimen32dp"
+            android:src="@drawable/ic_outline_share_24"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/dimen4dp"
+            app:tint="@color/black_Light" />
     </RelativeLayout>
 
     <ScrollView

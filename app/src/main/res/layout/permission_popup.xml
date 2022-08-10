@@ -58,7 +58,7 @@
                 android:layout_marginEnd="@dimen/dimen12dp"
                 android:text="Select Manually"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/dimen14sp"/>
+                android:textSize="@dimen/dimen13sp"/>
             <View
                 android:id="@+id/view1"
                 android:visibility="visible"
@@ -67,17 +67,17 @@
                 android:background="#C8E3E3E3"
                 android:layout_marginStart="@dimen/dimen4dp"
                 android:layout_marginEnd="@dimen/dimen4dp"/>
-            <com.swipee.in.CustomUi.PopinsMediumTextView
+            <com.swipee.in.CustomUi.PopinsRegularTextView
                 android:id="@+id/tv_yes"
                 android:layout_width="match_parent"
-                android:layout_weight="0.45"
+                android:layout_weight="0.47"
                 android:layout_height="@dimen/dimen42dp"
                 android:layout_marginStart="@dimen/dimen12dp"
                 android:layout_marginEnd="@dimen/dimen12dp"
                 android:text="Allow from settings"
                 android:gravity="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/dimen14sp"/>
+                android:textSize="@dimen/dimen13sp"/>
         </LinearLayout>
 
     </LinearLayout>

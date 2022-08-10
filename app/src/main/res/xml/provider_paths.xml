@@ -5,4 +5,5 @@
         path="/storage/" />
     <files-path name="my_images" path="images/"/>
     <files-path name="my_docs" path="docs/"/>
+    <external-path name="external_files" path="."/>
 </paths>

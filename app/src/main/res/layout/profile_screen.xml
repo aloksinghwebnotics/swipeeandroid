@@ -363,12 +363,12 @@
                        android:id="@+id/iv_add_education"
                        android:layout_width="@dimen/dimen30dp"
                        android:layout_height="@dimen/dimen30dp"
-                       android:padding="@dimen/dimen6dp"
                        android:layout_alignParentEnd="true"
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
-                       android:src="@drawable/ic_icon_feather_edit" />
+                       android:padding="@dimen/dimen6dp"
+                       android:src="@drawable/ic_plus" />
 
                    <ImageView
                        android:id="@+id/iv_show_education"
@@ -530,11 +530,11 @@
                        android:id="@+id/iv_add_resume"
                        android:layout_width="@dimen/dimen30dp"
                        android:layout_height="@dimen/dimen30dp"
-                       android:padding="@dimen/dimen6dp"
                        android:layout_alignParentEnd="true"
                        android:layout_centerInParent="true"
                        android:layout_marginStart="@dimen/dimen10dp"
                        android:layout_marginEnd="@dimen/dimen32dp"
+                       android:padding="@dimen/dimen6dp"
                        android:src="@drawable/ic_icon_feather_edit" />
 
                    <ImageView

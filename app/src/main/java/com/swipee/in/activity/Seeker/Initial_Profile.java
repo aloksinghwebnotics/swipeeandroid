@@ -134,11 +134,7 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
             AppController.ShowDialogue("", mContext);
             getProfileData();
         } else rest.AlertForInternet();
-////////////
 
-        /* */
-
-        //////////
     }
 
     private void setVisibilityGone() {
@@ -177,7 +173,6 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onFailure(@NonNull Call<JobTypeModel> call, @NonNull Throwable t) {
-
                 AppController.dismissProgressdialog();
             }
         });
@@ -325,10 +320,10 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
             IntStream.range(0, mArrayUserListLang.size()).forEach(i -> {
                 LinearLayout linearLayout = new LinearLayout(mContext);
                 FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
-                        FlowLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
-                layoutParams.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
+                        FlowLayout.LayoutParams.WRAP_CONTENT, (int) (getResources().getDisplayMetrics().density * 32));
+                layoutParams.setMargins((int) (getResources().getDisplayMetrics().density * 5), 0, (int) (getResources().getDisplayMetrics().density * 5), (int) (getResources().getDisplayMetrics().density * 8));
                 linearLayout.setPadding(16, 0, 16, 0);
-                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
+                linearLayout.setPadding((int) (getResources().getDisplayMetrics().density * 8), 0, (int) (getResources().getDisplayMetrics().density * 8), 0);
                 linearLayout.setLayoutParams(layoutParams);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 linearLayout.setGravity(Gravity.CENTER);
@@ -340,7 +335,7 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                 bt.setMaxLines(1);
                 bt.setEllipsize(TextUtils.TruncateAt.END);
                 bt.setTag(mArrayUserListLang.get(i).getLanguage_name());
-                bt.setTextColor(mContext.getResources().getColor(R.color.white));
+                bt.setTextColor(getResources().getColor(R.color.white));
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams1.setMargins(0, 0, 0, 0);
@@ -368,11 +363,11 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                 FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
                         FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
-                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
+                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (getResources().getDisplayMetrics().density * 32));
+                layoutParamsF.setMargins((int) (getResources().getDisplayMetrics().density * 5), 0, (int) (getResources().getDisplayMetrics().density * 5), (int) (getResources().getDisplayMetrics().density * 8));
                 linearLayoutF.setLayoutParams(layoutParams);
                 linearLayout.setLayoutParams(layoutParamsF);
-                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
+                linearLayout.setPadding((int) (getResources().getDisplayMetrics().density * 8), 0, (int) (getResources().getDisplayMetrics().density * 8), 0);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 linearLayout.setGravity(Gravity.CENTER);
                 linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
@@ -383,7 +378,7 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                 bt.setMaxLines(1);
                 bt.setEllipsize(TextUtils.TruncateAt.END);
                 bt.setTag(mArrayListUserSkills.get(i));
-                bt.setTextColor(mContext.getResources().getColor(R.color.white));
+                bt.setTextColor(getResources().getColor(R.color.white));
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams1.setMargins(0, 0, 0, 0);
@@ -409,11 +404,11 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                 FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(
                         FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams layoutParamsF = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (mContext.getResources().getDisplayMetrics().density * 32));
-                layoutParamsF.setMargins((int) (mContext.getResources().getDisplayMetrics().density * 5), 0, (int) (mContext.getResources().getDisplayMetrics().density * 5), (int) (mContext.getResources().getDisplayMetrics().density * 8));
+                        LinearLayout.LayoutParams.WRAP_CONTENT, (int) (getResources().getDisplayMetrics().density * 32));
+                layoutParamsF.setMargins((int) (getResources().getDisplayMetrics().density * 5), 0, (int) (getResources().getDisplayMetrics().density * 5), (int) (getResources().getDisplayMetrics().density * 8));
                 linearLayoutF.setLayoutParams(layoutParams);
                 linearLayout.setLayoutParams(layoutParamsF);
-                linearLayout.setPadding((int) (mContext.getResources().getDisplayMetrics().density * 8), 0, (int) (mContext.getResources().getDisplayMetrics().density * 8), 0);
+                linearLayout.setPadding((int) (getResources().getDisplayMetrics().density * 8), 0, (int) (getResources().getDisplayMetrics().density * 8), 0);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 linearLayout.setGravity(Gravity.CENTER);
                 linearLayout.setBackgroundResource(R.drawable.primary_semiround_bg);
@@ -424,7 +419,7 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                 bt.setMaxLines(1);
                 bt.setEllipsize(TextUtils.TruncateAt.END);
                 bt.setTag(mArrayUserJobType.get(i).getJob_type_name());
-                bt.setTextColor(mContext.getResources().getColor(R.color.white));
+                bt.setTextColor(getResources().getColor(R.color.white));
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams1.setMargins(0, 0, 0, 0);
@@ -549,10 +544,8 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                     ExperienceAdapter adapter = new ExperienceAdapter(mContext, mArrayuserworkexperience);
                     list_experience.setAdapter(adapter);
                 }
-
             }
         }
-
     }
 
     public void setEducationData(boolean isEdit, JsonObject jsonElements) {
@@ -633,7 +626,6 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
             iv_add_preferences.setImageResource(R.drawable.ic_icon_feather_edit);
             prefId = mArrayuseruserpreference.get(0).getPreference_id();
         } else iv_add_preferences.setImageResource(R.drawable.ic_plus);
-
     }
 
     private void getProfileData() {
@@ -687,12 +679,11 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
             Config.SetGender(employeeuserdetail.getData().getUser_profile_data().getGender());
             Config.SetId(employeeuserdetail.getData().getUser_profile_data().getUser_id());
             if (employeeuserdetail.getData().getUser_profile_data().getMiddle_name().length() != 0) {
-                Config.SetName(employeeuserdetail.getData().getUser_profile_data().getFirst_name() + " " +
-                        employeeuserdetail.getData().getUser_profile_data().getMiddle_name() + " " +
-                        employeeuserdetail.getData().getUser_profile_data().getLast_name());
+                Config.SetName(String.format("%s %s %s", employeeuserdetail.getData().getUser_profile_data().getFirst_name(),
+                        employeeuserdetail.getData().getUser_profile_data().getMiddle_name(), employeeuserdetail.getData().getUser_profile_data().getLast_name()));
             } else {
-                Config.SetName(employeeuserdetail.getData().getUser_profile_data().getFirst_name() + " " +
-                        employeeuserdetail.getData().getUser_profile_data().getLast_name());
+                Config.SetName(String.format("%s %s", employeeuserdetail.getData().getUser_profile_data().getFirst_name(),
+                        employeeuserdetail.getData().getUser_profile_data().getLast_name()));
             }
             Config.SetFName(employeeuserdetail.getData().getUser_profile_data().getFirst_name());
             Config.SetLName(employeeuserdetail.getData().getUser_profile_data().getLast_name());
@@ -720,7 +711,6 @@ public class Initial_Profile extends AppCompatActivity implements View.OnClickLi
                 list_education.setAdapter(adapter);
             }
         }
-
         if (mArrayuseruserpreference != null) {
             if (mArrayuseruserpreference.size() != 0) {
                 locId = new ArrayList<>();

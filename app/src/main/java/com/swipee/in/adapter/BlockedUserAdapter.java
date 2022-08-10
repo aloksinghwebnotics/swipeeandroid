@@ -1,4 +1,4 @@
-package com.swipee.in.adapter.company;
+package com.swipee.in.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.swipee.in.R;
-import com.swipee.in.activity.company.BlockedUsers;
+import com.swipee.in.activity.BlockedUsers;
 import com.swipee.in.model.company.LikedUserModel;
 
 import java.text.MessageFormat;
@@ -52,7 +52,7 @@ public class BlockedUserAdapter extends RecyclerView.Adapter<BlockedUserAdapter.
 
         holder.tv_companyname.setText(data.get(position).getSkill_name());
         holder.tv_name.setText(data.get(position).getFirst_name());
-        holder.tv_unblock.setText("Unblock "+data.get(position).getFirst_name());
+        holder.tv_unblock.setText(String.format("Unblock %s", data.get(position).getFirst_name()));
         holder.tv_loaction.setText(MessageFormat.format("{0}, {1}", data.get(position).getCity(), data.get(position).getState()));
         Glide.with(mContext)
                 .load(data.get(position).getUser_profile())
@@ -61,12 +61,7 @@ public class BlockedUserAdapter extends RecyclerView.Adapter<BlockedUserAdapter.
                 .transform(new MultiTransformation(new CenterCrop(),new RoundedCorners((int) (mContext.getResources().getDisplayMetrics().density*12))))
                 .into(holder.iv_backimg);
 
-        holder.tv_unblock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mContext.unBlockUser(data.get(position).getUser_id(),data.get(position).getFirst_name(),data.get(position).getJob_id());
-            }
-        });
+        holder.tv_unblock.setOnClickListener(view -> mContext.unBlockUser(data.get(position).getUser_id(),data.get(position).getFirst_name(),data.get(position).getJob_id()));
 
     }
 

@@ -347,18 +347,35 @@
                     android:layout_marginTop="@dimen/dimen6dp"
                     android:background="@color/nav_gray" />
 
-                <com.swipee.in.CustomUi.PopinsRegularTextView
-                    android:id="@+id/tv_upload"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen18dp"
+                    android:minHeight="@dimen/dimen30dp"
                     android:layout_marginBottom="@dimen/dimen18dp"
-                    android:drawableEnd="@drawable/ic_plus"
-                    android:gravity="center_vertical"
-                    android:text="Upload Video (Max size 15 MB)"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/dimen14sp" />
-
+                    android:layout_height="wrap_content">
+                    <com.swipee.in.CustomUi.PopinsRegularTextView
+                        android:id="@+id/tv_upload"
+                        android:layout_toStartOf="@+id/iv_deleteVideo"
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_plus"
+                        android:gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/dimen3dp"
+                        android:text="Upload Video (Max size 15 MB)"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/dimen14sp" />
+                    <ImageView
+                        android:id="@+id/iv_deleteVideo"
+                        android:visibility="gone"
+                        android:layout_width="@dimen/dimen30dp"
+                        android:layout_height="@dimen/dimen30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dimen7dp"
+                        android:padding="@dimen/dimen3dp"
+                        android:src="@drawable/ic_baseline_delete_24" />
+                </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/rl_video"
                     android:layout_width="match_parent"

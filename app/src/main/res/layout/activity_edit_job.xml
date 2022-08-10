@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerInParent="true"
-                        android:text="Job Description"
+                        android:text="Job description"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen16sp" />
 
@@ -106,7 +106,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:maxHeight="@dimen/dimen156dp"
-                        android:text="@string/tellabout"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/dimen13sp" />
                 </RelativeLayout>
@@ -129,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerInParent="true"
-                        android:text="No.of opening"
+                        android:text="No. of opening"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen16sp" />
 
@@ -168,7 +167,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:maxHeight="@dimen/dimen156dp"
-                        android:text="@string/tellabout"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/dimen13sp" />
                 </RelativeLayout>
@@ -288,7 +286,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:maxHeight="@dimen/dimen156dp"
-                        android:text="@string/tellabout"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/dimen13sp" />
                 </RelativeLayout>
@@ -350,7 +347,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:maxHeight="@dimen/dimen156dp"
-                        android:text="@string/tellabout"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/dimen13sp" />
                 </RelativeLayout>
@@ -430,7 +426,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerInParent="true"
-                        android:text="Required Languages"
+                        android:text="Required languages"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen16sp" />
 

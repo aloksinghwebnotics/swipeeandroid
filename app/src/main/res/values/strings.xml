@@ -209,21 +209,25 @@
     <string name="locationFeature">Accessing your current location requires location permission. Featured jobs are displayed based on your location. Please grant location permission from the settings.</string>
     <string name="storagegallery_profilepick">We require storage permission to select your profile picture. Please grant Storage permission from the settings.</string>
     <string name="storagecamera_profilepick">We require storage permission to click profile picture. Please grant Storage permission from the settings.</string>
+    <string name="storagecamera_profilevideo">Recording videos require storage permission. Please grant storage permission from the settings.</string>
     <string name="camera_profilepick">We require camera permission to click the profile picture. Please grant Camera permission from the settings.</string>
+    <string name="camera_profilevideo">Recording videos require camera permission. Please grant the camera permission from the settings.</string>
     <string name="allcamera_profilepick"><![CDATA[ We require storage & camera permission to click the profile picture. Please grant permissions from the settings.]]></string>
+    <string name="allcamera_profilevideo"><![CDATA[Recording videos require storage & camera permissions. Please grant the permissions from the settings.]]></string>
     <string name="storage_profilevideo">We require storage permission to select your profile video. Please grant Storage permission from the settings.</string>
     <string name="storage_resume">Accessing a document requires storage permission. Please grant storage permission from the settings.</string>
-    <string name="allvideocallpermission"><![CDATA[Interview calls require recording, & storage permission. Please grant the permissions from the settings.]]></string>
+    <string name="allvideocallpermission"><![CDATA[Video interviews require camera, recording, & storage permission. Please grant the permissions from the settings.]]></string>
     <string name="camera_record_videocallpermission"><![CDATA[Video interviews require Camera & Record audio permission. Please grant the permissions from the settings.]]></string>
     <string name="camera_storage_videocallpermission"><![CDATA[Video interviews require Camera & Storage permission. Please grant the permissions from the settings.]]></string>
     <string name="record_storage_videocallpermission"><![CDATA[Video interviews require Record audio & Storage permission. Please grant the permissions from the settings.]]></string>
     <string name="camera_videocallpermission">" Video interviews require camera permission. Please grant permission from the settings. "</string>
     <string name="recordaudio_videocallpermission">To join the interview requires recording permission. Please grant permission from the settings.</string>
     <string name="storage_videocallpermission">To join the interview requires storage permission. Please grant permission from the settings.</string>
-    <string name="allaudiocallpermission"><![CDATA[" Interview calls require recording, & storage permission. Please grant the permissions from the settings."]]></string>
+    <string name="allaudiocallpermission"><![CDATA[ Interview calls require recording, & storage permission. Please grant the permissions from the settings.]]></string>
     <string name="storage_doc_chat">Uploading documents requires storage permission. Please grant storage permission from the settings.</string>
     <string name="storage_image_chat">Accessing an image requires storage permission. Please grant storage permission from the settings.</string>
     <string name="all_for_camera_chat"><![CDATA[Clicking an image requires storage & camera permission. Please grant permissions from the settings.]]></string>
     <string name="storage_for_camera_chat">Clicking an image requires storage permission. Please grant storage permission from the settings.</string>
     <string name="camera_for_camera_chat">Clicking an image requires camera permission. Please grant the camera permission from the settings.</string>
+    <string name="storage_download_doc_chat">Downloading this document requires storage permission. Please grant storage permission from the settings.</string>
 </resources>

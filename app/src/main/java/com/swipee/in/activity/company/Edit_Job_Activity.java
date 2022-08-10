@@ -333,8 +333,7 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
     private void setPerkFlowList(ArrayList<CommonModel> job_benefits) {
         perksIds.clear();
         flow_perks.removeAllViews();
-        for (int i = 0; i < job_benefits.size(); i++) {
-            CommonModel obj = job_benefits.get(i);
+        job_benefits.forEach(obj -> {
             perksIds.add(obj.getId());
             LinearLayout linearLayout = new LinearLayout(mContext);
             LinearLayout linearLayoutF = new LinearLayout(mContext);
@@ -361,12 +360,11 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParams1.setMargins(0, 0, 0, 0);
             bt.setLayoutParams(layoutParams1);
-
             linearLayout.addView(bt);
             linearLayoutF.addView(linearLayout);
             linearLayoutF.setTag(obj.getName());
             flow_perks.addView(linearLayoutF);
-        }
+        });
     }
 
     @Override
@@ -486,6 +484,7 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
             case R.id.iv_add_languages:
                 startActivity(new Intent(mContext, AddLanguageActivity.class).putStringArrayListExtra("StringArrayList", languagesIds).putExtra("from", "editJob"));
                 break;
+
             case R.id.btn_done_perk:
                 ArrayList<CommonModel> commonModels= IntStream.range(0, perkArraylist.size()).filter(i -> perkArraylist.get(i).isSelected()).mapToObj(i -> perkArraylist.get(i)).collect(Collectors.toCollection(ArrayList::new));
                 setPerkFlowList(commonModels);
@@ -551,13 +550,10 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
                             saveEditJobData(hashMap);
                         }else rest.AlertForInternet();
                     }
-
-
                 break;
             default:
                 break;
         }
-
     }
 
     private void perkBottomSheet() {
@@ -676,18 +672,16 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
 
         if (salary_data.size() > 0) {
             ArrayList<CommonModel> commonModels=new ArrayList<>();
-            for (int i = 0; i < salary_data.size(); i++) {
-                JsonObject salaryObj=salary_data.get(i).getAsJsonObject();
-                commonModels.add(commonModels.size(),new CommonModel(salaryObj.get("range_id").getAsString(),salaryObj.get("min_salary").getAsString(),salaryObj.get("min_salary").getAsString().equalsIgnoreCase(job_min_salary)));
-                if (200000>Integer.parseInt(salaryObj.get("max_salary").getAsString()))
-                commonModels.add(commonModels.size(),new CommonModel(salaryObj.get("range_id").getAsString(),salaryObj.get("max_salary").getAsString(),salaryObj.get("max_salary").getAsString().equalsIgnoreCase(job_min_salary)));
-            }
+            IntStream.range(0, salary_data.size()).mapToObj(i -> salary_data.get(i).getAsJsonObject()).forEach(salaryObj -> {
+                commonModels.add(commonModels.size(), new CommonModel(salaryObj.get("range_id").getAsString(), salaryObj.get("min_salary").getAsString(), salaryObj.get("min_salary").getAsString().equalsIgnoreCase(job_min_salary)));
+                if (200000 > Integer.parseInt(salaryObj.get("max_salary").getAsString()))
+                    commonModels.add(commonModels.size(), new CommonModel(salaryObj.get("range_id").getAsString(), salaryObj.get("max_salary").getAsString(), salaryObj.get("max_salary").getAsString().equalsIgnoreCase(job_min_salary)));
+            });
             rv_min_salary.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
             MinSalaryAdapter minSalaryAdapter = new MinSalaryAdapter(mContext, commonModels);
             rv_min_salary.setAdapter(minSalaryAdapter);
             rv_min_salary.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         }
-
     }
 
     private void callMaxSalarySheet() {
@@ -708,16 +702,14 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
         });
         if (salary_data.size() > 0) {
             ArrayList<CommonModel> commonModels=new ArrayList<>();
-            for (int i = 0; i < salary_data.size(); i++) {
-                JsonObject salaryObj=salary_data.get(i).getAsJsonObject();
-                if (Integer.parseInt(job_min_salary)<Integer.parseInt(salaryObj.get("min_salary").getAsString())){
-                    commonModels.add(commonModels.size(),new CommonModel(salaryObj.get("range_id").getAsString(),salaryObj.get("min_salary").getAsString(),salaryObj.get("min_salary").getAsString().equalsIgnoreCase(job_max_salary)));
-                    commonModels.add(commonModels.size(),new CommonModel(salaryObj.get("range_id").getAsString(),salaryObj.get("max_salary").getAsString(),salaryObj.get("max_salary").getAsString().equalsIgnoreCase(job_max_salary)));
-                } else if (Integer.parseInt(job_min_salary)<Integer.parseInt(salaryObj.get("max_salary").getAsString())){
-                    commonModels.add(commonModels.size(),new CommonModel(salaryObj.get("range_id").getAsString(),salaryObj.get("max_salary").getAsString(),salaryObj.get("max_salary").getAsString().equalsIgnoreCase(job_max_salary)));
+            IntStream.range(0, salary_data.size()).mapToObj(i -> salary_data.get(i).getAsJsonObject()).forEach(salaryObj -> {
+                if (Integer.parseInt(job_min_salary) < Integer.parseInt(salaryObj.get("min_salary").getAsString())) {
+                    commonModels.add(commonModels.size(), new CommonModel(salaryObj.get("range_id").getAsString(), salaryObj.get("min_salary").getAsString(), salaryObj.get("min_salary").getAsString().equalsIgnoreCase(job_max_salary)));
+                    commonModels.add(commonModels.size(), new CommonModel(salaryObj.get("range_id").getAsString(), salaryObj.get("max_salary").getAsString(), salaryObj.get("max_salary").getAsString().equalsIgnoreCase(job_max_salary)));
+                } else if (Integer.parseInt(job_min_salary) < Integer.parseInt(salaryObj.get("max_salary").getAsString())) {
+                    commonModels.add(commonModels.size(), new CommonModel(salaryObj.get("range_id").getAsString(), salaryObj.get("max_salary").getAsString(), salaryObj.get("max_salary").getAsString().equalsIgnoreCase(job_max_salary)));
                 }
-
-            }
+            });
             rv_max_salary.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
             MaxSalaryAdapter maxSalaryAdapter = new MaxSalaryAdapter(mContext, commonModels);
             rv_max_salary.setAdapter(maxSalaryAdapter);
@@ -746,11 +738,7 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
 
         Activity mContext;
 
-
         public PerkAdapter(Context mContext, ArrayList<CommonModel> languageArraylist1) {
-
-            // TODO Auto-generated constructor stub
-
             this.mContext = (Activity) mContext;
             perkArraylist = languageArraylist1;
 
@@ -807,18 +795,11 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
         int oldPos;
         private OpeningAdapter.MyViewHolder oldHolder;
 
-
-
         public OpeningAdapter(Context mContext, ArrayList<CommonModel> data) {
-
             // TODO Auto-generated constructor stub
-
             this.mContext = mContext;
             this.data = data;
-
-
         }
-
 
         @NonNull
         @Override
@@ -833,7 +814,6 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
         public void onBindViewHolder(@NonNull OpeningAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
             String name = data.get(position).getName();
-            String id = data.get(position).getId();
             holder.radioButton.setClickable(false);
             holder.radioButton.setChecked(data.get(position).isSelected());
             if (data.get(position).isSelected()){
@@ -896,17 +876,13 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
 
             this.mContext = mContext;
             this.data = data;
-
-
         }
-
 
         @NonNull
         @Override
         public MinSalaryAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.child_state, parent, false);
-
             return new MyViewHolder(itemView);
         }
 
@@ -914,7 +890,6 @@ public class Edit_Job_Activity extends AppCompatActivity implements View.OnClick
         public void onBindViewHolder(@NonNull MinSalaryAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
             String name = data.get(position).getName();
-            String id = data.get(position).getId();
             holder.radioButton.setClickable(false);
             holder.radioButton.setChecked(data.get(position).isSelected());
             if (data.get(position).isSelected()){

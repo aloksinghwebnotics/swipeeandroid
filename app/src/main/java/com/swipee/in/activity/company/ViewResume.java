@@ -75,7 +75,7 @@ public class ViewResume extends AppCompatActivity implements View.OnClickListene
                 }
                 String url=myObject.getUser_resumes().getCv_file_link();
                 String title=myObject.getFirst_name();
-                tv_title.setText(title+"'s Profile");
+                tv_title.setText(String.format("%s's Profile", title));
                 wv_url.getSettings().setJavaScriptEnabled(true);
                 wv_url.getSettings().setAllowContentAccess(true);
                 wv_url.getSettings().setAllowFileAccess(true);
@@ -95,7 +95,6 @@ public class ViewResume extends AppCompatActivity implements View.OnClickListene
                     wv_url.loadUrl(url);
                 }
             }
-
         }
 
         iv_back.setOnClickListener(v -> onBackPressed());
@@ -204,7 +203,6 @@ public class ViewResume extends AppCompatActivity implements View.OnClickListene
                         setBackPressed();
                     } else rest.showToast(repo.get("message").getAsString());
                 }
-
             }
 
             @Override

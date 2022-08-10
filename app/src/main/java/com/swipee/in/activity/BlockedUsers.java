@@ -1,4 +1,4 @@
-package com.swipee.in.activity.company;
+package com.swipee.in.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -24,13 +24,13 @@ import com.google.gson.JsonObject;
 import com.swipee.in.R;
 import com.swipee.in.UrlManager.AppController;
 import com.swipee.in.UrlManager.Config;
-import com.swipee.in.activity.SettingsActivity;
-import com.swipee.in.adapter.company.BlockedUserAdapter;
+import com.swipee.in.adapter.BlockedUserAdapter;
 import com.swipee.in.model.company.LikedUserModel;
 import com.swipee.in.rest.Rest;
 import com.swipee.in.rest.SwipeeApiClient;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,7 +86,7 @@ public class BlockedUsers extends AppCompatActivity {
                         JsonObject jsonObject = response.body();
                         JsonArray dataObject = jsonObject.has("data") ? jsonObject.get("data").getAsJsonArray() : new JsonArray();
                         if (dataObject.size() > 0) {
-                            ArrayList<LikedUserModel> likedDataList = new ArrayList<>();
+                                                  ArrayList<LikedUserModel> likedDataList = new ArrayList<>();
                             for (int i = 0; i < dataObject.size(); i++) {
                                 JsonObject object = dataObject.get(i).getAsJsonObject();
                                 String user_id = object.has("user_id") ? object.get("user_id").isJsonNull() ? "" : object.get("user_id").getAsString() : "";
@@ -148,8 +148,7 @@ public class BlockedUsers extends AppCompatActivity {
                         JsonArray dataObject = jsonObject.has("data") ? jsonObject.get("data").getAsJsonArray() : new JsonArray();
                         if (dataObject.size() > 0) {                
                             ArrayList<LikedUserModel> likedDataList = new ArrayList<>();
-                            for (int i = 0; i < dataObject.size(); i++) {
-                                JsonObject object = dataObject.get(i).getAsJsonObject();
+                            IntStream.range(0, dataObject.size()).mapToObj(i -> dataObject.get(i).getAsJsonObject()).forEach(object -> {
                                 String user_id = object.has("company_id") ? object.get("company_id").isJsonNull() ? "" : object.get("company_id").getAsString() : "";
                                 String job_post_id = object.has("job_post_id") ? object.get("job_post_id").isJsonNull() ? "" : object.get("job_post_id").getAsString() : "";
                                 String job_title = object.has("job_title") ? object.get("job_title").isJsonNull() ? "" : object.get("job_title").getAsString() : "";
@@ -161,7 +160,7 @@ public class BlockedUsers extends AppCompatActivity {
                                 String skill_name1 = "";
                                 LikedUserModel jobData = new LikedUserModel(user_id, job_title, last_name, user_profile, skill_name1, country, state, city, job_post_id, "");
                                 likedDataList.add(likedDataList.size(), jobData);
-                            }
+                            });
                             rv_Likejob.setLayoutManager(new GridLayoutManager(mContext, 2));
                             BlockedUserAdapter appliedJobsAdapter = new BlockedUserAdapter(BlockedUsers.this, likedDataList);
                             rv_Likejob.setAdapter(appliedJobsAdapter);
@@ -210,7 +209,7 @@ public class BlockedUsers extends AppCompatActivity {
             if (!Config.isSeeker()){
                 AppController.ShowDialogue("", mContext);
                 unblockUser(id);
-            }else  if (Config.isSeeker()){
+            }else if (Config.isSeeker()){
                 AppController.ShowDialogue("", mContext);
                 unblockCompanies(id,job_id);
             }
@@ -218,8 +217,7 @@ public class BlockedUsers extends AppCompatActivity {
         progressdialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> progressdialog.dismiss());
         try {
             progressdialog.show();
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
 
     }
 
@@ -237,16 +235,14 @@ public class BlockedUsers extends AppCompatActivity {
                         setBackPressed();
                     } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
-
             }
-
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();
             }
         });
-
     }
+
     private void unblockCompanies(String id,String job_id) {
         SwipeeApiClient.swipeeServiceInstance().unblockJob(Config.GetUserToken(), id,job_id).enqueue(new Callback<JsonObject>() {
             @Override
@@ -261,9 +257,7 @@ public class BlockedUsers extends AppCompatActivity {
                         setBackPressed();
                     } else rest.showToast(response.body().get("message").getAsString());
                 } else rest.showToast("Something went wrong");
-
             }
-
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
                 AppController.dismissProgressdialog();

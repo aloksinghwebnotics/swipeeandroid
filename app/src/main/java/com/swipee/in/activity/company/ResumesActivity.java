@@ -92,7 +92,6 @@ public class ResumesActivity extends AppCompatActivity {
                     rest.showToast("Something went wrong");
                     finish();
                 }
-
             }
 
             @Override

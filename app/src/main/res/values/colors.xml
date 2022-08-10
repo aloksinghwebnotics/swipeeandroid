@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#4867AA</color>
+    <color name="colorPrimaryPartial">#B24867AA</color>
     <color name="white">#ffff</color>
     <color name="white_light">#F8F7FB</color>
     <color name="black_op50">#80151624</color>
